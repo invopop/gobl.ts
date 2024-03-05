@@ -1,27 +1,24 @@
-import type { JSONSchema7 } from 'json-schema';
 import { Uuid } from './schemas/uuid/uuid';
-import { BaseSchema } from './base';
-import { SchemaType } from './schemas/types';
 import { Invoice } from './schemas/bill/invoice';
 
-const CLASS_MAP: Record<SchemaType, typeof BaseSchema> = {
-  'bill/invoice': Invoice,
-  'uuid/uuid': Uuid,
+type Bill = {
+  Invoice: typeof Invoice;
 };
 
-export class GOBL {
-  json: JSONSchema7;
-  schema: BaseSchema;
+type UuidType = {
+  Uuid: typeof Uuid;
+};
 
-  constructor(schemaType: SchemaType, json: JSONSchema7) {
-    this.json = json;
+type GOBL = {
+  Bill: Bill;
+  Uuid: UuidType;
+};
 
-    const schemaClass = CLASS_MAP[schemaType] as typeof schemaClass;
-
-    if (!schemaClass) {
-      throw Error('Invalid schema type.');
-    }
-
-    this.schema = new schemaClass();
-  }
-}
+export const GOBL: GOBL = {
+  Bill: {
+    Invoice,
+  },
+  Uuid: {
+    Uuid,
+  },
+};

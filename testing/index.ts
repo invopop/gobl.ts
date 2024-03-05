@@ -1,5 +1,10 @@
 const { GOBL } = require('@invopop/gobl.ts');
 
-const GOBLInstance = new GOBL('bill/invoice');
+const uuid = new GOBL.Uuid.Uuid('550e8400-e29b-41d4-a716-446655440000');
+const invoice = new GOBL.Bill.Invoice({ type: 'standard', uuid });
 
-console.log(GOBLInstance.schema);
+console.log(invoice.SCHEMA_ID);
+console.log(invoice.type);
+console.log(invoice.notExisting);
+console.log(invoice.toJSON());
+console.log(uuid.toJSON());
