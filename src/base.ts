@@ -1,4 +1,4 @@
-import { InvoiceValue } from './schemas/bill/types';
+import type { InvoiceValue } from './schemas/bill/types';
 
 type GOBLSchema = InvoiceValue;
 

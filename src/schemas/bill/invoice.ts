@@ -1,6 +1,7 @@
 import { BaseSchema } from 'src/base';
-import { InvoiceType, InvoiceValue } from './types';
+import type { InvoiceType, InvoiceValue } from './types';
 import { Uuid } from '../uuid/uuid';
+import { getProps } from 'src/helpers';
 
 /**
  * @description Invoice represents a payment claim for goods or services supplied under conditions agreed between the supplier and the customer.
@@ -18,7 +19,7 @@ export class Invoice extends BaseSchema<InvoiceValue> {
   /**
    * @description Type of invoice document subject to the requirements of the local tax regime.
    */
-  get type(): InvoiceType {
+  get type(): InvoiceType | undefined {
     return this._value.type;
   }
 
@@ -29,7 +30,7 @@ export class Invoice extends BaseSchema<InvoiceValue> {
   /**
    * @description Unique document ID. Not required, but always recommended in addition to the Code.
    */
-  get uuid(): Uuid {
+  get uuid(): Uuid | undefined {
     return this._value.uuid;
   }
 
@@ -42,5 +43,20 @@ export class Invoice extends BaseSchema<InvoiceValue> {
    */
   public toJSON(): string {
     return JSON.stringify(this._value);
+  }
+
+  /**
+   * @description Generates a new Invoice instance from a JSON.
+   */
+  public static fromJSON(json: string): Invoice {
+    // Map of types for properly building the _value Object.
+    const casts: Record<string, any> = {
+      type: 'string',
+      uuid: Uuid,
+    };
+
+    const props = getProps<InvoiceValue>(JSON.parse(json) as InvoiceValue, casts);
+
+    return new this(props);
   }
 }
