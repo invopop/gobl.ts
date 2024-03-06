@@ -5,5 +5,5 @@ const invoice = new GOBL.Bill.Invoice({ type: 'standard', uuid });
 
 console.log(invoice.SCHEMA_ID);
 console.log(invoice.type);
-console.log(invoice.notExisting);
+invoice.type = 'corrective';
 console.log(invoice.toJSON());

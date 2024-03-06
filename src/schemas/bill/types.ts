@@ -1,13 +1,7 @@
 import { Uuid } from '../uuid/uuid';
 
 export type InvoiceValue = {
-  /**
-   * @description Type of invoice document subject to the requirements of the local tax regime.
-   */
   type?: InvoiceType;
-  /**
-   * @description Unique document ID. Not required, but always recommended in addition to the Code.
-   */
   uuid?: Uuid;
 };
 

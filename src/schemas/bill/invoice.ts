@@ -1,5 +1,6 @@
 import { BaseSchema } from 'src/base';
-import { InvoiceValue } from './types';
+import { InvoiceType, InvoiceValue } from './types';
+import { Uuid } from '../uuid/uuid';
 
 /**
  * @description Invoice represents a payment claim for goods or services supplied under conditions agreed between the supplier and the customer.
@@ -10,10 +11,36 @@ export class Invoice extends BaseSchema<InvoiceValue> {
    */
   SCHEMA_ID: string = 'https://gobl.org/draft-0/bill/invoice';
 
-  // Allow use unknown properties. TODO: Only allow the ones in T
-  [key: string]: any;
-
   public constructor(value: InvoiceValue) {
     super(value);
+  }
+
+  /**
+   * @description Type of invoice document subject to the requirements of the local tax regime.
+   */
+  get type(): InvoiceType {
+    return this._value.type;
+  }
+
+  set type(value: InvoiceType) {
+    this._value.type = value;
+  }
+
+  /**
+   * @description Unique document ID. Not required, but always recommended in addition to the Code.
+   */
+  get uuid(): Uuid {
+    return this._value.uuid;
+  }
+
+  set uuid(value: Uuid) {
+    this._value.uuid = value;
+  }
+
+  /**
+   * @description Casts root value to JSON.
+   */
+  public toJSON(): string {
+    return JSON.stringify(this._value);
   }
 }
