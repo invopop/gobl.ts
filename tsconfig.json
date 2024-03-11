@@ -9,7 +9,8 @@
     "outDir": "./dist",
     "baseUrl": "./",
     "incremental": true,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "allowJs": true
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "test", "lib", "**/*spec.ts"]

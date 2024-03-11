@@ -1,4 +1,4 @@
-import { BaseSchema } from 'src/base';
+import { BaseSchema } from '../../base';
 import type { InvoiceType, InvoiceValue } from './types';
 import { Uuid } from '../uuid/uuid';
 import { getProps } from 'src/helpers';
@@ -36,13 +36,6 @@ export class Invoice extends BaseSchema<InvoiceValue> {
 
   set uuid(value: Uuid) {
     this._value.uuid = value;
-  }
-
-  /**
-   * @description Casts root value to JSON.
-   */
-  public toJSON(): string {
-    return JSON.stringify(this._value);
   }
 
   /**

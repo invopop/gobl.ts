@@ -12,3 +12,4 @@ console.log(invoice.type);
 invoice.type = 'corrective';
 console.log(invoice.toJSON());
 console.log(invoice2);
+invoice.callWasmMethod();

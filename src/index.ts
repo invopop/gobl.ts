@@ -1,25 +1,26 @@
 import { Uuid } from './schemas/uuid/uuid';
 import { Invoice } from './schemas/bill/invoice';
-import { InvoiceValue } from './schemas/bill/types';
 
-export type BillType = {
-  Invoice: typeof Invoice & InvoiceValue;
-};
+export interface BillType {
+  Invoice: typeof Invoice;
+}
 
-export type UuidType = {
+export interface UuidType {
   Uuid: typeof Uuid;
-};
+}
 
-export type GOBLType = {
+export interface GOBLType {
   Bill: BillType;
   Uuid: UuidType;
-};
+}
 
-export default {
+const GOBL: GOBLType = {
   Bill: {
     Invoice,
   },
   Uuid: {
     Uuid,
   },
-} as GOBLType;
+};
+
+export default GOBL;

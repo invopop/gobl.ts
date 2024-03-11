@@ -29,5 +29,9 @@
     "microbundle": "^0.15.1",
     "prettier": "^3.2.5",
     "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "@types/golang-wasm-exec": "^1.15.2",
+    "crypto": "^1.0.1"
   }
 }
