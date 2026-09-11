@@ -36,6 +36,9 @@ jobs:
       # prettier's output stays faithful.
       - run: npx prettier --check .
 
+      # Type-level assertions (the 133-envelope corpus check and the
+      # `@ts-expect-error` cases) are compile-time only, so tsc is what runs
+      # them; vitest covers the runtime tests.
       - run: npx tsc --noEmit
       - run: npm test
       - run: npm run build
