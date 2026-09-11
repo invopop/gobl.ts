@@ -1,5 +1,5 @@
 {
-  "name": "@invopop/gobl.ts",
+  "name": "@invopop/gobl",
   "version": "0.505.0",
   "description": "GOBL library for TypeScript",
   "license": "Apache-2.0",
@@ -23,33 +23,55 @@
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
     },
     "./package.json": "./package.json",
-    "./*": {
-      "types": "./dist/gen/*/index.d.ts",
-      "import": "./dist/gen/*/index.js",
-      "require": "./dist/gen/*/index.cjs"
-    },
     "./registry/*": {
-      "types": "./dist/gen/registry/*.d.ts",
-      "import": "./dist/gen/registry/*.js",
-      "require": "./dist/gen/registry/*.cjs"
+      "import": {
+        "types": "./dist/gen/registry/*.d.ts",
+        "default": "./dist/gen/registry/*.js"
+      },
+      "require": {
+        "types": "./dist/gen/registry/*.d.cts",
+        "default": "./dist/gen/registry/*.cjs"
+      }
+    },
+    "./*": {
+      "import": {
+        "types": "./dist/gen/*/index.d.ts",
+        "default": "./dist/gen/*/index.js"
+      },
+      "require": {
+        "types": "./dist/gen/*/index.d.cts",
+        "default": "./dist/gen/*/index.cjs"
+      }
     }
   },
   "files": [
     "dist"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
-    "build": "tsup",
+    "build": "npm run build:js && npm run build:types",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "generate": "go run ./cmd/generate"
+    "generate": "go run ./cmd/generate",
+    "check-version": "node scripts/check-version.mjs",
+    "build:js": "tsup",
+    "build:types": "tsc -p tsconfig.build.json && node scripts/build-cjs-types.mjs",
+    "verify-package": "node scripts/verify-package.mjs"
   },
   "devDependencies": {
     "@types/node": "^22.20.2",

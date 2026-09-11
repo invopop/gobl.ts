@@ -1,0 +1,143 @@
+#
+# Publish @invopop/gobl to NPM.
+#
+# Triggered by pushing a version tag (e.g. v0.505.0), or manually via
+# workflow_dispatch to retry a failed publish without re-tagging.
+#
+# Split into two jobs so the privileged publish never executes repository code
+# (CodeQL "untrusted checkout in a privileged context"), mirroring the
+# gobl.dev publish workflow:
+#   - build:   unprivileged (contents: read, no id-token / secrets). Checks out
+#              the tagged commit, verifies it, builds, and packs a tarball.
+#   - publish: privileged (id-token: write for NPM OIDC trusted publishing).
+#              Only downloads the pre-built tarball and publishes it with
+#              --ignore-scripts; it never checks out or runs repository code.
+#
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Existing version tag to publish, e.g. v0.505.0'
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build package
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read # no secrets / id-token here, so building the code is safe
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+      tag: ${{ steps.npm-tag.outputs.tag }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.tag || github.ref }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+          cache: npm
+
+      - run: npm ci
+
+      # A release must never ship types that do not match the pinned GOBL, so
+      # regenerate and fail on any drift rather than trusting the commit.
+      - name: Generated types are current
+        run: |
+          go run ./cmd/generate
+          git diff --exit-code src/gen
+
+      - name: Resolve version from the tag
+        id: version
+        run: |
+          ref="${{ github.event.inputs.tag || github.ref_name }}"
+          version="${ref#v}"
+          if ! [[ "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?$ ]]; then
+            echo "::error::tag '$ref' is not a semver version tag"
+            exit 1
+          fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      # The tag is the source of truth, so stamp it into the manifest before
+      # the version check compares it against the generated GOBL version.
+      - name: Stamp and verify the version
+        run: |
+          npm version --no-git-tag-version --allow-same-version "${{ steps.version.outputs.version }}"
+          npm run check-version
+
+      - run: npx tsc --noEmit
+      - run: npm test
+      - run: npm run build
+
+      # Guards the published shape: subpath entries, dual ESM/CJS, and that the
+      # bulky extension labels stay out of the root import.
+      - run: npx vitest run test/package.test.ts
+
+      # npm refuses to publish a prerelease to the default `latest` dist-tag;
+      # derive `rc`/`beta`/etc. from the version, else `latest`.
+      - name: Determine npm dist-tag
+        id: npm-tag
+        run: |
+          v="${{ steps.version.outputs.version }}"
+          if [[ "$v" =~ -([a-z]+) ]]; then
+            tag="${BASH_REMATCH[1]}"
+          else
+            tag="latest"
+          fi
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+
+      - name: Pack
+        run: npm pack
+
+      - name: Show package contents
+        run: tar -tzf ./*.tgz | head -40
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: npm-package
+          path: ./*.tgz
+          if-no-files-found: error
+
+  publish:
+    name: Publish to NPM
+    needs: build
+    runs-on: ubuntu-latest
+    environment: release
+    permissions:
+      id-token: write # NPM OIDC trusted publishing
+      contents: read
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: npm-package
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+          # Intentionally no `registry-url`: setup-node would otherwise write
+          # an `.npmrc` with an `_authToken` entry that blocks the OIDC
+          # trusted-publisher exchange.
+
+      # npx fetches npm 11 (required for OIDC trusted publishing) without
+      # touching the global install. The prebuilt tarball is published with
+      # scripts disabled, so no repository code runs in this privileged job.
+      - name: Publish
+        run: npx -y npm@11 publish ./*.tgz --tag "${{ needs.build.outputs.tag }}" --ignore-scripts

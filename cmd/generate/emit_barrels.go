@@ -26,7 +26,7 @@ func emitModuleBarrel(files []*schemaFile) string {
 }
 
 // emitRootBarrel renders src/gen/index.ts, the namespace re-export that makes
-// `import type { bill } from '@invopop/gobl.ts'` work. Namespacing is not
+// `import type { bill } from '@invopop/gobl'` work. Namespacing is not
 // cosmetic: Amount, Code, Identity and Note each exist in two or three GOBL
 // packages, so a flat export surface is impossible.
 func emitRootBarrel(modules []string, hasRegistry bool) string {

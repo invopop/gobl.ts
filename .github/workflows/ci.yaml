@@ -39,6 +39,10 @@ jobs:
       # Type-level assertions (the 133-envelope corpus check and the
       # `@ts-expect-error` cases) are compile-time only, so tsc is what runs
       # them; vitest covers the runtime tests.
+      # The package major.minor must track the GOBL release the types came
+      # from; checked rather than merely documented.
+      - run: npm run check-version
+
       - run: npx tsc --noEmit
       - run: npm test
       - run: npm run build
@@ -46,6 +50,11 @@ jobs:
       # Guards the published package shape: subpath entries, dual ESM/CJS, and
       # that the bulky extension labels stay out of the root import.
       - run: npx vitest run test/package.test.ts
+
+      # Packs the tarball and consumes it from a throwaway project, in both
+      # ESM and CommonJS. In-repo type checking cannot see declaration-emit
+      # bugs, so this is the only step that exercises the published .d.ts.
+      - run: npm run verify-package
 
   live:
     runs-on: ubuntu-latest

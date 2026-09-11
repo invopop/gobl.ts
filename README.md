@@ -7,13 +7,15 @@ The model types are **generated** from GOBL's own JSON Schemas, so they track
 the upstream definitions exactly rather than drifting by hand.
 
 ```bash
-npm install @invopop/gobl.ts
+npm install @invopop/gobl
 ```
+
+Ships ESM and CommonJS builds with full type declarations for both. Node 18+.
 
 ## Usage
 
 ```ts
-import { GOBLClient, document, type bill } from '@invopop/gobl.ts';
+import { GOBLClient, document, type bill } from '@invopop/gobl';
 
 const gobl = new GOBLClient(); // https://gobl.dev/v0
 
@@ -44,7 +46,7 @@ Types are grouped into one namespace per GOBL package, because several names
 (`Amount`, `Code`, `Identity`, `Note`) exist in more than one:
 
 ```ts
-import type { bill, cbc, num, org, tax } from '@invopop/gobl.ts';
+import type { bill, cbc, num, org, tax } from '@invopop/gobl';
 
 const price: num.Amount = '90.00';
 const country: tax.RegimeCode = 'ES';
@@ -54,7 +56,7 @@ const party: org.Party = { name: 'Provide One' };
 Each package is also its own entry point, if you prefer:
 
 ```ts
-import type * as bill from '@invopop/gobl.ts/bill';
+import type * as bill from '@invopop/gobl/bill';
 ```
 
 **Calculated fields are optional.** GOBL populates totals, tax breakdowns and
@@ -62,7 +64,7 @@ similar during a build, so they are optional on input. Pair a document with its
 generated key list to get the read-side view:
 
 ```ts
-import type { Calculated, bill } from '@invopop/gobl.ts';
+import type { Calculated, bill } from '@invopop/gobl';
 
 type BuiltInvoice = Calculated<bill.Invoice, bill.InvoiceCalculatedKeys>;
 ```
@@ -71,7 +73,7 @@ type BuiltInvoice = Calculated<bill.Invoice, bill.InvoiceCalculatedKeys>;
 can build a form control without re-reading the schema:
 
 ```ts
-import { bill } from '@invopop/gobl.ts';
+import { bill } from '@invopop/gobl';
 
 Object.entries(bill.InvoiceTypeLabels).map(([value, { title }]) => ({ value, title }));
 ```
@@ -123,7 +125,30 @@ already wraps the GOBL wasm binary distributed via `cdn.gobl.org`.
 The package version tracks GOBL's `major.minor`, with the patch reserved for
 changes here — the same convention `gobl.dev` and `@invopop/gobl-worker` use.
 `0.505.x` is generated from GOBL `v0.505.0`, which `GOBL_VERSION` also reports
-at runtime.
+at runtime. `npm run check-version` enforces this, and CI runs it, so the
+package can never claim a GOBL version it was not generated from.
+
+## Releasing
+
+Publishing is driven by a version tag. The `Release` workflow builds, verifies
+and publishes to npm via OIDC trusted publishing — no long-lived token.
+
+```bash
+# 1. make sure the types match the pinned GOBL and the version agrees
+make generate && npm run check-version
+
+# 2. tag and push
+git tag v0.505.0 && git push origin v0.505.0
+```
+
+The workflow regenerates the types and fails on any drift, stamps the version
+from the tag, runs the full test suite, then packs a tarball and installs it
+into a throwaway project to confirm the published declarations actually
+compile — in both ESM and CommonJS — before publishing.
+
+A prerelease tag (`v0.506.0-rc.1`) publishes under a matching npm dist-tag
+(`rc`) rather than `latest`. `workflow_dispatch` re-runs a publish for an
+existing tag without re-tagging.
 
 ## Development
 
@@ -167,6 +192,12 @@ make generate VERSION=v0.506.0-dev
   calculated fields, extension key and value narrowing, open enums.
 - `test/client.test.ts` covers the client against a stub fetch.
 - `test/live.test.ts` runs against the real API (`make test-live`).
+- `npm run verify-package` packs the tarball and consumes it from a throwaway
+  project in both ESM and CommonJS. In-repo type checking only sees `src/`, so
+  this is the only check that exercises the **published** declarations — it is
+  what caught tsup's dts bundler flattening `export * as bill` into value
+  re-exports, which made every consumer typecheck fail while everything in this
+  repo passed. Declarations are emitted by `tsc` for that reason.
 
 ## Known upstream issues
 
