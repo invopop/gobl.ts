@@ -1,0 +1,28 @@
+import { defineConfig } from 'tsup';
+import { globSync } from 'node:fs';
+
+// Every module barrel and registry data file is its own entry point so that the
+// `exports` subpaths in package.json resolve, and so a consumer importing one
+// addon's extension data does not pull in the rest.
+const entry = [
+  'src/index.ts',
+  ...globSync('src/gen/*/index.ts'),
+  ...globSync('src/gen/registry/**/*.ts'),
+];
+
+export default defineConfig({
+  entry,
+  outDir: 'dist',
+  format: ['esm', 'cjs'],
+  // Declarations come from tsc, not from tsup's dts bundler. The bundler
+  // flattens `export * as bill from './bill/index.js'` into a rolled-up
+  // namespace and emits its type-only members as value re-exports, so every
+  // consumer typecheck failed with TS2693 ("only refers to a type, but is
+  // being used as a value"). tsc understands the construct natively and its
+  // per-file output mirrors src, which the exports map already matches.
+  dts: false,
+  clean: true,
+  sourcemap: true,
+  splitting: true,
+  treeshake: true,
+});

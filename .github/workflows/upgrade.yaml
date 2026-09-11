@@ -1,0 +1,60 @@
+name: Upgrade GOBL
+
+# Codegen only pays off if upgrading is cheap. This bumps the pinned GOBL
+# version, regenerates, and opens a pull request with the resulting type diff.
+on:
+  schedule:
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  upgrade:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+
+      - name: Bump GOBL
+        id: bump
+        run: |
+          go get github.com/invopop/gobl@latest
+          go get github.com/invopop/gobl.dev@latest
+          go mod tidy
+          version=$(go list -m -f '{{.Version}}' github.com/invopop/gobl)
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      - name: Regenerate
+        run: go run ./cmd/generate
+
+      # The npm version tracks GOBL's major.minor, following the convention
+      # used by gobl.dev and @invopop/gobl-worker.
+      - name: Align the package version
+        run: |
+          npm version "${GOBL_VERSION#v}" --no-git-tag-version --allow-same-version
+        env:
+          GOBL_VERSION: ${{ steps.bump.outputs.version }}
+
+      - run: npx tsc --noEmit && npm test
+
+      - uses: peter-evans/create-pull-request@v7
+        with:
+          branch: chore/upgrade-gobl
+          title: 'Upgrade to GOBL ${{ steps.bump.outputs.version }}'
+          commit-message: 'Upgrade to GOBL ${{ steps.bump.outputs.version }}'
+          body: |
+            Regenerated `src/gen` from GOBL ${{ steps.bump.outputs.version }}.
+
+            Review the type diff for breaking changes before merging. Note that
+            the example fixtures are vendored separately; run `make fixtures`
+            against a local GOBL checkout if the corpus test needs refreshing.
