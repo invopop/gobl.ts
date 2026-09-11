@@ -27,6 +27,12 @@ verify-package:
 
 test:
 	npm test
+	.github/scripts/next-version.test.sh .github/scripts/next-version.sh
+
+# Print the tag the next push to main would release.
+.PHONY: next-version
+next-version:
+	@.github/scripts/next-version.sh
 
 # Runs the tests that call the public GOBL API.
 .PHONY: test-live
