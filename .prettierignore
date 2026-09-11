@@ -1,0 +1,7 @@
+dist
+node_modules
+
+# Generated from GOBL's example suite; 18k lines of vendored documents whose
+# formatting carries no meaning. Regenerate with `make fixtures`.
+test/fixtures
+test/fixtures.test-d.ts
