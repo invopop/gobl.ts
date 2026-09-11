@@ -245,7 +245,7 @@ func emitCatalogues() string {
 // stays reachable on its own subpath, so an application that renders extension
 // pickers can opt in:
 //
-//	import { ExtensionKeyLabels } from '@invopop/gobl.ts/registry/extension-keys';
+//	import { ExtensionKeyLabels } from '@invopop/gobl/registry/extension-keys';
 func emitRegistryBarrel() string {
 	var b strings.Builder
 	b.WriteString(genHeader + "\n\n")

@@ -23,7 +23,7 @@ describe.runIf(built)('published package', () => {
     const sources = [...closure('index.js').values()].join('');
     // ~90 KB of display strings in every language GOBL defines. Useful, but
     // only to applications that render extension pickers, so it lives on the
-    // `@invopop/gobl.ts/registry/extension-keys` subpath instead.
+    // `@invopop/gobl/registry/extension-keys` subpath instead.
     expect(sources).not.toContain('untdid-tax-category');
   });
 

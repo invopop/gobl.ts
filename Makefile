@@ -19,6 +19,12 @@ fixtures:
 build:
 	npm run build
 
+# Packs the tarball and consumes it from a throwaway project, in both ESM and
+# CommonJS, to check the published declarations compile.
+.PHONY: verify-package
+verify-package:
+	npm run verify-package
+
 test:
 	npm test
 
@@ -39,4 +45,4 @@ lint:
 	npx prettier --check .
 
 clean:
-	rm -rf dist node_modules
+	rm -rf dist node_modules *.tgz

@@ -6,7 +6,7 @@
  * `Identity`, `Note`) exist in more than one:
  *
  * ```ts
- * import { GOBLClient, type bill, type org } from '@invopop/gobl.ts';
+ * import { GOBLClient, type bill, type org } from '@invopop/gobl';
  *
  * const invoice: bill.Invoice = {
  *   supplier: { name: 'Provide One' } as org.Party,
