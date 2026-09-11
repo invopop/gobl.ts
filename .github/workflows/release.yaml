@@ -1,36 +1,99 @@
 #
-# Publish @invopop/gobl to NPM.
+# Release @invopop/gobl to NPM.
 #
-# Triggered by pushing a version tag (e.g. v0.505.0), or manually via
-# workflow_dispatch to retry a failed publish without re-tagging.
+# Fully automated: every push to main derives the next semver tag from the GOBL
+# version the types were generated against (see
+# .github/scripts/next-version.sh), tags it, and publishes. Bumping the GOBL
+# requirement is what moves the minor, with no manual step — the same model as
+# gobl.dev's Release CLI workflow.
 #
-# Split into two jobs so the privileged publish never executes repository code
-# (CodeQL "untrusted checkout in a privileged context"), mirroring the
-# gobl.dev publish workflow:
+# Add [skip release] to a commit message to push to main without releasing.
+#
+# Split into jobs so the privileged publish never executes repository code
+# (CodeQL "untrusted checkout in a privileged context"):
+#   - tag:     contents: write. Derives and pushes the annotated tag. Only on
+#              a push to main; skipped when a tag was supplied.
 #   - build:   unprivileged (contents: read, no id-token / secrets). Checks out
-#              the tagged commit, verifies it, builds, and packs a tarball.
+#              the released commit, verifies it, builds, and packs a tarball.
 #   - publish: privileged (id-token: write for NPM OIDC trusted publishing).
 #              Only downloads the pre-built tarball and publishes it with
 #              --ignore-scripts; it never checks out or runs repository code.
+#   - github:  contents: write. Records the GitHub Release, after npm succeeds.
+#
+# Tagging and releasing live in one workflow deliberately: a tag pushed with
+# GITHUB_TOKEN does not trigger further workflow runs, so a separate tagging
+# workflow would create the tag and then silently never publish.
 #
 name: Release
 
 on:
   push:
+    branches:
+      - main
     tags:
       - 'v*'
   workflow_dispatch:
     inputs:
       tag:
-        description: 'Existing version tag to publish, e.g. v0.505.0'
-        required: true
+        description: 'Existing version tag to publish. Leave empty to derive the next one.'
+        required: false
 
 permissions:
   contents: read
 
+concurrency:
+  group: release
+  cancel-in-progress: false
+
 jobs:
+  tag:
+    name: Derive and push tag
+    # Only the push-to-main path tags. A tag push, or a dispatch naming an
+    # existing tag, goes straight to build.
+    if: >-
+      (github.event_name == 'push' &&
+       github.ref == 'refs/heads/main' &&
+       !contains(github.event.head_commit.message, '[skip release]')) ||
+      (github.event_name == 'workflow_dispatch' && inputs.tag == '')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # create and push tags
+    outputs:
+      version: ${{ steps.tag.outputs.version }}
+      core: ${{ steps.tag.outputs.core }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # all tags, for version derivation
+
+      # next-version.sh resolves the core version with `go list -m`.
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: false
+
+      - name: Derive and push release tag
+        id: tag
+        run: |
+          next="$(.github/scripts/next-version.sh)"
+          core="$(go list -m -f '{{.Version}}' github.com/invopop/gobl)"
+          echo "Releasing $next (GOBL $core)"
+          # Annotated so the exact core version survives on the tag itself; the
+          # tag name only identifies the core line.
+          git -c user.name=github-actions \
+              -c user.email=github-actions@github.com \
+              tag -a "$next" -m "$next (GOBL $core)"
+          git push origin "refs/tags/$next"
+          echo "version=$next" >> "$GITHUB_OUTPUT"
+          echo "core=$core" >> "$GITHUB_OUTPUT"
+
   build:
     name: Build package
+    needs: tag
+    # Runs on all three paths, so it must tolerate `tag` being skipped.
+    if: always() && !failure() && !cancelled() && (needs.tag.result == 'success' || needs.tag.result == 'skipped')
     runs-on: ubuntu-latest
     permissions:
       contents: read # no secrets / id-token here, so building the code is safe
@@ -41,7 +104,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.inputs.tag || github.ref }}
+          # The tag job just pushed this ref; on the other paths it already
+          # exists. Building the tag rather than the branch means the artifact
+          # always corresponds to exactly what was released.
+          ref: ${{ needs.tag.outputs.version || inputs.tag || github.ref }}
           fetch-depth: 0
           persist-credentials: false
 
@@ -68,12 +134,15 @@ jobs:
       - name: Resolve version from the tag
         id: version
         run: |
-          ref="${{ github.event.inputs.tag || github.ref_name }}"
+          # Three paths reach here: an auto-derived tag, a manually pushed tag,
+          # or a dispatch naming an existing tag.
+          ref="${{ needs.tag.outputs.version || inputs.tag || github.ref_name }}"
           version="${ref#v}"
           if ! [[ "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?$ ]]; then
-            echo "::error::tag '$ref' is not a semver version tag"
+            echo "::error::'$ref' is not a semver version tag"
             exit 1
           fi
+          echo "Releasing $version"
           echo "version=$version" >> "$GITHUB_OUTPUT"
 
       # The tag is the source of truth, so stamp it into the manifest before
@@ -141,3 +210,52 @@ jobs:
       # scripts disabled, so no repository code runs in this privileged job.
       - name: Publish
         run: npx -y npm@11 publish ./*.tgz --tag "${{ needs.build.outputs.tag }}" --ignore-scripts
+
+  github:
+    name: Record GitHub Release
+    needs: [tag, build, publish]
+    if: always() && needs.publish.result == 'success'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # create the release
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      # The tag name pins only the GOBL line, so the exact core version the
+      # types were generated from is recorded here as well as in the annotated
+      # tag and the GOBL_VERSION constant.
+      - name: Create release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ needs.build.outputs.version }}
+          CORE: ${{ needs.tag.outputs.core }}
+        run: |
+          if gh release view "v${VERSION}" >/dev/null 2>&1; then
+            echo "release v${VERSION} already exists, nothing to do"
+            exit 0
+          fi
+
+          core_note="Generated from GOBL ${CORE}."
+          if [[ -z "$CORE" ]]; then
+            # Set only on the auto-tag path; otherwise read it back from the
+            # annotated tag, which records it as "vX.Y.Z (GOBL vA.B.C)".
+            core_note="$(git tag -l --format='%(contents:subject)' "v${VERSION}")"
+          fi
+
+          prerelease=""
+          [[ "$VERSION" == *-* ]] && prerelease="--prerelease"
+
+          gh release create "v${VERSION}" \
+            --title "v${VERSION}" \
+            --notes "${core_note}
+
+          \`\`\`bash
+          npm install @invopop/gobl@${VERSION}
+          \`\`\`" \
+            --generate-notes \
+            --verify-tag \
+            $prerelease

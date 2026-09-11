@@ -130,25 +130,41 @@ package can never claim a GOBL version it was not generated from.
 
 ## Releasing
 
-Publishing is driven by a version tag. The `Release` workflow builds, verifies
-and publishes to npm via OIDC trusted publishing — no long-lived token.
+Releases are automatic. Every push to `main` derives the next version, tags it,
+and publishes to npm — so bumping the GOBL dependency and merging is the whole
+release process.
 
-```bash
-# 1. make sure the types match the pinned GOBL and the version agrees
-make generate && npm run check-version
+The version is a function of `go.mod` plus the existing tags: `major.minor`
+follows the GOBL release the types were generated from, and the patch is ours.
 
-# 2. tag and push
-git tag v0.505.0 && git push origin v0.505.0
+```
+GOBL 0.505.x  ->  v0.505.0, v0.505.1, v0.505.2, ...
+GOBL 0.506.0  ->  v0.506.0, v0.506.1, ...
 ```
 
-The workflow regenerates the types and fails on any drift, stamps the version
-from the tag, runs the full test suite, then packs a tarball and installs it
+A GOBL patch release is absorbed into the next patch here, so the exact core
+version is not recoverable from the tag name alone. It is recorded in the
+annotated tag, in the GitHub Release notes, and in `GOBL_VERSION` at runtime.
+
+To see what the next push would release:
+
+```bash
+make next-version
+```
+
+To push to `main` without releasing, include `[skip release]` in the commit
+message. `workflow_dispatch` triggers a release manually — leave the tag input
+empty to derive the next version, or name an existing tag to retry a failed
+publish.
+
+Publishing uses npm **OIDC trusted publishing**, so there is no long-lived
+token. The workflow regenerates the types and fails on drift, stamps the
+version from the tag, runs the full suite, then packs a tarball and installs it
 into a throwaway project to confirm the published declarations actually
-compile — in both ESM and CommonJS — before publishing.
+compile — in both ESM and CommonJS — before anything reaches the registry.
 
 A prerelease tag (`v0.506.0-rc.1`) publishes under a matching npm dist-tag
-(`rc`) rather than `latest`. `workflow_dispatch` re-runs a publish for an
-existing tag without re-tagging.
+(`rc`) rather than `latest`.
 
 ## Development
 
@@ -168,7 +184,8 @@ make build
 regenerates and fails on any diff, so a stale tree cannot ship.
 
 To upgrade GOBL, bump the dependency and regenerate — or let the weekly
-`Upgrade GOBL` workflow open the pull request for you:
+`Upgrade GOBL` workflow open the pull request for you. Merging it releases the
+new version automatically:
 
 ```bash
 go get github.com/invopop/gobl@latest && go mod tidy && make generate
@@ -192,6 +209,9 @@ make generate VERSION=v0.506.0-dev
   calculated fields, extension key and value narrowing, open enums.
 - `test/client.test.ts` covers the client against a stub fetch.
 - `test/live.test.ts` runs against the real API (`make test-live`).
+- `.github/scripts/next-version.test.sh` covers release-number derivation
+  against synthetic tag histories — an off-by-one there either skips a version
+  or tries to republish one npm has already taken.
 - `npm run verify-package` packs the tarball and consumes it from a throwaway
   project in both ESM and CommonJS. In-repo type checking only sees `src/`, so
   this is the only check that exercises the **published** declarations — it is

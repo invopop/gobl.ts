@@ -19,6 +19,10 @@ jobs:
           cache: npm
       - run: npm ci
 
+      # Release numbering is derived, so the derivation is tested.
+      - name: Version derivation
+        run: .github/scripts/next-version.test.sh .github/scripts/next-version.sh
+
       - name: Go generator is formatted and vets clean
         run: |
           test -z "$(gofmt -l cmd/)" || { gofmt -d cmd/; exit 1; }
