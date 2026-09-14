@@ -165,6 +165,14 @@ jobs:
       # bulky extension labels stay out of the root import.
       - run: npx vitest run test/package.test.ts
 
+      # A release must not ship declarations a consumer cannot compile
+      # against: tsc here only checks src/, never the emitted .d.ts.
+      - run: npm run verify-package
+
+      # ...nor JavaScript that will not run under goja, the engine used for
+      # embedded scripting.
+      - run: go run ./cmd/gojacheck
+
       # npm refuses to publish a prerelease to the default `latest` dist-tag;
       # derive `rc`/`beta`/etc. from the version, else `latest`.
       - name: Determine npm dist-tag
