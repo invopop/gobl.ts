@@ -69,6 +69,12 @@ jobs:
       # bugs, so this is the only step that exercises the published .d.ts.
       - run: npm run verify-package
 
+      # Loads the published bundle into goja, the pure-Go engine used for
+      # embedded scripting, and replays the num fixtures there. Node passing
+      # says nothing about goja: it is a separate implementation, and a library
+      # method it lacks would only surface here.
+      - run: go run ./cmd/gojacheck
+
   live:
     runs-on: ubuntu-latest
     # The public API is a moving target, so a failure here should not block a
