@@ -8,6 +8,11 @@ VERSION ?=
 generate:
 	go run ./cmd/generate $(if $(VERSION),-version $(VERSION),)
 
+# Re-record the num parity fixtures by executing the pinned GOBL num package.
+.PHONY: num-fixtures
+num-fixtures:
+	go run ./cmd/numfixtures
+
 # Re-vendor the example envelopes used by the corpus type test. Needs a local
 # checkout of github.com/invopop/gobl, since the examples are not embedded in
 # the Go module.

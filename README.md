@@ -89,6 +89,50 @@ const ext: tax.Extensions = { 'es-verifactu-doc-type': 'F1' };
 Use `tax.ExtensionsAny` when working with documents that may carry keys from a
 newer GOBL release than this package was generated against.
 
+### Arithmetic
+
+Document fields hold amounts as **strings** (`num.Amount`, `num.Percentage`),
+because the number of decimal places is meaningful: `"90.00"` records that the
+value is known to two places, and that precision propagates through every
+calculation derived from it. `parseFloat` throws that away.
+
+`Amount` and `Percentage` mirror GOBL's `num` package so the arithmetic matches
+the server's:
+
+```ts
+import { Amount, Percentage } from '@invopop/gobl';
+
+const line = Amount.parse('90.00').multiply(Amount.parse('20')); // "1800.00"
+const vat = Percentage.parse('21%');
+line.add(vat.of(line)).toString(); // "2178.00"
+```
+
+Two behaviours differ from every general-purpose decimal library, and both are
+deliberate:
+
+**Operations take the receiver's precision**, not the operand's and not the
+maximum. Raise it first when you want to keep the operand's extra places —
+which is what GOBL's own code does before nearly every addition:
+
+```ts
+Amount.parse('100.00').add(Amount.parse('0.0001')).toString(); // "100.00"
+Amount.parse('100.00')
+  .matchPrecision(Amount.parse('0.0001'))
+  .add(Amount.parse('0.0001'))
+  .toString(); // "100.0001"
+```
+
+**Rounding is half away from zero**, not banker's rounding, so `-62.5` becomes
+`-63`.
+
+A `Percentage` stores a factor internally, so `"16%"` and `"0.160"` are the same
+value — and a rate written as `"16"` without the sign means 1600%.
+
+Note that `toString()` gives the wire form, so a computed value can go straight
+back into a document. There is no client-side totals calculator: GOBL derives
+tax amounts from a higher-precision accumulated base that finished documents do
+not expose, so totals stay with `build`.
+
 ### Client
 
 `GOBLClient` covers the whole [gobl.dev](https://gobl.dev) API: `build`, `sign`,
@@ -173,10 +217,11 @@ pinned `github.com/invopop/gobl` module. Output depends only on `go.mod`, so no
 sibling checkout is needed and regeneration is reproducible.
 
 ```bash
-make generate    # rewrite src/gen from the pinned GOBL version
+make generate      # rewrite src/gen from the pinned GOBL version
+make num-fixtures  # re-record the num parity fixtures
 make typecheck
 make test
-make test-live   # exercise the public gobl.dev API
+make test-live     # exercise the public gobl.dev API
 make build
 ```
 
@@ -209,6 +254,12 @@ make generate VERSION=v0.506.0-dev
   calculated fields, extension key and value narrowing, open enums.
 - `test/client.test.ts` covers the client against a stub fetch.
 - `test/live.test.ts` runs against the real API (`make test-live`).
+- `test/num.test.ts` replays **16,824 arithmetic cases recorded from the Go
+  `num` package** (`make num-fixtures`). GOBL's semantics are unusual enough
+  that "looks right" is not good enough, so the port is checked against the
+  implementation it mirrors, asserting the exact string form and therefore the
+  resulting exponent. It also reproduces every line sum in the example corpus,
+  confirming the arithmetic against GOBL's own calculated output.
 - `.github/scripts/next-version.test.sh` covers release-number derivation
   against synthetic tag histories — an off-by-one there either skips a version
   or tries to republish one npm has already taken.

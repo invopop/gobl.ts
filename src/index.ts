@@ -15,7 +15,18 @@
  *
  * const env = await new GOBLClient().build(invoice, { envelop: true });
  * ```
+ *
+ * Document fields hold amounts as strings (`num.Amount`), because the number of
+ * decimal places is meaningful. Lift them into {@link Amount} to calculate:
+ *
+ * ```ts
+ * import { Amount, Percentage } from '@invopop/gobl';
+ *
+ * const line = Amount.parse('90.00').multiply(Amount.parse('20'));
+ * line.add(Percentage.parse('21%').of(line)).toString(); // "2178.00"
+ * ```
  */
 export * from './gen/index.js';
+export * from './num/index.js';
 export * from './client/index.js';
 export * from './helpers.js';
