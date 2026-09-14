@@ -43,6 +43,15 @@ jobs:
       # Type-level assertions (the 133-envelope corpus check and the
       # `@ts-expect-error` cases) are compile-time only, so tsc is what runs
       # them; vitest covers the runtime tests.
+      # src/num mirrors GOBL's arithmetic, and the fixtures that prove it are
+      # produced by executing the pinned Go package. Regenerating and diffing
+      # means a GOBL release that changes num semantics fails the build rather
+      # than silently producing wrong money.
+      - name: num parity fixtures are current
+        run: |
+          go run ./cmd/numfixtures
+          git diff --exit-code test/fixtures/num.json
+
       # The package major.minor must track the GOBL release the types came
       # from; checked rather than merely documented.
       - run: npm run check-version
