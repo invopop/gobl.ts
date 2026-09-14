@@ -30,6 +30,12 @@ build:
 verify-package:
 	npm run verify-package
 
+# Runs the published bundle under goja, the pure-Go engine used for embedded
+# scripting. Needs `make build` first.
+.PHONY: goja
+goja:
+	go run ./cmd/gojacheck
+
 test:
 	npm test
 	.github/scripts/next-version.test.sh .github/scripts/next-version.sh
