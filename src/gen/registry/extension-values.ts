@@ -2351,6 +2351,15 @@ export interface ExtensionValues {
    */
   'it-sdi-liquidation-state': 'LS' | 'LN';
   /**
+   * SDI Notification. Outcome SDI reports for a submitted invoice, recorded on a
+   * bill.Status line. RC/NS/MC/AT/DT are the codes SDI emits
+   * directly; EC01/EC02 are the recipient responses resolved from a
+   * Notifica Esito.
+   *
+   * @source addon it-sdi-v1
+   */
+  'it-sdi-notification': 'RC' | 'NS' | 'MC' | 'AT' | 'DT' | 'EC01' | 'EC02';
+  /**
    * Payment Means
    *
    * @source addon it-sdi-v1
@@ -2417,6 +2426,19 @@ export interface ExtensionValues {
     | 'X'
     | 'Y'
     | 'ZO';
+  /**
+   * Retained Tax Statutory Rate. Statutory rate of a withholding computed on a reduced taxable base, as
+   * printed in AliquotaRitenuta. Italian withholdings often apply to a fraction
+   * of the line total, such as the 23% withheld on 50% of an agent's commission
+   * (art. 25-bis DPR 600/1973). GOBL has no taxable base per tax, so the combo's
+   * percent must be the effective rate over the whole line (11.50% in that
+   * example) and this extension keeps the statutory one. Set it when the two
+   * differ; ImportoRitenuta is still calculated from the percent, and whether
+   * the pair is coherent is up to the issuer.
+   *
+   * @source addon it-sdi-v1
+   */
+  'it-sdi-retained-rate': Code;
   /**
    * Shareholder State. Indicates the company's shareholder configuration, used in the
    * IscrizioneREA block of a FatturaPA document as the SocioUnico
