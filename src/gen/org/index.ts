@@ -17,5 +17,4 @@ export * from './party.js';
 export * from './person.js';
 export * from './registration.js';
 export * from './telephone.js';
-export * from './unit.js';
 export * from './website.js';

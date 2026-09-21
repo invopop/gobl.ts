@@ -197,6 +197,404 @@ export const LineChargeKeyLabels: EnumLabels<LineChargeKeyKnown> = {
   },
 };
 
+/**
+ * Unit to associate with the quantity when using the rate.
+ *
+ * @title Unit
+ */
+export type LineChargeUnit =
+  | 'mg'
+  | 'cg'
+  | 'g'
+  | 'kg'
+  | 't'
+  | 'mm'
+  | 'cm'
+  | 'dm'
+  | 'm'
+  | 'lm'
+  | 'km'
+  | 'in'
+  | 'ft'
+  | 'lft'
+  | 'mm2'
+  | 'cm2'
+  | 'dm2'
+  | 'm2'
+  | 'ac'
+  | 'ha'
+  | 'mm3'
+  | 'cm3'
+  | 'dm3'
+  | 'm3'
+  | 'ml'
+  | 'cl'
+  | 'dl'
+  | 'l'
+  | 'kl'
+  | 'w'
+  | 'kw'
+  | 'kwh'
+  | 'kj'
+  | 'kcal'
+  | 'rate'
+  | 'yr'
+  | 'mon'
+  | 'wk'
+  | 'day'
+  | 's'
+  | 'h'
+  | 'min'
+  | 'piece'
+  | 'item'
+  | 'pair'
+  | 'dozen'
+  | 'assortment'
+  | 'service'
+  | 'job'
+  | 'activity'
+  | 'trip'
+  | 'group'
+  | 'outfit'
+  | 'kit'
+  | 'basebox'
+  | 'pk'
+  | 'one'
+  | 'bag'
+  | 'box'
+  | 'bin'
+  | 'can'
+  | 'tub'
+  | 'case'
+  | 'tray'
+  | 'portion'
+  | 'set'
+  | 'roll'
+  | 'carton'
+  | 'cylinder'
+  | 'barrel'
+  | 'jerrican'
+  | 'carboy'
+  | 'demijohn'
+  | 'bottle'
+  | 'canister'
+  | 'pkg'
+  | 'pkt'
+  | 'bunch'
+  | 'bdl'
+  | 'blk'
+  | 'pallet'
+  | 'reel'
+  | 'sack'
+  | 'sheet'
+  | 'envelope'
+  | 'lot'
+  | 'unit';
+
+export const LineChargeUnitLabels: EnumLabels<LineChargeUnit> = {
+  mg: {
+    title: 'Milligrams',
+  },
+  cg: {
+    title: 'Centigrams',
+  },
+  g: {
+    title: 'Metric grams',
+  },
+  kg: {
+    title: 'Metric kilograms',
+  },
+  t: {
+    title: 'Metric tons',
+  },
+  mm: {
+    title: 'Millimetres',
+  },
+  cm: {
+    title: 'Centimetres',
+  },
+  dm: {
+    title: 'Decimetres',
+    description: 'A unit of length equal to one-tenth of a metre.',
+  },
+  m: {
+    title: 'Metres',
+  },
+  lm: {
+    title: 'Linear metres',
+    description:
+      'The running length in metres of a uniform-width product (e.g. carpet, fabric, cable), billed per metre regardless of width.',
+  },
+  km: {
+    title: 'Kilometres',
+  },
+  in: {
+    title: 'Inches',
+  },
+  ft: {
+    title: 'Feet',
+  },
+  lft: {
+    title: 'Linear feet',
+    description:
+      'The running length in feet of a uniform-width product (e.g. lumber, trim, cable), billed per foot regardless of width.',
+  },
+  mm2: {
+    title: 'Square millimetres',
+  },
+  cm2: {
+    title: 'Square centimetres',
+  },
+  dm2: {
+    title: 'Square decimetres',
+  },
+  m2: {
+    title: 'Square metres',
+  },
+  ac: {
+    title: 'Acres',
+    description: 'A unit of area equal to 43,560 square feet.',
+  },
+  ha: {
+    title: 'Hectares',
+    description: 'A unit of area equal to 10,000 square metres.',
+  },
+  mm3: {
+    title: 'Cubic millimetres',
+  },
+  cm3: {
+    title: 'Cubic centimetres',
+  },
+  dm3: {
+    title: 'Cubic decimetres',
+  },
+  m3: {
+    title: 'Cubic metres',
+  },
+  ml: {
+    title: 'Millilitres',
+  },
+  cl: {
+    title: 'Centilitres',
+  },
+  dl: {
+    title: 'Decilitres',
+  },
+  l: {
+    title: 'Litres',
+  },
+  kl: {
+    title: 'Kilolitres',
+  },
+  w: {
+    title: 'Watts',
+  },
+  kw: {
+    title: 'Kilowatts',
+  },
+  kwh: {
+    title: 'Kilowatt Hours',
+  },
+  kj: {
+    title: 'Kilojoules',
+  },
+  kcal: {
+    title: 'Kilocalories',
+  },
+  rate: {
+    title: 'Rate',
+    description: 'A unit of quantity expressed as a rate for usage of a facility or service.',
+  },
+  yr: {
+    title: 'Years',
+    description: 'A unit of time equal to twelve months.',
+  },
+  mon: {
+    title: 'Months',
+    description: 'Unit of time equal to 1/12 of a year of 365,25 days.',
+  },
+  wk: {
+    title: 'Weeks',
+    description: 'A unit of time equal to seven days.',
+  },
+  day: {
+    title: 'Days',
+  },
+  s: {
+    title: 'Seconds',
+  },
+  h: {
+    title: 'Hours',
+  },
+  min: {
+    title: 'Minutes',
+  },
+  piece: {
+    title: 'Pieces',
+    description:
+      'A unit of count defining the number of pieces (piece: a single item, article or exemplar).',
+  },
+  item: {
+    title: 'Items',
+    description: 'A unit of count defining the number of items regarded as separate units.',
+  },
+  pair: {
+    title: 'Pairs',
+    description: "A unit of count defining the number of pairs (pair: item described by two's).",
+  },
+  dozen: {
+    title: 'Dozens',
+    description: 'A unit of count defining the number of units in multiples of 12.',
+  },
+  assortment: {
+    title: 'Assortments',
+    description:
+      'A unit of count defining the number of assortments (assortment: a collection of items or components of a single product packaged together).',
+  },
+  service: {
+    title: 'Service Units',
+    description:
+      'A unit of count defining the number of service units (service unit: defined period / property / facility / utility of supply).',
+  },
+  job: {
+    title: 'Jobs',
+    description: 'A unit of count defining the number of jobs.',
+  },
+  activity: {
+    title: 'Activities',
+    description:
+      'A unit of count defining the number of activities (activity: a unit of work or action).',
+  },
+  trip: {
+    title: 'Trips',
+    description:
+      'A unit of count defining the number of trips (trip: a journey to a place and back again).',
+  },
+  group: {
+    title: 'Groups',
+    description:
+      'A unit of count defining the number of groups (group: set of items classified together).',
+  },
+  outfit: {
+    title: 'Outfits',
+    description:
+      'A unit of count defining the number of outfits (outfit: a complete set of equipment / materials / objects used for a specific purpose).',
+  },
+  kit: {
+    title: 'Kits',
+    description: 'A unit of count defining the number of kits (kit: tub, barrel or pail).',
+  },
+  basebox: {
+    title: 'Base Boxes',
+    description:
+      'A unit of area of 112 sheets of tin mil products (tin plate, tin free steel or black plate) 14 by 20 inches, or 31,360 square inches.',
+  },
+  pk: {
+    title: 'Bulk Packs',
+    description: 'A unit of count defining the number of items per bulk pack.',
+  },
+  one: {
+    title: 'One',
+    description: 'A single generic unit of a service or product.',
+  },
+  bag: {
+    title: 'Bags',
+  },
+  box: {
+    title: 'Boxes',
+  },
+  bin: {
+    title: 'Bins',
+  },
+  can: {
+    title: 'Cans',
+  },
+  tub: {
+    title: 'Tubs',
+  },
+  case: {
+    title: 'Cases',
+  },
+  tray: {
+    title: 'Trays',
+  },
+  portion: {
+    title: 'Portions',
+  },
+  set: {
+    title: 'Sets',
+    description:
+      'A unit of count defining the number of sets (set: a number of objects grouped together).',
+  },
+  roll: {
+    title: 'Rolls',
+  },
+  carton: {
+    title: 'Cartons',
+  },
+  cylinder: {
+    title: 'Cylinders',
+  },
+  barrel: {
+    title: 'Barrels',
+  },
+  jerrican: {
+    title: 'Jerricans',
+    description: 'Jerrican, cylindrical',
+  },
+  carboy: {
+    title: 'Carboys',
+  },
+  demijohn: {
+    title: 'Demijohns',
+  },
+  bottle: {
+    title: 'Bottles',
+  },
+  canister: {
+    title: 'Canisters',
+  },
+  pkg: {
+    title: 'Packages',
+    description: 'Standard packaging unit.',
+  },
+  pkt: {
+    title: 'Packets',
+  },
+  bunch: {
+    title: 'Bunches',
+  },
+  bdl: {
+    title: 'Bundles',
+  },
+  blk: {
+    title: 'Blocks',
+  },
+  pallet: {
+    title: 'Pallets',
+  },
+  reel: {
+    title: 'Reels',
+  },
+  sack: {
+    title: 'Sacks',
+  },
+  sheet: {
+    title: 'Sheets',
+  },
+  envelope: {
+    title: 'Envelopes',
+  },
+  lot: {
+    title: 'Lot',
+  },
+  unit: {
+    title: 'Unit',
+    description:
+      'A type of package composed of a single item or object, not otherwise specified as a unit of transport equipment.',
+  },
+};
+
 /** LineCharge represents an amount added to the line, and will be applied before taxes. */
 export interface LineCharge {
   /**
@@ -243,7 +641,7 @@ export interface LineCharge {
    *
    * @title Unit
    */
-  unit?: org.Unit;
+  unit?: LineChargeUnit;
   /**
    * Rate defines a price per unit to use instead of the percentage.
    *

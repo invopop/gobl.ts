@@ -477,11 +477,21 @@ export const ExtensionKeyLabels: EnumLabels<ExtensionKey> = {
     description:
       'Indicates whether the company is in liquidation, used in the\nIscrizioneREA block of a FatturaPA document as the\nStatoLiquidazione field.',
   },
+  'it-sdi-notification': {
+    title: 'SDI Notification',
+    description:
+      'Outcome SDI reports for a submitted invoice, recorded on a\nbill.Status line. RC/NS/MC/AT/DT are the codes SDI emits\ndirectly; EC01/EC02 are the recipient responses resolved from a\nNotifica Esito.',
+  },
   'it-sdi-payment-means': {
     title: 'Payment Means',
   },
   'it-sdi-retained': {
     title: 'Retained Tax Payment Reason Code',
+  },
+  'it-sdi-retained-rate': {
+    title: 'Retained Tax Statutory Rate',
+    description:
+      "Statutory rate of a withholding computed on a reduced taxable base, as\nprinted in AliquotaRitenuta. Italian withholdings often apply to a fraction\nof the line total, such as the 23% withheld on 50% of an agent's commission\n(art. 25-bis DPR 600/1973). GOBL has no taxable base per tax, so the combo's\npercent must be the effective rate over the whole line (11.50% in that\nexample) and this extension keeps the statutory one. Set it when the two\ndiffer; ImportoRitenuta is still calculated from the percent, and whether\nthe pair is coherent is up to the issuer.",
   },
   'it-sdi-shareholder-state': {
     title: 'Shareholder State',
@@ -724,5 +734,10 @@ export const ExtensionKeyLabels: EnumLabels<ExtensionKey> = {
   'untdid-text-subject': {
     title: 'UNTDID 4451 Text Subject Qualifier',
     description: 'Code specifying subject of a free text.',
+  },
+  'untdid-unit': {
+    title: 'UNTDID Unit of Measure',
+    description:
+      'Unit of measure code from UN/ECE Recommendations 20 and 21. This extension preserves the exact standard code when a GOBL unit key is unavailable or when a document format requires the UNTDID representation.',
   },
 };

@@ -90,7 +90,6 @@ export interface SchemaTypes {
   'https://gobl.org/draft-0/org/person': org.Person;
   'https://gobl.org/draft-0/org/registration': org.Registration;
   'https://gobl.org/draft-0/org/telephone': org.Telephone;
-  'https://gobl.org/draft-0/org/unit': org.Unit;
   'https://gobl.org/draft-0/org/website': org.Website;
   'https://gobl.org/draft-0/pay/card': pay.Card;
   'https://gobl.org/draft-0/pay/credit-transfer': pay.CreditTransfer;
@@ -199,7 +198,6 @@ export const SchemaIDs: readonly SchemaID[] = [
   'https://gobl.org/draft-0/org/person',
   'https://gobl.org/draft-0/org/registration',
   'https://gobl.org/draft-0/org/telephone',
-  'https://gobl.org/draft-0/org/unit',
   'https://gobl.org/draft-0/org/website',
   'https://gobl.org/draft-0/pay/card',
   'https://gobl.org/draft-0/pay/credit-transfer',
