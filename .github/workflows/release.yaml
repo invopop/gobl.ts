@@ -131,6 +131,11 @@ jobs:
           go run ./cmd/generate
           git diff --exit-code src/gen
 
+      - name: num parity fixtures are current
+        run: |
+          go run ./cmd/numfixtures
+          git diff --exit-code test/fixtures/num.json
+
       - name: Resolve version from the tag
         id: version
         run: |
