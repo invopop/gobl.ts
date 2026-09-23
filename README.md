@@ -157,6 +157,28 @@ catch (err) {
 }
 ```
 
+#### Embedded scripting (goja)
+
+The published JavaScript runs under [goja](https://github.com/dop251/goja), the
+pure-Go engine, so this library can be used inside embedded scripting blocks.
+Load the CommonJS build with `goja_nodejs/require`, or bundle it to a single
+file — the package has no runtime dependencies either way.
+
+```go
+vm := goja.New()
+require.NewRegistry().Enable(vm)
+vm.RunString(`var G = require('@invopop/gobl');`)
+```
+
+`GOBLClient` needs a `fetch` supplied by the host, since goja has none; module
+load and all arithmetic work without one. `cmd/gojacheck` runs in CI and
+replays the full num fixture set inside goja, so compatibility is a guarantee
+rather than an accident — including library methods goja lacks, which no build
+target would catch.
+
+Arithmetic alone bundles to ~6 KB minified and loads in a few milliseconds; the
+whole library is ~65 KB.
+
 #### WebAssembly
 
 The client is an implementation of the `GOBLBackend` interface, so a
@@ -263,6 +285,8 @@ make generate VERSION=v0.506.0-dev
 - `.github/scripts/next-version.test.sh` covers release-number derivation
   against synthetic tag histories — an off-by-one there either skips a version
   or tries to republish one npm has already taken.
+- `make goja` loads the published bundle into goja and replays the num
+  fixtures there, so embedded-scripting support cannot regress silently.
 - `npm run verify-package` packs the tarball and consumes it from a throwaway
   project in both ESM and CommonJS. In-repo type checking only sees `src/`, so
   this is the only check that exercises the **published** declarations — it is
