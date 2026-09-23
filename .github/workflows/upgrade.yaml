@@ -35,7 +35,9 @@ jobs:
           echo "version=$version" >> "$GITHUB_OUTPUT"
 
       - name: Regenerate
-        run: go run ./cmd/generate
+        run: |
+          go run ./cmd/generate
+          go run ./cmd/numfixtures
 
       # The npm version tracks GOBL's major.minor, following the convention
       # used by gobl.dev and @invopop/gobl-worker.
