@@ -6,13 +6,13 @@ go 1.25.0
 // replace github.com/invopop/gobl => ../gobl
 
 require (
-	github.com/invopop/gobl v0.505.0
-	github.com/invopop/gobl.dev v0.505.0
+	github.com/invopop/gobl v0.507.0
+	github.com/invopop/gobl.dev v0.507.0
 	github.com/wk8/go-ordered-map/v2 v2.1.8
 )
 
 require (
-	cloud.google.com/go v0.119.0 // indirect
+	cloud.google.com/go v0.121.3 // indirect
 	github.com/Masterminds/semver/v3 v3.3.1 // indirect
 	github.com/asaskevich/govalidator v0.0.0-20230301143203-a9d515a09cc2 // indirect
 	github.com/bahlo/generic-list-go v0.2.0 // indirect
@@ -21,13 +21,14 @@ require (
 	github.com/go-jose/go-jose/v4 v4.1.4 // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/invopop/gobl.br.nfe v0.0.4 // indirect
-	github.com/invopop/gobl.br.nfse v0.0.1 // indirect
-	github.com/invopop/gobl.dk.oioubl v0.0.1 // indirect
+	github.com/invopop/gobl.br.nfse v0.0.2 // indirect
+	github.com/invopop/gobl.dk.oioubl v0.0.6 // indirect
 	github.com/invopop/gobl.fi.finvoice v0.0.2 // indirect
 	github.com/invopop/gobl.fr.ctc v0.0.8 // indirect
-	github.com/invopop/gobl.it.sdi v0.74.0 // indirect
-	github.com/invopop/gobl.mx.cfdi v0.63.0 // indirect
-	github.com/invopop/gobl.pt.saft v0.0.6 // indirect
+	github.com/invopop/gobl.it.sdi v0.77.0 // indirect
+	github.com/invopop/gobl.mx.cfdi v0.64.0 // indirect
+	github.com/invopop/gobl.pl.ksef v0.45.0 // indirect
+	github.com/invopop/gobl.pt.saft v0.0.7 // indirect
 	github.com/invopop/gobl.sa.zatca v0.0.4 // indirect
 	github.com/invopop/jsonschema v0.14.0 // indirect
 	github.com/invopop/yaml v0.3.1 // indirect

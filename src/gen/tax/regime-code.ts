@@ -18,6 +18,7 @@ export type RegimeCode =
   | 'CA'
   | 'CH'
   | 'CO'
+  | 'CR'
   | 'DE'
   | 'DK'
   | 'EL'
@@ -32,11 +33,13 @@ export type RegimeCode =
   | 'NL'
   | 'NO'
   | 'NZ'
+  | 'PE'
   | 'PL'
   | 'PT'
   | 'SA'
   | 'SE'
   | 'SG'
+  | 'SK'
   | 'US';
 
 export const RegimeCodeLabels: EnumLabels<RegimeCode> = {
@@ -66,6 +69,9 @@ export const RegimeCodeLabels: EnumLabels<RegimeCode> = {
   },
   CO: {
     title: 'Colombia',
+  },
+  CR: {
+    title: 'Costa Rica',
   },
   DE: {
     title: 'Germany',
@@ -109,6 +115,9 @@ export const RegimeCodeLabels: EnumLabels<RegimeCode> = {
   NZ: {
     title: 'New Zealand',
   },
+  PE: {
+    title: 'Peru',
+  },
   PL: {
     title: 'Poland',
   },
@@ -123,6 +132,9 @@ export const RegimeCodeLabels: EnumLabels<RegimeCode> = {
   },
   SG: {
     title: 'Singapore',
+  },
+  SK: {
+    title: 'Slovakia',
   },
   US: {
     title: 'United States of America',

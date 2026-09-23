@@ -90,8 +90,9 @@ export interface Delivery {
    * Type of delivery document.
    *
    * @title Type
+   * @calculated Computed by GOBL; omit when building a document.
    */
-  type: DeliveryType;
+  type?: DeliveryType;
   /**
    * Series is used to identify groups of deliveries by date, business area, project,
    * type, customer, a combination of any, or other company specific data.
@@ -270,7 +271,7 @@ export interface Delivery {
 }
 
 /** Properties of {@link Delivery} that GOBL computes during calculation. */
-export type DeliveryCalculatedKeys = 'issue_date' | 'issue_time' | 'currency' | 'totals';
+export type DeliveryCalculatedKeys = 'type' | 'issue_date' | 'issue_time' | 'currency' | 'totals';
 
 export const DeliverySchemaID = 'https://gobl.org/draft-0/bill/delivery';
 
