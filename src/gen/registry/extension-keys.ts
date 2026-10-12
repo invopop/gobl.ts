@@ -467,7 +467,7 @@ export const ExtensionKeyLabels: EnumLabels<ExtensionKey> = {
   'it-sdi-format': {
     title: 'SDI Transmission Format',
     description:
-      'Code used to describe the transmission format of the invoice. It is set\nduring calculation from the invoice\'s tags: "FPA12" when the invoice\ncarries the "b2g" tag, and "FPR12" otherwise.',
+      'Code used to describe the transmission format of the invoice. It is set\nduring calculation from the invoice\'s tags: "FPA12" when the invoice\ncarries the "b2g" tag, "FSM10" when it carries the "simplified" tag,\nand "FPR12" otherwise.',
   },
   'it-sdi-fund-type': {
     title: 'Fund Type',

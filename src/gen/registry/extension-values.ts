@@ -2305,15 +2305,17 @@ export interface ExtensionValues {
     | 'RF16'
     | 'RF17'
     | 'RF19'
-    | 'RF18';
+    | 'RF18'
+    | 'RF20';
   /**
    * SDI Transmission Format. Code used to describe the transmission format of the invoice. It is set
    * during calculation from the invoice's tags: "FPA12" when the invoice
-   * carries the "b2g" tag, and "FPR12" otherwise.
+   * carries the "b2g" tag, "FSM10" when it carries the "simplified" tag,
+   * and "FPR12" otherwise.
    *
    * @source addon it-sdi-v1
    */
-  'it-sdi-format': 'FPA12' | 'FPR12';
+  'it-sdi-format': 'FPA12' | 'FPR12' | 'FSM10';
   /**
    * Fund Type
    *
