@@ -19,8 +19,8 @@ export interface Person {
    */
   uuid?: string;
   /**
-   * Label can be used to identify the person in a given context in a single
-   * language, for example "Attn", "Contact", "Responsible", etc.
+   * Identifies the person in a given context in a single language, for example
+   * "Attn", "Contact", "Responsible", etc.
    *
    * @title Label
    * @example "Attn"
@@ -52,7 +52,7 @@ export interface Person {
    */
   identities?: Identity[];
   /**
-   * Regular post addresses for where information should be sent if needed.
+   * Postal addresses where information should be sent if needed.
    *
    * @title Postal Addresses
    */
@@ -64,19 +64,19 @@ export interface Person {
    */
   emails?: Email[];
   /**
-   * Regular phone or mobile numbers
+   * Regular phone or mobile numbers.
    *
    * @title Telephone Numbers
    */
   telephones?: Telephone[];
   /**
-   * Avatars provider links to images or photos or the person.
+   * Links to images or photos of the person.
    *
    * @title Avatars
    */
   avatars?: Image[];
   /**
-   * Data about the data.
+   * Additional semi-structured information.
    *
    * @title Meta
    */

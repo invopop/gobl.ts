@@ -7,20 +7,19 @@ import type { Code } from './code.js';
 /** An Amount represents a monetary value in a specific currency. */
 export interface Amount {
   /**
-   * Label allows for additional information to be added to the
-   * currency Amount that may be useful.
+   * Additional information about the amount that may be useful.
    *
    * @title Label
    */
   label?: string;
   /**
-   * Code defines the currency for this amount.
+   * Currency of the amount.
    *
    * @title Currency
    */
   currency: Code;
   /**
-   * Value is the amount in the currency.
+   * Amount in the currency.
    *
    * @title Value
    */

@@ -15,6 +15,7 @@ export type RegimeCode =
   | 'AU'
   | 'BE'
   | 'BR'
+  | 'BS'
   | 'CA'
   | 'CH'
   | 'CO'
@@ -60,6 +61,9 @@ export const RegimeCodeLabels: EnumLabels<RegimeCode> = {
   },
   BR: {
     title: 'Brazil',
+  },
+  BS: {
+    title: 'Commonwealth of The Bahamas',
   },
   CA: {
     title: 'Canada',

@@ -8,13 +8,13 @@ import type { Scenario } from './scenario.js';
  */
 export interface ScenarioSet {
   /**
-   * Partial or complete schema URL for the document type
+   * Partial or complete schema URL for the document type.
    *
    * @title Schema
    */
   schema: string;
   /**
-   * List of scenarios for the schema
+   * List of scenarios for the schema.
    *
    * @title List
    */

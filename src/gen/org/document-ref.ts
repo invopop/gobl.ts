@@ -9,7 +9,7 @@ import type * as num from '../num/index.js';
 import type * as tax from '../tax/index.js';
 import type { Identity } from './identity.js';
 
-/** DocumentRef is used to describe an existing document or a specific part of it's contents. */
+/** DocumentRef is used to describe an existing document or a specific part of its contents. */
 export interface DocumentRef {
   /**
    * Universally Unique Identifier.
@@ -32,7 +32,7 @@ export interface DocumentRef {
    */
   type?: cbc.Key;
   /**
-   * IssueDate reflects the date the document was issued.
+   * Date the document was issued.
    *
    * @title Issue Date
    */
@@ -106,10 +106,10 @@ export interface DocumentRef {
    */
   tax?: tax.Total;
   /**
-   * Payable is the total amount that is payable in the referenced document. Only needed
-   * for specific tax regimes or addons. This may also be used in some scenarios
-   * to determine the proportion of the referenced document that has been paid, and
-   * calculate the remaining amount due and taxes.
+   * Total amount payable in the referenced document. Only needed for specific tax
+   * regimes or addons. May also be used in some scenarios to determine the proportion
+   * of the referenced document that has been paid, and to calculate the remaining
+   * amount due and taxes.
    *
    * @title Payable
    */
@@ -121,7 +121,7 @@ export interface DocumentRef {
    */
   ext?: tax.Extensions;
   /**
-   * Meta contains additional information about the document.
+   * Additional information about the document.
    *
    * @title Meta
    */

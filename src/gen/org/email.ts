@@ -25,7 +25,7 @@ export interface Email {
    */
   addr: string;
   /**
-   * Additional fields.
+   * Additional semi-structured information.
    *
    * @title Meta
    */

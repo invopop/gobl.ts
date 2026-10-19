@@ -784,6 +784,23 @@ export interface ExtensionValues {
    */
   'co-dian-fiscal-responsibility': 'O-13' | 'O-15' | 'O-23' | 'O-47' | 'R-99-PN';
   /**
+   * Item Identification Standard. Identifies the product-coding standard used for an invoice line's item code,
+   * mapped to the UBL's `StandardItemIdentification/ID@schemeID`.
+   *
+   * For example:
+   *
+   * ```js
+   * "item": {
+   * 	"name": "Producto",
+   * 	"ref": "7702004003489",
+   * 	"ext": { "co-dian-item-identification": "010" }
+   * }
+   * ```
+   *
+   * @source addon co-dian-v2
+   */
+  'co-dian-item-identification': '001' | '010' | '020' | '999';
+  /**
    * DIAN Municipality Code. The municipality code as defined by the DIAN.
    *
    * Set the 5-digit code for the municipality where the issuer is located in both
@@ -817,6 +834,30 @@ export interface ExtensionValues {
    * @source addon co-dian-v2
    */
   'co-dian-municipality': Code;
+  /**
+   * Tax Scheme. The tax (tributo) the party is responsible for, as defined by the DIAN for
+   * Colombian electronic invoicing.
+   *
+   * The DIAN limits suppliers to `01` (IVA) or `04` (INC), while customers may
+   * use any value; final consumers must be reported with `ZZ`. If a Colombian
+   * customer provides no value, GOBL will automatically set `ZZ` as the default.
+   *
+   * For example:
+   *
+   * ```js
+   * "supplier": {
+   * 	"name": "EXAMPLE SUPPLIER S.A.S.",
+   * 	"tax_id": {
+   * 		"country": "CO",
+   * 		"code": "9014514812"
+   * 	},
+   * 	"ext": { "co-dian-tax-scheme": "01" }
+   * }
+   * ```
+   *
+   * @source addon co-dian-v2
+   */
+  'co-dian-tax-scheme': '01' | '04' | 'ZA' | 'ZZ';
   /**
    * SKAT excise duty code. Code identifying a Danish excise duty ("punktafgift") from the SKAT
    * tax scheme codelist (OIOUBL `urn:oioubl:id:taxschemeid`), set on a
@@ -1280,6 +1321,18 @@ export interface ExtensionValues {
    */
   'es-verifactu-doc-type': 'F1' | 'F2' | 'F3' | 'R1' | 'R2' | 'R3' | 'R4' | 'R5';
   /**
+   * Event Type Code. Identifies the NO VERI*FACTU event being reported by a `bill.Status`
+   * line, whose key must be `other`. Core GOBL status line keys describe
+   * the situation of a business document, so the event type is carried
+   * here instead.
+   *
+   * Maps to the `TipoEvento` field of a `RegistroEvento`, list L2E.
+   *
+   * @source addon es-verifactu-v1
+   */
+  'es-verifactu-event-type':
+    '01' | '02' | '03' | '04' | '05' | '06' | '07' | '08' | '09' | '10' | '90';
+  /**
    * Verifactu Exemption Code. Exemption code used to explain why the operation is exempt from taxes.
    *
    * This extension maps to the field `OperacionExenta`, and **cannot** be provided
@@ -1447,6 +1500,31 @@ export interface ExtensionValues {
    * @source addon es-verifactu-v1
    */
   'es-verifactu-simplified-art7273': 'S' | 'N';
+  /**
+   * Finnish e-invoice operator. Identifier of the e-invoice operator (intermediator) that serves the
+   * party's e-invoice address, quoted alongside that address: an operator's
+   * own OVT code such as `003700010001`, or a bank's BIC such as `NDEAFIHH`.
+   *
+   * A Finnish e-invoice address may be registered with several operators, and
+   * the operator decides where an invoice is delivered. Set it on the party
+   * that receives the message, the customer or the supplier of a self-billed
+   * invoice, to have the Finvoice message routed to that operator:
+   *
+   * ```js
+   * "customer": {
+   * 	"name": "Ostaja Oy",
+   * 	"endpoints": [
+   * 		{ "uri": "iso6523-actorid-upis::0216:003745678907" }
+   * 	],
+   * 	"ext": {
+   * 		"fi-finvoice-operator": "003700010001"
+   * 	}
+   * }
+   * ```
+   *
+   * @source addon fi-finvoice-v3
+   */
+  'fi-finvoice-operator': Code;
   /**
    * General Information Framework. The general information framework is used to provide additional context
    * about the entity submitting the document. If no value is provided, it will
@@ -2305,15 +2383,17 @@ export interface ExtensionValues {
     | 'RF16'
     | 'RF17'
     | 'RF19'
-    | 'RF18';
+    | 'RF18'
+    | 'RF20';
   /**
    * SDI Transmission Format. Code used to describe the transmission format of the invoice. It is set
    * during calculation from the invoice's tags: "FPA12" when the invoice
-   * carries the "b2g" tag, and "FPR12" otherwise.
+   * carries the "b2g" tag, "FSM10" when it carries the "simplified" tag,
+   * and "FPR12" otherwise.
    *
    * @source addon it-sdi-v1
    */
-  'it-sdi-format': 'FPA12' | 'FPR12';
+  'it-sdi-format': 'FPA12' | 'FPR12' | 'FSM10';
   /**
    * Fund Type
    *
@@ -2342,6 +2422,28 @@ export interface ExtensionValues {
     | 'TC20'
     | 'TC21'
     | 'TC22';
+  /**
+   * Issuer Type. Says who issued the invoice when it was not the supplier. FatturaPA
+   * requires this in the `SoggettoEmittente` field whenever someone other
+   * than the supplier issues the document (article 21 of DPR 633/1972).
+   *
+   * When you name a third party as the ordering `issuer`, because that party
+   * issues the invoice on the supplier's behalf, the addon sets `TZ`.
+   *
+   * When your tags select a document the customer issues, the addon sets
+   * `CC` and replaces any value you gave: TD16 to TD20, TD22, TD23 and TD28.
+   * On these the customer sends the document to SDI and the supplier block
+   * names the seller. TD21 and TD27 stay unset, because there the issuer is
+   * both supplier and customer. For any other invoice the customer issued,
+   * set `CC` yourself.
+   *
+   * A `CC` invoice cannot also name an ordering `issuer`, because FatturaPA
+   * keeps `TerzoIntermediarioOSoggettoEmittente` for a third party acting for
+   * the supplier.
+   *
+   * @source addon it-sdi-v1
+   */
+  'it-sdi-issuer-type': 'CC' | 'TZ';
   /**
    * Liquidation State. Indicates whether the company is in liquidation, used in the
    * IscrizioneREA block of a FatturaPA document as the
@@ -2480,6 +2582,12 @@ export interface ExtensionValues {
    * @source addon it-ticket-v1
    */
   'it-ticket-product': 'goods' | 'services';
+  /**
+   * Cancellation Reason. Reason for cancelling a CFDI at the SAT. Reason 01 requires the UUID of the CFDI that substitutes it.
+   *
+   * @source addon mx-cfdi-v4
+   */
+  'mx-cfdi-cancel-reason': '01' | '02' | '03' | '04';
   /**
    * Document Type
    *

@@ -24,7 +24,7 @@ export interface Combo {
    * @title Country
    */
   country?: l10n.TaxCountryCode;
-  /** Key helps determine the tax situation within the category. */
+  /** Determines the tax situation within the category. */
   key?: cbc.Key;
   /**
    * Rate within a category and for a given key to apply.
@@ -33,8 +33,8 @@ export interface Combo {
    */
   rate?: cbc.Key;
   /**
-   * Percent defines the percentage set manually or determined from the
-   * key. A nil percent implies that this tax combo is either exempt or not-subject.
+   * Percentage set manually or determined from the rate or key. A nil percent implies
+   * that the tax combo is either exempt or not subject.
    *
    * @title Percent
    * @calculated Computed by GOBL; omit when building a document.

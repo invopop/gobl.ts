@@ -63,18 +63,17 @@ export interface Delivery {
    */
   $regime?: tax.RegimeCode;
   /**
-   * Addons defines a list of keys used to identify tax addons that apply special
-   * normalization, scenarios, and validation rules to a document.
+   * Keys identifying the tax addons that apply special normalization, scenarios, and
+   * validation rules to the document.
    *
    * @title Addons
    */
   $addons?: tax.AddonList;
   /**
-   * Tags are used to help identify specific tax scenarios or requirements that may
-   * apply changes to the contents of the document or imply a specific meaning.
-   * Converters may use tags to help identify specific situations that do not have
-   * a specific extension, for example; self-billed or partial invoices may be
-   * identified by their respective tags.
+   * Keys that identify specific tax scenarios or requirements that may change the
+   * contents of the document or imply a specific meaning. Converters may use tags to
+   * identify situations that do not have a specific extension; for example, self-billed
+   * or partial invoices are identified by their respective tags.
    *
    * @title Tags
    */
@@ -94,18 +93,18 @@ export interface Delivery {
    */
   type?: DeliveryType;
   /**
-   * Series is used to identify groups of deliveries by date, business area, project,
-   * type, customer, a combination of any, or other company specific data.
-   * If the output format does not support the series as a separate field, it will be
-   * prepended to the code for presentation with a dash (`-`) for separation.
+   * Identifies groups of deliveries by date, business area, project, type, customer,
+   * a combination of any, or other company specific data. If the output format does not
+   * support the series as a separate field, it will be prepended to the code with a dash
+   * (`-`) for separation.
    *
    * @title Series
    * @recommended
    */
   series?: cbc.Code;
   /**
-   * Code is a sequential identifier that uniquely identifies the delivery. The code can
-   * be left empty initially, but is **required** to **sign** the document.
+   * Sequential identifier that uniquely identifies the delivery. May be left empty
+   * initially, but is **required** to **sign** the document.
    *
    * @title Code
    * @recommended
@@ -119,17 +118,15 @@ export interface Delivery {
    */
   issue_date?: cal.Date;
   /**
-   * IssueTime is an optional field that may be useful to indicate the time of day when
-   * the delivery was issued. Some regions and formats may require this field to be set.
-   * An empty string will be automatically updated to reflect the current time, otherwise
-   * the field can be left with a nil value.
+   * Optional time of day when the delivery was issued. Some regions and formats may
+   * require this field; otherwise it can be left nil.
    *
    * @title Issue Time
    * @calculated Computed by GOBL; omit when building a document.
    */
   issue_time?: cal.Time;
   /**
-   * When the taxes of this delivery become accountable, if none set, the issue date is used.
+   * When the taxes of the delivery become accountable. Defaults to the issue date.
    *
    * @title Value Date
    */
@@ -142,7 +139,7 @@ export interface Delivery {
    */
   currency?: currency.Code;
   /**
-   * Exchange rates to be used when converting the invoices monetary values into other currencies.
+   * Exchange rates to be used when converting the document's monetary values into other currencies.
    *
    * @title Exchange Rates
    */
@@ -161,20 +158,19 @@ export interface Delivery {
    */
   preceding?: org.DocumentRef[];
   /**
-   * Tracking is used to define specific codes or IDs that may be used to
-   * identify and track delivery.
+   * Codes or IDs that may be used to identify and track the delivery.
    *
    * @title Tracking
    */
   tracking?: Tracking;
   /**
-   * DespatchDate is the date when the goods are expected to be despatched.
+   * Date when the goods are expected to be despatched.
    *
    * @title Despatch Date
    */
   despatch_date?: cal.Date;
   /**
-   * ReceiveDate is the date when the goods are expected to be received.
+   * Date when the goods are expected to be received.
    *
    * @title Receive Date
    */
@@ -216,26 +212,26 @@ export interface Delivery {
    */
   courier?: org.Party;
   /**
-   * List of lines representing each of the items to be ordered.
+   * List of lines representing each of the items to be delivered.
    *
    * @title Lines
    * @recommended
    */
   lines?: Line[];
   /**
-   * Discounts or allowances applied to order totals
+   * Discounts or allowances applied to the delivery totals.
    *
    * @title Discounts
    */
   discounts?: Discount[];
   /**
-   * Charges or surcharges applied to order totals
+   * Charges or surcharges applied to the delivery totals.
    *
    * @title Charges
    */
   charges?: Charge[];
   /**
-   * Summary of all the order totals, including taxes (calculated).
+   * Summary of all the delivery totals, including taxes (calculated).
    *
    * @title Totals
    * @calculated Computed by GOBL; omit when building a document.
@@ -261,9 +257,8 @@ export interface Delivery {
    */
   meta?: cbc.Meta;
   /**
-   * Attachments provide additional information or supporting documents that are not included
-   * in the main document. It is important that attachments are not used for alternative
-   * versions of the PDF, for that, see "links" inside the envelope headers.
+   * Supporting documents that are not included in the main document. Do not use for
+   * alternative versions of the PDF; use "links" inside the envelope headers instead.
    *
    * @title Attachments
    */
@@ -278,13 +273,13 @@ export const DeliverySchemaID = 'https://gobl.org/draft-0/bill/delivery';
 /** Tracking stores tracking information about a delivery. */
 export interface Tracking {
   /**
-   * Code used for tracking
+   * Code used to track the delivery.
    *
    * @title Code
    */
   code?: cbc.Code;
   /**
-   * Website to access for more tracking details
+   * URL to access more tracking details.
    *
    * @title Website
    */

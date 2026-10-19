@@ -452,7 +452,7 @@ export interface Item {
    */
   key?: ItemKey;
   /**
-   * Brief name of the item
+   * Brief name of the item.
    *
    * @title Name
    */
@@ -464,8 +464,7 @@ export interface Item {
    */
   identities?: Identity[];
   /**
-   * Attributes describe named features or properties of the item, such as
-   * color or size.
+   * Named features or properties of the item, such as color or size.
    *
    * @title Attributes
    */
@@ -489,18 +488,39 @@ export interface Item {
    */
   currency?: currency.Code;
   /**
-   * Base price of a single unit to be sold. Must be either zero or positive.
+   * List price before the price discount is applied. When set, the price
+   * is calculated as the list price less the discount.
+   *
+   * @title List Price
+   */
+  list?: num.Amount;
+  /**
+   * Amount deducted from the list price to determine the price.
+   *
+   * @title Price Discount
+   */
+  discount?: num.Amount;
+  /**
+   * Price after any price discount, for a single unit or the number of units
+   * defined by per. Must be either zero or positive.
    *
    * @title Price
    */
   price?: num.Amount;
   /**
-   * AltPrices defines a list of prices with their currencies that may be used
-   * as an alternative to the item's base price.
+   * Prices in other currencies that may be used as an alternative to the item's
+   * price.
    *
    * @title Alternative Prices
    */
   alt_prices?: currency.Amount[];
+  /**
+   * Number of units the prices apply to, e.g. 100 for a price per 100 kg.
+   * Assumed to be 1 when empty.
+   *
+   * @title Per Quantity
+   */
+  per?: num.Amount;
   /**
    * Unit of measure using a GOBL key. Standard UN/ECE codes may be preserved
    * in the untdid-unit extension.
@@ -509,7 +529,7 @@ export interface Item {
    */
   unit?: ItemUnit;
   /**
-   * Country code of where this item was from originally.
+   * Country code of where the item originates from.
    *
    * @title Country of Origin
    */
@@ -521,7 +541,7 @@ export interface Item {
    */
   ext?: tax.Extensions;
   /**
-   * Additional meta information that may be useful
+   * Additional semi-structured information that may be useful.
    *
    * @title Meta
    */

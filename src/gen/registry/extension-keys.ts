@@ -200,10 +200,20 @@ export const ExtensionKeyLabels: EnumLabels<ExtensionKey> = {
     description:
       'The fiscal responsibility code as defined by the DIAN for Colombian electronic invoicing.\nMaps to the UBL\'s `TaxLevelCode` field.\n\nThe DIAN requires that Colombian invoices specify the fiscal responsibilities of the\nsupplier or customer using specific codes. If no value is provided, GOBL will\nautomatically set `R-99-PN` as the default.\n\n| Code    | Description                   |\n| ------- | ----------------------------- |\n| O-13    | Gran contribuyente            |\n| O-15    | Autorretenedor                |\n| O-23    | Agente de retención IVA       |\n| O-47    | Régimen simple de tributación |\n| R-99-PN | No aplica - Otros             |\n\nFor example:\n\n```js\n"customer": {\n\t"name": "EXAMPLE CUSTOMER S.A.S.",\n\t"tax_id": {\n\t\t"country": "CO",\n\t\t"code": "9014514812"\n\t},\n\t"ext": {\n\t\t"co-dian-fiscal-responsibility": "O-13"\n\t}\n}\n```',
   },
+  'co-dian-item-identification': {
+    title: 'Item Identification Standard',
+    description:
+      'Identifies the product-coding standard used for an invoice line\'s item code,\nmapped to the UBL\'s `StandardItemIdentification/ID@schemeID`.\n\nFor example:\n\n```js\n"item": {\n\t"name": "Producto",\n\t"ref": "7702004003489",\n\t"ext": { "co-dian-item-identification": "010" }\n}\n```',
+  },
   'co-dian-municipality': {
     title: 'DIAN Municipality Code',
     description:
       'The municipality code as defined by the DIAN.\n\nSet the 5-digit code for the municipality where the issuer is located in both\nthe supplier and customer:\n\n```js\n"supplier": {\n\t"name": "EXAMPLE SUPPLIER S.A.S.",\n\t"tax_id": {\n\t\t"country": "CO",\n\t\t"code": "9014514812"\n\t},\n\t"ext": {\n\t\t"co-dian-municipality": "11001" // Bogotá, D.C.\n\t},\n\t// [...]\n},\n"customer": {\n\t"name": "EXAMPLE CUSTOMER S.A.S.",\n\t"tax_id": {\n\t\t"country": "CO",\n\t\t"code": "9014514805"\n\t},\n\t"ext": {\n\t\t"co-dian-municipality": "05001" // Medellín\n\t},\n\t// [...]\n},\n```',
+  },
+  'co-dian-tax-scheme': {
+    title: 'Tax Scheme',
+    description:
+      'The tax (tributo) the party is responsible for, as defined by the DIAN for\nColombian electronic invoicing.\n\nThe DIAN limits suppliers to `01` (IVA) or `04` (INC), while customers may\nuse any value; final consumers must be reported with `ZZ`. If a Colombian\ncustomer provides no value, GOBL will automatically set `ZZ` as the default.\n\nFor example:\n\n```js\n"supplier": {\n\t"name": "EXAMPLE SUPPLIER S.A.S.",\n\t"tax_id": {\n\t\t"country": "CO",\n\t\t"code": "9014514812"\n\t},\n\t"ext": { "co-dian-tax-scheme": "01" }\n}\n```',
   },
   'dk-oioubl-duty-code': {
     title: 'SKAT excise duty code',
@@ -321,6 +331,11 @@ export const ExtensionKeyLabels: EnumLabels<ExtensionKey> = {
     description:
       "Code used to identify the type of invoice being sent. This will be\ndetermined automatically by GOBL during normalization according\nto the scenario definitions.\n\nThe codes `R2`, `R3`, and `R4` are not covered by GOBL's scenarios\nand will need to be set manually if needed.\n\nValues correspond to L2 list.",
   },
+  'es-verifactu-event-type': {
+    title: 'Event Type Code',
+    description:
+      'Identifies the NO VERI*FACTU event being reported by a `bill.Status`\nline, whose key must be `other`. Core GOBL status line keys describe\nthe situation of a business document, so the event type is carried\nhere instead.\n\nMaps to the `TipoEvento` field of a `RegistroEvento`, list L2E.',
+  },
   'es-verifactu-exempt': {
     title: 'Verifactu Exemption Code',
     description:
@@ -350,6 +365,11 @@ export const ExtensionKeyLabels: EnumLabels<ExtensionKey> = {
     title: 'Simplified Invoice Art. 7.2 and 7.3, RD 1619/2012',
     description:
       'This extensions covers a specific use-case when the customer specifically\nrequests that the invoice includes their fiscal details, but they are\nnot registered for tax.\n\nMaps to the `FacturaSimplificadaArt7273` field in Verifactu documents.\n\nCan only be true when the invoice type (`TipoFactura`) is one of: `F1`,\n`F3`, `R1`, `R2`, `R3`, or `R4`.',
+  },
+  'fi-finvoice-operator': {
+    title: 'Finnish e-invoice operator',
+    description:
+      'Identifier of the e-invoice operator (intermediator) that serves the\nparty\'s e-invoice address, quoted alongside that address: an operator\'s\nown OVT code such as `003700010001`, or a bank\'s BIC such as `NDEAFIHH`.\n\nA Finnish e-invoice address may be registered with several operators, and\nthe operator decides where an invoice is delivered. Set it on the party\nthat receives the message, the customer or the supplier of a self-billed\ninvoice, to have the Finvoice message routed to that operator:\n\n```js\n"customer": {\n\t"name": "Ostaja Oy",\n\t"endpoints": [\n\t\t{ "uri": "iso6523-actorid-upis::0216:003745678907" }\n\t],\n\t"ext": {\n\t\t"fi-finvoice-operator": "003700010001"\n\t}\n}\n```',
   },
   'fr-choruspro-framework': {
     title: 'General Information Framework',
@@ -467,10 +487,15 @@ export const ExtensionKeyLabels: EnumLabels<ExtensionKey> = {
   'it-sdi-format': {
     title: 'SDI Transmission Format',
     description:
-      'Code used to describe the transmission format of the invoice. It is set\nduring calculation from the invoice\'s tags: "FPA12" when the invoice\ncarries the "b2g" tag, and "FPR12" otherwise.',
+      'Code used to describe the transmission format of the invoice. It is set\nduring calculation from the invoice\'s tags: "FPA12" when the invoice\ncarries the "b2g" tag, "FSM10" when it carries the "simplified" tag,\nand "FPR12" otherwise.',
   },
   'it-sdi-fund-type': {
     title: 'Fund Type',
+  },
+  'it-sdi-issuer-type': {
+    title: 'Issuer Type',
+    description:
+      "Says who issued the invoice when it was not the supplier. FatturaPA\nrequires this in the `SoggettoEmittente` field whenever someone other\nthan the supplier issues the document (article 21 of DPR 633/1972).\n\nWhen you name a third party as the ordering `issuer`, because that party\nissues the invoice on the supplier's behalf, the addon sets `TZ`.\n\nWhen your tags select a document the customer issues, the addon sets\n`CC` and replaces any value you gave: TD16 to TD20, TD22, TD23 and TD28.\nOn these the customer sends the document to SDI and the supplier block\nnames the seller. TD21 and TD27 stay unset, because there the issuer is\nboth supplier and customer. For any other invoice the customer issued,\nset `CC` yourself.\n\nA `CC` invoice cannot also name an ordering `issuer`, because FatturaPA\nkeeps `TerzoIntermediarioOSoggettoEmittente` for a third party acting for\nthe supplier.",
   },
   'it-sdi-liquidation-state': {
     title: 'Liquidation State',
@@ -517,6 +542,11 @@ export const ExtensionKeyLabels: EnumLabels<ExtensionKey> = {
   'it-ticket-product': {
     title: 'AdE CF Product Key',
     description: 'Product keys are used by AdE CF to differentiate between goods\nand services.',
+  },
+  'mx-cfdi-cancel-reason': {
+    title: 'Cancellation Reason',
+    description:
+      'Reason for cancelling a CFDI at the SAT. Reason 01 requires the UUID of the CFDI that substitutes it.',
   },
   'mx-cfdi-doc-type': {
     title: 'Document Type',

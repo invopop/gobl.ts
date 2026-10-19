@@ -15,19 +15,19 @@ import type { TagSet } from './tag-set.js';
 /** CategoryDef contains the definition of a general type of tax inside a region. */
 export interface CategoryDef {
   /**
-   * Code to be used in documents
+   * Code to be used in documents.
    *
    * @title Code
    */
   code: cbc.Code;
   /**
-   * Short name of the category to be used instead of code in output
+   * Short name of the category to be used instead of the code in output.
    *
    * @title Name
    */
   name: i18n.String;
   /**
-   * Human name for the code to use for titles
+   * Human readable name of the category used for titles.
    *
    * @title Title
    */
@@ -39,19 +39,17 @@ export interface CategoryDef {
    */
   desc?: i18n.String;
   /**
-   * Retained when true implies that the tax amount will be retained
-   * by the buyer on behalf of the supplier, and thus subtracted from
-   * the invoice taxable base total. Typically used for taxes related to
-   * income.
+   * When true, the tax amount will be retained by the buyer on behalf of the
+   * supplier, and thus subtracted from the invoice taxable base total. Typically
+   * used for taxes related to income.
    *
    * @title Retained
    */
   retained?: boolean;
   /**
-   * Informative when true implies that the tax amount will be calculated
-   * and reported but will not affect the invoice totals. Typically used
-   * for taxes that are embedded in the base amount or don't impact the
-   * final payable amount.
+   * When true, the tax amount will be calculated and reported but will not affect
+   * the invoice totals. Typically used for taxes that are embedded in the base
+   * amount or don't impact the final payable amount.
    *
    * @title Informative
    */
@@ -63,21 +61,21 @@ export interface CategoryDef {
    */
   keys?: KeyDef[];
   /**
-   * Rates defines the set of rates that can be used with this category.
+   * Set of rates that can be used with this category.
    *
    * @title Rates
    */
   rates?: RateDef[];
   /**
-   * Extensions defines a list of extension keys that may be used or required
-   * as an alternative or alongside choosing a rate for the tax category.
-   * Every key must be defined in the Regime's extensions table.
+   * Extension keys that may be used or required as an alternative to or alongside
+   * a rate for the tax category. Every key must be defined in the regime's
+   * extensions table.
    *
    * @title Extensions
    */
   extensions?: cbc.Key[];
   /**
-   * Map defines a set of regime specific code mappings.
+   * Regime specific code mappings.
    *
    * @title Map
    */
@@ -97,8 +95,8 @@ export interface CategoryDef {
    */
   ext?: Extensions;
   /**
-   * Meta contains additional information about the category that is relevant
-   * for local frequently used formats.
+   * Additional information about the category that is relevant for local frequently
+   * used formats.
    *
    * @title Meta
    */
@@ -110,26 +108,25 @@ export const CategoryDefSchemaID = 'https://gobl.org/draft-0/tax/regime-def#/$de
 /** KeyDef defines a key that can be used inside a tax category. */
 export interface KeyDef {
   /**
-   * Key identifies this rate within the system
+   * Unique identifier for the key within the category.
    *
    * @title Key
    */
   key?: cbc.Key;
   /**
-   * Human name of the rate set
+   * Human readable name of the key.
    *
    * @title Name
    */
   name?: i18n.String;
   /**
-   * Useful description of the rate.
+   * Useful description of the key.
    *
    * @title Description
    */
   desc?: i18n.String;
   /**
-   * NoPercent when true implies that the rate when used in a tax Combo should
-   * not define a percent value.
+   * When true, a tax combo using this key should not define a percent value.
    *
    * @title No Percent
    */
@@ -141,20 +138,19 @@ export const KeyDefSchemaID = 'https://gobl.org/draft-0/tax/regime-def#/$defs/ta
 /** RateDef defines a single rate inside a category */
 export interface RateDef {
   /**
-   * Rate defines the key for which this rate applies.
+   * Identifies the rate within the category.
    *
    * @title Rate
    */
   rate: cbc.Key;
   /**
-   * Keys identifies the set of tax keys defined in the category that this
-   * rate can be used with.
+   * Tax keys defined in the category that this rate can be used with.
    *
    * @title Keys
    */
   keys?: cbc.Key[];
   /**
-   * Human name of the rate
+   * Human readable name of the rate.
    *
    * @title Name
    */
@@ -166,18 +162,15 @@ export interface RateDef {
    */
   desc?: i18n.String;
   /**
-   * Values contains a list of Value objects that contain the
-   * current and historical percentage values for the rate and
-   * additional filters.
-   * Order is important, newer values should come before
-   * older values.
+   * Current and historical percentage values for the rate with additional filters.
+   * Order is important; newer values should come before older values.
    *
    * @title Values
    */
   values?: RateValueDef[];
   /**
-   * Meta contains additional information about the rate that is relevant
-   * for local frequently used implementations.
+   * Additional information about the rate that is relevant for local frequently used
+   * implementations.
    *
    * @title Meta
    */
@@ -189,9 +182,7 @@ export const RateDefSchemaID = 'https://gobl.org/draft-0/tax/regime-def#/$defs/t
 /** RateValueDef contains a percentage rate or fixed amount for a given date range. */
 export interface RateValueDef {
   /**
-   * Only apply this rate if one of the tags is present in the invoice.
-   * Tags []cbc.Key `json:"tags,omitempty" jsonschema:"title=Tags"`
-   * Ext map of keys that can be used to filter to determine if the rate applies.
+   * Extension codes used to filter whether this value applies.
    *
    * @title Extensions
    */
@@ -203,7 +194,7 @@ export interface RateValueDef {
    */
   since?: cal.Date;
   /**
-   * Percent rate that should be applied
+   * Percent rate that should be applied.
    *
    * @title Percent
    */
@@ -242,9 +233,8 @@ export interface RegimeDef {
    */
   description?: i18n.String;
   /**
-   * Sources is a list of references to tax authority or other relevant documentation that
-   * can be used to validate the regime's data and be used in the future to check for updates
-   * and changes.
+   * References to tax authority or other relevant documentation that can be used to
+   * validate the regime's data and to check for updates and changes in the future.
    *
    * @title Sources
    */
@@ -285,10 +275,9 @@ export interface RegimeDef {
    */
   currency: currency.Code;
   /**
-   * TaxScheme defines the principal scheme of consumption tax that should be
-   * applied to the regime and associated with Tax IDs in some export formats
-   * such as UBL or CII. Some regimes may not have a Tax Scheme and as a
-   * consequence will not use tax identities, like the US.
+   * Principal scheme of consumption tax that applies to the regime and is associated
+   * with tax IDs in some export formats such as UBL or CII. Some regimes, like the
+   * US, may not have a tax scheme and as a consequence will not use tax identities.
    *
    * @title Tax Scheme
    */
@@ -308,9 +297,9 @@ export interface RegimeDef {
    */
   tags?: TagSet[];
   /**
-   * Extensions defines the keys that can be used for extended or extra data inside the regime that
-   * is specific to the regime and cannot be easily determined from other GOBL structures.
-   * Typically these are used to define local codes for suppliers, customers, products, or tax rates.
+   * Keys that can be used for extended or extra data specific to the regime that
+   * cannot be easily determined from other GOBL structures. Typically used to define
+   * local codes for suppliers, customers, products, or tax rates.
    *
    * @title Extensions
    */
@@ -323,23 +312,22 @@ export interface RegimeDef {
    */
   identities?: cbc.Definition[];
   /**
-   * PaymentMeansKeys specific for the regime that extend the original
-   * base payment means keys.
+   * Payment means keys specific to the regime that extend the base set.
    *
    * @title Payment Means Keys
    */
   payment_means_keys?: cbc.Definition[];
   /**
-   * InboxKeys specific to the regime that can be used to identify where a document
-   * should be forwarded to.
+   * Inbox keys specific to the regime that identify where a document should be
+   * forwarded to.
    *
    * @title Inbox Keys
    */
   inbox_keys?: cbc.Definition[];
   /**
-   * Scenarios are used to describe a specific set of conditions and rules that apply to a specific
-   * document schema. These provide a more generic solution for normalization and validation of documents
-   * in regimes with specific requirements.
+   * Sets of conditions and rules that apply to a specific document schema. These
+   * provide a more generic solution for normalization and validation of documents in
+   * regimes with specific requirements.
    *
    * @title Scenarios
    */

@@ -16,8 +16,7 @@ export interface DeliveryDetails {
    */
   receiver?: org.Party;
   /**
-   * Identities is used to define specific codes or IDs that may be used to
-   * identify the delivery.
+   * Specific codes or IDs that may be used to identify the delivery.
    *
    * @title Identities
    */

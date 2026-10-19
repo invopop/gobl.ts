@@ -107,7 +107,7 @@ export interface Address {
    */
   coords?: Coordinates;
   /**
-   * Any additional semi-structure details about the address.
+   * Any additional semi-structured details about the address.
    *
    * @title Meta
    */

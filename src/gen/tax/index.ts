@@ -6,6 +6,7 @@ export * from './catalogue-def.js';
 export * from './correction-definition.js';
 export * from './correction-set.js';
 export * from './extensions.js';
+export * from './filter.js';
 export * from './identity.js';
 export * from './note.js';
 export * from './regime-code.js';

@@ -42,7 +42,7 @@ export interface Registration {
   /** @title Other */
   other?: string;
   /**
-   * Ext holds any additional information that may be required by specific tax authorities.
+   * Any additional information that may be required by specific tax authorities.
    *
    * @title Extensions
    */

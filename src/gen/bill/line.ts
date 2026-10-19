@@ -25,7 +25,7 @@ export interface Line {
    */
   i?: number;
   /**
-   * Number of items
+   * Number of items.
    *
    * @title Quantity
    */
@@ -58,7 +58,7 @@ export interface Line {
    */
   cost?: cbc.Code;
   /**
-   * Details about the item, service or good, that is being sold
+   * Details about the item, service, or good being sold.
    *
    * @title Item
    */
@@ -71,26 +71,26 @@ export interface Line {
    */
   breakdown?: SubLine[];
   /**
-   * Result of quantity multiplied by the item's price (calculated)
+   * Result of quantity multiplied by the item's price (calculated).
    *
    * @title Sum
    * @calculated Computed by GOBL; omit when building a document.
    */
   sum?: num.Amount;
   /**
-   * Discounts applied to this line
+   * Discounts applied to this line.
    *
    * @title Discounts
    */
   discounts?: LineDiscount[];
   /**
-   * Charges applied to this line
+   * Charges applied to this line.
    *
    * @title Charges
    */
   charges?: LineCharge[];
   /**
-   * Map of taxes to be applied and used in the invoice totals
+   * Map of taxes to be applied and used in the document totals.
    *
    * @title Taxes
    */
@@ -126,7 +126,7 @@ export interface Line {
    */
   notes?: org.Note[];
   /**
-   * Extension codes that apply to the line
+   * Extension codes that apply to the line.
    *
    * @title Extensions
    */
@@ -606,25 +606,25 @@ export interface LineCharge {
    */
   key?: LineChargeKey;
   /**
-   * Reference or ID for this charge defined by the issuer
+   * Reference or ID for this charge defined by the issuer.
    *
    * @title Code
    */
   code?: cbc.Code;
   /**
-   * Text description as to why the charge was applied
+   * Reason why the charge was applied.
    *
    * @title Reason
    */
   reason?: string;
   /**
-   * Base for percent calculations instead of the line's sum
+   * Base for percent calculations instead of the line's sum.
    *
    * @title Base
    */
   base?: num.Amount;
   /**
-   * Percentage of base or parent line's sum
+   * Percentage of the base or the parent line's sum.
    *
    * @title Percent
    */
@@ -643,7 +643,7 @@ export interface LineCharge {
    */
   unit?: LineChargeUnit;
   /**
-   * Rate defines a price per unit to use instead of the percentage.
+   * Price per unit to use instead of the percentage.
    *
    * @title Rate
    */
@@ -656,7 +656,7 @@ export interface LineCharge {
    */
   amount?: num.Amount;
   /**
-   * Extension codes that apply to the charge
+   * Extension codes that apply to the charge.
    *
    * @title Extensions
    */
@@ -746,13 +746,13 @@ export interface LineDiscount {
    */
   key?: LineDiscountKey;
   /**
-   * Code or reference for this discount defined by the issuer
+   * Code or reference for this discount defined by the issuer.
    *
    * @title Code
    */
   code?: cbc.Code;
   /**
-   * Text description as to why the discount was applied
+   * Reason why the discount was applied.
    *
    * @title Reason
    */
@@ -764,20 +764,20 @@ export interface LineDiscount {
    */
   base?: num.Amount;
   /**
-   * Percentage to apply to the base or line sum to calculate the discount amount
+   * Percentage to apply to the base or line sum to calculate the discount amount.
    *
    * @title Percent
    */
   percent?: num.Percentage;
   /**
-   * Fixed discount amount to apply (calculated if percent present)
+   * Fixed discount amount to apply (calculated if percent present).
    *
    * @title Amount
    * @calculated Computed by GOBL; omit when building a document.
    */
   amount?: num.Amount;
   /**
-   * Extension codes that apply to the discount
+   * Extension codes that apply to the discount.
    *
    * @title Extensions
    */
@@ -808,7 +808,7 @@ export interface SubLine {
    */
   i?: number;
   /**
-   * Number of items
+   * Number of items.
    *
    * @title Quantity
    */
@@ -841,26 +841,26 @@ export interface SubLine {
    */
   cost?: cbc.Code;
   /**
-   * Details about the item, service or good, that is being sold
+   * Details about the item, service, or good being sold.
    *
    * @title Item
    */
   item: org.Item;
   /**
-   * Result of quantity multiplied by the item's price (calculated)
+   * Result of quantity multiplied by the item's price (calculated).
    *
    * @title Sum
    * @calculated Computed by GOBL; omit when building a document.
    */
   sum?: num.Amount;
   /**
-   * Discounts applied to this sub-line
+   * Discounts applied to this sub-line.
    *
    * @title Discounts
    */
   discounts?: LineDiscount[];
   /**
-   * Charges applied to this sub-line
+   * Charges applied to this sub-line.
    *
    * @title Charges
    */

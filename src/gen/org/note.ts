@@ -6,7 +6,7 @@ import type { EnumLabels } from '../label.js';
 import type * as tax from '../tax/index.js';
 
 /**
- * Key specifying subject of the text
+ * Subject of the note's text.
  *
  * @title Key
  */
@@ -165,7 +165,7 @@ export interface Note {
    */
   uuid?: string;
   /**
-   * Key specifying subject of the text
+   * Subject of the note's text.
    *
    * @title Key
    */
@@ -183,19 +183,19 @@ export interface Note {
    */
   src?: cbc.Key;
   /**
-   * The contents of the note
+   * Contents of the note.
    *
    * @title Text
    */
   text: string;
   /**
-   * Additional information about the note
+   * Additional information about the note.
    *
    * @title Meta
    */
   meta?: cbc.Meta;
   /**
-   * Extension data
+   * Extension codes that apply to the note.
    *
    * @title Extensions
    */

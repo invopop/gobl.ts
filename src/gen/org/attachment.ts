@@ -28,14 +28,13 @@ export interface Attachment {
    */
   code?: cbc.Code;
   /**
-   * Filename of the attachment, will override name retrieved from URL.
+   * Filename of the attachment. Overrides the name retrieved from the URL.
    *
    * @title Name
    */
   name?: string;
   /**
-   * Details of why the attachment is being included and details on
-   * what it contains.
+   * Why the attachment is included and what it contains.
    *
    * @title Description
    */
@@ -48,8 +47,7 @@ export interface Attachment {
    */
   url: string;
   /**
-   * Digest is used to verify the integrity of the attachment
-   * when downloaded from the URL.
+   * Used to verify the integrity of the attachment when downloaded from the URL.
    *
    * @title Digest
    */

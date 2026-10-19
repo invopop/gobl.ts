@@ -56,18 +56,17 @@ export interface Order {
    */
   $regime?: tax.RegimeCode;
   /**
-   * Addons defines a list of keys used to identify tax addons that apply special
-   * normalization, scenarios, and validation rules to a document.
+   * Keys identifying the tax addons that apply special normalization, scenarios, and
+   * validation rules to the document.
    *
    * @title Addons
    */
   $addons?: tax.AddonList;
   /**
-   * Tags are used to help identify specific tax scenarios or requirements that may
-   * apply changes to the contents of the document or imply a specific meaning.
-   * Converters may use tags to help identify specific situations that do not have
-   * a specific extension, for example; self-billed or partial invoices may be
-   * identified by their respective tags.
+   * Keys that identify specific tax scenarios or requirements that may change the
+   * contents of the document or imply a specific meaning. Converters may use tags to
+   * identify situations that do not have a specific extension; for example, self-billed
+   * or partial invoices are identified by their respective tags.
    *
    * @title Tags
    */
@@ -86,67 +85,65 @@ export interface Order {
    */
   type?: OrderType;
   /**
-   * Series is used to identify groups of orders by date, business area, project,
-   * type, customer, a combination of any, or other company specific data.
-   * If the output format does not support the series as a separate field, it will be
-   * prepended to the code for presentation with a dash (`-`) for separation.
+   * Identifies groups of orders by date, business area, project, type, customer,
+   * a combination of any, or other company specific data. If the output format does not
+   * support the series as a separate field, it will be prepended to the code with a dash
+   * (`-`) for separation.
    *
    * @title Series
    * @recommended
    */
   series?: cbc.Code;
   /**
-   * Code is a sequential identifier that uniquely identifies the order. The code can
-   * be left empty initially, but is **required** to **sign** the document.
+   * Sequential identifier that uniquely identifies the order. May be left empty
+   * initially, but is **required** to **sign** the document.
    *
    * @title Code
    * @recommended
    */
   code?: cbc.Code;
   /**
-   * When the invoice was created.
+   * When the order was created.
    *
    * @title Issue Date
    * @calculated Computed by GOBL; omit when building a document.
    */
   issue_date?: cal.Date;
   /**
-   * IssueTime is an optional field that may be useful to indicate the time of day when
-   * the order was issued. Some regions and formats may require this field to be set.
-   * An empty string will be automatically updated to reflect the current time, otherwise
-   * the field can be left with a nil value.
+   * Optional time of day when the order was issued. Some regions and formats may
+   * require this field; otherwise it can be left nil.
    *
    * @title Issue Time
    * @calculated Computed by GOBL; omit when building a document.
    */
   issue_time?: cal.Time;
   /**
-   * Date when the operation defined by the invoice became effective.
+   * Date when the operation defined by the order became effective.
    *
    * @title Operation Date
    */
   op_date?: cal.Date;
   /**
-   * When the taxes of this invoice become accountable, if none set, the issue date is used.
+   * When the taxes of the document become accountable. Defaults to the issue date.
    *
    * @title Value Date
    */
   value_date?: cal.Date;
   /**
-   * Currency for all invoice totals.
+   * Currency for all order totals.
    *
    * @title Currency
    * @calculated Computed by GOBL; omit when building a document.
    */
   currency?: currency.Code;
   /**
-   * Exchange rates to be used when converting the invoices monetary values into other currencies.
+   * Exchange rates to be used when converting the document's monetary values into other currencies.
    *
    * @title Exchange Rates
    */
   exchange_rates?: currency.ExchangeRate[];
   /**
-   * The identification of contracts.
+   * Contracts related to the document.
    *
    * @title Contracts
    */
@@ -194,7 +191,7 @@ export interface Order {
    */
   buyer?: org.Party;
   /**
-   * Seller is the party liable to pay taxes on the transaction if not the same as the supplier.
+   * Party liable to pay taxes on the transaction, if not the same as the supplier.
    *
    * @title Seller
    */
@@ -207,13 +204,13 @@ export interface Order {
    */
   lines?: Line[];
   /**
-   * Discounts or allowances applied to order totals
+   * Discounts or allowances applied to the order totals.
    *
    * @title Discounts
    */
   discounts?: Discount[];
   /**
-   * Charges or surcharges applied to order totals
+   * Charges or surcharges applied to the order totals.
    *
    * @title Charges
    */
@@ -257,9 +254,8 @@ export interface Order {
    */
   meta?: cbc.Meta;
   /**
-   * Attachments provide additional information or supporting documents that are not included
-   * in the main document. It is important that attachments are not used for alternative
-   * versions of the PDF, for that, see "links" inside the envelope headers.
+   * Supporting documents that are not included in the main document. Do not use for
+   * alternative versions of the PDF; use "links" inside the envelope headers instead.
    *
    * @title Attachments
    */

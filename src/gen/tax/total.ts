@@ -29,9 +29,7 @@ export const CategoryTotalSchemaID = 'https://gobl.org/draft-0/tax/total#/$defs/
  */
 export interface RateTotal {
   /**
-   * Country code override when issuing with taxes applied from different countries,
-   * it'd be very strange to mix rates from different countries, but in theory
-   * this would be possible.
+   * Country code override when issuing with taxes applied from different countries.
    *
    * @title Country
    */
@@ -43,7 +41,7 @@ export interface RateTotal {
    */
   key?: cbc.Key;
   /**
-   * If the rate is defined with extensions, they'll be used to group by also.
+   * Extensions used to group the rate, if defined.
    *
    * @title Extensions
    */
@@ -67,7 +65,7 @@ export interface RateTotal {
    */
   surcharge?: RateTotalSurcharge;
   /**
-   * Total amount of rate, excluding surcharges
+   * Total amount of the rate, excluding surcharges.
    *
    * @title Amount
    */
@@ -92,7 +90,7 @@ export const RateTotalSurchargeSchemaID =
  */
 export interface Total {
   /**
-   * Grouping of all the taxes by their category
+   * Grouping of all the taxes by their category.
    *
    * @title Categories
    */
@@ -104,7 +102,7 @@ export interface Total {
    */
   sum: num.Amount;
   /**
-   * Sum of retained or withheld tax amounts
+   * Sum of retained or withheld tax amounts.
    *
    * @title Retained
    */

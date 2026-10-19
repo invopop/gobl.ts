@@ -129,11 +129,18 @@ export interface Record {
    */
   key?: RecordKey;
   /**
+   * Reason the amount was waived and not collected from the customer,
+   * as an alternative to the payment means key.
+   *
+   * @title Waiver
+   */
+  waiver?: cbc.Key;
+  /**
    * ID or reference for the payment.
    *
    * @title Reference
    */
-  ref?: string;
+  ref?: cbc.Code;
   /**
    * Description about the payment.
    *
@@ -149,6 +156,13 @@ export interface Record {
    * @title Percent
    */
   percent?: num.Percentage;
+  /**
+   * Tax rate totals whose sum is used as the amount, as an alternative to
+   * the percent.
+   *
+   * @title Taxes
+   */
+  taxes?: tax.Filter[];
   /**
    * How much was paid.
    *

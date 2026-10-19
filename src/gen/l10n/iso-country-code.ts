@@ -4,7 +4,7 @@
 import type { EnumLabels } from '../label.js';
 
 /**
- * Defines an ISO 3166-2 country code
+ * Defines an ISO 3166-1 alpha-2 country code.
  *
  * @title ISO Country Code
  */

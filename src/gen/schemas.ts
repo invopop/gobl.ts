@@ -106,6 +106,7 @@ export interface SchemaTypes {
   'https://gobl.org/draft-0/tax/correction-definition': tax.CorrectionDefinition;
   'https://gobl.org/draft-0/tax/correction-set': tax.CorrectionSet;
   'https://gobl.org/draft-0/tax/extensions': tax.Extensions;
+  'https://gobl.org/draft-0/tax/filter': tax.Filter;
   'https://gobl.org/draft-0/tax/identity': tax.Identity;
   'https://gobl.org/draft-0/tax/note': tax.Note;
   'https://gobl.org/draft-0/tax/regime-code': tax.RegimeCode;
@@ -214,6 +215,7 @@ export const SchemaIDs: readonly SchemaID[] = [
   'https://gobl.org/draft-0/tax/correction-definition',
   'https://gobl.org/draft-0/tax/correction-set',
   'https://gobl.org/draft-0/tax/extensions',
+  'https://gobl.org/draft-0/tax/filter',
   'https://gobl.org/draft-0/tax/identity',
   'https://gobl.org/draft-0/tax/note',
   'https://gobl.org/draft-0/tax/regime-code',

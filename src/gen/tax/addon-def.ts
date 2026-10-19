@@ -16,46 +16,44 @@ export interface AddonDef {
    */
   key: cbc.Key;
   /**
-   * Requires defines any additional addons that this one depends on to operate
-   * correctly.
+   * Additional addons that this one depends on to operate correctly.
    *
    * @title Requires
    */
   requires?: cbc.Key[];
   /**
-   * Name of the add-on
+   * Name of the add-on.
    *
    * @title Name
    */
   name: i18n.String;
   /**
-   * Description of the add-on
+   * Description of the add-on.
    *
    * @title Description
    */
   description?: i18n.String;
   /**
-   * Sources is a list of sources that are used to provide the data for the add-on.
+   * Sources of the data used to define the add-on.
    *
    * @title Sources
    */
   sources?: cbc.Source[];
   /**
-   * Extensions defines the list of extensions that are associated with an add-on.
+   * Extensions associated with the add-on.
    *
    * @title Extensions
    */
   extensions: cbc.Definition[];
   /**
-   * Tags is slice of tag sets that define what can be assigned to each document schema.
+   * Tag sets that define what can be assigned to each document schema.
    *
    * @title Tags
    */
   tags?: TagSet[];
   /**
-   * Scenarios are applied to documents after normalization and before
-   * validation to ensure that form specific extensions have been added
-   * to the document.
+   * Applied to documents after normalization and before validation to ensure that
+   * format specific extensions have been added.
    *
    * @title Scenarios
    */
@@ -68,15 +66,13 @@ export interface AddonDef {
    */
   identities?: cbc.Definition[];
   /**
-   * Inboxes is a list of keys that are used to identify where copies of
-   * documents can be sent.
+   * Keys used to identify where copies of documents can be sent.
    *
    * @title Inboxes
    */
   inboxes?: cbc.Definition[];
   /**
-   * Corrections is used to provide a map of correction definitions that
-   * are supported by the add-on.
+   * Correction definitions supported by the add-on.
    *
    * @title Corrections
    */
