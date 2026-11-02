@@ -6,20 +6,20 @@ import type { Date } from './date.js';
 /** Period represents a span of time bounded by a start and/or an end date. */
 export interface Period {
   /**
-   * Label is a short description of the period.
+   * Short description of the period.
    *
    * @title Label
    */
   label?: string;
   /**
-   * Start indicates when this period starts, required if there is no end date.
+   * When the period starts. Required if there is no end date.
    *
    * @title Start
    */
   start?: Date;
   /**
-   * End indicates when the period ends, required if there is no start date,
-   * and must be on or after the start date.
+   * When the period ends. Required if there is no start date, and must be on or after
+   * the start date.
    *
    * @title End
    */

@@ -32,9 +32,9 @@ export interface SchemaTypes {
   'https://gobl.org/draft-0/bill/fault': bill.Fault;
   'https://gobl.org/draft-0/bill/invoice': bill.Invoice;
   'https://gobl.org/draft-0/bill/line': bill.Line;
-  'https://gobl.org/draft-0/bill/line#/$defs/bill.LineCharge': bill.LineCharge;
-  'https://gobl.org/draft-0/bill/line#/$defs/bill.LineDiscount': bill.LineDiscount;
   'https://gobl.org/draft-0/bill/line#/$defs/bill.SubLine': bill.SubLine;
+  'https://gobl.org/draft-0/bill/line-charge': bill.LineCharge;
+  'https://gobl.org/draft-0/bill/line-discount': bill.LineDiscount;
   'https://gobl.org/draft-0/bill/order': bill.Order;
   'https://gobl.org/draft-0/bill/ordering': bill.Ordering;
   'https://gobl.org/draft-0/bill/payment': bill.Payment;
@@ -57,6 +57,7 @@ export interface SchemaTypes {
   'https://gobl.org/draft-0/cbc/meta': cbc.Meta;
   'https://gobl.org/draft-0/cbc/source': cbc.Source;
   'https://gobl.org/draft-0/cbc/uri': cbc.URI;
+  'https://gobl.org/draft-0/cbc/usage': cbc.Usage;
   'https://gobl.org/draft-0/currency/amount': currency.Amount;
   'https://gobl.org/draft-0/currency/code': currency.Code;
   'https://gobl.org/draft-0/currency/exchange-rate': currency.ExchangeRate;
@@ -103,11 +104,15 @@ export interface SchemaTypes {
   'https://gobl.org/draft-0/tax/addon-def': tax.AddonDef;
   'https://gobl.org/draft-0/tax/addon-list': tax.AddonList;
   'https://gobl.org/draft-0/tax/catalogue-def': tax.CatalogueDef;
+  'https://gobl.org/draft-0/tax/combo': tax.Combo;
   'https://gobl.org/draft-0/tax/correction-definition': tax.CorrectionDefinition;
   'https://gobl.org/draft-0/tax/correction-set': tax.CorrectionSet;
   'https://gobl.org/draft-0/tax/extensions': tax.Extensions;
+  'https://gobl.org/draft-0/tax/filter': tax.Filter;
   'https://gobl.org/draft-0/tax/identity': tax.Identity;
   'https://gobl.org/draft-0/tax/note': tax.Note;
+  'https://gobl.org/draft-0/tax/rate-total': tax.RateTotal;
+  'https://gobl.org/draft-0/tax/rate-total#/$defs/tax.RateTotalSurcharge': tax.RateTotalSurcharge;
   'https://gobl.org/draft-0/tax/regime-code': tax.RegimeCode;
   'https://gobl.org/draft-0/tax/regime-def': tax.RegimeDef;
   'https://gobl.org/draft-0/tax/regime-def#/$defs/tax.CategoryDef': tax.CategoryDef;
@@ -117,12 +122,9 @@ export interface SchemaTypes {
   'https://gobl.org/draft-0/tax/scenario': tax.Scenario;
   'https://gobl.org/draft-0/tax/scenario-set': tax.ScenarioSet;
   'https://gobl.org/draft-0/tax/set': tax.Set;
-  'https://gobl.org/draft-0/tax/set#/$defs/tax.Combo': tax.Combo;
   'https://gobl.org/draft-0/tax/tag-set': tax.TagSet;
   'https://gobl.org/draft-0/tax/total': tax.Total;
   'https://gobl.org/draft-0/tax/total#/$defs/tax.CategoryTotal': tax.CategoryTotal;
-  'https://gobl.org/draft-0/tax/total#/$defs/tax.RateTotal': tax.RateTotal;
-  'https://gobl.org/draft-0/tax/total#/$defs/tax.RateTotalSurcharge': tax.RateTotalSurcharge;
 }
 
 /** The ID of any schema defined by this version of GOBL. */
@@ -140,9 +142,9 @@ export const SchemaIDs: readonly SchemaID[] = [
   'https://gobl.org/draft-0/bill/fault',
   'https://gobl.org/draft-0/bill/invoice',
   'https://gobl.org/draft-0/bill/line',
-  'https://gobl.org/draft-0/bill/line#/$defs/bill.LineCharge',
-  'https://gobl.org/draft-0/bill/line#/$defs/bill.LineDiscount',
   'https://gobl.org/draft-0/bill/line#/$defs/bill.SubLine',
+  'https://gobl.org/draft-0/bill/line-charge',
+  'https://gobl.org/draft-0/bill/line-discount',
   'https://gobl.org/draft-0/bill/order',
   'https://gobl.org/draft-0/bill/ordering',
   'https://gobl.org/draft-0/bill/payment',
@@ -165,6 +167,7 @@ export const SchemaIDs: readonly SchemaID[] = [
   'https://gobl.org/draft-0/cbc/meta',
   'https://gobl.org/draft-0/cbc/source',
   'https://gobl.org/draft-0/cbc/uri',
+  'https://gobl.org/draft-0/cbc/usage',
   'https://gobl.org/draft-0/currency/amount',
   'https://gobl.org/draft-0/currency/code',
   'https://gobl.org/draft-0/currency/exchange-rate',
@@ -211,11 +214,15 @@ export const SchemaIDs: readonly SchemaID[] = [
   'https://gobl.org/draft-0/tax/addon-def',
   'https://gobl.org/draft-0/tax/addon-list',
   'https://gobl.org/draft-0/tax/catalogue-def',
+  'https://gobl.org/draft-0/tax/combo',
   'https://gobl.org/draft-0/tax/correction-definition',
   'https://gobl.org/draft-0/tax/correction-set',
   'https://gobl.org/draft-0/tax/extensions',
+  'https://gobl.org/draft-0/tax/filter',
   'https://gobl.org/draft-0/tax/identity',
   'https://gobl.org/draft-0/tax/note',
+  'https://gobl.org/draft-0/tax/rate-total',
+  'https://gobl.org/draft-0/tax/rate-total#/$defs/tax.RateTotalSurcharge',
   'https://gobl.org/draft-0/tax/regime-code',
   'https://gobl.org/draft-0/tax/regime-def',
   'https://gobl.org/draft-0/tax/regime-def#/$defs/tax.CategoryDef',
@@ -225,10 +232,7 @@ export const SchemaIDs: readonly SchemaID[] = [
   'https://gobl.org/draft-0/tax/scenario',
   'https://gobl.org/draft-0/tax/scenario-set',
   'https://gobl.org/draft-0/tax/set',
-  'https://gobl.org/draft-0/tax/set#/$defs/tax.Combo',
   'https://gobl.org/draft-0/tax/tag-set',
   'https://gobl.org/draft-0/tax/total',
   'https://gobl.org/draft-0/tax/total#/$defs/tax.CategoryTotal',
-  'https://gobl.org/draft-0/tax/total#/$defs/tax.RateTotal',
-  'https://gobl.org/draft-0/tax/total#/$defs/tax.RateTotalSurcharge',
 ];

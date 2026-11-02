@@ -3,10 +3,11 @@
 
 import type * as cal from '../cal/index.js';
 import type * as cbc from '../cbc/index.js';
-import type { EnumLabels } from '../label.js';
 import type * as num from '../num/index.js';
 import type * as org from '../org/index.js';
 import type * as tax from '../tax/index.js';
+import type { LineCharge } from './line-charge.js';
+import type { LineDiscount } from './line-discount.js';
 
 /** Line is a single row in an invoice. */
 export interface Line {
@@ -25,7 +26,7 @@ export interface Line {
    */
   i?: number;
   /**
-   * Number of items
+   * Number of items.
    *
    * @title Quantity
    */
@@ -58,7 +59,7 @@ export interface Line {
    */
   cost?: cbc.Code;
   /**
-   * Details about the item, service or good, that is being sold
+   * Details about the item, service, or good being sold.
    *
    * @title Item
    */
@@ -71,26 +72,26 @@ export interface Line {
    */
   breakdown?: SubLine[];
   /**
-   * Result of quantity multiplied by the item's price (calculated)
+   * Result of quantity multiplied by the item's price (calculated).
    *
    * @title Sum
    * @calculated Computed by GOBL; omit when building a document.
    */
   sum?: num.Amount;
   /**
-   * Discounts applied to this line
+   * Discounts applied to this line.
    *
    * @title Discounts
    */
   discounts?: LineDiscount[];
   /**
-   * Charges applied to this line
+   * Charges applied to this line.
    *
    * @title Charges
    */
   charges?: LineCharge[];
   /**
-   * Map of taxes to be applied and used in the invoice totals
+   * Map of taxes to be applied and used in the document totals.
    *
    * @title Taxes
    */
@@ -126,7 +127,7 @@ export interface Line {
    */
   notes?: org.Note[];
   /**
-   * Extension codes that apply to the line
+   * Extension codes that apply to the line.
    *
    * @title Extensions
    */
@@ -137,657 +138,6 @@ export interface Line {
 export type LineCalculatedKeys = 'i' | 'sum' | 'total';
 
 export const LineSchemaID = 'https://gobl.org/draft-0/bill/line';
-
-/** Known values for {@link LineChargeKey}. */
-export type LineChargeKeyKnown =
-  | 'stamp-duty'
-  | 'outlay'
-  | 'tax'
-  | 'customs'
-  | 'delivery'
-  | 'packing'
-  | 'handling'
-  | 'insurance'
-  | 'storage'
-  | 'admin'
-  | 'cleaning';
-
-/**
- * Key for grouping or identifying charges for tax purposes. A suggested list of
- * keys is provided, but these are for reference only and may be extended by
- * the issuer.
- *
- * @title Key
- */
-export type LineChargeKey = LineChargeKeyKnown | (string & {});
-
-export const LineChargeKeyLabels: EnumLabels<LineChargeKeyKnown> = {
-  'stamp-duty': {
-    title: 'Stamp Duty',
-  },
-  outlay: {
-    title: 'Outlay',
-  },
-  tax: {
-    title: 'Tax',
-  },
-  customs: {
-    title: 'Customs',
-  },
-  delivery: {
-    title: 'Delivery',
-  },
-  packing: {
-    title: 'Packing',
-  },
-  handling: {
-    title: 'Handling',
-  },
-  insurance: {
-    title: 'Insurance',
-  },
-  storage: {
-    title: 'Storage',
-  },
-  admin: {
-    title: 'Administration',
-  },
-  cleaning: {
-    title: 'Cleaning',
-  },
-};
-
-/**
- * Unit to associate with the quantity when using the rate.
- *
- * @title Unit
- */
-export type LineChargeUnit =
-  | 'mg'
-  | 'cg'
-  | 'g'
-  | 'kg'
-  | 't'
-  | 'mm'
-  | 'cm'
-  | 'dm'
-  | 'm'
-  | 'lm'
-  | 'km'
-  | 'in'
-  | 'ft'
-  | 'lft'
-  | 'mm2'
-  | 'cm2'
-  | 'dm2'
-  | 'm2'
-  | 'ac'
-  | 'ha'
-  | 'mm3'
-  | 'cm3'
-  | 'dm3'
-  | 'm3'
-  | 'ml'
-  | 'cl'
-  | 'dl'
-  | 'l'
-  | 'kl'
-  | 'w'
-  | 'kw'
-  | 'kwh'
-  | 'kj'
-  | 'kcal'
-  | 'rate'
-  | 'yr'
-  | 'mon'
-  | 'wk'
-  | 'day'
-  | 's'
-  | 'h'
-  | 'min'
-  | 'piece'
-  | 'item'
-  | 'pair'
-  | 'dozen'
-  | 'assortment'
-  | 'service'
-  | 'job'
-  | 'activity'
-  | 'trip'
-  | 'group'
-  | 'outfit'
-  | 'kit'
-  | 'basebox'
-  | 'pk'
-  | 'one'
-  | 'bag'
-  | 'box'
-  | 'bin'
-  | 'can'
-  | 'tub'
-  | 'case'
-  | 'tray'
-  | 'portion'
-  | 'set'
-  | 'roll'
-  | 'carton'
-  | 'cylinder'
-  | 'barrel'
-  | 'jerrican'
-  | 'carboy'
-  | 'demijohn'
-  | 'bottle'
-  | 'canister'
-  | 'pkg'
-  | 'pkt'
-  | 'bunch'
-  | 'bdl'
-  | 'blk'
-  | 'pallet'
-  | 'reel'
-  | 'sack'
-  | 'sheet'
-  | 'envelope'
-  | 'lot'
-  | 'unit';
-
-export const LineChargeUnitLabels: EnumLabels<LineChargeUnit> = {
-  mg: {
-    title: 'Milligrams',
-  },
-  cg: {
-    title: 'Centigrams',
-  },
-  g: {
-    title: 'Metric grams',
-  },
-  kg: {
-    title: 'Metric kilograms',
-  },
-  t: {
-    title: 'Metric tons',
-  },
-  mm: {
-    title: 'Millimetres',
-  },
-  cm: {
-    title: 'Centimetres',
-  },
-  dm: {
-    title: 'Decimetres',
-    description: 'A unit of length equal to one-tenth of a metre.',
-  },
-  m: {
-    title: 'Metres',
-  },
-  lm: {
-    title: 'Linear metres',
-    description:
-      'The running length in metres of a uniform-width product (e.g. carpet, fabric, cable), billed per metre regardless of width.',
-  },
-  km: {
-    title: 'Kilometres',
-  },
-  in: {
-    title: 'Inches',
-  },
-  ft: {
-    title: 'Feet',
-  },
-  lft: {
-    title: 'Linear feet',
-    description:
-      'The running length in feet of a uniform-width product (e.g. lumber, trim, cable), billed per foot regardless of width.',
-  },
-  mm2: {
-    title: 'Square millimetres',
-  },
-  cm2: {
-    title: 'Square centimetres',
-  },
-  dm2: {
-    title: 'Square decimetres',
-  },
-  m2: {
-    title: 'Square metres',
-  },
-  ac: {
-    title: 'Acres',
-    description: 'A unit of area equal to 43,560 square feet.',
-  },
-  ha: {
-    title: 'Hectares',
-    description: 'A unit of area equal to 10,000 square metres.',
-  },
-  mm3: {
-    title: 'Cubic millimetres',
-  },
-  cm3: {
-    title: 'Cubic centimetres',
-  },
-  dm3: {
-    title: 'Cubic decimetres',
-  },
-  m3: {
-    title: 'Cubic metres',
-  },
-  ml: {
-    title: 'Millilitres',
-  },
-  cl: {
-    title: 'Centilitres',
-  },
-  dl: {
-    title: 'Decilitres',
-  },
-  l: {
-    title: 'Litres',
-  },
-  kl: {
-    title: 'Kilolitres',
-  },
-  w: {
-    title: 'Watts',
-  },
-  kw: {
-    title: 'Kilowatts',
-  },
-  kwh: {
-    title: 'Kilowatt Hours',
-  },
-  kj: {
-    title: 'Kilojoules',
-  },
-  kcal: {
-    title: 'Kilocalories',
-  },
-  rate: {
-    title: 'Rate',
-    description: 'A unit of quantity expressed as a rate for usage of a facility or service.',
-  },
-  yr: {
-    title: 'Years',
-    description: 'A unit of time equal to twelve months.',
-  },
-  mon: {
-    title: 'Months',
-    description: 'Unit of time equal to 1/12 of a year of 365,25 days.',
-  },
-  wk: {
-    title: 'Weeks',
-    description: 'A unit of time equal to seven days.',
-  },
-  day: {
-    title: 'Days',
-  },
-  s: {
-    title: 'Seconds',
-  },
-  h: {
-    title: 'Hours',
-  },
-  min: {
-    title: 'Minutes',
-  },
-  piece: {
-    title: 'Pieces',
-    description:
-      'A unit of count defining the number of pieces (piece: a single item, article or exemplar).',
-  },
-  item: {
-    title: 'Items',
-    description: 'A unit of count defining the number of items regarded as separate units.',
-  },
-  pair: {
-    title: 'Pairs',
-    description: "A unit of count defining the number of pairs (pair: item described by two's).",
-  },
-  dozen: {
-    title: 'Dozens',
-    description: 'A unit of count defining the number of units in multiples of 12.',
-  },
-  assortment: {
-    title: 'Assortments',
-    description:
-      'A unit of count defining the number of assortments (assortment: a collection of items or components of a single product packaged together).',
-  },
-  service: {
-    title: 'Service Units',
-    description:
-      'A unit of count defining the number of service units (service unit: defined period / property / facility / utility of supply).',
-  },
-  job: {
-    title: 'Jobs',
-    description: 'A unit of count defining the number of jobs.',
-  },
-  activity: {
-    title: 'Activities',
-    description:
-      'A unit of count defining the number of activities (activity: a unit of work or action).',
-  },
-  trip: {
-    title: 'Trips',
-    description:
-      'A unit of count defining the number of trips (trip: a journey to a place and back again).',
-  },
-  group: {
-    title: 'Groups',
-    description:
-      'A unit of count defining the number of groups (group: set of items classified together).',
-  },
-  outfit: {
-    title: 'Outfits',
-    description:
-      'A unit of count defining the number of outfits (outfit: a complete set of equipment / materials / objects used for a specific purpose).',
-  },
-  kit: {
-    title: 'Kits',
-    description: 'A unit of count defining the number of kits (kit: tub, barrel or pail).',
-  },
-  basebox: {
-    title: 'Base Boxes',
-    description:
-      'A unit of area of 112 sheets of tin mil products (tin plate, tin free steel or black plate) 14 by 20 inches, or 31,360 square inches.',
-  },
-  pk: {
-    title: 'Bulk Packs',
-    description: 'A unit of count defining the number of items per bulk pack.',
-  },
-  one: {
-    title: 'One',
-    description: 'A single generic unit of a service or product.',
-  },
-  bag: {
-    title: 'Bags',
-  },
-  box: {
-    title: 'Boxes',
-  },
-  bin: {
-    title: 'Bins',
-  },
-  can: {
-    title: 'Cans',
-  },
-  tub: {
-    title: 'Tubs',
-  },
-  case: {
-    title: 'Cases',
-  },
-  tray: {
-    title: 'Trays',
-  },
-  portion: {
-    title: 'Portions',
-  },
-  set: {
-    title: 'Sets',
-    description:
-      'A unit of count defining the number of sets (set: a number of objects grouped together).',
-  },
-  roll: {
-    title: 'Rolls',
-  },
-  carton: {
-    title: 'Cartons',
-  },
-  cylinder: {
-    title: 'Cylinders',
-  },
-  barrel: {
-    title: 'Barrels',
-  },
-  jerrican: {
-    title: 'Jerricans',
-    description: 'Jerrican, cylindrical',
-  },
-  carboy: {
-    title: 'Carboys',
-  },
-  demijohn: {
-    title: 'Demijohns',
-  },
-  bottle: {
-    title: 'Bottles',
-  },
-  canister: {
-    title: 'Canisters',
-  },
-  pkg: {
-    title: 'Packages',
-    description: 'Standard packaging unit.',
-  },
-  pkt: {
-    title: 'Packets',
-  },
-  bunch: {
-    title: 'Bunches',
-  },
-  bdl: {
-    title: 'Bundles',
-  },
-  blk: {
-    title: 'Blocks',
-  },
-  pallet: {
-    title: 'Pallets',
-  },
-  reel: {
-    title: 'Reels',
-  },
-  sack: {
-    title: 'Sacks',
-  },
-  sheet: {
-    title: 'Sheets',
-  },
-  envelope: {
-    title: 'Envelopes',
-  },
-  lot: {
-    title: 'Lot',
-  },
-  unit: {
-    title: 'Unit',
-    description:
-      'A type of package composed of a single item or object, not otherwise specified as a unit of transport equipment.',
-  },
-};
-
-/** LineCharge represents an amount added to the line, and will be applied before taxes. */
-export interface LineCharge {
-  /**
-   * Key for grouping or identifying charges for tax purposes. A suggested list of
-   * keys is provided, but these are for reference only and may be extended by
-   * the issuer.
-   *
-   * @title Key
-   */
-  key?: LineChargeKey;
-  /**
-   * Reference or ID for this charge defined by the issuer
-   *
-   * @title Code
-   */
-  code?: cbc.Code;
-  /**
-   * Text description as to why the charge was applied
-   *
-   * @title Reason
-   */
-  reason?: string;
-  /**
-   * Base for percent calculations instead of the line's sum
-   *
-   * @title Base
-   */
-  base?: num.Amount;
-  /**
-   * Percentage of base or parent line's sum
-   *
-   * @title Percent
-   */
-  percent?: num.Percentage;
-  /**
-   * Quantity of units to apply the charge to when using the rate instead of
-   * the line's quantity.
-   *
-   * @title Quantity
-   */
-  quantity?: num.Amount;
-  /**
-   * Unit to associate with the quantity when using the rate.
-   *
-   * @title Unit
-   */
-  unit?: LineChargeUnit;
-  /**
-   * Rate defines a price per unit to use instead of the percentage.
-   *
-   * @title Rate
-   */
-  rate?: num.Amount;
-  /**
-   * Fixed or resulting charge amount to apply (calculated if percent present).
-   *
-   * @title Amount
-   * @calculated Computed by GOBL; omit when building a document.
-   */
-  amount?: num.Amount;
-  /**
-   * Extension codes that apply to the charge
-   *
-   * @title Extensions
-   */
-  ext?: tax.Extensions;
-}
-
-/** Properties of {@link LineCharge} that GOBL computes during calculation. */
-export type LineChargeCalculatedKeys = 'amount';
-
-export const LineChargeSchemaID = 'https://gobl.org/draft-0/bill/line#/$defs/bill.LineCharge';
-
-/** Known values for {@link LineDiscountKey}. */
-export type LineDiscountKeyKnown =
-  | 'early-completion'
-  | 'military'
-  | 'work-accident'
-  | 'special-agreement'
-  | 'production-error'
-  | 'new-outlet'
-  | 'sample'
-  | 'end-of-range'
-  | 'incoterm'
-  | 'pos-threshold'
-  | 'special-rebate'
-  | 'temporary'
-  | 'standard'
-  | 'yearly-turnover';
-
-/**
- * Key for identifying the type of discount being applied.
- *
- * @title Key
- */
-export type LineDiscountKey = LineDiscountKeyKnown | (string & {});
-
-export const LineDiscountKeyLabels: EnumLabels<LineDiscountKeyKnown> = {
-  'early-completion': {
-    title: 'Bonus for works ahead of schedule',
-  },
-  military: {
-    title: 'Military Discount',
-  },
-  'work-accident': {
-    title: 'Work Accident Discount',
-  },
-  'special-agreement': {
-    title: 'Special Agreement Discount',
-  },
-  'production-error': {
-    title: 'Production Error Discount',
-  },
-  'new-outlet': {
-    title: 'New Outlet Discount',
-  },
-  sample: {
-    title: 'Sample Discount',
-  },
-  'end-of-range': {
-    title: 'End of Range Discount',
-  },
-  incoterm: {
-    title: 'Incoterm Discount',
-  },
-  'pos-threshold': {
-    title: 'Point of Sale Threshold Discount',
-  },
-  'special-rebate': {
-    title: 'Special Rebate',
-  },
-  temporary: {
-    title: 'Temporary',
-  },
-  standard: {
-    title: 'Standard',
-  },
-  'yearly-turnover': {
-    title: 'Yearly Turnover',
-  },
-};
-
-/** LineDiscount represents an amount deducted from the line, and will be applied before taxes. */
-export interface LineDiscount {
-  /**
-   * Key for identifying the type of discount being applied.
-   *
-   * @title Key
-   */
-  key?: LineDiscountKey;
-  /**
-   * Code or reference for this discount defined by the issuer
-   *
-   * @title Code
-   */
-  code?: cbc.Code;
-  /**
-   * Text description as to why the discount was applied
-   *
-   * @title Reason
-   */
-  reason?: string;
-  /**
-   * Base for percent calculations instead of the line's sum.
-   *
-   * @title Base
-   */
-  base?: num.Amount;
-  /**
-   * Percentage to apply to the base or line sum to calculate the discount amount
-   *
-   * @title Percent
-   */
-  percent?: num.Percentage;
-  /**
-   * Fixed discount amount to apply (calculated if percent present)
-   *
-   * @title Amount
-   * @calculated Computed by GOBL; omit when building a document.
-   */
-  amount?: num.Amount;
-  /**
-   * Extension codes that apply to the discount
-   *
-   * @title Extensions
-   */
-  ext?: tax.Extensions;
-}
-
-/** Properties of {@link LineDiscount} that GOBL computes during calculation. */
-export type LineDiscountCalculatedKeys = 'amount';
-
-export const LineDiscountSchemaID = 'https://gobl.org/draft-0/bill/line#/$defs/bill.LineDiscount';
 
 /**
  * SubLine provides a simplified line that can be embedded inside other lines to provide a more detailed breakdown of the items being sold or substituted.
@@ -808,7 +158,7 @@ export interface SubLine {
    */
   i?: number;
   /**
-   * Number of items
+   * Number of items.
    *
    * @title Quantity
    */
@@ -841,26 +191,26 @@ export interface SubLine {
    */
   cost?: cbc.Code;
   /**
-   * Details about the item, service or good, that is being sold
+   * Details about the item, service, or good being sold.
    *
    * @title Item
    */
   item: org.Item;
   /**
-   * Result of quantity multiplied by the item's price (calculated)
+   * Result of quantity multiplied by the item's price (calculated).
    *
    * @title Sum
    * @calculated Computed by GOBL; omit when building a document.
    */
   sum?: num.Amount;
   /**
-   * Discounts applied to this sub-line
+   * Discounts applied to this sub-line.
    *
    * @title Discounts
    */
   discounts?: LineDiscount[];
   /**
-   * Charges applied to this sub-line
+   * Charges applied to this sub-line.
    *
    * @title Charges
    */

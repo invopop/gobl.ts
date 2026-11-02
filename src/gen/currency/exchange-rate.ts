@@ -23,17 +23,15 @@ export interface ExchangeRate {
    */
   to: Code;
   /**
-   * At represents the effective date and time at which the exchange rate
-   * is determined by the source. The time may be zero if referring to a
-   * specific day only.
+   * Effective date and time at which the exchange rate was determined by the source.
+   * The time may be zero if referring to a specific day only.
    *
    * @title At
    */
   at?: cal.DateTime;
   /**
-   * Source key provides a reference to the source the exchange rate was
-   * obtained from. Typically this will be determined by an application
-   * used to update exchange rates automatically.
+   * Key identifying the source the exchange rate was obtained from. Typically set by
+   * an application that updates exchange rates automatically.
    *
    * @title Source
    */

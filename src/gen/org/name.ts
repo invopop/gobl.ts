@@ -13,7 +13,7 @@ export interface Name {
    */
   uuid?: string;
   /**
-   * What the person would like to be called
+   * What the person would like to be called.
    *
    * @title Alias
    */
@@ -25,13 +25,13 @@ export interface Name {
    */
   prefix?: string;
   /**
-   * Person's given or first name
+   * Person's given or first name.
    *
    * @title Given
    */
   given?: string;
   /**
-   * Middle names or initials
+   * Middle names or initials.
    *
    * @title Middle
    */
@@ -43,7 +43,7 @@ export interface Name {
    */
   surname?: string;
   /**
-   * Additional second of family name.
+   * Additional second or family name, used in some countries.
    *
    * @title Second Surname
    */

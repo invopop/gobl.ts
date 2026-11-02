@@ -46,7 +46,7 @@ export const ExtensionKeyLabels: EnumLabels<ExtensionKey> = {
       "Code used to identify the VAT status of the customer. This extension must be included\nin the customer's `ext` field when the customer is required.\n\nGOBL will automatically normalize this value based on the customer's tax identification:\n\nCustomer without tax ID (final consumers): Defaults to `5` (Final Consumer). Also\naccepts `4` (Exempt Subject), `7` (Uncategorized), `10` (VAT Exempt Law 19640),\nor `15` (VAT Not Applicable).\n\nCustomer with foreign tax ID: Defaults to `9` (Foreign Customer). Also accepts\n`8` (Foreign Supplier).\n\nCustomer with Argentine tax ID (CUIT/CUIL): Defaults to `1` (Registered VAT Company).\nAlso accepts `6` (Monotributo), `13` (Social Monotributista), `16` (Promoted Independent\nWorker), `4` (Exempt Subject), `7` (Uncategorized), `10` (VAT Exempt Law 19640),\nor `15` (VAT Not Applicable).\n\nThe VAT status is validated against the document type:\n\n- Type A documents (`1`, `2`, `3`, etc.): Require VAT status `1`, `6`, `13`, or `16`.\n- Type B documents (`6`, `7`, `8`, etc.): Cannot have VAT status `1`, `6`, `13`, or `16`.\n- Document type `49` (Used Goods Purchase Invoice): Requires VAT status `5` (Final Consumer).",
   },
   'br-ibge-municipality': {
-    title: 'IBGE Municipality Code',
+    title: 'IBGE: Municipality Code',
     description:
       'The municipality code as defined by the IBGE (Brazilian Institute of Geography and\nStatistics).',
   },
@@ -181,7 +181,7 @@ export const ExtensionKeyLabels: EnumLabels<ExtensionKey> = {
       'Indicates the tax status of the operation for the determination of the IBS and CBS\ntaxes by the tax authorities.\n\nMaps to the `CST` field in the NFS-e national layout.\n\nList of possible values:\n\n* https://dfe-portal.svrs.rs.gov.br/DFE/ClassificacaoTributaria',
   },
   'cef-vatex': {
-    title: 'CEF VATEX - VAT exemption reason codes',
+    title: 'CEF: VATEX Exemption Reason',
     description:
       'Codes for the reasons for VAT exemption as defined by the Connecting Europe Facility (CEF).',
   },
@@ -200,10 +200,20 @@ export const ExtensionKeyLabels: EnumLabels<ExtensionKey> = {
     description:
       'The fiscal responsibility code as defined by the DIAN for Colombian electronic invoicing.\nMaps to the UBL\'s `TaxLevelCode` field.\n\nThe DIAN requires that Colombian invoices specify the fiscal responsibilities of the\nsupplier or customer using specific codes. If no value is provided, GOBL will\nautomatically set `R-99-PN` as the default.\n\n| Code    | Description                   |\n| ------- | ----------------------------- |\n| O-13    | Gran contribuyente            |\n| O-15    | Autorretenedor                |\n| O-23    | Agente de retención IVA       |\n| O-47    | Régimen simple de tributación |\n| R-99-PN | No aplica - Otros             |\n\nFor example:\n\n```js\n"customer": {\n\t"name": "EXAMPLE CUSTOMER S.A.S.",\n\t"tax_id": {\n\t\t"country": "CO",\n\t\t"code": "9014514812"\n\t},\n\t"ext": {\n\t\t"co-dian-fiscal-responsibility": "O-13"\n\t}\n}\n```',
   },
+  'co-dian-item-identification': {
+    title: 'Item Identification Standard',
+    description:
+      'Identifies the product-coding standard used for an invoice line\'s item code,\nmapped to the UBL\'s `StandardItemIdentification/ID@schemeID`.\n\nFor example:\n\n```js\n"item": {\n\t"name": "Producto",\n\t"ref": "7702004003489",\n\t"ext": { "co-dian-item-identification": "010" }\n}\n```',
+  },
   'co-dian-municipality': {
     title: 'DIAN Municipality Code',
     description:
       'The municipality code as defined by the DIAN.\n\nSet the 5-digit code for the municipality where the issuer is located in both\nthe supplier and customer:\n\n```js\n"supplier": {\n\t"name": "EXAMPLE SUPPLIER S.A.S.",\n\t"tax_id": {\n\t\t"country": "CO",\n\t\t"code": "9014514812"\n\t},\n\t"ext": {\n\t\t"co-dian-municipality": "11001" // Bogotá, D.C.\n\t},\n\t// [...]\n},\n"customer": {\n\t"name": "EXAMPLE CUSTOMER S.A.S.",\n\t"tax_id": {\n\t\t"country": "CO",\n\t\t"code": "9014514805"\n\t},\n\t"ext": {\n\t\t"co-dian-municipality": "05001" // Medellín\n\t},\n\t// [...]\n},\n```',
+  },
+  'co-dian-tax-scheme': {
+    title: 'Tax Scheme',
+    description:
+      'The tax (tributo) the party is responsible for, as defined by the DIAN for\nColombian electronic invoicing.\n\nThe DIAN limits suppliers to `01` (IVA) or `04` (INC), while customers may\nuse any value; final consumers must be reported with `ZZ`. If a Colombian\ncustomer provides no value, GOBL will automatically set `ZZ` as the default.\n\nFor example:\n\n```js\n"supplier": {\n\t"name": "EXAMPLE SUPPLIER S.A.S.",\n\t"tax_id": {\n\t\t"country": "CO",\n\t\t"code": "9014514812"\n\t},\n\t"ext": { "co-dian-tax-scheme": "01" }\n}\n```',
   },
   'dk-oioubl-duty-code': {
     title: 'SKAT excise duty code',
@@ -227,87 +237,87 @@ export const ExtensionKeyLabels: EnumLabels<ExtensionKey> = {
       "Indicates that an advance payment came from a public grant or subsidy. Set on a payment Record's `ext` map; replaces the previous `pay.Record.Grant` boolean field.",
   },
   'es-sii-correction-type': {
-    title: 'Corrective Invoice Type',
+    title: 'SII: Corrective Invoice Type',
     description:
       'Correction type code used to identify the type of correction being made.\n\nCode is determined automatically according to the invoice type:\n\n| Invoice Type  | Code |\n| ------------- | ---- |\n| `corrective`  | `S`  |\n| `credit-note` | `I`  |\n| `debit-note`  | `I`  |\n\nMaps to the `TipoRectificativa` field. Values correspond to the L5 list.',
   },
   'es-sii-doc-type': {
-    title: 'Invoice Type',
+    title: 'SII: Invoice Type',
     description:
       "Code used to identify the type of invoice being sent or received. This will be determined\nautomatically by GOBL during normalization according to the scenario definitions.\n\nThe following codes are not covered by GOBL's scenarios and will need to be set manually if\nneeded: `F4`, `F5`, `F6`, `R2`, `R3`, `R4`, `AJ`, `LC`.\n\nMaps to the `TipoFactura` field. Values correspond to the L2_EMI (issued invoices) and\nL2_RECI (received invoices) lists.",
   },
   'es-sii-exempt': {
-    title: 'Exemption Reason',
+    title: 'SII: Exemption Reason',
     description:
       'Exemption code used to explain why the operation is exempt from taxes.\n\nThe follow mappings will be made automatically by GOBL during normalization:\n\n| Tax Key           | Exemption Codes            |\n|-------------------|----------------------------|\n| `exempt`          | `E1` (default), `E6`       |\n| `export`          | `E2` (default), `E3`, `E4` |\n| `intra-community` | `E5`                       |\n\nMaps to the field `CausaExencion`. Values correspond to the L9 list.\n\nNote: This extension is **mutually exclusive** with `es-sii-outside-scope`.',
   },
   'es-sii-identity-type': {
-    title: 'Identification Type',
+    title: 'SII: Identification Type',
     description:
       'Identity code used to identify the type of identity document used by the customer.\n\nThe regular Party Tax Identity is preferred over using a specific identity type code, and\nwill be mapped automatically as follows:\n\n- Spanish Tax IDs will be mapped to the `NIF` field.\n- EU Tax IDs will be mapped to the `IDOtro\\IDType` field with code `02`.\n- Non-EU Tax IDs will be mapped to the `IDOtro\\IDType` field with code `04`.\n\nSII will perform validation on both Spanish and EU Tax IDs, so it is important to provide\nthe correct details.\n\nThe following identity `key` values will be mapped automatically to an extension by the\naddon:\n\n| Identity Key | Code |\n| ------------ | ---- |\n| `passport`   | `03` |\n| `foreign`    | `04` |\n| `resident`   | `05` |\n| `other`      | `06` |\n\nThe `07` "not registered in census" code is not mapped automatically, but can be provided\ndirectly if needed.\n\nExample identity of a UK passport:\n\n```\n{\n\t"identities": [\n\t\t{\n\t\t\t"key": "passport",\n\t\t\t"country": "GB",\n\t\t\t"code": "123456789"\n\t\t}\n\t]\n}\n```\n\nWill be normalized to:\n\n```\n{\n\t"identities": [\n\t\t{\n\t\t\t"key": "passport",\n\t\t\t"country": "GB",\n\t\t\t"code": "123456789",\n\t\t\t"ext": {\n\t\t\t\t"es-sii-identity-type": "03"\n\t\t\t}\n\t\t}\n\t]\n}\n```\n\nMaps to the field `IDOtro\\IDType`. Values correspond to the L4 list.',
   },
   'es-sii-outside-scope': {
-    title: 'Type of Operation Outside Scope',
+    title: 'SII: Type of Operation Outside Scope',
     description:
       "Type of operation not subject to VAT.\n\nThis extension is used to determine which tax amount field should be reported in the SII\npayload:\n\n- `other` will set the `ImportePorArticulos7_14_Otros` field.\n- `location` will set the `ImporteTAIReglasLocalizacion` field.\n\nGOBL will attempt to automatically assign operation type codes based on tax key:\n\n| Operation Type | Tax Key                   |\n| -------------- | ------------------------- |\n| `other`        | `outside-scope`           |\n| `location`     | `outside-scope` (default) |\n\nDoesn't map directly to any field. Used internally to determine how to report the tax amount.\n\nNote: This extension is **mutually exclusive** with `es-sii-exempt`.",
   },
   'es-sii-product': {
-    title: 'Product Type',
+    title: 'SII: Product Type',
     description:
       "Product type code used to differentiate between goods and services for the purpose of\nreporting breakdowns in the SII format.\n\nThis extension is used to determine the type of operation breakdown when generating the SII\nreport. When provided, the value will be used to generate the `DesgloseTipoOperacion` field,\nselecting between `PrestacionServices` (provision of services) or `Entrega` (delivery of\ngoods).\n\nThis extension is optional; if not provided, the breakdown will use `DesgloseFactura` instead\nof `DesgloseTipoOperacion`.\n\nDoesn't map directly to any field. Used internally to structure the breakdown data.",
   },
   'es-sii-regime': {
-    title: 'Special Regime or Relevance Key',
+    title: 'SII: Special Regime or Relevance Key',
     description:
       'Identify the regime applied to the operation.\n\nThe regime key must be assigned for each tax combo. If no regime key is provided, GOBL will\ntry to assign a code from the following tax combo contexts:\n\n| Combo Context  | Regime Code |\n| -------------- | ----------- |\n| Key `standard` | `01`        |\n| Key `export`   | `02`        |\n\nMaps to the field `ClaveRegimenEspecialOTrascendencia`. Values correspond to the L3.1\n(issued invoices) and L3.2 (received invoices) lists.',
   },
   'es-sii-simplified-art7273': {
-    title: 'Simplified Invoice Art. 7.2 and 7.3, RD 1619/2012',
+    title: 'SII: Simplified Invoice Art. 7.2 and 7.3, RD 1619/2012',
     description:
       'This extension covers a specific use-case when the customer specifically requests that the\ninvoice includes their fiscal details, but they are not registered for tax.\n\nCan only be true when the invoice type (`TipoFactura`) is one of: `F1`, `F3`, `R1`, `R2`,\n`R3`, or `R4`.\n\nMaps to the `FacturaSimplificadaArticulos7.2_7.3` field. Values correspond to the L26 list.',
   },
   'es-sii-third-party-issuer': {
-    title: 'Issued by Third Party or Recipient',
+    title: 'SII: Issued by Third Party or Recipient',
     description:
       "Indicates whether the invoice is issued by a third party or by the customer themselves.\n\nThe default value is `N` (No).\n\nThe `self-billed` tag will automatically set this extension in the invoice to `S` (Yes).\n\nIf the `issuer` field is set in the invoice's ordering section, then this extension will be\nset to `S` (Yes) too.\n\nMaps to the field `EmitidaPorTercerosODestinatario`. Values correspond to the L10 list.",
   },
   'es-tbai-bi-activity': {
-    title: 'Activity Code (Bizkaia)',
+    title: 'TicketBAI: Activity Code (Bizkaia)',
     description:
       "Economic activity code (epígrafe) for individual issuers submitting through\nBizkaia's LROE Modelo 140 register. Not required for organisations, who\nfile through Modelo 240.",
   },
   'es-tbai-correction': {
-    title: 'TicketBAI Rectification Type Code',
+    title: 'TicketBAI: Rectification Type Code',
     description:
       'Corrected or rectified invoices that need to be sent in the TicketBAI format\nrequire a specific type code to be defined alongside the preceding invoice\ndata.',
   },
   'es-tbai-exemption': {
-    title: 'TicketBAI Exemption code',
+    title: 'TicketBAI: Exemption Code',
     description:
       'Codes used by TicketBAI for both "exempt", "not-subject", and reverse\ncharge transactions. In the TicketBAI format these are separated,\nbut in order to simplify GOBL and be more closely aligned with\nother countries we\'ve combined them into one.\n\nThe follow mappings will be made automatically by GOBL during normalization.\n\n| Tax Key           | Exemption Codes            |\n|-------------------|----------------------------|\n| `exempt`          | `E1` (default), `E6`       |\n| `export`          | `E2` (default), `E3`, `E4` |\n| `intra-community` | `E5`                       |\n| `reverse-charge`  | `S2`                       |\n| `outside-scope`   | `OT`, `RL`, `VT`, `IE`     |',
   },
   'es-tbai-identity-type': {
-    title: 'Identity Type Code',
+    title: 'TicketBAI: Identity Type Code',
     description:
       'Identity code used to identify the type of identity document used by the customer\nwhen there is no tax identifier available. Maps to the `IDType` value under\n`IDOtro` in the TicketBAI XML.\n\nThe regular Party Tax Identity is preferred over using a specific identity type\ncode, and will be mapped automatically as follows:\n\n- Spanish Tax IDs will be mapped to the `NIF` field.\n- EU Tax IDs will be mapped to the `IDOtro` field with code `02`.\n- Non-EU Tax IDs will be mapped to the `IDOtro` field with code `04`.\n\nThe following identity `key` values will be mapped automatically to an extension\nby the addon:\n\n| Identity Key | Extension Code |\n|--------------|----------------|\n| `passport`   | `03`           |\n| `foreign`    | `04`           |\n| `resident`   | `05`           |\n| `other`      | `06`           |\n\nExample identity of a UK passport:\n\n```\n{\n\t"identities": [\n\t\t{\n\t\t\t"key": "passport",\n\t\t\t"country": "GB",\n\t\t\t"code": "123456789"\n\t\t}\n\t]\n}\n```\n\nWill be normalized to:\n\n```\n{\n\t"identities": [\n\t\t{\n\t\t\t"key": "passport",\n\t\t\t"country": "GB",\n\t\t\t"code": "123456789",\n\t\t\t"ext": {\n\t\t\t\t"es-tbai-identity-type": "03"\n\t\t\t}\n\t\t}\n\t]\n}\n```',
   },
   'es-tbai-product': {
-    title: 'TicketBAI Product Key',
+    title: 'TicketBAI: Product Key',
     description:
       'Product keys are used by TicketBAI to differentiate between -exported- goods\nand services. It may be useful to classify all products regardless of wether\nthey are exported or not.\n\nThere is an additional exception case for goods that are resold without modification\nwhen the supplier is in the simplified tax regime. For must purposes this special\ncase can be ignored.\n\nIf no product key is provided, the default is "services".',
   },
   'es-tbai-regime': {
-    title: 'TicketBAI VAT Regime Key',
+    title: 'TicketBAI: VAT Regime Key',
     description:
       'Identifies the VAT regime or operation classification applied to the\ntransaction. Maps to the `ClaveRegimenIvaOpTrascendencia` field, with\nvalues taken from the TicketBAI XSD.\n\nThe regime code is normally assigned per tax combo. If no regime code\nis provided, GOBL will try to assign a code from the following contexts:\n\n| Combo Context              | Regime Code |\n|----------------------------|-------------|\n| Category `IGIC`            | `08`        |\n| Key `export`               | `02`        |\n| Has surcharge              | `51`        |\n| Otherwise                  | `01`        |',
   },
   'es-tbai-region': {
-    title: 'TicketBAI Region Code',
+    title: 'TicketBAI: Region Code',
     description:
       'Region codes are used by TicketBAI to differentiate between the different\nsubdivisions of the Basque Country. This is used to determine the correct\nAPI endpoint to use when submitting documents.',
   },
   'es-tbai-simplified': {
-    title: 'TicketBAI Simplified Invoice Flag',
+    title: 'TicketBAI: Simplified Invoice Flag',
     description:
       'Flag that maps to the `FacturaSimplificada` field in TicketBAI\ndocuments. Set automatically to `S` by GOBL during normalization\nwhen the `simplified` tag is present. When absent, the invoice is\ntreated as `N` (not simplified).',
   },
@@ -320,6 +330,11 @@ export const ExtensionKeyLabels: EnumLabels<ExtensionKey> = {
     title: 'Invoice Type Code',
     description:
       "Code used to identify the type of invoice being sent. This will be\ndetermined automatically by GOBL during normalization according\nto the scenario definitions.\n\nThe codes `R2`, `R3`, and `R4` are not covered by GOBL's scenarios\nand will need to be set manually if needed.\n\nValues correspond to L2 list.",
+  },
+  'es-verifactu-event-type': {
+    title: 'Event Type Code',
+    description:
+      'Identifies the NO VERI*FACTU event being reported by a `bill.Status`\nline, whose key must be `other`. Core GOBL status line keys describe\nthe situation of a business document, so the event type is carried\nhere instead.\n\nMaps to the `TipoEvento` field of a `RegistroEvento`, list L2E.',
   },
   'es-verifactu-exempt': {
     title: 'Verifactu Exemption Code',
@@ -351,105 +366,115 @@ export const ExtensionKeyLabels: EnumLabels<ExtensionKey> = {
     description:
       'This extensions covers a specific use-case when the customer specifically\nrequests that the invoice includes their fiscal details, but they are\nnot registered for tax.\n\nMaps to the `FacturaSimplificadaArt7273` field in Verifactu documents.\n\nCan only be true when the invoice type (`TipoFactura`) is one of: `F1`,\n`F3`, `R1`, `R2`, `R3`, or `R4`.',
   },
+  'fi-finvoice-operator': {
+    title: 'Finnish e-invoice operator',
+    description:
+      'Identifier of the e-invoice operator (intermediator) that serves the\nparty\'s e-invoice address, quoted alongside that address: an operator\'s\nown OVT code such as `003700010001`, or a bank\'s BIC such as `NDEAFIHH`.\n\nA Finnish e-invoice address may be registered with several operators, and\nthe operator decides where an invoice is delivered. Set it on the party\nthat receives the message, the customer or the supplier of a self-billed\ninvoice, to have the Finvoice message routed to that operator:\n\n```js\n"customer": {\n\t"name": "Ostaja Oy",\n\t"endpoints": [\n\t\t{ "uri": "iso6523-actorid-upis::0216:003745678907" }\n\t],\n\t"ext": {\n\t\t"fi-finvoice-operator": "003700010001"\n\t}\n}\n```',
+  },
   'fr-choruspro-framework': {
-    title: 'General Information Framework',
+    title: 'Chorus Pro: General Information Framework',
     description:
       'The general information framework is used to provide additional context\nabout the entity submitting the document. If no value is provided, it will\ndefault to "A1" (Submission by a supplier of an invoice), the most common\nuse-case.\n\nThis extension\'s value is not deterministic, meaning that it will not be\nreplaced by GOBL during normalization.',
   },
   'fr-choruspro-scheme': {
-    title: 'Scheme',
+    title: 'Chorus Pro: Scheme',
   },
   'fr-ctc-billing-mode': {
-    title: 'Billing Mode',
+    title: 'France CTC: Billing Mode',
     description:
-      'Code used to describe the billing framework of the invoice. The\nbilling mode indicates the nature of goods/services and the payment\ncontext.\n\nCode prefixes indicate the invoice nature:\n- "B": Goods invoice (Biens)\n- "S": Services invoice\n- "M": Mixed/dual invoice (goods and services that are not accessory\n  to each other)\n\nThe numeric suffix indicates the payment type (1=deposit,\n2=already paid, 4=final after down payment, 5=subcontractor,\n6=co-contractor, 7=e-reporting, 8=multi-vendor,\n9=bi-directional).',
+      'Code used to describe the billing framework of the invoice. The\nbilling mode indicates the nature of goods/services and the payment\ncontext.\n\nCode prefixes indicate the invoice nature:\n- "B": Goods invoice (Biens)\n- "S": Services invoice\n- "M": Mixed/dual invoice (goods and services that are not accessory\n  to each other)\n\nThe numeric suffix indicates the payment type (1=deposit,\n2=already paid, 3=subcontracting with direct payment,\n4=final after down payment, 5=subcontractor, 6=co-contractor,\n7=e-reporting, 8=multi-vendor, 9=bi-directional).\n\nS3 is public-sector only: a subcontractor bills the public buyer\ndirectly under the paiement direct arrangement.',
+  },
+  'fr-ctc-delivery-terms': {
+    title: 'France CTC: Incoterm Delivery Terms',
+    description:
+      'Code for the delivery or transport terms agreed between the buyer and\nthe seller (EXT-FR-FE-185), restricted to the Incoterms and UNTDID 4053\ncodes the French CTC Extended rules accept (BR-FREXT-CL-27).',
   },
   'fr-ctc-flow10-b2c-category': {
-    title: 'B2C Transaction Category',
+    title: 'France CTC: B2C Transaction Category',
     description:
       'Classifies a B2C transaction for French e-reporting to the PPF\n(G1.68). Required on Flow 10 B2C invoices.\n\n- TLB1: Goods deliveries subject to VAT.\n- TPS1: Services subject to VAT.\n- TNT1: Goods / services not subject to French VAT,\n  including intra-EU distance sales per CGI articles 258 A\n  and 259 B.\n- TMA1: Operations under the VAT-on-margin regime\n  (CGI articles 266-1-e, 268, 297 A).',
   },
   'fr-ctc-flow6-action': {
-    title: 'Flow 6 Action Code',
+    title: 'France CTC: Flow 6 Action Code',
     description:
       'CDAR RequestedActionCode (MDT-121) carried on a\nbill.Action under a bill.Status line. Tells the issuer\nwhat to do next with the referenced invoice — reissue\nit, send a credit note, provide more information, etc.\nThe normalizer derives the default from bill.Action.Key\n(NOA / PIN / NIN / CNF / CNP / CNA / OTH);\ncallers can override directly on the extension when\nround-tripping a parsed CDV.',
   },
   'fr-ctc-flow6-condition': {
-    title: 'Flow 6 Condition Code',
+    title: 'France CTC: Flow 6 Condition Code',
     description:
       "CDAR CharacteristicTypeCode (MDT-207). Unified\nvocabulary; the rules narrow the allow-list per\ndocument type:\n\n  - On bill.Reason under bill.Status: CBB, DIV, DVA,\n    MAJ (field-level corrections), MAP / MAPTTC /\n    MNA / MNATTC (partial-approval / rejection\n    amounts), ESC / RAB / REM (discount markers).\n    Each Reason carries 0..1 condition classifying its\n    dominant characteristic kind; the full field-level\n    corrections ride the Reason's bill.Fault entries\n    (fault code = characteristic TypeCode, message =\n    data name and value, paths = XML location).\n  - On bill.Payment.Ext: MEN (Encaissé), MPA (Payé),\n    RAP (Reste à payer). The normalizer defaults the\n    value from bill.Payment.Type (receipt → MEN,\n    advice → MPA); partial payments can override to\n    RAP.",
   },
   'fr-ctc-flow6-reason': {
-    title: 'CDAR Reason Code',
+    title: 'France CTC: CDAR Reason Code',
     description:
       "Exact CDAR ReasonCode pinned on a bill.Reason under a\nbill.Status — Status-only (bill.Payment has no\nReasons). The CDAR ReasonCode dimension is 1:N with\nbill.Reason.Key: this extension lets the caller pick\nthe precise code within a bucket. The normalizer\nderives a default from Reason.Key (see\nnormalizeReason); callers can override to one of the\nbucket's other allowed codes.",
   },
   'fr-ctc-flow6-role': {
-    title: 'Party Role Code',
+    title: 'France CTC: Party Role Code',
     description:
       'UNCL 3035 role code carried as the CDAR RoleCode (MDT-158)\non each populated party of any Flow 6 lifecycle message\n— set on Supplier / Customer of both bill.Status and\nbill.Payment. Labels follow the French CTC\nspecification, which assigns CDAR-specific meanings to\nWK (dematerialisation platform / operator) and DFH\n(Portail Public de Facturation). The normalizer fills\nthe obvious defaults (Supplier → SE, Customer → BY)\nand leaves the rest for the caller to set explicitly.',
   },
   'fr-ctc-flow6-status': {
-    title: 'CDAR Process Condition Code',
+    title: 'France CTC: CDAR Process Condition Code',
     description:
       'CDAR ProcessConditionCode (MDT-9) identifying the\nlifecycle event reported by the Flow 6 message.\nUnified vocabulary; the rules narrow the allow-list\nper document type:\n\n  - bill.Status accepts 200 / 201 / 202 / 203 / 204 /\n    205 / 206 / 207 / 208 / 209 / 210 / 213. The\n    normalizer derives the value from the\n    (StatusLine.Key, Status.Type) pair via processTable.\n  - bill.Payment accepts 211 (Paiement transmis) and\n    212 (Encaissée). The normalizer derives the value\n    from bill.Payment.Type (advice → 211, receipt →\n    212).\n\nCallers can pre-set the ext directly to pin a specific\ncode (e.g. when round-tripping a parsed CDV).',
   },
   'gr-mydata-branch': {
-    title: 'Branch number',
+    title: 'myDATA: Branch number',
     description:
       'The branch (establishment) number of the party, as declared in the\nAADE taxpayer registry. Set the `gr-mydata-branch` extension on a\nparty when the invoice is issued by or addressed to an establishment\nother than the headquarters. When absent, the headquarters branch\n(`0`) is assumed.\n\nThe number must match an establishment registered with AADE for the\nparty\'s tax ID; submissions with unknown branch numbers may be\nrejected by myDATA.\n\nFor example:\n\n```json\n"supplier": {\n\t"name": "Hotel Example",\n\t"tax_id": {\n\t\t"country": "EL",\n\t\t"code": "111222333"\n\t},\n\t"ext": {\n\t\t"gr-mydata-branch": "2"\n\t}\n}\n```',
   },
   'gr-mydata-exemption': {
-    title: 'VAT exemption cause',
+    title: 'myDATA: VAT exemption cause',
     description:
       'Greece invoices can be exempt of VAT for different causes and the tax authority\nrequire a specific cause code to be provided.\n\nGOBL will try to automatically map the tax combo `key` to an appropriate exemption\ncode, but given the number of options you will no doubt need to consult with\na tax professional to determine the correct code for your case.\n\nExample usage:\n\n```js\n"lines": [\n\t{\n\t\t"i": 1,\n\t\t"quantity": "20",\n\t\t"item": {\n\t\t\t"name": "Υπηρεσίες Ανάπτυξης",\n\t\t\t"price": "90.00",\n\t\t},\n\t\t"sum": "1800.00",\n\t\t"taxes": [\n\t\t\t{\n\t\t\t\t"cat": "VAT",\n\t\t\t\t"key": "exempt",\n\t\t\t\t"ext": {\n\t\t\t\t\t"gr-mydata-exemption": "7"\n\t\t\t\t}\n\t\t\t}\n\t\t],\n\t\t"total": "1800.00"\n\t}\n]\n```\n\nNote that descriptions provided in the `gr-mydata-exemption` extension are\ngenerated using AI and may not be 100% accurate. Always consult with a tax\nprofessional to ensure you\'re choosing the correct code.',
   },
   'gr-mydata-fee': {
-    title: 'Fee category',
+    title: 'myDATA: Fee category',
     description:
       'Greek invoices may contain charges for different types of fees. In GOBL, you must use\nthe `gr-mydata-fee` extension at charge level to specify the specific fee category\nfor the charge.\n\nFor example:\n\n```json\n"charges": [\n\t{\n\t\t"amount": "10.00",\n\t\t"reason": "Subscription fee",\n\t\t"ext": {\n\t\t\t"gr-mydata-tax-type": "2",\n\t\t\t"gr-mydata-fee": "13",\n\t\t}\n\t}\n]\n```',
   },
   'gr-mydata-income-cat': {
-    title: 'Income Classification Category',
+    title: 'myDATA: Income Classification Category',
     description:
       'Invoices reported to the Greek tax authority via myDATA can optionally include information\nabout the income classification of each invoice item.\n\nIn a GOBL invoice, the `gr-mydata-income-cat` and `gr-mydata-income-type` extensions can be\nset at the item level to any of the values expected by the IAPR. For example:\n\n```json\n"lines": [\n\t{\n\t\t"i": 1,\n\t\t"quantity": "20",\n\t\t"item": {\n\t\t\t"name": "Υπηρεσίες Ανάπτυξης",\n\t\t\t"price": "90.00",\n\t\t\t"ext": {\n\t\t\t\t"gr-mydata-income-cat": "category1_1",\n\t\t\t\t"gr-mydata-income-type": "E3_561_001",\n\t\t\t}\n\t\t}\n\t}\n]\n```\n\nWhen an income category is set, the income type must also be provided, with one\nexception: `category1_95` (Other Income-related Information) covers informative\namounts that do not count towards income, such as the 0.5% municipality duty, and\nmust be reported without the `gr-mydata-income-type` extension.',
   },
   'gr-mydata-income-type': {
-    title: 'Income Classification Type',
+    title: 'myDATA: Income Classification Type',
     description: 'See the Income Classification Category for more information.',
   },
   'gr-mydata-invoice-type': {
-    title: 'Invoice type',
+    title: 'myDATA: Invoice type',
     description:
       'The Greek tax authority (IAPR) requires an invoice type code to be specified as part of the invoice. GOBL will\nautomatically set the correct code based on the invoice\'s `type` and `$tags` values.\n\nHowever, you can also set the code manually using the `gr-mydata-invoice-type` extension in the tax\nsection of the invoice, and setting the invoice\'s `type` to `other`.\n\nThe following table lists how the combination of `type` and `$tags` values are mapped to the\nIAPR MyDATA invoice type code:\n\n| Type   | Description                                     | GOBL Type     | GOBL Tags                  |\n| ------ | ----------------------------------------------- | ------------- |----------------------------|\n| `1.1`  | Sales Invoice                                   | `standard`    | `goods`                    |\n| `1.2`  | Sales Invoice/Intra-community Supplies          | `standard`    | `goods`, `export`, `eu`    |\n| `1.3`  | Sales Invoice/Third Country Supplies            | `standard`    | `goods`, `export`          |\n| `1.4`  | Sales Invoice/Sale on Behalf of Third Parties   | `standard`    | `goods`, `self-billed`     |\n| `2.1`  | Service Rendered Invoice                        | `standard`    | `services`                 |\n| `2.2`  | Intra-community Service Rendered Invoice        | `standard`    | `services`, `export`, `eu` |\n| `2.3`  | Third Country Service Rendered Invoice          | `standard`    | `services`, `export`       |\n| `5.1`  | Credit Invoice/Associated                       | `credit-note` |                            |\n| `11.1` | Retail Sales Receipt                            | `standard`    | `goods`, `simplified`      |\n| `11.2` | Service Rendered Receipt                        | `standard`    | `services`, `simplified`   |\n| `11.3` | Simplified Invoice                              | `standard`    | `simplified`               |\n| `11.4` | Retail Sales Credit Note                        | `credit-note` | `simplified`               |\n| `11.5` | Retail Sales Receipt on Behalf of Third Parties | `credit-note` | `goods`, `simplified`, `self-billed` |\n\nFor example, this is how you set the IAPR invoice type explicitly:\n\n```json\n{\n\t"$schema": "https://gobl.org/draft-0/bill/invoice",\n\t// ...\n\t"type": "other",\n\t"tax": {\n\t\t"ext": {\n\t\t\t"gr-mydata-invoice-type": "2.3"\n\t\t}\n\t}\n}\n```\n\nAnd this is how you\'ll get the same result by using the GOBL type and tags:\n\n```json\n{\n\t"$schema": "https://gobl.org/draft-0/bill/invoice",\n\t"$addons": ["gr-mydata-v1"],\n\t"$tags": ["services", "export"],\n\t// ...\n\t"type": "standard",\n}\n```',
   },
   'gr-mydata-other-tax': {
-    title: 'Other taxes category',
+    title: 'myDATA: Other taxes category',
     description:
       'Greek invoices may contain charges for different taxes other than VAT. The\n`gr-mydata-other-tax` extension at charge level must be used to specify the specific\nother tax category for the charge.\n\nFor example:\n\n```json\n"charges": [\n\t{\n\t\t"amount": "3.00",\n\t\t"reason": "Climate Crisis Fee",\n\t\t"ext": {\n\t\t\t"gr-mydata-tax-type": "3",\n\t\t\t"gr-mydata-other-tax": "8",\n\t\t}\n\t}\n]\n```',
   },
   'gr-mydata-payment-means': {
-    title: 'Payment means',
+    title: 'myDATA: Payment means',
     description:
       'The IAPR requires invoices to specify a payment method code. In a GOBL invoice,\nthe payment means is set using the `key` field in the payment instructions.\nThe following table lists all the IAPR payment methods and how GOBL will map from\nthe payment instructions key to each of them:\n\n| Code | Name                             | GOBL Payment Instruction Key |\n| ---- | -------------------------------- | ---------------------------- |\n| `1`  | Domestic Payments Account Number | `credit-transfer`            |\n| `2`  | Foreign Payments Account Number  | `credit-transfer+foreign`    |\n| `3`  | Cash                             | `cash`                       |\n| `4`  | Check                            | `cheque`                     |\n| `5`  | On credit                        | `promissory-note`            |\n| `6`  | Web Banking                      | `online`                     |\n| `7`  | POS / e-POS                      | `card`                       |\n\nFor example:\n\n```js\n"payment": {\n\t"instructions": {\n\t\t"key": "credit-transfer+foreign" // Will set the IAPR Payment Method to "2"\n\t}\n}\n```',
   },
   'gr-mydata-stamp-duty': {
-    title: 'Stamp duty coefficient category',
+    title: 'myDATA: Stamp duty coefficient category',
     description:
       'Greek invoices may contain charges for stamp duty. The `gr-mydata-stamp-duty` extension\nat charge level must be used to specify the specific stamp duty coefficient category\nfor the charge.\n\nFor example:\n\n```json\n"charges": [\n\t{\n\t\t"amount": "12.00",\n\t\t"reason": "Stamp duty",\n\t\t"ext": {\n\t\t\t"gr-mydata-tax-type": "4",\n\t\t\t"gr-mydata-stamp-duty": "1"\n\t\t}\n\t}\n]\n```',
   },
   'gr-mydata-tax-type': {
-    title: 'Tax type',
+    title: 'myDATA: Tax type',
     description:
       'Greek invoices may contain charges or allowances for taxes and fees different from VAT. The\n`gr-mydata-tax-type` extension at charge level must be used to specify the tax type.\n\nGOBL will attempt to automatically set the `gr-mydata-tax-type` extension. The following\ntable shows the mappings used: first, GOBL will check the charge\'s `key` field; if that\ndoes not match, it will then check for the presence of the related extension:\n\n| Code | Name       | GOBL Charge Key | Extension              |\n| ---- | ---------- | --------------- | ---------------------- |\n| `2`  | Fee        |                 | `gr-mydata-fee`        |\n| `3`  | Other Tax  | `tax`           | `gr-mydata-other-tax`  |\n| `4`  | Stamp Duty | `stamp-duty`    | `gr-mydata-stamp-duty` |\n\nFor example (manual):\n\n```json\n"charges": [\n\t{\n\t\t"amount": "10.00",\n\t\t"reason": "Stamp duty fee",\n\t\t"ext": {\n\t\t\t"gr-mydata-tax-type": "2",\n\t\t\t"gr-mydata-fee": "13",\n\t\t}\n\t}\n]\n```',
   },
   'gr-mydata-vat-rate': {
-    title: 'VAT rate',
+    title: 'myDATA: VAT rate',
     description:
       'Greece has three VAT rates: standard, reduced and super-reduced. Each of these rates are reduced by\n30% on the islands of Leros, Lesbos, Kos, Samos and Chios. The tax authority identifies each rate\nwith a specific VAT category.\n\nThe IAPR VAT category code must be set using the `gr-mydata-vat-rate` extension of\na line\'s tax to one of the codes.\n\n| Code | Description                 | GOBL Rate              |\n| ---- | --------------------------- | ---------------------- |\n| `1`  | Standard rate               | `standard`             |\n| `2`  | Reduced rate                | `reduced`              |\n| `3`  | Super-reduced rate          | `super-reduced`        |\n| `4`  | Standard rate (Island)      | `standard+island`      |\n| `5`  | Reduced rate (Island)       | `reduced+island`       |\n| `6`  | Super-reduced rate (Island) | `super-reduced+island` |\n| `7`  | Without VAT                 | `exempt`               |\n| `8`  | Records without VAT         |                        |\n\nPlease, note that GOBL will automatically set the proper `gr-mydata-vat-rate` code and tax percent automatically when the line tax uses any of the GOBL rates specified in the table above. For example:\n\n```js\n{\n\t"$schema": "https://gobl.org/draft-0/bill/invoice",\n\t// ...\n\t"lines": [\n\t\t{\n\t\t\t"i": 1,\n\t\t\t"quantity": "20",\n\t\t\t"item": {\n\t\t\t\t"name": "Υπηρεσίες Ανάπτυξης",\n\t\t\t\t"price": "90.00",\n\t\t\t},\n\t\t\t"sum": "1800.00",\n\t\t\t"taxes": [\n\t\t\t\t{\n\t\t\t\t\t"cat": "VAT",\n\t\t\t\t\t"rate": "standard+island"\n\t\t\t\t}\n\t\t\t],\n\t\t\t"total": "1800.00"\n\t\t}\n\t],\n}\n```',
   },
   'iso-scheme-id': {
-    title: 'ISO/IEC 6523 Identifier scheme code',
+    title: 'ISO/IEC 6523: Identifier Scheme Code',
     description:
       'Defines a global structure for uniquely identifying organizations or entities.\nThis standard is essential in environments where electronic communications require\nunambiguous identification of organizations, especially in automated systems or\nelectronic data interchange (EDI).\n\nThe ISO 6523 set of identifies is used by the EN16931 standard for electronic invoicing.',
   },
@@ -467,10 +492,15 @@ export const ExtensionKeyLabels: EnumLabels<ExtensionKey> = {
   'it-sdi-format': {
     title: 'SDI Transmission Format',
     description:
-      'Code used to describe the transmission format of the invoice. It is set\nduring calculation from the invoice\'s tags: "FPA12" when the invoice\ncarries the "b2g" tag, and "FPR12" otherwise.',
+      'Code used to describe the transmission format of the invoice. It is set\nduring calculation from the invoice\'s tags: "FPA12" when the invoice\ncarries the "b2g" tag, "FSM10" when it carries the "simplified" tag,\nand "FPR12" otherwise.',
   },
   'it-sdi-fund-type': {
     title: 'Fund Type',
+  },
+  'it-sdi-issuer-type': {
+    title: 'Issuer Type',
+    description:
+      "Says who issued the invoice when it was not the supplier. FatturaPA\nrequires this in the `SoggettoEmittente` field whenever someone other\nthan the supplier issues the document (article 21 of DPR 633/1972).\n\nWhen you name a third party as the ordering `issuer`, because that party\nissues the invoice on the supplier's behalf, the addon sets `TZ`.\n\nWhen your tags select a document the customer issues, the addon sets\n`CC` and replaces any value you gave: TD16 to TD20, TD22, TD23 and TD28.\nOn these the customer sends the document to SDI and the supplier block\nnames the seller. TD21 and TD27 stay unset, because there the issuer is\nboth supplier and customer. For any other invoice the customer issued,\nset `CC` yourself.\n\nA `CC` invoice cannot also name an ordering `issuer`, because FatturaPA\nkeeps `TerzoIntermediarioOSoggettoEmittente` for a third party acting for\nthe supplier.",
   },
   'it-sdi-liquidation-state': {
     title: 'Liquidation State',
@@ -500,23 +530,30 @@ export const ExtensionKeyLabels: EnumLabels<ExtensionKey> = {
   },
   'it-sdi-vat-liability': {
     title: 'VAT Liability',
+    description:
+      "Says when the VAT on a line becomes chargeable, written to FatturaPA's\n`EsigibilitaIVA`: `I` immediately, `D` deferred, or `S` under split\npayment (scissione dei pagamenti, art. 17-ter DPR 633/72), where the\ncustomer pays the VAT straight to the tax authority.\n\nWhen a line or charge has standard VAT marked `S`, the addon adds a\npayment advance with the `vat-split-payment` waiver for that VAT, so the\namount due and the due dates leave it out while the VAT stays on the\ninvoice.",
   },
   'it-ticket-exempt': {
-    title: 'Exemption Code',
+    title: 'AdE: Exemption Code',
   },
   'it-ticket-line-ref': {
-    title: 'AdE Line Reference',
+    title: 'AdE: Line Reference',
     description:
       'Reference code provided by the AdE to be able to identify the specific line in credit notes.',
   },
   'it-ticket-lottery': {
-    title: 'AdE Lottery Code',
+    title: 'AdE: Lottery Code',
     description:
       'Lottery key is used to identify the lottery number (Codice lotteria). \nThis lottery code is provided by the customer at the time of purchase. \nIt is used to identify the customer in the lottery system provided by the Agenzia delle Entrate.',
   },
   'it-ticket-product': {
-    title: 'AdE CF Product Key',
+    title: 'AdE: CF Product Key',
     description: 'Product keys are used by AdE CF to differentiate between goods\nand services.',
+  },
+  'mx-cfdi-cancel-reason': {
+    title: 'Cancellation Reason',
+    description:
+      'Reason for cancelling a CFDI at the SAT. Reason 01 requires the UUID of the CFDI that substitutes it.',
   },
   'mx-cfdi-doc-type': {
     title: 'Document Type',
@@ -634,7 +671,7 @@ export const ExtensionKeyLabels: EnumLabels<ExtensionKey> = {
       'The `pl-favat-third-party-role` extension specifies the role of a third party or\nadditional entity in an invoice transaction. This extension is used in **party\nidentities** (`customer.identities[].ext`, `supplier.identities[].ext`, or in\nadditional parties).\n\nThis extension is **not normalized automatically** and must be set manually based on\nthe role of the entity in the transaction.\n\nCommon use cases:\n- Role "8": Required when customer has `pl-favat-jst` = "1" (Local Government Unit)\n- Role "10": Required when customer has `pl-favat-group-vat` = "1" (VAT Group member)\n- Role "5": When invoice is issued by an entity on behalf of the taxpayer\n- Other roles: For factoring, recipients, payers, etc.\n\nEach identity with this extension should also include a `code` field with the\nidentifier of the third party.\n\nExample with JST customer:\n\n```js\n{\n\t"customer": {\n\t\t// ...\n\t\t"ext": {\n\t\t\t"pl-favat-jst": "1"\n\t\t},\n\t\t"identities": [\n\t\t\t{\n\t\t\t\t"code": "146501",\n\t\t\t\t"ext": {\n\t\t\t\t\t"pl-favat-third-party-role": "8"\n\t\t\t\t}\n\t\t\t}\n\t\t]\n\t}\n}\n```',
   },
   'pt-region': {
-    title: 'Region Code',
+    title: 'AT: Region Code',
     description:
       'SAF-T\'s `TaxCountryRegion` (País ou região do imposto) specifies the region of taxation\n(Portugal mainland, Açores, Madeira or any ISO country) in a Portuguese invoice. Each\nregion has their own tax rates which can be determined automatically.\n\nTo set the specific a region different to Portugal mainland, the `pt-region` extension of\neach line\'s VAT tax should be set to one of the following values:\n\n| Code  | Description                                         |\n| ----- | --------------------------------------------------- |\n| PT    | Mainland Portugal (default)                         |\n| PT-AC | Açores                                              |\n| PT-MA | Madeira                                             |\n| ...   | Any ISO country code (e.g. ES, FR, DE, etc.)        |\n\nFor example:\n\n```js\n{\n\t"$schema": "https://gobl.org/draft-0/bill/invoice",\n\t// ...\n\t"lines": [\n\t\t{\n\t\t\t// ...\n\t\t\t"item": {\n\t\t\t\t"name": "Some service",\n\t\t\t\t"price": "25.00"\n\t\t\t},\n\t\t\t"tax": [\n\t\t\t\t{\n\t\t\t\t\t\t"cat": "VAT",\n\t\t\t\t\t\t"rate": "exempt",\n\t\t\t\t\t\t"ext": {\n\t\t\t\t\t\t\t"pt-region": "PT-AC",\n\t\t\t\t\t\t\t// ...\n\t\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t]\n\t\t}\n\t]\n}\n```',
   },
@@ -699,44 +736,44 @@ export const ExtensionKeyLabels: EnumLabels<ExtensionKey> = {
       'Code used to describe the ZATCA invoice transaction type and flags (KSA-2).\nThe code is a 7-character string where positions 1-2 indicate the main type\n(01 = Standard Tax Invoice, 02 = Simplified Tax Invoice) and positions 3-7\nare binary flags for third-party, nominal, export, summary, and self-billed\ntransactions respectively.',
   },
   'untdid-allowance': {
-    title: 'UNTDID 5189 Allowance',
+    title: 'UNTDID 5189: Allowance',
     description:
       'UNTDID 5189 code used to describe the allowance type. This list is based on the\n[EN16931 code list](https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/Registry+of+supporting+artefacts+to+implement+EN16931#RegistryofsupportingartefactstoimplementEN16931-Codelists)\nvalues table which focusses on invoices and payments.',
   },
   'untdid-charge': {
-    title: 'UNTDID 7161 Charge',
+    title: 'UNTDID 7161: Charge',
     description:
       'UNTDID 7161 code used to describe the charge. List is based on the\nEN16931 code lists with extensions for taxes and duties.',
   },
   'untdid-document-type': {
-    title: 'UNTDID 1001 Document Type',
+    title: 'UNTDID 1001: Document Type',
     description:
       'UNTDID 1001 code used to describe the type of document. Ths list is based on the [EN16931 code list](https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/Registry+of+supporting+artefacts+to+implement+EN16931#RegistryofsupportingartefactstoimplementEN16931-Codelists)\nvalues table which focusses on invoices and payments.\n\nOther tax regimes and addons may use their own subset of codes.',
   },
   'untdid-item-type': {
-    title: 'UNTDID 7143 Item Type Identification Code',
+    title: 'UNTDID 7143: Item Type Identification Code',
   },
   'untdid-payment-means': {
-    title: 'UNTDID 4461 Payment Means',
+    title: 'UNTDID 4461: Payment Means',
     description:
       'UNTDID 4461 code used to describe the means of payment. This list is based on the\n[EN16931 code list](https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/Registry+of+supporting+artefacts+to+implement+EN16931#RegistryofsupportingartefactstoimplementEN16931-Codelists)\nvalues table which focusses on invoices and payments.',
   },
   'untdid-reference': {
-    title: 'UNTDID 1153 Reference Code Qualifier',
+    title: 'UNTDID 1153: Reference Code Qualifier',
     description:
       'UNTDID 1153 code used to describe the reference code qualifier. This list is based on the\n[EN16931 code list](https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/Registry+of+supporting+artefacts+to+implement+EN16931#RegistryofsupportingartefactstoimplementEN16931-Codelists)\nvalues table which focusses on invoices and payments.',
   },
   'untdid-tax-category': {
-    title: 'UNTDID 3505 Tax Category',
+    title: 'UNTDID 3505: Tax Category',
     description:
       'UNTDID 5305 code used to describe the applicable duty/tax/fee category. There are\nmultiple versions and subsets of this table so regimes and addons may need to filter\noptions for a specific subset of values.\n\nData from https://unece.org/fileadmin/DAM/trade/untdid/d16b/tred/tred5305.htm.',
   },
   'untdid-text-subject': {
-    title: 'UNTDID 4451 Text Subject Qualifier',
+    title: 'UNTDID 4451: Text Subject Qualifier',
     description: 'Code specifying subject of a free text.',
   },
   'untdid-unit': {
-    title: 'UNTDID Unit of Measure',
+    title: 'UNTDID: Unit of Measure',
     description:
       'Unit of measure code from UN/ECE Recommendations 20 and 21. This extension preserves the exact standard code when a GOBL unit key is unavailable or when a document format requires the UNTDID representation.',
   },

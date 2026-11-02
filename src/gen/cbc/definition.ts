@@ -7,6 +7,7 @@ import type { Code } from './code.js';
 import type { Key } from './key.js';
 import type { Meta } from './meta.js';
 import type { Source } from './source.js';
+import type { Usage } from './usage.js';
 
 /**
  * Definition defines properties of a key, code, or other value that has a specific meaning or utility.
@@ -31,18 +32,24 @@ export interface Definition {
    */
   name: i18n.String;
   /**
-   * Description offering more details about when the key should be used.
+   * More details about when the key should be used.
    *
    * @title Description
    */
   desc?: i18n.String;
   /**
-   * Meta defines any additional details that may be useful or associated
-   * with the key.
+   * Any additional details associated with the key.
    *
    * @title Meta
    */
   meta?: Meta;
+  /**
+   * Context in which the definition may be used, such as the addons or regimes
+   * that offer it, and where it can be placed inside a document.
+   *
+   * @title Usage
+   */
+  usage?: Usage;
   /**
    * Where the information was sourced from and where it can be reviewed for updates in the future.
    *
@@ -50,22 +57,22 @@ export interface Definition {
    */
   sources?: Source[];
   /**
-   * Values defines the possible values associated with the key, which themselves will
-   * either be keys or codes depending on the context.
+   * Possible values associated with the key, which are themselves either keys or codes
+   * depending on the context.
    *
    * @title Values
    */
   values?: Definition[];
   /**
-   * Pattern is used to validate the key value instead of using a fixed value
-   * from the code or key definitions.
+   * Regular expression used to validate the value instead of a fixed value from the
+   * code or key definitions.
    *
    * @title Pattern
    */
   pattern?: string;
   /**
-   * Map helps map local keys to specific codes, useful for converting the
-   * described key into a local code.
+   * Maps local keys to specific codes, useful for converting the described key into a
+   * local code.
    *
    * @title Code Map
    */

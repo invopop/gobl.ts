@@ -2,9 +2,8 @@
 // Source: schemas/tax/total.json
 
 import type * as cbc from '../cbc/index.js';
-import type * as l10n from '../l10n/index.js';
 import type * as num from '../num/index.js';
-import type { Extensions } from './extensions.js';
+import type { RateTotal } from './rate-total.js';
 
 /** CategoryTotal groups together all rates inside a given category. */
 export interface CategoryTotal {
@@ -25,74 +24,11 @@ export interface CategoryTotal {
 export const CategoryTotalSchemaID = 'https://gobl.org/draft-0/tax/total#/$defs/tax.CategoryTotal';
 
 /**
- * RateTotal contains a sum of all the tax rates in the document with a matching category and rate.
- */
-export interface RateTotal {
-  /**
-   * Country code override when issuing with taxes applied from different countries,
-   * it'd be very strange to mix rates from different countries, but in theory
-   * this would be possible.
-   *
-   * @title Country
-   */
-  country?: l10n.TaxCountryCode;
-  /**
-   * Tax key if supported by the category.
-   *
-   * @title Key
-   */
-  key?: cbc.Key;
-  /**
-   * If the rate is defined with extensions, they'll be used to group by also.
-   *
-   * @title Extensions
-   */
-  ext?: Extensions;
-  /**
-   * Base amount that the percentage is applied to.
-   *
-   * @title Base
-   */
-  base: num.Amount;
-  /**
-   * Percentage of the rate. Will be nil when taxes are **exempt**.
-   *
-   * @title Percent
-   */
-  percent?: num.Percentage;
-  /**
-   * Surcharge applied to the rate.
-   *
-   * @title Surcharge
-   */
-  surcharge?: RateTotalSurcharge;
-  /**
-   * Total amount of rate, excluding surcharges
-   *
-   * @title Amount
-   */
-  amount: num.Amount;
-}
-
-export const RateTotalSchemaID = 'https://gobl.org/draft-0/tax/total#/$defs/tax.RateTotal';
-
-/** RateTotalSurcharge reflects the sum surcharges inside the rate. */
-export interface RateTotalSurcharge {
-  /** @title Percent */
-  percent: num.Percentage;
-  /** @title Amount */
-  amount: num.Amount;
-}
-
-export const RateTotalSurchargeSchemaID =
-  'https://gobl.org/draft-0/tax/total#/$defs/tax.RateTotalSurcharge';
-
-/**
  * Total contains a set of Category Totals which in turn contain all the accumulated taxes contained in the document.
  */
 export interface Total {
   /**
-   * Grouping of all the taxes by their category
+   * Grouping of all the taxes by their category.
    *
    * @title Categories
    */
@@ -104,7 +40,7 @@ export interface Total {
    */
   sum: num.Amount;
   /**
-   * Sum of retained or withheld tax amounts
+   * Sum of retained or withheld tax amounts.
    *
    * @title Retained
    */

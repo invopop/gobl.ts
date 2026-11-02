@@ -5,7 +5,7 @@ import type { EnumLabels } from '../label.js';
 import type * as tax from '../tax/index.js';
 
 /**
- * Key helps determine what to do next.
+ * Identifies the type of action being suggested.
  *
  * @title Key
  */
@@ -46,20 +46,19 @@ export const ActionKeyLabels: EnumLabels<ActionKey> = {
 /** Action provides a suggestion about what to do next with the document. */
 export interface Action {
   /**
-   * Key helps determine what to do next.
+   * Identifies the type of action being suggested.
    *
    * @title Key
    */
   key: ActionKey;
   /**
-   * Description includes human readable details about what steps should be
-   * taken next.
+   * Human readable details about what steps should be taken next.
    *
    * @title Description
    */
   description?: string;
   /**
-   * Extensions for local or format focussed data
+   * Extensions for local or format specific data.
    *
    * @title Extensions
    */

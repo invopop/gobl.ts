@@ -11,7 +11,7 @@ import type { Action } from './action.js';
 import type { Reason } from './reason.js';
 
 /**
- * Status Key indicates the situation of the document
+ * Indicates the situation of the referenced document.
  *
  * @title Key
  */
@@ -80,53 +80,49 @@ export interface StatusLine {
    */
   index: number;
   /**
-   * Status Key indicates the situation of the document
+   * Indicates the situation of the referenced document.
    *
    * @title Key
    */
   key: StatusLineKey;
   /**
-   * When this row should be considered effective
+   * When this row should be considered effective.
    *
    * @title Date
    */
   date?: cal.Date;
   /**
-   * Document reference or details about the document that needs to be looked
-   * at.
+   * Reference to or details of the document this status applies to.
    *
    * @title Document
    */
   doc?: org.DocumentRef;
   /**
-   * Description includes a human readable description that explains the
-   * reason for the current status, if necessary.
+   * Human readable explanation of the reason for the current status, if necessary.
    *
    * @title Description
    */
   description?: string;
   /**
-   * Reasons define an array of reason objects that help the recipient
-   * determine why the status was provided.
+   * Reasons that help the recipient determine why the status was provided.
    *
    * @title Reasons
    */
   reasons?: Reason[];
   /**
-   * Actions contains an array of actions that should be carried out by the
-   * recipient of the message. These are suggestions.
+   * Suggested actions to be carried out by the recipient of the message.
    *
    * @title Actions
    */
   actions?: Action[];
   /**
-   * Extensions for local or format focussed data
+   * Extensions for local or format specific data.
    *
    * @title Extensions
    */
   ext?: tax.Extensions;
   /**
-   * Complements contain regime/addon specific payload data.
+   * Regime or addon specific payload data.
    *
    * @title Complements
    */
