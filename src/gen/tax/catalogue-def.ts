@@ -8,13 +8,13 @@ import type * as i18n from '../i18n/index.js';
  * A CatalogueDef contains a set of re-useable extensions, scenarios, and validators that can be used by addons or tax regimes.
  */
 export interface CatalogueDef {
-  /** Key defines a unique identifier for the catalogue. */
+  /** Unique identifier for the catalogue. */
   key: cbc.Key;
-  /** Name is the name of the catalogue. */
+  /** Name of the catalogue. */
   name: i18n.String;
-  /** Description is a human readable description of the catalogue. */
+  /** Human readable description of the catalogue. */
   description?: i18n.String;
-  /** Extensions defines all the extensions offered by the catalogue. */
+  /** All the extensions offered by the catalogue. */
   extensions: cbc.Definition[];
 }
 

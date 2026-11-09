@@ -7,3 +7,4 @@ export * from './key.js';
 export * from './meta.js';
 export * from './source.js';
 export * from './uri.js';
+export * from './usage.js';

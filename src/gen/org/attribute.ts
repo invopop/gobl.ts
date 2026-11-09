@@ -546,9 +546,8 @@ export interface Attribute {
    */
   key?: AttributeKey;
   /**
-   * Type defines a code used to identify the attribute when the "key"
-   * field is empty, from a code list agreed upon between the supplier
-   * and customer.
+   * Code used to identify the attribute when the "key" field is empty, from a code
+   * list agreed upon between the supplier and customer.
    *
    * @title Type
    */

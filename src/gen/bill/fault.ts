@@ -16,14 +16,14 @@ export interface Fault {
    */
   code: cbc.Code;
   /**
-   * Message contains human readable details about the specific condition.
+   * Human readable details about the specific condition.
    *
    * @title Message
    */
   message?: string;
   /**
-   * Paths contains an array of JSON paths that maps the GOBL specific error
-   * to a field inside the envelope that the condition is applied to.
+   * JSON paths that map the GOBL specific error to the fields inside the envelope
+   * that the condition applies to.
    *
    * @title Paths
    */

@@ -65,7 +65,7 @@ export const ChargeKeyLabels: EnumLabels<ChargeKeyKnown> = {
 };
 
 /**
- * Charge represents a surchange applied to the complete document independent from the individual lines.
+ * Charge represents a surcharge applied to the complete document independent from the individual lines.
  */
 export interface Charge {
   /**
@@ -90,45 +90,52 @@ export interface Charge {
    */
   key?: ChargeKey;
   /**
-   * Code to used to refer to the this charge by the issuer
+   * Code used by the issuer to refer to this charge.
    *
    * @title Code
    */
   code?: cbc.Code;
   /**
-   * Text description as to why the charge was applied
+   * Reason why the charge was applied.
    *
    * @title Reason
    */
   reason?: string;
   /**
-   * Base represents the value used as a base for percent calculations instead
-   * of the invoice's sum of lines.
+   * When true, the charge amount is calculated and reported but does not affect the
+   * document totals. Used for costs that must be declared while being borne by the
+   * supplier, such as a stamp duty the issuer absorbs instead of passing on to the customer.
+   *
+   * @title Informative
+   */
+  informative?: boolean;
+  /**
+   * Value used as the base for percent calculations instead of the invoice's sum of lines.
    *
    * @title Base
    */
   base?: num.Amount;
   /**
-   * Percentage to apply to the sum of all lines
+   * Percentage to apply to the sum of all lines.
    *
    * @title Percent
    */
   percent?: num.Percentage;
   /**
-   * Amount to apply (calculated if percent present)
+   * Amount to apply (calculated if percent present).
    *
    * @title Amount
    * @calculated Computed by GOBL; omit when building a document.
    */
   amount?: num.Amount;
   /**
-   * List of taxes to apply to the charge
+   * List of taxes to apply to the charge. Not allowed on informative charges.
    *
    * @title Taxes
    */
   taxes?: tax.Set;
   /**
-   * Extension codes that apply to the charge
+   * Extension codes that apply to the charge.
    *
    * @title Extensions
    */

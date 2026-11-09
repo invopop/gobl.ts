@@ -48,8 +48,7 @@ export interface CorrectionOptions {
    */
   ext?: tax.Extensions;
   /**
-   * CopyTax when true will copy the tax totals from the previous document to the
-   * preceding document data.
+   * When true, copies the tax totals from the previous document into the preceding document data.
    *
    * @title Copy Tax Totals
    */

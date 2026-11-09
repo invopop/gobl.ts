@@ -50,18 +50,17 @@ export interface Payment {
    */
   $regime?: tax.RegimeCode;
   /**
-   * Addons defines a list of keys used to identify tax addons that apply special
-   * normalization, scenarios, and validation rules to a document.
+   * Keys identifying the tax addons that apply special normalization, scenarios, and
+   * validation rules to the document.
    *
    * @title Addons
    */
   $addons?: tax.AddonList;
   /**
-   * Tags are used to help identify specific tax scenarios or requirements that may
-   * apply changes to the contents of the document or imply a specific meaning.
-   * Converters may use tags to help identify specific situations that do not have
-   * a specific extension, for example; self-billed or partial invoices may be
-   * identified by their respective tags.
+   * Keys that identify specific tax scenarios or requirements that may change the
+   * contents of the document or imply a specific meaning. Converters may use tags to
+   * identify situations that do not have a specific extension; for example, self-billed
+   * or partial invoices are identified by their respective tags.
    *
    * @title Tags
    */
@@ -81,18 +80,18 @@ export interface Payment {
    */
   type?: PaymentType;
   /**
-   * Series is used to identify groups of payments by date, business area, project,
-   * type, customer, a combination of any, or other company specific data.
-   * If the output format does not support the series as a separate field, it will be
-   * prepended to the code for presentation with a dash (`-`) for separation.
+   * Identifies groups of payments by date, business area, project, type, customer,
+   * a combination of any, or other company specific data. If the output format does not
+   * support the series as a separate field, it will be prepended to the code with a dash
+   * (`-`) for separation.
    *
    * @title Series
    * @recommended
    */
   series?: cbc.Code;
   /**
-   * Code is a sequential identifier that uniquely identifies the payment. The code can
-   * be left empty initially, but is **required** to **sign** the document.
+   * Sequential identifier that uniquely identifies the payment. May be left empty
+   * initially, but is **required** to **sign** the document.
    *
    * @title Code
    * @recommended
@@ -106,15 +105,14 @@ export interface Payment {
    */
   issue_date?: cal.Date;
   /**
-   * IssueTime is an optional field that may be useful to indicate the time of day when
-   * the payment was issued.
+   * Optional time of day when the payment was issued.
    *
    * @title Issue Time
    * @calculated Computed by GOBL; omit when building a document.
    */
   issue_time?: cal.Time;
   /**
-   * When the taxes of this payment become accountable, if none set, the issue date is assumed.
+   * When the taxes of the payment become accountable. Defaults to the issue date.
    *
    * @title Value Date
    */
@@ -163,8 +161,8 @@ export interface Payment {
    */
   payee?: org.Party;
   /**
-   * Ordering allows for additional information about the ordering process including references
-   * to other documents and alternative parties involved in the order-to-delivery process.
+   * Additional information about the ordering process, including references to other
+   * documents and alternative parties involved in the order-to-delivery process.
    *
    * @title Ordering
    */
@@ -177,9 +175,9 @@ export interface Payment {
    */
   lines: PaymentLine[];
   /**
-   * Methods describes how the payment was settled. At least one method is
-   * required; multiple may be present when the payment was split across
-   * means (for example, partly card + partly cash).
+   * How the payment was settled. At least one method is required; multiple may be
+   * present when the payment was split across means, for example partly card and
+   * partly cash.
    *
    * @title Methods
    */
@@ -227,7 +225,7 @@ export interface PaymentLine {
    */
   uuid?: string;
   /**
-   * Line number within the parent document (automatically calculated)
+   * Line number within the parent document (calculated).
    *
    * @title Index
    * @calculated Computed by GOBL; omit when building a document.
@@ -241,7 +239,7 @@ export interface PaymentLine {
    */
   refund?: boolean;
   /**
-   * Reference to the document being paid
+   * Reference to the document being paid.
    *
    * @title Document
    */
@@ -262,9 +260,8 @@ export interface PaymentLine {
    */
   description?: string;
   /**
-   * Payable reflects the amount of the document that is payable. This will be
-   * calculated from the embedded document's amount automatically and converted
-   * to the currency of the document.
+   * Amount of the referenced document that is payable. Calculated automatically from
+   * the embedded document's amount and converted to the currency of this document.
    *
    * @title Payable
    */
@@ -283,20 +280,20 @@ export interface PaymentLine {
    */
   amount: num.Amount;
   /**
-   * Due reflects how much still needs to be paid
+   * Amount that still needs to be paid.
    *
    * @title Due
    */
   due?: num.Amount;
   /**
-   * Tax contains a breakdown of the taxes that will be applied to this payment line
-   * after taking into account currency conversion and the relative amounts.
+   * Breakdown of the taxes applied to this payment line after taking into account
+   * currency conversion and the relative amounts.
    *
    * @title Tax
    */
   tax?: tax.Total;
   /**
-   * Additional notes specific to this line item for clarification purposes
+   * Additional notes specific to this line item for clarification purposes.
    *
    * @title Notes
    */

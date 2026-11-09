@@ -7,26 +7,26 @@ import type * as i18n from '../i18n/index.js';
 /** Source is used to identify a specific source of data. */
 export interface Source {
   /**
-   * Title stores the name of the source of information.
+   * Name of the source of information.
    *
    * @title Title
    */
   title?: i18n.String;
   /**
-   * URL is the location of the source of information.
+   * Location of the source of information.
    *
    * @title URL
    * @format uri
    */
   url: string;
   /**
-   * ContentType of the information expected at the URL.
+   * Content type of the information expected at the URL.
    *
    * @title Content Type
    */
   content_type?: string;
   /**
-   * At is the date and time the information was retrieved.
+   * Date and time the information was retrieved.
    *
    * @title At
    */

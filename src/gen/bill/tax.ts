@@ -30,8 +30,8 @@ export const TaxRoundingLabels: EnumLabels<TaxRounding> = {
 };
 
 /**
- * Point is a code that identifies the event which triggers the tax liability,
- * such as invoice issuance, delivery of goods, or receipt of payment.
+ * Code that identifies the event which triggers the tax liability, such as invoice
+ * issuance, delivery of goods, or receipt of payment.
  *
  * @title Point
  */
@@ -74,8 +74,8 @@ export interface Tax {
    */
   rounding?: TaxRounding;
   /**
-   * Point is a code that identifies the event which triggers the tax liability,
-   * such as invoice issuance, delivery of goods, or receipt of payment.
+   * Code that identifies the event which triggers the tax liability, such as invoice
+   * issuance, delivery of goods, or receipt of payment.
    *
    * @title Point
    */
@@ -88,8 +88,8 @@ export interface Tax {
    */
   ext?: tax.Extensions;
   /**
-   * Notes contains tax-related notes, typically used for exemption reasons
-   * or other tax-specific explanations associated with particular tax categories.
+   * Tax-related notes, typically used for exemption reasons or other tax-specific
+   * explanations associated with particular tax categories.
    *
    * @title Notes
    */

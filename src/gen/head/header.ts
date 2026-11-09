@@ -29,8 +29,8 @@ export interface Header {
    */
   stamps?: Stamp[];
   /**
-   * Links provide URLs to other resources that are related to this envelope
-   * and unlike stamps can be added even in the draft state.
+   * URLs to other resources related to this envelope. Unlike stamps, links can be
+   * added even in the draft state.
    *
    * @title Links
    */
@@ -48,32 +48,30 @@ export interface Header {
    */
   meta?: cbc.Meta;
   /**
-   * Any information that may be relevant to other humans about this envelope
+   * Any information that may be relevant to other humans about this envelope.
    *
    * @title Notes
    */
   notes?: string;
   /**
-   * From is the URI-form transport address of the envelope's issuer,
-   * e.g. "gobl:invoices.example.com" or
-   * "iso6523-actorid-upis::9920:b123123123".
+   * URI-form transport address of the envelope's issuer, e.g.
+   * "gobl:invoices.example.com" or "iso6523-actorid-upis::9920:b123123123".
    *
    * @title From
    */
   from?: cbc.URI;
   /**
-   * To is the URI-form transport address of the envelope's intended
-   * receiver.
+   * URI-form transport address of the envelope's intended receiver.
    *
    * @title To
    */
   to?: cbc.URI;
   /**
-   * Ignore lists fully-qualified validation fault codes to suppress when
-   * validating this envelope, e.g. "GOBL-EU-EN16931-ORG-ITEM-01". Intended
-   * for format-conversion cases where a specific, known fault is acceptable.
-   * Covered by the envelope signature when sealed. NOTE: any code may be
-   * listed, including structural envelope/header codes — use deliberately.
+   * Fully-qualified validation fault codes to suppress when validating this
+   * envelope, e.g. "GOBL-EU-EN16931-ORG-ITEM-01". Intended for format-conversion
+   * cases where a specific, known fault is acceptable. Covered by the envelope
+   * signature when sealed. Any code may be listed, including structural envelope
+   * and header codes, so use deliberately.
    *
    * @title Ignore
    */

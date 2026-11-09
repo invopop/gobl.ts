@@ -49,8 +49,8 @@ export interface Status {
    */
   $regime?: tax.RegimeCode;
   /**
-   * Addons defines a list of keys used to identify tax addons that apply special
-   * normalization, scenarios, and validation rules to a document.
+   * Keys identifying the tax addons that apply special normalization, scenarios, and
+   * validation rules to the document.
    *
    * @title Addons
    */
@@ -69,61 +69,57 @@ export interface Status {
    */
   type: StatusType;
   /**
-   * IssueDate is the date when the status is to be considered effective.
+   * Date when the status is to be considered effective.
    *
    * @title Issue Date
    */
   issue_date: cal.Date;
   /**
-   * IssueTime is used when extra precision is required to determine when exactly
-   * the status was issued.
+   * Time of day when the status was issued, for when extra precision is required.
    *
    * @title Issue Time
    */
   issue_time?: cal.Time;
   /**
-   * Series is an optional code to group related status events together.
+   * Optional code to group related status events together.
    *
    * @title Series
    * @recommended
    */
   series?: cbc.Code;
   /**
-   * Code provides a way to identify the specific status event being reported.
+   * Identifies the specific status event being reported.
    *
    * @title Code
    */
   code: cbc.Code;
   /**
-   * Ext provides additional structured data specific to the regime or addon.
+   * Additional structured data specific to the regime or addon.
    *
    * @title Extensions
    */
   ext?: tax.Extensions;
   /**
-   * Supplier represents the entity supplying the goods or services in the
-   * original transaction.
+   * Entity supplying the goods or services in the original transaction.
    *
    * @title Supplier
    */
   supplier: org.Party;
   /**
-   * Customer is optional and describes the recipient of the original
-   * services.
+   * Optional recipient of the original goods or services.
    *
    * @title Customer
    */
   customer?: org.Party;
   /**
-   * Ordering provides links to related documents and additional details about
-   * which parties may be involved in the transaction.
+   * Links to related documents and additional details about which parties may be
+   * involved in the transaction.
    *
    * @title Ordering
    */
   ordering?: Ordering;
   /**
-   * Lines contain the main payload of the message used to describe individual
-   * documents which have a status.
+   * Main payload of the message, describing the status of individual documents.
    *
    * @title Lines
    * @recommended
@@ -136,7 +132,7 @@ export interface Status {
    */
   notes?: org.Note[];
   /**
-   * Meta contains unstructured data useful for internal tools.
+   * Unstructured data useful for internal tools.
    *
    * @title Meta
    */

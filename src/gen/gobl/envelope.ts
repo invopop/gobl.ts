@@ -8,25 +8,25 @@ import type * as schema from '../schema/index.js';
 /** Envelope wraps around a document adding headers and digital signatures. */
 export interface Envelope<T extends object = schema.Object> {
   /**
-   * Schema identifies the schema that should be used to understand this document
+   * Identifies the schema that should be used to understand this document.
    *
    * @title JSON Schema ID
    */
   $schema: string;
   /**
-   * Details on what the contents are
+   * Details about the contents of the envelope.
    *
    * @title Header
    */
   head: head.Header;
   /**
-   * The data inside the envelope
+   * Document contained inside the envelope.
    *
    * @title Document
    */
   doc: T;
   /**
-   * JSON Web Signatures of the header
+   * JSON Web Signatures of the header.
    *
    * @title Signatures
    */

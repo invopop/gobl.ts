@@ -17,7 +17,7 @@ export interface Message {
    */
   uuid?: string;
   /**
-   * Summary of the message content
+   * Summary of the message content.
    *
    * @title Title
    */

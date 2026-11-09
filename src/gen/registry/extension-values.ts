@@ -271,7 +271,7 @@ export interface ExtensionValues {
    */
   'ar-arca-vat-status': '1' | '4' | '5' | '6' | '7' | '8' | '9' | '10' | '13' | '15' | '16';
   /**
-   * IBGE Municipality Code. The municipality code as defined by the IBGE (Brazilian Institute of Geography and
+   * IBGE: Municipality Code. The municipality code as defined by the IBGE (Brazilian Institute of Geography and
    * Statistics).
    *
    * @source regime BR
@@ -613,7 +613,7 @@ export interface ExtensionValues {
    */
   'br-nfse-tax-status': Code;
   /**
-   * CEF VATEX - VAT exemption reason codes. Codes for the reasons for VAT exemption as defined by the Connecting Europe Facility (CEF).
+   * CEF: VATEX Exemption Reason. Codes for the reasons for VAT exemption as defined by the Connecting Europe Facility (CEF).
    *
    * @source catalogue cef
    */
@@ -784,6 +784,23 @@ export interface ExtensionValues {
    */
   'co-dian-fiscal-responsibility': 'O-13' | 'O-15' | 'O-23' | 'O-47' | 'R-99-PN';
   /**
+   * Item Identification Standard. Identifies the product-coding standard used for an invoice line's item code,
+   * mapped to the UBL's `StandardItemIdentification/ID@schemeID`.
+   *
+   * For example:
+   *
+   * ```js
+   * "item": {
+   * 	"name": "Producto",
+   * 	"ref": "7702004003489",
+   * 	"ext": { "co-dian-item-identification": "010" }
+   * }
+   * ```
+   *
+   * @source addon co-dian-v2
+   */
+  'co-dian-item-identification': '001' | '010' | '020' | '999';
+  /**
    * DIAN Municipality Code. The municipality code as defined by the DIAN.
    *
    * Set the 5-digit code for the municipality where the issuer is located in both
@@ -817,6 +834,30 @@ export interface ExtensionValues {
    * @source addon co-dian-v2
    */
   'co-dian-municipality': Code;
+  /**
+   * Tax Scheme. The tax (tributo) the party is responsible for, as defined by the DIAN for
+   * Colombian electronic invoicing.
+   *
+   * The DIAN limits suppliers to `01` (IVA) or `04` (INC), while customers may
+   * use any value; final consumers must be reported with `ZZ`. If a Colombian
+   * customer provides no value, GOBL will automatically set `ZZ` as the default.
+   *
+   * For example:
+   *
+   * ```js
+   * "supplier": {
+   * 	"name": "EXAMPLE SUPPLIER S.A.S.",
+   * 	"tax_id": {
+   * 		"country": "CO",
+   * 		"code": "9014514812"
+   * 	},
+   * 	"ext": { "co-dian-tax-scheme": "01" }
+   * }
+   * ```
+   *
+   * @source addon co-dian-v2
+   */
+  'co-dian-tax-scheme': '01' | '04' | 'ZA' | 'ZZ';
   /**
    * SKAT excise duty code. Code identifying a Danish excise duty ("punktafgift") from the SKAT
    * tax scheme codelist (OIOUBL `urn:oioubl:id:taxschemeid`), set on a
@@ -882,7 +923,7 @@ export interface ExtensionValues {
    */
   'es-facturae-subsidy': 'S' | 'N';
   /**
-   * Corrective Invoice Type. Correction type code used to identify the type of correction being made.
+   * SII: Corrective Invoice Type. Correction type code used to identify the type of correction being made.
    *
    * Code is determined automatically according to the invoice type:
    *
@@ -898,7 +939,7 @@ export interface ExtensionValues {
    */
   'es-sii-correction-type': 'S' | 'I';
   /**
-   * Invoice Type. Code used to identify the type of invoice being sent or received. This will be determined
+   * SII: Invoice Type. Code used to identify the type of invoice being sent or received. This will be determined
    * automatically by GOBL during normalization according to the scenario definitions.
    *
    * The following codes are not covered by GOBL's scenarios and will need to be set manually if
@@ -912,7 +953,7 @@ export interface ExtensionValues {
   'es-sii-doc-type':
     'F1' | 'F2' | 'F3' | 'F4' | 'F5' | 'F6' | 'R1' | 'R2' | 'R3' | 'R4' | 'R5' | 'AJ' | 'LC';
   /**
-   * Exemption Reason. Exemption code used to explain why the operation is exempt from taxes.
+   * SII: Exemption Reason. Exemption code used to explain why the operation is exempt from taxes.
    *
    * The follow mappings will be made automatically by GOBL during normalization:
    *
@@ -930,7 +971,7 @@ export interface ExtensionValues {
    */
   'es-sii-exempt': 'E1' | 'E2' | 'E3' | 'E4' | 'E5' | 'E6';
   /**
-   * Identification Type. Identity code used to identify the type of identity document used by the customer.
+   * SII: Identification Type. Identity code used to identify the type of identity document used by the customer.
    *
    * The regular Party Tax Identity is preferred over using a specific identity type code, and
    * will be mapped automatically as follows:
@@ -992,7 +1033,7 @@ export interface ExtensionValues {
    */
   'es-sii-identity-type': '02' | '03' | '04' | '05' | '06' | '07';
   /**
-   * Type of Operation Outside Scope. Type of operation not subject to VAT.
+   * SII: Type of Operation Outside Scope. Type of operation not subject to VAT.
    *
    * This extension is used to determine which tax amount field should be reported in the SII
    * payload:
@@ -1015,7 +1056,7 @@ export interface ExtensionValues {
    */
   'es-sii-outside-scope': 'other' | 'location';
   /**
-   * Product Type. Product type code used to differentiate between goods and services for the purpose of
+   * SII: Product Type. Product type code used to differentiate between goods and services for the purpose of
    * reporting breakdowns in the SII format.
    *
    * This extension is used to determine the type of operation breakdown when generating the SII
@@ -1032,7 +1073,7 @@ export interface ExtensionValues {
    */
   'es-sii-product': 'goods' | 'services';
   /**
-   * Special Regime or Relevance Key. Identify the regime applied to the operation.
+   * SII: Special Regime or Relevance Key. Identify the regime applied to the operation.
    *
    * The regime key must be assigned for each tax combo. If no regime key is provided, GOBL will
    * try to assign a code from the following tax combo contexts:
@@ -1066,7 +1107,7 @@ export interface ExtensionValues {
     | '16'
     | '17';
   /**
-   * Simplified Invoice Art. 7.2 and 7.3, RD 1619/2012. This extension covers a specific use-case when the customer specifically requests that the
+   * SII: Simplified Invoice Art. 7.2 and 7.3, RD 1619/2012. This extension covers a specific use-case when the customer specifically requests that the
    * invoice includes their fiscal details, but they are not registered for tax.
    *
    * Can only be true when the invoice type (`TipoFactura`) is one of: `F1`, `F3`, `R1`, `R2`,
@@ -1078,7 +1119,7 @@ export interface ExtensionValues {
    */
   'es-sii-simplified-art7273': 'S' | 'N';
   /**
-   * Issued by Third Party or Recipient. Indicates whether the invoice is issued by a third party or by the customer themselves.
+   * SII: Issued by Third Party or Recipient. Indicates whether the invoice is issued by a third party or by the customer themselves.
    *
    * The default value is `N` (No).
    *
@@ -1093,7 +1134,7 @@ export interface ExtensionValues {
    */
   'es-sii-third-party-issuer': 'S' | 'N';
   /**
-   * Activity Code (Bizkaia). Economic activity code (epígrafe) for individual issuers submitting through
+   * TicketBAI: Activity Code (Bizkaia). Economic activity code (epígrafe) for individual issuers submitting through
    * Bizkaia's LROE Modelo 140 register. Not required for organisations, who
    * file through Modelo 240.
    *
@@ -1101,7 +1142,7 @@ export interface ExtensionValues {
    */
   'es-tbai-bi-activity': Code;
   /**
-   * TicketBAI Rectification Type Code. Corrected or rectified invoices that need to be sent in the TicketBAI format
+   * TicketBAI: Rectification Type Code. Corrected or rectified invoices that need to be sent in the TicketBAI format
    * require a specific type code to be defined alongside the preceding invoice
    * data.
    *
@@ -1109,7 +1150,7 @@ export interface ExtensionValues {
    */
   'es-tbai-correction': 'R1' | 'R2' | 'R3' | 'R4' | 'R5';
   /**
-   * TicketBAI Exemption code. Codes used by TicketBAI for both "exempt", "not-subject", and reverse
+   * TicketBAI: Exemption Code. Codes used by TicketBAI for both "exempt", "not-subject", and reverse
    * charge transactions. In the TicketBAI format these are separated,
    * but in order to simplify GOBL and be more closely aligned with
    * other countries we've combined them into one.
@@ -1128,7 +1169,7 @@ export interface ExtensionValues {
    */
   'es-tbai-exemption': 'E1' | 'E2' | 'E3' | 'E4' | 'E5' | 'E6' | 'OT' | 'RL' | 'VT' | 'IE' | 'S2';
   /**
-   * Identity Type Code. Identity code used to identify the type of identity document used by the customer
+   * TicketBAI: Identity Type Code. Identity code used to identify the type of identity document used by the customer
    * when there is no tax identifier available. Maps to the `IDType` value under
    * `IDOtro` in the TicketBAI XML.
    *
@@ -1184,7 +1225,7 @@ export interface ExtensionValues {
    */
   'es-tbai-identity-type': '02' | '03' | '04' | '05' | '06';
   /**
-   * TicketBAI Product Key. Product keys are used by TicketBAI to differentiate between -exported- goods
+   * TicketBAI: Product Key. Product keys are used by TicketBAI to differentiate between -exported- goods
    * and services. It may be useful to classify all products regardless of wether
    * they are exported or not.
    *
@@ -1198,7 +1239,7 @@ export interface ExtensionValues {
    */
   'es-tbai-product': 'goods' | 'services' | 'resale';
   /**
-   * TicketBAI VAT Regime Key. Identifies the VAT regime or operation classification applied to the
+   * TicketBAI: VAT Regime Key. Identifies the VAT regime or operation classification applied to the
    * transaction. Maps to the `ClaveRegimenIvaOpTrascendencia` field, with
    * values taken from the TicketBAI XSD.
    *
@@ -1235,7 +1276,7 @@ export interface ExtensionValues {
     | '52'
     | '53';
   /**
-   * TicketBAI Region Code. Region codes are used by TicketBAI to differentiate between the different
+   * TicketBAI: Region Code. Region codes are used by TicketBAI to differentiate between the different
    * subdivisions of the Basque Country. This is used to determine the correct
    * API endpoint to use when submitting documents.
    *
@@ -1243,7 +1284,7 @@ export interface ExtensionValues {
    */
   'es-tbai-region': 'VI' | 'BI' | 'SS';
   /**
-   * TicketBAI Simplified Invoice Flag. Flag that maps to the `FacturaSimplificada` field in TicketBAI
+   * TicketBAI: Simplified Invoice Flag. Flag that maps to the `FacturaSimplificada` field in TicketBAI
    * documents. Set automatically to `S` by GOBL during normalization
    * when the `simplified` tag is present. When absent, the invoice is
    * treated as `N` (not simplified).
@@ -1279,6 +1320,18 @@ export interface ExtensionValues {
    * @source addon es-verifactu-v1
    */
   'es-verifactu-doc-type': 'F1' | 'F2' | 'F3' | 'R1' | 'R2' | 'R3' | 'R4' | 'R5';
+  /**
+   * Event Type Code. Identifies the NO VERI*FACTU event being reported by a `bill.Status`
+   * line, whose key must be `other`. Core GOBL status line keys describe
+   * the situation of a business document, so the event type is carried
+   * here instead.
+   *
+   * Maps to the `TipoEvento` field of a `RegistroEvento`, list L2E.
+   *
+   * @source addon es-verifactu-v1
+   */
+  'es-verifactu-event-type':
+    '01' | '02' | '03' | '04' | '05' | '06' | '07' | '08' | '09' | '10' | '90';
   /**
    * Verifactu Exemption Code. Exemption code used to explain why the operation is exempt from taxes.
    *
@@ -1448,7 +1501,32 @@ export interface ExtensionValues {
    */
   'es-verifactu-simplified-art7273': 'S' | 'N';
   /**
-   * General Information Framework. The general information framework is used to provide additional context
+   * Finnish e-invoice operator. Identifier of the e-invoice operator (intermediator) that serves the
+   * party's e-invoice address, quoted alongside that address: an operator's
+   * own OVT code such as `003700010001`, or a bank's BIC such as `NDEAFIHH`.
+   *
+   * A Finnish e-invoice address may be registered with several operators, and
+   * the operator decides where an invoice is delivered. Set it on the party
+   * that receives the message, the customer or the supplier of a self-billed
+   * invoice, to have the Finvoice message routed to that operator:
+   *
+   * ```js
+   * "customer": {
+   * 	"name": "Ostaja Oy",
+   * 	"endpoints": [
+   * 		{ "uri": "iso6523-actorid-upis::0216:003745678907" }
+   * 	],
+   * 	"ext": {
+   * 		"fi-finvoice-operator": "003700010001"
+   * 	}
+   * }
+   * ```
+   *
+   * @source addon fi-finvoice-v3
+   */
+  'fi-finvoice-operator': Code;
+  /**
+   * Chorus Pro: General Information Framework. The general information framework is used to provide additional context
    * about the entity submitting the document. If no value is provided, it will
    * default to "A1" (Submission by a supplier of an invoice), the most common
    * use-case.
@@ -1484,13 +1562,13 @@ export interface ExtensionValues {
     | 'A24'
     | 'A25';
   /**
-   * Scheme
+   * Chorus Pro: Scheme
    *
    * @source addon fr-choruspro-v1
    */
   'fr-choruspro-scheme': '1' | '2' | '3' | '4' | '5' | '6';
   /**
-   * Billing Mode. Code used to describe the billing framework of the invoice. The
+   * France CTC: Billing Mode. Code used to describe the billing framework of the invoice. The
    * billing mode indicates the nature of goods/services and the payment
    * context.
    *
@@ -1501,9 +1579,12 @@ export interface ExtensionValues {
    *   to each other)
    *
    * The numeric suffix indicates the payment type (1=deposit,
-   * 2=already paid, 4=final after down payment, 5=subcontractor,
-   * 6=co-contractor, 7=e-reporting, 8=multi-vendor,
-   * 9=bi-directional).
+   * 2=already paid, 3=subcontracting with direct payment,
+   * 4=final after down payment, 5=subcontractor, 6=co-contractor,
+   * 7=e-reporting, 8=multi-vendor, 9=bi-directional).
+   *
+   * S3 is public-sector only: a subcontractor bills the public buyer
+   * directly under the paiement direct arrangement.
    *
    * @source addon fr-ctc-flow10-v1
    */
@@ -1516,6 +1597,7 @@ export interface ExtensionValues {
     | 'B9'
     | 'S1'
     | 'S2'
+    | 'S3'
     | 'S4'
     | 'S5'
     | 'S6'
@@ -1528,7 +1610,28 @@ export interface ExtensionValues {
     | 'M8'
     | 'M9';
   /**
-   * B2C Transaction Category. Classifies a B2C transaction for French e-reporting to the PPF
+   * France CTC: Incoterm Delivery Terms. Code for the delivery or transport terms agreed between the buyer and
+   * the seller (EXT-FR-FE-185), restricted to the Incoterms and UNTDID 4053
+   * codes the French CTC Extended rules accept (BR-FREXT-CL-27).
+   *
+   * @source addon fr-ctc-flow2-v1
+   */
+  'fr-ctc-delivery-terms':
+    | '1'
+    | '2'
+    | 'CFR'
+    | 'CIF'
+    | 'CIP'
+    | 'CPT'
+    | 'DAP'
+    | 'DDP'
+    | 'DPU'
+    | 'EXW'
+    | 'FAS'
+    | 'FCA'
+    | 'FOB';
+  /**
+   * France CTC: B2C Transaction Category. Classifies a B2C transaction for French e-reporting to the PPF
    * (G1.68). Required on Flow 10 B2C invoices.
    *
    * - TLB1: Goods deliveries subject to VAT.
@@ -1543,7 +1646,7 @@ export interface ExtensionValues {
    */
   'fr-ctc-flow10-b2c-category': 'TLB1' | 'TPS1' | 'TNT1' | 'TMA1';
   /**
-   * Flow 6 Action Code. CDAR RequestedActionCode (MDT-121) carried on a
+   * France CTC: Flow 6 Action Code. CDAR RequestedActionCode (MDT-121) carried on a
    * bill.Action under a bill.Status line. Tells the issuer
    * what to do next with the referenced invoice — reissue
    * it, send a credit note, provide more information, etc.
@@ -1556,7 +1659,7 @@ export interface ExtensionValues {
    */
   'fr-ctc-flow6-action': 'NOA' | 'PIN' | 'NIN' | 'CNF' | 'CNP' | 'CNA' | 'OTH';
   /**
-   * Flow 6 Condition Code. CDAR CharacteristicTypeCode (MDT-207). Unified
+   * France CTC: Flow 6 Condition Code. CDAR CharacteristicTypeCode (MDT-207). Unified
    * vocabulary; the rules narrow the allow-list per
    * document type:
    *
@@ -1593,7 +1696,7 @@ export interface ExtensionValues {
     | 'MPA'
     | 'RAP';
   /**
-   * CDAR Reason Code. Exact CDAR ReasonCode pinned on a bill.Reason under a
+   * France CTC: CDAR Reason Code. Exact CDAR ReasonCode pinned on a bill.Reason under a
    * bill.Status — Status-only (bill.Payment has no
    * Reasons). The CDAR ReasonCode dimension is 1:N with
    * bill.Reason.Key: this extension lets the caller pick
@@ -1651,7 +1754,7 @@ export interface ExtensionValues {
     | 'IRR_TAILLE_F'
     | 'IRR_ANTIVIRUS';
   /**
-   * Party Role Code. UNCL 3035 role code carried as the CDAR RoleCode (MDT-158)
+   * France CTC: Party Role Code. UNCL 3035 role code carried as the CDAR RoleCode (MDT-158)
    * on each populated party of any Flow 6 lifecycle message
    * — set on Supplier / Customer of both bill.Status and
    * bill.Payment. Labels follow the French CTC
@@ -1665,7 +1768,7 @@ export interface ExtensionValues {
    */
   'fr-ctc-flow6-role': 'BY' | 'AB' | 'DL' | 'SE' | 'SR' | 'WK' | 'DFH' | 'PE' | 'PR' | 'II' | 'IV';
   /**
-   * CDAR Process Condition Code. CDAR ProcessConditionCode (MDT-9) identifying the
+   * France CTC: CDAR Process Condition Code. CDAR ProcessConditionCode (MDT-9) identifying the
    * lifecycle event reported by the Flow 6 message.
    * Unified vocabulary; the rules narrow the allow-list
    * per document type:
@@ -1700,7 +1803,7 @@ export interface ExtensionValues {
     | '212'
     | '213';
   /**
-   * Branch number. The branch (establishment) number of the party, as declared in the
+   * myDATA: Branch number. The branch (establishment) number of the party, as declared in the
    * AADE taxpayer registry. Set the `gr-mydata-branch` extension on a
    * party when the invoice is issued by or addressed to an establishment
    * other than the headquarters. When absent, the headquarters branch
@@ -1729,7 +1832,7 @@ export interface ExtensionValues {
    */
   'gr-mydata-branch': Code;
   /**
-   * VAT exemption cause. Greece invoices can be exempt of VAT for different causes and the tax authority
+   * myDATA: VAT exemption cause. Greece invoices can be exempt of VAT for different causes and the tax authority
    * require a specific cause code to be provided.
    *
    * GOBL will try to automatically map the tax combo `key` to an appropriate exemption
@@ -1801,7 +1904,7 @@ export interface ExtensionValues {
     | '30'
     | '31';
   /**
-   * Fee category. Greek invoices may contain charges for different types of fees. In GOBL, you must use
+   * myDATA: Fee category. Greek invoices may contain charges for different types of fees. In GOBL, you must use
    * the `gr-mydata-fee` extension at charge level to specify the specific fee category
    * for the charge.
    *
@@ -1846,7 +1949,7 @@ export interface ExtensionValues {
     | '21'
     | '22';
   /**
-   * Income Classification Category. Invoices reported to the Greek tax authority via myDATA can optionally include information
+   * myDATA: Income Classification Category. Invoices reported to the Greek tax authority via myDATA can optionally include information
    * about the income classification of each invoice item.
    *
    * In a GOBL invoice, the `gr-mydata-income-cat` and `gr-mydata-income-type` extensions can be
@@ -1889,7 +1992,7 @@ export interface ExtensionValues {
     | 'category1_10'
     | 'category1_95';
   /**
-   * Income Classification Type. See the Income Classification Category for more information.
+   * myDATA: Income Classification Type. See the Income Classification Category for more information.
    *
    * @source addon gr-mydata-v1
    */
@@ -1929,7 +2032,7 @@ export interface ExtensionValues {
     | 'E3_598_001'
     | 'E3_598_003';
   /**
-   * Invoice type. The Greek tax authority (IAPR) requires an invoice type code to be specified as part of the invoice. GOBL will
+   * myDATA: Invoice type. The Greek tax authority (IAPR) requires an invoice type code to be specified as part of the invoice. GOBL will
    * automatically set the correct code based on the invoice's `type` and `$tags` values.
    *
    * However, you can also set the code manually using the `gr-mydata-invoice-type` extension in the tax
@@ -2030,7 +2133,7 @@ export interface ExtensionValues {
     | '17.5'
     | '17.6';
   /**
-   * Other taxes category. Greek invoices may contain charges for different taxes other than VAT. The
+   * myDATA: Other taxes category. Greek invoices may contain charges for different taxes other than VAT. The
    * `gr-mydata-other-tax` extension at charge level must be used to specify the specific
    * other tax category for the charge.
    *
@@ -2083,7 +2186,7 @@ export interface ExtensionValues {
     | '29'
     | '30';
   /**
-   * Payment means. The IAPR requires invoices to specify a payment method code. In a GOBL invoice,
+   * myDATA: Payment means. The IAPR requires invoices to specify a payment method code. In a GOBL invoice,
    * the payment means is set using the `key` field in the payment instructions.
    * The following table lists all the IAPR payment methods and how GOBL will map from
    * the payment instructions key to each of them:
@@ -2112,7 +2215,7 @@ export interface ExtensionValues {
    */
   'gr-mydata-payment-means': '1' | '2' | '3' | '4' | '5' | '6' | '7';
   /**
-   * Stamp duty coefficient category. Greek invoices may contain charges for stamp duty. The `gr-mydata-stamp-duty` extension
+   * myDATA: Stamp duty coefficient category. Greek invoices may contain charges for stamp duty. The `gr-mydata-stamp-duty` extension
    * at charge level must be used to specify the specific stamp duty coefficient category
    * for the charge.
    *
@@ -2135,7 +2238,7 @@ export interface ExtensionValues {
    */
   'gr-mydata-stamp-duty': '1' | '2' | '3' | '4';
   /**
-   * Tax type. Greek invoices may contain charges or allowances for taxes and fees different from VAT. The
+   * myDATA: Tax type. Greek invoices may contain charges or allowances for taxes and fees different from VAT. The
    * `gr-mydata-tax-type` extension at charge level must be used to specify the tax type.
    *
    * GOBL will attempt to automatically set the `gr-mydata-tax-type` extension. The following
@@ -2167,7 +2270,7 @@ export interface ExtensionValues {
    */
   'gr-mydata-tax-type': '1' | '2' | '3' | '4' | '5';
   /**
-   * VAT rate. Greece has three VAT rates: standard, reduced and super-reduced. Each of these rates are reduced by
+   * myDATA: VAT rate. Greece has three VAT rates: standard, reduced and super-reduced. Each of these rates are reduced by
    * 30% on the islands of Leros, Lesbos, Kos, Samos and Chios. The tax authority identifies each rate
    * with a specific VAT category.
    *
@@ -2216,7 +2319,7 @@ export interface ExtensionValues {
    */
   'gr-mydata-vat-rate': '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8';
   /**
-   * ISO/IEC 6523 Identifier scheme code. Defines a global structure for uniquely identifying organizations or entities.
+   * ISO/IEC 6523: Identifier Scheme Code. Defines a global structure for uniquely identifying organizations or entities.
    * This standard is essential in environments where electronic communications require
    * unambiguous identification of organizations, especially in automated systems or
    * electronic data interchange (EDI).
@@ -2305,15 +2408,17 @@ export interface ExtensionValues {
     | 'RF16'
     | 'RF17'
     | 'RF19'
-    | 'RF18';
+    | 'RF18'
+    | 'RF20';
   /**
    * SDI Transmission Format. Code used to describe the transmission format of the invoice. It is set
    * during calculation from the invoice's tags: "FPA12" when the invoice
-   * carries the "b2g" tag, and "FPR12" otherwise.
+   * carries the "b2g" tag, "FSM10" when it carries the "simplified" tag,
+   * and "FPR12" otherwise.
    *
    * @source addon it-sdi-v1
    */
-  'it-sdi-format': 'FPA12' | 'FPR12';
+  'it-sdi-format': 'FPA12' | 'FPR12' | 'FSM10';
   /**
    * Fund Type
    *
@@ -2342,6 +2447,28 @@ export interface ExtensionValues {
     | 'TC20'
     | 'TC21'
     | 'TC22';
+  /**
+   * Issuer Type. Says who issued the invoice when it was not the supplier. FatturaPA
+   * requires this in the `SoggettoEmittente` field whenever someone other
+   * than the supplier issues the document (article 21 of DPR 633/1972).
+   *
+   * When you name a third party as the ordering `issuer`, because that party
+   * issues the invoice on the supplier's behalf, the addon sets `TZ`.
+   *
+   * When your tags select a document the customer issues, the addon sets
+   * `CC` and replaces any value you gave: TD16 to TD20, TD22, TD23 and TD28.
+   * On these the customer sends the document to SDI and the supplier block
+   * names the seller. TD21 and TD27 stay unset, because there the issuer is
+   * both supplier and customer. For any other invoice the customer issued,
+   * set `CC` yourself.
+   *
+   * A `CC` invoice cannot also name an ordering `issuer`, because FatturaPA
+   * keeps `TerzoIntermediarioOSoggettoEmittente` for a third party acting for
+   * the supplier.
+   *
+   * @source addon it-sdi-v1
+   */
+  'it-sdi-issuer-type': 'CC' | 'TZ';
   /**
    * Liquidation State. Indicates whether the company is in liquidation, used in the
    * IscrizioneREA block of a FatturaPA document as the
@@ -2448,25 +2575,33 @@ export interface ExtensionValues {
    */
   'it-sdi-shareholder-state': 'SU' | 'SM';
   /**
-   * VAT Liability
+   * VAT Liability. Says when the VAT on a line becomes chargeable, written to FatturaPA's
+   * `EsigibilitaIVA`: `I` immediately, `D` deferred, or `S` under split
+   * payment (scissione dei pagamenti, art. 17-ter DPR 633/72), where the
+   * customer pays the VAT straight to the tax authority.
+   *
+   * When a line or charge has standard VAT marked `S`, the addon adds a
+   * payment advance with the `vat-split-payment` waiver for that VAT, so the
+   * amount due and the due dates leave it out while the VAT stays on the
+   * invoice.
    *
    * @source addon it-sdi-v1
    */
   'it-sdi-vat-liability': 'I' | 'D' | 'S';
   /**
-   * Exemption Code
+   * AdE: Exemption Code
    *
    * @source addon it-ticket-v1
    */
   'it-ticket-exempt': 'N1' | 'N2' | 'N3' | 'N4' | 'N5' | 'N6';
   /**
-   * AdE Line Reference. Reference code provided by the AdE to be able to identify the specific line in credit notes.
+   * AdE: Line Reference. Reference code provided by the AdE to be able to identify the specific line in credit notes.
    *
    * @source addon it-ticket-v1
    */
   'it-ticket-line-ref': Code;
   /**
-   * AdE Lottery Code. Lottery key is used to identify the lottery number (Codice lotteria).
+   * AdE: Lottery Code. Lottery key is used to identify the lottery number (Codice lotteria).
    * This lottery code is provided by the customer at the time of purchase.
    * It is used to identify the customer in the lottery system provided by the Agenzia delle Entrate.
    *
@@ -2474,12 +2609,18 @@ export interface ExtensionValues {
    */
   'it-ticket-lottery': Code;
   /**
-   * AdE CF Product Key. Product keys are used by AdE CF to differentiate between goods
+   * AdE: CF Product Key. Product keys are used by AdE CF to differentiate between goods
    * and services.
    *
    * @source addon it-ticket-v1
    */
   'it-ticket-product': 'goods' | 'services';
+  /**
+   * Cancellation Reason. Reason for cancelling a CFDI at the SAT. Reason 01 requires the UUID of the CFDI that substitutes it.
+   *
+   * @source addon mx-cfdi-v4
+   */
+  'mx-cfdi-cancel-reason': '01' | '02' | '03' | '04';
   /**
    * Document Type
    *
@@ -3195,7 +3336,7 @@ export interface ExtensionValues {
    */
   'pl-favat-third-party-role': '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10' | '11';
   /**
-   * Region Code. SAF-T's `TaxCountryRegion` (País ou região do imposto) specifies the region of taxation
+   * AT: Region Code. SAF-T's `TaxCountryRegion` (País ou região do imposto) specifies the region of taxation
    * (Portugal mainland, Açores, Madeira or any ISO country) in a Portuguese invoice. Each
    * region has their own tax rates which can be determined automatically.
    *
@@ -4016,7 +4157,7 @@ export interface ExtensionValues {
     | '0211000'
     | '0211010';
   /**
-   * UNTDID 5189 Allowance. UNTDID 5189 code used to describe the allowance type. This list is based on the
+   * UNTDID 5189: Allowance. UNTDID 5189 code used to describe the allowance type. This list is based on the
    * [EN16931 code list](https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/Registry+of+supporting+artefacts+to+implement+EN16931#RegistryofsupportingartefactstoimplementEN16931-Codelists)
    * values table which focusses on invoices and payments.
    *
@@ -4043,7 +4184,7 @@ export interface ExtensionValues {
     | '104'
     | '105';
   /**
-   * UNTDID 7161 Charge. UNTDID 7161 code used to describe the charge. List is based on the
+   * UNTDID 7161: Charge. UNTDID 7161 code used to describe the charge. List is based on the
    * EN16931 code lists with extensions for taxes and duties.
    *
    * @source catalogue untdid
@@ -4232,7 +4373,7 @@ export interface ExtensionValues {
     | 'YY'
     | 'ZZZ';
   /**
-   * UNTDID 1001 Document Type. UNTDID 1001 code used to describe the type of document. Ths list is based on the [EN16931 code list](https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/Registry+of+supporting+artefacts+to+implement+EN16931#RegistryofsupportingartefactstoimplementEN16931-Codelists)
+   * UNTDID 1001: Document Type. UNTDID 1001 code used to describe the type of document. Ths list is based on the [EN16931 code list](https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/Registry+of+supporting+artefacts+to+implement+EN16931#RegistryofsupportingartefactstoimplementEN16931-Codelists)
    * values table which focusses on invoices and payments.
    *
    * Other tax regimes and addons may use their own subset of codes.
@@ -4302,7 +4443,7 @@ export interface ExtensionValues {
     | '877'
     | '935';
   /**
-   * UNTDID 7143 Item Type Identification Code
+   * UNTDID 7143: Item Type Identification Code
    *
    * @source catalogue untdid
    */
@@ -4492,7 +4633,7 @@ export interface ExtensionValues {
     | 'VX'
     | 'ZZZ';
   /**
-   * UNTDID 4461 Payment Means. UNTDID 4461 code used to describe the means of payment. This list is based on the
+   * UNTDID 4461: Payment Means. UNTDID 4461 code used to describe the means of payment. This list is based on the
    * [EN16931 code list](https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/Registry+of+supporting+artefacts+to+implement+EN16931#RegistryofsupportingartefactstoimplementEN16931-Codelists)
    * values table which focusses on invoices and payments.
    *
@@ -4584,7 +4725,7 @@ export interface ExtensionValues {
     | '98'
     | 'ZZZ';
   /**
-   * UNTDID 1153 Reference Code Qualifier. UNTDID 1153 code used to describe the reference code qualifier. This list is based on the
+   * UNTDID 1153: Reference Code Qualifier. UNTDID 1153 code used to describe the reference code qualifier. This list is based on the
    * [EN16931 code list](https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/Registry+of+supporting+artefacts+to+implement+EN16931#RegistryofsupportingartefactstoimplementEN16931-Codelists)
    * values table which focusses on invoices and payments.
    *
@@ -5409,7 +5550,7 @@ export interface ExtensionValues {
     | 'XP'
     | 'ZZZ';
   /**
-   * UNTDID 3505 Tax Category. UNTDID 5305 code used to describe the applicable duty/tax/fee category. There are
+   * UNTDID 3505: Tax Category. UNTDID 5305 code used to describe the applicable duty/tax/fee category. There are
    * multiple versions and subsets of this table so regimes and addons may need to filter
    * options for a specific subset of values.
    *
@@ -5440,7 +5581,7 @@ export interface ExtensionValues {
     | 'S'
     | 'Z';
   /**
-   * UNTDID 4451 Text Subject Qualifier. Code specifying subject of a free text.
+   * UNTDID 4451: Text Subject Qualifier. Code specifying subject of a free text.
    *
    * @source catalogue untdid
    */
@@ -5847,7 +5988,7 @@ export interface ExtensionValues {
     | 'WHI'
     | 'ZZZ';
   /**
-   * UNTDID Unit of Measure. Unit of measure code from UN/ECE Recommendations 20 and 21. This extension preserves the exact standard code when a GOBL unit key is unavailable or when a document format requires the UNTDID representation.
+   * UNTDID: Unit of Measure. Unit of measure code from UN/ECE Recommendations 20 and 21. This extension preserves the exact standard code when a GOBL unit key is unavailable or when a document format requires the UNTDID representation.
    *
    * @source catalogue untdid
    */
