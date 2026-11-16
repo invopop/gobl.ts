@@ -33,8 +33,8 @@ export interface Party {
    */
   uuid?: string;
   /**
-   * Label can be used to provide a custom label for the party in a given
-   * context in a single language, for example "Supplier", "Host", or similar.
+   * Custom label for the party in a given context in a single language, for example
+   * "Supplier", "Host", or similar.
    *
    * @title Label
    * @example "Supplier"
@@ -54,13 +54,14 @@ export interface Party {
    */
   alias?: string;
   /**
-   * Agent is a party that acts on behalf of this party. An agent cannot itself have an agent.
+   * Party that acts on behalf of this party. An agent cannot itself have an agent.
    *
    * @title Agent
    */
   agent?: Party;
   /**
-   * The entity's legal ID code used for tax purposes. They may have other numbers, but we're only interested in those valid for tax purposes.
+   * Legal identity code used for tax purposes. Other identification numbers belong in
+   * the identities list.
    *
    * @title Tax Identity
    * @recommended
@@ -85,19 +86,19 @@ export interface Party {
    */
   endpoints?: Endpoint[];
   /**
-   * Digital inboxes used for forwarding electronic versions of documents
+   * Digital inboxes used for forwarding electronic versions of documents.
    *
    * @title Inboxes
    */
   inboxes?: Inbox[];
   /**
-   * Regular post addresses for where information should be sent if needed.
+   * Postal addresses where information should be sent if needed.
    *
    * @title Postal Addresses
    */
   addresses?: Address[];
   /**
-   * Electronic mail addresses
+   * Electronic mail addresses.
    *
    * @title Email Addresses
    */
@@ -109,7 +110,7 @@ export interface Party {
    */
   websites?: Website[];
   /**
-   * Regular telephone numbers
+   * Regular telephone numbers.
    *
    * @title Telephone Numbers
    */

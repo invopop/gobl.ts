@@ -20,7 +20,7 @@ export interface Image {
    */
   label?: string;
   /**
-   * URL of the image
+   * URL of the image.
    *
    * @title URL
    */
@@ -64,14 +64,13 @@ export interface Image {
    */
   width?: number;
   /**
-   * Digest can be used to ensure the image contained at the URL
-   * is the same one as originally intended.
+   * Used to verify the image at the URL is the same one as originally intended.
    *
    * @title Digest
    */
   digest?: dsig.Digest;
   /**
-   * Meta contains additional information about the image.
+   * Additional information about the image.
    *
    * @title Meta
    */

@@ -4,6 +4,7 @@
 import type * as cal from '../cal/index.js';
 import type * as cbc from '../cbc/index.js';
 import type * as org from '../org/index.js';
+import type * as tax from '../tax/index.js';
 
 /**
  * DeliveryDetails covers the details of the destination for the products described in the invoice body.
@@ -16,8 +17,7 @@ export interface DeliveryDetails {
    */
   receiver?: org.Party;
   /**
-   * Identities is used to define specific codes or IDs that may be used to
-   * identify the delivery.
+   * Specific codes or IDs that may be used to identify the delivery.
    *
    * @title Identities
    */
@@ -34,6 +34,12 @@ export interface DeliveryDetails {
    * @title Period
    */
   period?: cal.Period;
+  /**
+   * Extension codes that apply to the delivery.
+   *
+   * @title Extensions
+   */
+  ext?: tax.Extensions;
   /**
    * Additional custom data.
    *

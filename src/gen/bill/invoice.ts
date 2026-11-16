@@ -29,11 +29,10 @@ export type InvoiceTagKnown =
   | 'factoring';
 
 /**
- * Tags are used to help identify specific tax scenarios or requirements that may
- * apply changes to the contents of the document or imply a specific meaning.
- * Converters may use tags to help identify specific situations that do not have
- * a specific extension, for example; self-billed or partial invoices may be
- * identified by their respective tags.
+ * Keys that identify specific tax scenarios or requirements that may change the
+ * contents of the document or imply a specific meaning. Converters may use tags to
+ * identify situations that do not have a specific extension; for example, self-billed
+ * or partial invoices are identified by their respective tags.
  *
  * @title Tags
  */
@@ -81,7 +80,7 @@ export const InvoiceTypeLabels: EnumLabels<InvoiceType> = {
   },
   proforma: {
     title: 'Proforma',
-    description: 'For a clients validation before sending a final invoice.',
+    description: "For a client's validation before sending a final invoice.",
   },
   corrective: {
     title: 'Corrective',
@@ -99,7 +98,7 @@ export const InvoiceTypeLabels: EnumLabels<InvoiceType> = {
   other: {
     title: 'Other',
     description:
-      'Any other type of invoice that does not fit into the standard categories and implies\nthat any scenarios defined in tax regimes or addons will not be applied.\n\nThis is useful for being able to create invoices with custom types in extensions,\nbut is not recommend for general use.',
+      'Any other type of invoice that does not fit into the standard categories and implies\nthat any scenarios defined in tax regimes or addons will not be applied.\n\nThis is useful for being able to create invoices with custom types in extensions,\nbut is not recommended for general use.',
   },
 };
 
@@ -118,18 +117,17 @@ export interface Invoice {
    */
   $regime?: tax.RegimeCode;
   /**
-   * Addons defines a list of keys used to identify tax addons that apply special
-   * normalization, scenarios, and validation rules to a document.
+   * Keys identifying the tax addons that apply special normalization, scenarios, and
+   * validation rules to the document.
    *
    * @title Addons
    */
   $addons?: tax.AddonList;
   /**
-   * Tags are used to help identify specific tax scenarios or requirements that may
-   * apply changes to the contents of the document or imply a specific meaning.
-   * Converters may use tags to help identify specific situations that do not have
-   * a specific extension, for example; self-billed or partial invoices may be
-   * identified by their respective tags.
+   * Keys that identify specific tax scenarios or requirements that may change the
+   * contents of the document or imply a specific meaning. Converters may use tags to
+   * identify situations that do not have a specific extension; for example, self-billed
+   * or partial invoices are identified by their respective tags.
    *
    * @title Tags
    */
@@ -149,37 +147,35 @@ export interface Invoice {
    */
   type?: InvoiceType;
   /**
-   * Series is used to identify groups of invoices by date, business area, project,
-   * type of document, customer type, a combination of any or other company specific data.
-   * If the output format does not support the series as a separate field, it will be
-   * prepended to the code for presentation with a dash (`-`) for separation.
+   * Identifies groups of invoices by date, business area, project, type of document,
+   * customer type, a combination of any, or other company specific data. If the output
+   * format does not support the series as a separate field, it will be prepended to the
+   * code with a dash (`-`) for separation.
    *
    * @title Series
    * @recommended
    */
   series?: cbc.Code;
   /**
-   * Code is a sequential identifier that uniquely identifies the invoice. The code can
-   * be left empty initially, but is **required** to **sign** the invoice.
+   * Sequential identifier that uniquely identifies the invoice. May be left empty
+   * initially, but is **required** to **sign** the invoice.
    *
    * @title Code
    * @recommended
    */
   code?: cbc.Code;
   /**
-   * Issue date for when the invoice was created and issued. Todays date is used if
-   * none is set. There are often legal restrictions on how far back or in the future an
-   * invoice can be issued.
+   * Date when the invoice was created and issued. Today's date is used if none is set.
+   * There are often legal restrictions on how far back or in the future an invoice can be
+   * issued.
    *
    * @title Issue Date
    * @calculated Computed by GOBL; omit when building a document.
    */
   issue_date?: cal.Date;
   /**
-   * IssueTime is an optional field that may be useful to indicate the time of day when
-   * the invoice was issued. Some regions and formats may require this field to be set.
-   * An empty string will be automatically updated to reflect the current time, otherwise
-   * the field can be left with a nil value.
+   * Optional time of day when the invoice was issued. Some regions and formats may
+   * require this field; otherwise it can be left nil.
    *
    * @title Issue Time
    * @calculated Computed by GOBL; omit when building a document.
@@ -192,7 +188,7 @@ export interface Invoice {
    */
   op_date?: cal.Date;
   /**
-   * When the taxes of this invoice become accountable, if none set, the issue date is used.
+   * When the taxes of the document become accountable. Defaults to the issue date.
    *
    * @title Value Date
    */
@@ -205,7 +201,7 @@ export interface Invoice {
    */
   currency?: currency.Code;
   /**
-   * Exchange rates to be used when converting the invoices monetary values into other currencies.
+   * Exchange rates to be used when converting the document's monetary values into other currencies.
    *
    * @title Exchange Rates
    */
@@ -299,9 +295,8 @@ export interface Invoice {
    */
   meta?: cbc.Meta;
   /**
-   * Attachments provide additional information or supporting documents that are not included
-   * in the main document. It is important that attachments are not used for alternative
-   * versions of the PDF, for that, see "links" inside the envelope headers.
+   * Supporting documents that are not included in the main document. Do not use for
+   * alternative versions of the PDF; use "links" inside the envelope headers instead.
    *
    * @title Attachments
    */

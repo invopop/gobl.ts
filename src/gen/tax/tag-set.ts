@@ -14,7 +14,7 @@ export interface TagSet {
    */
   schema: string;
   /**
-   * List of tags for the schema
+   * List of tags for the schema.
    *
    * @title List
    */

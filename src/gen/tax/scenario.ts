@@ -35,9 +35,9 @@ export interface Scenario {
    */
   tags?: cbc.Key[];
   /**
-   * Categories is an optional list of tax category codes that acts as a filter.
-   * When set, at least one of the specified categories must be present in the
-   * document's line taxes for the scenario to match.
+   * Optional list of tax category codes that acts as a filter. When set, at least
+   * one of the specified categories must be present in the document's line taxes
+   * for the scenario to match.
    *
    * @title Tax Categories
    */
@@ -49,9 +49,9 @@ export interface Scenario {
    */
   ext_key?: cbc.Key;
   /**
-   * Extension code that along side the key must be present for a match
-   * to happen. This cannot be used without an `cbc.Code`. The value will
-   * be copied to the note code if needed.
+   * Extension code that, alongside the key, must be present for a match. Cannot be
+   * used without the extension key. The value will be copied to the note code if
+   * needed.
    *
    * @title Extension Code
    */
@@ -63,15 +63,14 @@ export interface Scenario {
    */
   note?: Note;
   /**
-   * Codes is used to define additional codes for regime specific
-   * situations.
+   * Additional codes for regime specific situations.
    *
    * @title Codes
    */
   codes?: cbc.CodeMap;
   /**
-   * Ext represents a set of tax extensions that should be applied to
-   * the document in the appropriate "tax" context.
+   * Tax extensions that should be applied to the document in the appropriate "tax"
+   * context.
    *
    * @title Extensions
    */

@@ -3,7 +3,9 @@
 
 import type * as cbc from '../cbc/index.js';
 
-/** CorrectionDefinition contains details about what can be defined in . */
+/**
+ * CorrectionDefinition contains details about what can be defined in the preceding document references when correcting a document.
+ */
 export interface CorrectionDefinition {
   /**
    * Partial or complete schema URL for the document type supported by correction.
@@ -12,19 +14,19 @@ export interface CorrectionDefinition {
    */
   schema: string;
   /**
-   * The types of sub-documents supported by the regime
+   * The types of sub-documents supported by the regime.
    *
    * @title Types
    */
   types?: cbc.Key[];
   /**
-   * Extension keys that can be included
+   * Extension keys that can be included.
    *
    * @title Extensions
    */
   extensions?: cbc.Key[];
   /**
-   * ReasonRequired when true implies that a reason must be provided
+   * When true, a reason must be provided.
    *
    * @title Reason Required
    */
@@ -36,7 +38,8 @@ export interface CorrectionDefinition {
    */
   stamps?: cbc.Key[];
   /**
-   * Copy tax from the preceding document to the document ref.
+   * When true, tax totals are copied from the preceding document to the document
+   * reference.
    *
    * @title Copy Tax Totals
    */

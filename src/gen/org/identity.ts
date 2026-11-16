@@ -7,7 +7,7 @@ import type { EnumLabels } from '../label.js';
 import type * as tax from '../tax/index.js';
 
 /**
- * Scope defines the context in which this identity is meant to be used.
+ * Context in which the identity is meant to be used.
  *
  * @title Scope
  */
@@ -38,7 +38,7 @@ export interface Identity {
    */
   label?: string;
   /**
-   * Scope defines the context in which this identity is meant to be used.
+   * Context in which the identity is meant to be used.
    *
    * @title Scope
    */
@@ -50,33 +50,32 @@ export interface Identity {
    */
   country?: l10n.ISOCountryCode;
   /**
-   * Uniquely classify this identity using a key instead of a Type.
+   * Uniquely classifies the identity, used instead of a type.
    *
    * @title Key
    */
   key?: cbc.Key;
   /**
-   * The type of Code being represented and usually specific for
-   * a particular context, country, or tax regime, and cannot be used
-   * alongside the key.
+   * Type of code being represented, usually specific to a particular context,
+   * country, or tax regime. Cannot be used alongside the key.
    *
    * @title Type
    */
   type?: cbc.Code;
   /**
-   * The actual value of the identity code.
+   * Value of the identity.
    *
    * @title Code
    */
   code: cbc.Code;
   /**
-   * Description adds details about what the code could mean or imply
+   * Details about what the code means or implies.
    *
    * @title Description
    */
   description?: string;
   /**
-   * Ext provides a way to add additional information to the identity.
+   * Additional structured information about the identity.
    *
    * @title Extensions
    */

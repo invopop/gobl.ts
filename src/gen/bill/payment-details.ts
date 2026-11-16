@@ -19,17 +19,17 @@ export interface PaymentDetails {
    */
   payer?: org.Party;
   /**
-   * Payment terms or conditions.
-   *
-   * @title Terms
-   */
-  terms?: pay.Terms;
-  /**
    * Any amounts that have been paid in advance and should be deducted from the amount due.
    *
    * @title Advances
    */
   advances?: pay.Record[];
+  /**
+   * Payment terms or conditions.
+   *
+   * @title Terms
+   */
+  terms?: pay.Terms;
   /**
    * Details on how payment should be made.
    *

@@ -15,14 +15,14 @@ export interface Note {
    */
   cat?: cbc.Code;
   /**
-   * Key usually identifies the tax rate key this note applies to (e.g. "exempt",
-   * "reverse-charge"), but may also be used for other identifiers depending on context.
+   * Usually the tax rate key this note applies to (e.g. "exempt", "reverse-charge"),
+   * but may also be used for other identifiers depending on context.
    *
    * @title Key
    */
   key?: cbc.Key;
   /**
-   * Text contains the exemption reason or explanation.
+   * Exemption reason or explanation.
    *
    * @title Text
    */

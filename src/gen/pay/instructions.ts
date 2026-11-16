@@ -111,7 +111,7 @@ export interface Instructions {
    */
   key: InstructionsKey;
   /**
-   * Optional text description of the payment method
+   * Optional text description of the payment method.
    *
    * @title Detail
    */
@@ -141,7 +141,7 @@ export interface Instructions {
    */
   direct_debit?: DirectDebit;
   /**
-   * Array of online payment options
+   * Online payment options.
    *
    * @title Online
    */
@@ -153,7 +153,7 @@ export interface Instructions {
    */
   notes?: string;
   /**
-   * Extension key-pairs values defined by a tax regime.
+   * Extension key-value pairs defined by a tax regime.
    *
    * @title Extensions
    */

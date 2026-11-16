@@ -6,7 +6,7 @@ import type * as tax from '../tax/index.js';
 import type { Fault } from './fault.js';
 
 /**
- * Key helps identify the reason.
+ * Identifies the type of reason.
  *
  * @title Key
  */
@@ -90,27 +90,25 @@ export const ReasonKeyLabels: EnumLabels<ReasonKey> = {
 /** Reason helps the recipient of a message determine why they are receiving it. */
 export interface Reason {
   /**
-   * Key helps identify the reason.
+   * Identifies the type of reason.
    *
    * @title Key
    */
   key: ReasonKey;
   /**
-   * Description contains a simple text that describes the reason why the
-   * original document was not processed.
+   * Text describing why the original document was not processed.
    *
    * @title Description
    */
   description?: string;
   /**
-   * Faults provides more specific details about what cause the document
-   * to be rejected.
+   * More specific details about what caused the document to be rejected.
    *
    * @title Faults
    */
   faults?: Fault[];
   /**
-   * Extensions for local or format focussed data
+   * Extensions for local or format specific data.
    *
    * @title Extensions
    */

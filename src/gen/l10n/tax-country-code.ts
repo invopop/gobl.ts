@@ -4,7 +4,7 @@
 import type { EnumLabels } from '../label.js';
 
 /**
- * Defines an ISO base country code used for tax purposes
+ * Defines an ISO base country code used for tax purposes.
  *
  * @title Tax Country Code
  */

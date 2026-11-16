@@ -87,7 +87,7 @@ export interface Discount {
    */
   uuid?: string;
   /**
-   * Line number inside the list of discounts (calculated)
+   * Line number inside the list of discounts (calculated).
    *
    * @title Index
    * @calculated Computed by GOBL; omit when building a document.
@@ -100,20 +100,19 @@ export interface Discount {
    */
   key?: DiscountKey;
   /**
-   * Code to used to refer to the this discount by the issuer
+   * Code used by the issuer to refer to this discount.
    *
    * @title Code
    */
   code?: cbc.Code;
   /**
-   * Text description as to why the discount was applied
+   * Reason why the discount was applied.
    *
    * @title Reason
    */
   reason?: string;
   /**
-   * Base represents the value used as a base for percent calculations instead
-   * of the invoice's sum of lines.
+   * Value used as the base for percent calculations instead of the invoice's sum of lines.
    *
    * @title Base
    */
@@ -132,13 +131,13 @@ export interface Discount {
    */
   amount?: num.Amount;
   /**
-   * List of taxes to apply to the discount
+   * List of taxes to apply to the discount.
    *
    * @title Taxes
    */
   taxes?: tax.Set;
   /**
-   * Extension codes that apply to the discount
+   * Extension codes that apply to the discount.
    *
    * @title Extensions
    */
