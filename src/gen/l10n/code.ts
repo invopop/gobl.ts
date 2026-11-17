@@ -2,7 +2,7 @@
 // Source: schemas/l10n/code.json
 
 /**
- * Code is used for short identifies like country or state codes.
+ * Code is used for short identifiers like country or state codes.
  *
  * @title Code
  * @pattern ^[A-Z0-9]+$

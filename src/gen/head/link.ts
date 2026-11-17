@@ -6,9 +6,9 @@ import type * as dsig from '../dsig/index.js';
 import type { EnumLabels } from '../label.js';
 
 /**
- * Category helps classify the link according to a fixed list. This is optional
- * but highly recommended as it helps receivers better understand the purpose
- * of the link and potentially how it should be presented.
+ * Classifies the link according to a fixed list. Optional but highly recommended,
+ * as it helps receivers understand the purpose of the link and potentially how it
+ * should be presented.
  *
  * @title Category
  */
@@ -59,17 +59,14 @@ export interface Link {
    */
   uuid?: string;
   /**
-   * Category helps classify the link according to a fixed list. This is optional
-   * but highly recommended as it helps receivers better understand the purpose
-   * of the link and potentially how it should be presented.
+   * Classifies the link according to a fixed list. Optional but highly recommended,
+   * as it helps receivers understand the purpose of the link and potentially how it
+   * should be presented.
    *
    * @title Category
    */
   category?: LinkCategory;
-  /**
-   * Key is a unique identifier for the link within the header and category
-   * if provided.
-   */
+  /** Unique identifier for the link within the header and category, if provided. */
   key: cbc.Key;
   /**
    * Code used to identify the contents of the link.
@@ -98,8 +95,8 @@ export interface Link {
    */
   mime?: string;
   /**
-   * Digest is used to verify the integrity of the destination document
-   * when downloaded from the URL.
+   * Used to verify the integrity of the destination document when downloaded from
+   * the URL.
    *
    * @title Digest
    */
@@ -112,7 +109,7 @@ export interface Link {
    */
   url: string;
   /**
-   * Meta contains additional metadata about the link.
+   * Additional metadata about the link.
    *
    * @title Metadata
    */

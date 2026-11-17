@@ -8,6 +8,8 @@ export * from './delivery.js';
 export * from './discount.js';
 export * from './fault.js';
 export * from './invoice.js';
+export * from './line-charge.js';
+export * from './line-discount.js';
 export * from './line.js';
 export * from './order.js';
 export * from './ordering.js';

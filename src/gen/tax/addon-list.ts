@@ -26,8 +26,11 @@ export type AddonKey =
   | 'it-sdi-v1'
   | 'it-ticket-v1'
   | 'mx-cfdi-v4'
+  | 'peppol-bis-v3'
+  | 'peppol-pint-v1'
   | 'pl-favat-v3'
   | 'pt-saft-v1'
+  | 'ro-efactura-v1'
   | 'sa-zatca-v1';
 
 export const AddonKeyLabels: EnumLabels<AddonKey> = {
@@ -97,11 +100,20 @@ export const AddonKeyLabels: EnumLabels<AddonKey> = {
   'mx-cfdi-v4': {
     title: 'Mexican SAT CFDI v4.X',
   },
+  'peppol-bis-v3': {
+    title: 'Peppol BIS Billing 3.0',
+  },
+  'peppol-pint-v1': {
+    title: 'Peppol PINT',
+  },
   'pl-favat-v3': {
     title: 'Polish KSeF FA_VAT FA(3)',
   },
   'pt-saft-v1': {
     title: 'Portugal SAF-T',
+  },
+  'ro-efactura-v1': {
+    title: 'Romania RO e-Factura v1.x',
   },
   'sa-zatca-v1': {
     title: 'Saudi Arabia ZATCA',

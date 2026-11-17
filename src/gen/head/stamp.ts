@@ -14,7 +14,7 @@ export interface Stamp {
    */
   prv: cbc.Key;
   /**
-   * The serialized stamp value generated for or by the external agency
+   * Serialized stamp value generated for or by the external agency.
    *
    * @title Value
    */

@@ -15,10 +15,12 @@ export type RegimeCode =
   | 'AU'
   | 'BE'
   | 'BR'
+  | 'BS'
   | 'CA'
   | 'CH'
   | 'CO'
   | 'CR'
+  | 'CZ'
   | 'DE'
   | 'DK'
   | 'EL'
@@ -36,6 +38,7 @@ export type RegimeCode =
   | 'PE'
   | 'PL'
   | 'PT'
+  | 'RO'
   | 'SA'
   | 'SE'
   | 'SG'
@@ -61,6 +64,9 @@ export const RegimeCodeLabels: EnumLabels<RegimeCode> = {
   BR: {
     title: 'Brazil',
   },
+  BS: {
+    title: 'Commonwealth of The Bahamas',
+  },
   CA: {
     title: 'Canada',
   },
@@ -72,6 +78,9 @@ export const RegimeCodeLabels: EnumLabels<RegimeCode> = {
   },
   CR: {
     title: 'Costa Rica',
+  },
+  CZ: {
+    title: 'Czech Republic',
   },
   DE: {
     title: 'Germany',
@@ -123,6 +132,9 @@ export const RegimeCodeLabels: EnumLabels<RegimeCode> = {
   },
   PT: {
     title: 'Portugal',
+  },
+  RO: {
+    title: 'Romania',
   },
   SA: {
     title: 'Kingdom of Saudi Arabia',

@@ -23,6 +23,12 @@ export interface Online {
    * @title URL
    */
   url: string;
+  /**
+   * Additional semi-structured data that may be useful.
+   *
+   * @title Meta
+   */
+  meta?: cbc.Meta;
 }
 
 export const OnlineSchemaID = 'https://gobl.org/draft-0/pay/online';

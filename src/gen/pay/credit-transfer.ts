@@ -9,7 +9,13 @@ import type * as org from '../org/index.js';
  */
 export interface CreditTransfer {
   /**
-   * International Bank Account Number
+   * Short label to help identify this credit transfer.
+   *
+   * @title Label
+   */
+  label?: string;
+  /**
+   * International Bank Account Number.
    *
    * @title IBAN
    */
@@ -45,6 +51,12 @@ export interface CreditTransfer {
    * @title Branch
    */
   branch?: org.Address;
+  /**
+   * Additional semi-structured data that may be useful.
+   *
+   * @title Meta
+   */
+  meta?: cbc.Meta;
 }
 
 export const CreditTransferSchemaID = 'https://gobl.org/draft-0/pay/credit-transfer';

@@ -38,8 +38,11 @@ const TYPES = {
   'https://gobl.org/draft-0/tax/identity': 'tax.Identity',
 };
 
-rmSync(fixturesDir, { recursive: true, force: true });
+// num.json is recorded separately by cmd/numfixtures.
 mkdirSync(fixturesDir, { recursive: true });
+for (const f of readdirSync(fixturesDir)) {
+  if (f.endsWith('.json') && f !== 'num.json') rmSync(join(fixturesDir, f));
+}
 
 const cases = [];
 const skipped = [];

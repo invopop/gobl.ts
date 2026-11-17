@@ -42,21 +42,20 @@ export interface Ordering {
    */
   buyer?: org.Party;
   /**
-   * Seller is the party liable to pay taxes on the transaction if not the same as the supplier.
+   * Party liable to pay taxes on the transaction, if not the same as the supplier.
    *
    * @title Seller
    */
   seller?: org.Party;
   /**
-   * Issuer represents a third party responsible for issuing the document, but is not
-   * responsible for tax. Some tax regimes and formats require this field.
+   * Third party responsible for issuing the document, but not responsible for tax.
+   * Required by some tax regimes and formats.
    *
    * @title Issuer
    */
   issuer?: org.Party;
   /**
-   * Addressee represents a third party to whom the document is addressed, but is not
-   * the customer.
+   * Third party to whom the document is addressed, but who is not the customer.
    *
    * @title Addressee
    */
@@ -68,7 +67,7 @@ export interface Ordering {
    */
   projects?: org.DocumentRef[];
   /**
-   * The identification of contracts.
+   * Contracts related to the document.
    *
    * @title Contracts
    */
@@ -86,19 +85,19 @@ export interface Ordering {
    */
   sales?: org.DocumentRef[];
   /**
-   * Receiving Advice.
+   * Receiving advice documents.
    *
    * @title Receiving Advice
    */
   receiving?: org.DocumentRef[];
   /**
-   * Despatch advice.
+   * Despatch advice documents.
    *
    * @title Despatch Advice
    */
   despatch?: org.DocumentRef[];
   /**
-   * Tender advice, the identification of the call for tender or lot the document relates to.
+   * Call for tender or lot the document relates to.
    *
    * @title Tender Advice
    */
