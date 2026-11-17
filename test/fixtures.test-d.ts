@@ -233,1419 +233,6 @@ import type * as tax from '../src/gen/tax/index.js';
   }
 }) satisfies Envelope<bill.Invoice>;
 
-// ar/out/invoice-ar-arca-credit-note.json
-({
-  "$schema": "https://gobl.org/draft-0/envelope",
-  "head": {
-    "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
-    "dig": {
-      "alg": "sha256",
-      "val": "e0814bb5494ba6e58086b21256c72c7cc6fe4fc68abc67e27ae0343296fec706"
-    }
-  },
-  "doc": {
-    "$schema": "https://gobl.org/draft-0/bill/invoice",
-    "$regime": "AR",
-    "$addons": [
-      "ar-arca-v4"
-    ],
-    "uuid": "5cfa9d78-7be0-6dfd-b2df-0a0402fa074c",
-    "type": "credit-note",
-    "series": "1",
-    "code": "00000001",
-    "issue_date": "2025-01-20",
-    "currency": "ARS",
-    "preceding": [
-      {
-        "issue_date": "2025-01-15",
-        "series": "1",
-        "code": "00000123",
-        "ext": {
-          "ar-arca-doc-type": "1"
-        }
-      }
-    ],
-    "tax": {
-      "ext": {
-        "ar-arca-concept": "1",
-        "ar-arca-doc-type": "3"
-      }
-    },
-    "supplier": {
-      "name": "Proveedor Ejemplo S.A.",
-      "tax_id": {
-        "country": "AR",
-        "code": "30712345671"
-      },
-      "addresses": [
-        {
-          "street": "Av. Corrientes 1234",
-          "locality": "Buenos Aires",
-          "region": "Ciudad Autónoma de Buenos Aires",
-          "code": "C1043",
-          "country": "AR"
-        }
-      ]
-    },
-    "customer": {
-      "name": "Cliente Comercial S.R.L.",
-      "tax_id": {
-        "country": "AR",
-        "code": "30987654321"
-      },
-      "addresses": [
-        {
-          "street": "Av. Santa Fe 2500",
-          "locality": "Buenos Aires",
-          "region": "Ciudad Autónoma de Buenos Aires",
-          "code": "C1123",
-          "country": "AR"
-        }
-      ],
-      "ext": {
-        "ar-arca-vat-status": "1"
-      }
-    },
-    "lines": [
-      {
-        "i": 1,
-        "quantity": "2",
-        "item": {
-          "key": "goods",
-          "name": "Notebooks Dell Latitude - Devolución",
-          "price": "450000.00"
-        },
-        "sum": "900000.00",
-        "taxes": [
-          {
-            "cat": "VAT",
-            "key": "standard",
-            "rate": "general",
-            "percent": "21.0%",
-            "ext": {
-              "ar-arca-vat-rate": "5"
-            }
-          }
-        ],
-        "total": "900000.00"
-      }
-    ],
-    "totals": {
-      "sum": "900000.00",
-      "total": "900000.00",
-      "taxes": {
-        "categories": [
-          {
-            "code": "VAT",
-            "rates": [
-              {
-                "key": "standard",
-                "ext": {
-                  "ar-arca-vat-rate": "5"
-                },
-                "base": "900000.00",
-                "percent": "21.0%",
-                "amount": "189000.00"
-              }
-            ],
-            "amount": "189000.00"
-          }
-        ],
-        "sum": "189000.00"
-      },
-      "tax": "189000.00",
-      "total_with_tax": "1089000.00",
-      "payable": "1089000.00"
-    }
-  }
-}) satisfies Envelope<bill.Invoice>;
-
-// ar/out/invoice-ar-arca-debit-note.json
-({
-  "$schema": "https://gobl.org/draft-0/envelope",
-  "head": {
-    "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
-    "dig": {
-      "alg": "sha256",
-      "val": "ad68679c733b6c5003e3fbd2ad8e2758f53d07c827ad2d0fa54b0d8b78fa8fa7"
-    }
-  },
-  "doc": {
-    "$schema": "https://gobl.org/draft-0/bill/invoice",
-    "$regime": "AR",
-    "$addons": [
-      "ar-arca-v4"
-    ],
-    "uuid": "6d0b0e89-8cf1-7e0e-c3e0-1b1513fb185d",
-    "type": "debit-note",
-    "series": "1",
-    "code": "00000001",
-    "issue_date": "2025-01-22",
-    "currency": "ARS",
-    "preceding": [
-      {
-        "issue_date": "2025-01-15",
-        "series": "1",
-        "code": "00000123",
-        "ext": {
-          "ar-arca-doc-type": "1"
-        }
-      }
-    ],
-    "tax": {
-      "ext": {
-        "ar-arca-concept": "2",
-        "ar-arca-doc-type": "2"
-      }
-    },
-    "supplier": {
-      "name": "Proveedor Ejemplo S.A.",
-      "tax_id": {
-        "country": "AR",
-        "code": "30712345671"
-      },
-      "addresses": [
-        {
-          "street": "Av. Corrientes 1234",
-          "locality": "Buenos Aires",
-          "region": "Ciudad Autónoma de Buenos Aires",
-          "code": "C1043",
-          "country": "AR"
-        }
-      ]
-    },
-    "customer": {
-      "name": "Cliente Comercial S.R.L.",
-      "tax_id": {
-        "country": "AR",
-        "code": "30987654321"
-      },
-      "addresses": [
-        {
-          "street": "Av. Santa Fe 2500",
-          "locality": "Buenos Aires",
-          "region": "Ciudad Autónoma de Buenos Aires",
-          "code": "C1123",
-          "country": "AR"
-        }
-      ],
-      "ext": {
-        "ar-arca-vat-status": "1"
-      }
-    },
-    "lines": [
-      {
-        "i": 1,
-        "quantity": "1",
-        "item": {
-          "name": "Intereses por mora",
-          "price": "25000.00"
-        },
-        "sum": "25000.00",
-        "taxes": [
-          {
-            "cat": "VAT",
-            "key": "standard",
-            "rate": "general",
-            "percent": "21.0%",
-            "ext": {
-              "ar-arca-vat-rate": "5"
-            }
-          }
-        ],
-        "total": "25000.00"
-      }
-    ],
-    "ordering": {
-      "period": {
-        "start": "2025-01-01",
-        "end": "2025-01-22"
-      }
-    },
-    "payment": {
-      "terms": {
-        "due_dates": [
-          {
-            "date": "2025-01-22",
-            "amount": "30250.00",
-            "percent": "100%"
-          }
-        ]
-      }
-    },
-    "totals": {
-      "sum": "25000.00",
-      "total": "25000.00",
-      "taxes": {
-        "categories": [
-          {
-            "code": "VAT",
-            "rates": [
-              {
-                "key": "standard",
-                "ext": {
-                  "ar-arca-vat-rate": "5"
-                },
-                "base": "25000.00",
-                "percent": "21.0%",
-                "amount": "5250.00"
-              }
-            ],
-            "amount": "5250.00"
-          }
-        ],
-        "sum": "5250.00"
-      },
-      "tax": "5250.00",
-      "total_with_tax": "30250.00",
-      "payable": "30250.00"
-    }
-  }
-}) satisfies Envelope<bill.Invoice>;
-
-// ar/out/invoice-ar-arca-foreign-customer.json
-({
-  "$schema": "https://gobl.org/draft-0/envelope",
-  "head": {
-    "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
-    "dig": {
-      "alg": "sha256",
-      "val": "995b42aa5d88716e4a8d88a6dbcc4640bbb1fe0745ea141b2e134bafca0a3d28"
-    }
-  },
-  "doc": {
-    "$schema": "https://gobl.org/draft-0/bill/invoice",
-    "$regime": "AR",
-    "$addons": [
-      "ar-arca-v4"
-    ],
-    "uuid": "0b4f421d-c035-b242-a724-5f5957bf5c9b",
-    "type": "standard",
-    "series": "2",
-    "code": "00000250",
-    "issue_date": "2025-02-05",
-    "currency": "ARS",
-    "tax": {
-      "ext": {
-        "ar-arca-concept": "1",
-        "ar-arca-doc-type": "6"
-      }
-    },
-    "supplier": {
-      "name": "Servicios Globales Argentina S.A.",
-      "tax_id": {
-        "country": "AR",
-        "code": "30712345671"
-      },
-      "addresses": [
-        {
-          "street": "Av. Madero 900",
-          "locality": "Buenos Aires",
-          "region": "Ciudad Autónoma de Buenos Aires",
-          "code": "C1106",
-          "country": "AR"
-        }
-      ],
-      "emails": [
-        {
-          "addr": "international@serviciosglobales.com.ar"
-        }
-      ]
-    },
-    "customer": {
-      "name": "Empresa Brasileña Ltda.",
-      "tax_id": {
-        "country": "BR",
-        "code": "11222333000181"
-      },
-      "addresses": [
-        {
-          "street": "Av. Paulista 1000",
-          "locality": "São Paulo",
-          "region": "SP",
-          "code": "01310-100",
-          "country": "BR"
-        }
-      ],
-      "emails": [
-        {
-          "addr": "compras@empresabrasilena.com.br"
-        }
-      ],
-      "ext": {
-        "ar-arca-vat-status": "9"
-      }
-    },
-    "lines": [
-      {
-        "i": 1,
-        "quantity": "1",
-        "item": {
-          "key": "goods",
-          "name": "Licencia de software anual",
-          "price": "2500000.00"
-        },
-        "sum": "2500000.00",
-        "taxes": [
-          {
-            "cat": "VAT",
-            "key": "standard",
-            "rate": "general",
-            "percent": "21.0%",
-            "ext": {
-              "ar-arca-vat-rate": "5"
-            }
-          }
-        ],
-        "total": "2500000.00"
-      }
-    ],
-    "totals": {
-      "sum": "2500000.00",
-      "total": "2500000.00",
-      "taxes": {
-        "categories": [
-          {
-            "code": "VAT",
-            "rates": [
-              {
-                "key": "standard",
-                "ext": {
-                  "ar-arca-vat-rate": "5"
-                },
-                "base": "2500000.00",
-                "percent": "21.0%",
-                "amount": "525000.00"
-              }
-            ],
-            "amount": "525000.00"
-          }
-        ],
-        "sum": "525000.00"
-      },
-      "tax": "525000.00",
-      "total_with_tax": "3025000.00",
-      "payable": "3025000.00"
-    }
-  }
-}) satisfies Envelope<bill.Invoice>;
-
-// ar/out/invoice-ar-arca-monotributo.json
-({
-  "$schema": "https://gobl.org/draft-0/envelope",
-  "head": {
-    "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
-    "dig": {
-      "alg": "sha256",
-      "val": "c5f275c8e9565ead29089e41769c81334ec1cc24a2c457ed5784762e3b7ff7f4"
-    }
-  },
-  "doc": {
-    "$schema": "https://gobl.org/draft-0/bill/invoice",
-    "$regime": "AR",
-    "$addons": [
-      "ar-arca-v4"
-    ],
-    "$tags": [
-      "monotax"
-    ],
-    "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-    "type": "standard",
-    "series": "1",
-    "code": "00000050",
-    "issue_date": "2025-01-18",
-    "currency": "ARS",
-    "tax": {
-      "ext": {
-        "ar-arca-concept": "2",
-        "ar-arca-doc-type": "11"
-      }
-    },
-    "supplier": {
-      "name": "María García - Diseño Gráfico",
-      "tax_id": {
-        "country": "AR",
-        "code": "20172543597"
-      },
-      "addresses": [
-        {
-          "street": "Calle Florida 500",
-          "locality": "Buenos Aires",
-          "region": "Ciudad Autónoma de Buenos Aires",
-          "code": "C1005",
-          "country": "AR"
-        }
-      ],
-      "emails": [
-        {
-          "addr": "maria.garcia@email.com.ar"
-        }
-      ]
-    },
-    "customer": {
-      "name": "Startup Tech S.R.L.",
-      "tax_id": {
-        "country": "AR",
-        "code": "30987654321"
-      },
-      "addresses": [
-        {
-          "street": "Av. Belgrano 1000",
-          "locality": "Buenos Aires",
-          "region": "Ciudad Autónoma de Buenos Aires",
-          "code": "C1092",
-          "country": "AR"
-        }
-      ],
-      "emails": [
-        {
-          "addr": "admin@startuptech.com.ar"
-        }
-      ],
-      "ext": {
-        "ar-arca-vat-status": "1"
-      }
-    },
-    "lines": [
-      {
-        "i": 1,
-        "quantity": "1",
-        "item": {
-          "key": "services",
-          "name": "Diseño de logotipo e identidad visual",
-          "price": "150000.00"
-        },
-        "sum": "150000.00",
-        "total": "150000.00"
-      }
-    ],
-    "charges": [
-      {
-        "i": 1,
-        "key": "tax",
-        "percent": "10%",
-        "amount": "15000.00",
-        "ext": {
-          "ar-arca-tax-type": "1"
-        }
-      }
-    ],
-    "ordering": {
-      "period": {
-        "start": "2025-01-01",
-        "end": "2025-01-15"
-      }
-    },
-    "payment": {
-      "terms": {
-        "due_dates": [
-          {
-            "date": "2025-01-25",
-            "amount": "150000.00"
-          }
-        ]
-      }
-    },
-    "totals": {
-      "sum": "150000.00",
-      "charge": "15000.00",
-      "total": "165000.00",
-      "tax": "0.00",
-      "total_with_tax": "165000.00",
-      "payable": "165000.00"
-    }
-  }
-}) satisfies Envelope<bill.Invoice>;
-
-// ar/out/invoice-ar-arca-services.json
-({
-  "$schema": "https://gobl.org/draft-0/envelope",
-  "head": {
-    "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
-    "dig": {
-      "alg": "sha256",
-      "val": "7af489c6112bfa5e350e60bddabbc426e57813259aaac5e82fa2506400f4dfa9"
-    }
-  },
-  "doc": {
-    "$schema": "https://gobl.org/draft-0/bill/invoice",
-    "$regime": "AR",
-    "$addons": [
-      "ar-arca-v4"
-    ],
-    "uuid": "8f2d209b-ae13-9020-e502-3d3735ad3a7f",
-    "type": "standard",
-    "series": "3",
-    "code": "00000789",
-    "issue_date": "2025-01-30",
-    "currency": "ARS",
-    "tax": {
-      "ext": {
-        "ar-arca-concept": "2",
-        "ar-arca-doc-type": "1"
-      }
-    },
-    "supplier": {
-      "name": "Consultora Digital S.A.",
-      "tax_id": {
-        "country": "AR",
-        "code": "30712345671"
-      },
-      "addresses": [
-        {
-          "street": "Av. del Libertador 7000",
-          "locality": "Buenos Aires",
-          "region": "Ciudad Autónoma de Buenos Aires",
-          "code": "C1429",
-          "country": "AR"
-        }
-      ],
-      "emails": [
-        {
-          "addr": "facturacion@consultora.com.ar"
-        }
-      ]
-    },
-    "customer": {
-      "name": "Empresa Tecnológica S.R.L.",
-      "tax_id": {
-        "country": "AR",
-        "code": "30987654321"
-      },
-      "addresses": [
-        {
-          "street": "Av. Callao 1200",
-          "locality": "Buenos Aires",
-          "region": "Ciudad Autónoma de Buenos Aires",
-          "code": "C1023",
-          "country": "AR"
-        }
-      ],
-      "emails": [
-        {
-          "addr": "pagos@empresatecnologica.com.ar"
-        }
-      ],
-      "ext": {
-        "ar-arca-vat-status": "1"
-      }
-    },
-    "lines": [
-      {
-        "i": 1,
-        "quantity": "160",
-        "item": {
-          "key": "services",
-          "name": "Desarrollo de software - Horas",
-          "price": "15000.00",
-          "unit": "h"
-        },
-        "sum": "2400000.00",
-        "taxes": [
-          {
-            "cat": "VAT",
-            "key": "standard",
-            "rate": "general",
-            "percent": "21.0%",
-            "ext": {
-              "ar-arca-vat-rate": "5"
-            }
-          }
-        ],
-        "total": "2400000.00"
-      },
-      {
-        "i": 2,
-        "quantity": "1",
-        "item": {
-          "key": "services",
-          "name": "Consultoría en arquitectura de sistemas",
-          "price": "500000.00"
-        },
-        "sum": "500000.00",
-        "taxes": [
-          {
-            "cat": "VAT",
-            "key": "standard",
-            "rate": "general",
-            "percent": "21.0%",
-            "ext": {
-              "ar-arca-vat-rate": "5"
-            }
-          }
-        ],
-        "total": "500000.00"
-      }
-    ],
-    "ordering": {
-      "period": {
-        "start": "2025-01-01",
-        "end": "2025-01-31"
-      }
-    },
-    "payment": {
-      "terms": {
-        "due_dates": [
-          {
-            "date": "2025-02-15",
-            "amount": "1500000.00"
-          },
-          {
-            "date": "2025-03-15",
-            "amount": "1500000.00"
-          }
-        ]
-      }
-    },
-    "totals": {
-      "sum": "2900000.00",
-      "total": "2900000.00",
-      "taxes": {
-        "categories": [
-          {
-            "code": "VAT",
-            "rates": [
-              {
-                "key": "standard",
-                "ext": {
-                  "ar-arca-vat-rate": "5"
-                },
-                "base": "2900000.00",
-                "percent": "21.0%",
-                "amount": "609000.00"
-              }
-            ],
-            "amount": "609000.00"
-          }
-        ],
-        "sum": "609000.00"
-      },
-      "tax": "609000.00",
-      "total_with_tax": "3509000.00",
-      "payable": "3509000.00"
-    }
-  }
-}) satisfies Envelope<bill.Invoice>;
-
-// ar/out/invoice-ar-arca-simplified-no-customer.json
-({
-  "$schema": "https://gobl.org/draft-0/envelope",
-  "head": {
-    "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
-    "dig": {
-      "alg": "sha256",
-      "val": "0b34fe9168ebefd7cefbfc1885aaf8e9af0dd56565014211dcb562da26e9c590"
-    }
-  },
-  "doc": {
-    "$schema": "https://gobl.org/draft-0/bill/invoice",
-    "$regime": "AR",
-    "$addons": [
-      "ar-arca-v4"
-    ],
-    "uuid": "1c5a532e-d146-c353-b835-6a6068ca6d0c",
-    "type": "standard",
-    "series": "2",
-    "code": "00000500",
-    "issue_date": "2025-02-10",
-    "currency": "ARS",
-    "tax": {
-      "ext": {
-        "ar-arca-concept": "1",
-        "ar-arca-doc-type": "6"
-      }
-    },
-    "supplier": {
-      "name": "Supermercado La Esquina S.A.",
-      "tax_id": {
-        "country": "AR",
-        "code": "30712345671"
-      },
-      "addresses": [
-        {
-          "street": "Av. Cabildo 3500",
-          "locality": "Buenos Aires",
-          "region": "Ciudad Autónoma de Buenos Aires",
-          "code": "C1429",
-          "country": "AR"
-        }
-      ]
-    },
-    "lines": [
-      {
-        "i": 1,
-        "quantity": "5",
-        "item": {
-          "key": "goods",
-          "name": "Productos varios",
-          "price": "15000.00"
-        },
-        "sum": "75000.00",
-        "taxes": [
-          {
-            "cat": "VAT",
-            "key": "standard",
-            "rate": "general",
-            "percent": "21.0%",
-            "ext": {
-              "ar-arca-vat-rate": "5"
-            }
-          }
-        ],
-        "total": "75000.00"
-      }
-    ],
-    "totals": {
-      "sum": "75000.00",
-      "total": "75000.00",
-      "taxes": {
-        "categories": [
-          {
-            "code": "VAT",
-            "rates": [
-              {
-                "key": "standard",
-                "ext": {
-                  "ar-arca-vat-rate": "5"
-                },
-                "base": "75000.00",
-                "percent": "21.0%",
-                "amount": "15750.00"
-              }
-            ],
-            "amount": "15750.00"
-          }
-        ],
-        "sum": "15750.00"
-      },
-      "tax": "15750.00",
-      "total_with_tax": "90750.00",
-      "payable": "90750.00"
-    }
-  }
-}) satisfies Envelope<bill.Invoice>;
-
-// ar/out/invoice-ar-arca-simplified.json
-({
-  "$schema": "https://gobl.org/draft-0/envelope",
-  "head": {
-    "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
-    "dig": {
-      "alg": "sha256",
-      "val": "74e3ce60eccd785a79eb0af4bbdf6da2e5be05b1ac4238ad3b45685614ced2f6"
-    }
-  },
-  "doc": {
-    "$schema": "https://gobl.org/draft-0/bill/invoice",
-    "$regime": "AR",
-    "$addons": [
-      "ar-arca-v4"
-    ],
-    "uuid": "4bea8c67-6ad9-5cfc-a1ce-f9f391e963b1",
-    "type": "standard",
-    "series": "2",
-    "code": "00000456",
-    "issue_date": "2025-01-16",
-    "currency": "ARS",
-    "tax": {
-      "ext": {
-        "ar-arca-concept": "1",
-        "ar-arca-doc-type": "6"
-      }
-    },
-    "supplier": {
-      "name": "Electrodomésticos del Sur S.A.",
-      "tax_id": {
-        "country": "AR",
-        "code": "30712345671"
-      },
-      "addresses": [
-        {
-          "street": "Av. Rivadavia 5000",
-          "locality": "Buenos Aires",
-          "region": "Ciudad Autónoma de Buenos Aires",
-          "code": "C1424",
-          "country": "AR"
-        }
-      ],
-      "emails": [
-        {
-          "addr": "ventas@electrodomesticos.com.ar"
-        }
-      ]
-    },
-    "customer": {
-      "name": "Juan Pérez",
-      "identities": [
-        {
-          "code": "25123456",
-          "ext": {
-            "ar-arca-identity-type": "96"
-          }
-        }
-      ],
-      "ext": {
-        "ar-arca-vat-status": "5"
-      }
-    },
-    "lines": [
-      {
-        "i": 1,
-        "quantity": "1",
-        "item": {
-          "key": "goods",
-          "name": "Heladera Samsung 400L",
-          "price": "850000.00"
-        },
-        "sum": "850000.00",
-        "taxes": [
-          {
-            "cat": "VAT",
-            "key": "standard",
-            "rate": "general",
-            "percent": "21.0%",
-            "ext": {
-              "ar-arca-vat-rate": "5"
-            }
-          }
-        ],
-        "total": "850000.00"
-      }
-    ],
-    "totals": {
-      "sum": "850000.00",
-      "total": "850000.00",
-      "taxes": {
-        "categories": [
-          {
-            "code": "VAT",
-            "rates": [
-              {
-                "key": "standard",
-                "ext": {
-                  "ar-arca-vat-rate": "5"
-                },
-                "base": "850000.00",
-                "percent": "21.0%",
-                "amount": "178500.00"
-              }
-            ],
-            "amount": "178500.00"
-          }
-        ],
-        "sum": "178500.00"
-      },
-      "tax": "178500.00",
-      "total_with_tax": "1028500.00",
-      "payable": "1028500.00"
-    }
-  }
-}) satisfies Envelope<bill.Invoice>;
-
-// ar/out/invoice-ar-arca-standard.json
-({
-  "$schema": "https://gobl.org/draft-0/envelope",
-  "head": {
-    "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
-    "dig": {
-      "alg": "sha256",
-      "val": "09c7b58fbcfd82ce3ba5d8e2935f11c5c19f75d1122deba75609244c47b0edaf"
-    }
-  },
-  "doc": {
-    "$schema": "https://gobl.org/draft-0/bill/invoice",
-    "$regime": "AR",
-    "$addons": [
-      "ar-arca-v4"
-    ],
-    "uuid": "3aea7b56-59d8-4beb-90bd-f8f280d852a0",
-    "type": "standard",
-    "series": "1",
-    "code": "00000123",
-    "issue_date": "2025-01-15",
-    "currency": "ARS",
-    "tax": {
-      "ext": {
-        "ar-arca-concept": "1",
-        "ar-arca-doc-type": "1"
-      }
-    },
-    "supplier": {
-      "name": "Proveedor Ejemplo S.A.",
-      "tax_id": {
-        "country": "AR",
-        "code": "30712345671"
-      },
-      "addresses": [
-        {
-          "street": "Av. Corrientes 1234",
-          "locality": "Buenos Aires",
-          "region": "Ciudad Autónoma de Buenos Aires",
-          "code": "C1043",
-          "country": "AR"
-        }
-      ],
-      "emails": [
-        {
-          "addr": "ventas@proveedorejemplo.com.ar"
-        }
-      ]
-    },
-    "customer": {
-      "name": "Cliente Comercial S.R.L.",
-      "tax_id": {
-        "country": "AR",
-        "code": "30987654321"
-      },
-      "addresses": [
-        {
-          "street": "Av. Santa Fe 2500",
-          "locality": "Buenos Aires",
-          "region": "Ciudad Autónoma de Buenos Aires",
-          "code": "C1123",
-          "country": "AR"
-        }
-      ],
-      "emails": [
-        {
-          "addr": "compras@clientecomercial.com.ar"
-        }
-      ],
-      "ext": {
-        "ar-arca-vat-status": "1"
-      }
-    },
-    "lines": [
-      {
-        "i": 1,
-        "quantity": "10",
-        "item": {
-          "key": "goods",
-          "name": "Notebooks Dell Latitude",
-          "price": "450000.00"
-        },
-        "sum": "4500000.00",
-        "taxes": [
-          {
-            "cat": "VAT",
-            "key": "standard",
-            "rate": "general",
-            "percent": "21.0%",
-            "ext": {
-              "ar-arca-vat-rate": "5"
-            }
-          }
-        ],
-        "total": "4500000.00"
-      }
-    ],
-    "totals": {
-      "sum": "4500000.00",
-      "total": "4500000.00",
-      "taxes": {
-        "categories": [
-          {
-            "code": "VAT",
-            "rates": [
-              {
-                "key": "standard",
-                "ext": {
-                  "ar-arca-vat-rate": "5"
-                },
-                "base": "4500000.00",
-                "percent": "21.0%",
-                "amount": "945000.00"
-              }
-            ],
-            "amount": "945000.00"
-          }
-        ],
-        "sum": "945000.00"
-      },
-      "tax": "945000.00",
-      "total_with_tax": "5445000.00",
-      "payable": "5445000.00"
-    }
-  }
-}) satisfies Envelope<bill.Invoice>;
-
-// ar/out/invoice-ar-arca-used-goods.json
-({
-  "$schema": "https://gobl.org/draft-0/envelope",
-  "head": {
-    "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
-    "dig": {
-      "alg": "sha256",
-      "val": "ee3ff13d3d88b4938bf599672215272432c0bc9865159681a2e150beef94be97"
-    }
-  },
-  "doc": {
-    "$schema": "https://gobl.org/draft-0/bill/invoice",
-    "$regime": "AR",
-    "$addons": [
-      "ar-arca-v4"
-    ],
-    "uuid": "3aea7b56-59d8-4beb-90bd-f8f280d852a1",
-    "type": "other",
-    "series": "1",
-    "code": "00000124",
-    "issue_date": "2025-01-15",
-    "currency": "ARS",
-    "tax": {
-      "ext": {
-        "ar-arca-concept": "1",
-        "ar-arca-doc-type": "49"
-      }
-    },
-    "supplier": {
-      "name": "Compraventa de Usados S.A.",
-      "tax_id": {
-        "country": "AR",
-        "code": "30712345671"
-      },
-      "addresses": [
-        {
-          "street": "Av. Warnes 1234",
-          "locality": "Buenos Aires",
-          "region": "Ciudad Autónoma de Buenos Aires",
-          "code": "C1414",
-          "country": "AR"
-        }
-      ],
-      "emails": [
-        {
-          "addr": "ventas@usados.com.ar"
-        }
-      ]
-    },
-    "lines": [
-      {
-        "i": 1,
-        "quantity": "1",
-        "item": {
-          "key": "goods",
-          "name": "Automóvil Usado - Ford Focus 2018",
-          "price": "8500000.00"
-        },
-        "sum": "8500000.00",
-        "taxes": [
-          {
-            "cat": "VAT",
-            "key": "standard",
-            "rate": "general",
-            "percent": "21.0%",
-            "ext": {
-              "ar-arca-vat-rate": "5"
-            }
-          }
-        ],
-        "total": "8500000.00"
-      }
-    ],
-    "totals": {
-      "sum": "8500000.00",
-      "total": "8500000.00",
-      "taxes": {
-        "categories": [
-          {
-            "code": "VAT",
-            "rates": [
-              {
-                "key": "standard",
-                "ext": {
-                  "ar-arca-vat-rate": "5"
-                },
-                "base": "8500000.00",
-                "percent": "21.0%",
-                "amount": "1785000.00"
-              }
-            ],
-            "amount": "1785000.00"
-          }
-        ],
-        "sum": "1785000.00"
-      },
-      "tax": "1785000.00",
-      "total_with_tax": "10285000.00",
-      "payable": "10285000.00"
-    }
-  }
-}) satisfies Envelope<bill.Invoice>;
-
-// ar/out/invoice-ar-arca-with-charges.json
-({
-  "$schema": "https://gobl.org/draft-0/envelope",
-  "head": {
-    "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
-    "dig": {
-      "alg": "sha256",
-      "val": "91e50efac4f3d3d2f60b959fcb90c871e2613f3e1b8a3fd65d824d644590c8be"
-    }
-  },
-  "doc": {
-    "$schema": "https://gobl.org/draft-0/bill/invoice",
-    "$regime": "AR",
-    "$addons": [
-      "ar-arca-v4"
-    ],
-    "uuid": "9a3e310c-bf24-a131-f613-4e4846ae4b8a",
-    "type": "standard",
-    "series": "1",
-    "code": "00000200",
-    "issue_date": "2025-02-01",
-    "currency": "ARS",
-    "tax": {
-      "ext": {
-        "ar-arca-concept": "1",
-        "ar-arca-doc-type": "1"
-      }
-    },
-    "supplier": {
-      "name": "Mayorista Nacional S.A.",
-      "tax_id": {
-        "country": "AR",
-        "code": "30712345671"
-      },
-      "addresses": [
-        {
-          "street": "Av. 9 de Julio 1500",
-          "locality": "Buenos Aires",
-          "region": "Ciudad Autónoma de Buenos Aires",
-          "code": "C1037",
-          "country": "AR"
-        }
-      ],
-      "emails": [
-        {
-          "addr": "ventas@mayorista.com.ar"
-        }
-      ]
-    },
-    "customer": {
-      "name": "Distribuidora Regional S.R.L.",
-      "tax_id": {
-        "country": "AR",
-        "code": "30987654321"
-      },
-      "addresses": [
-        {
-          "street": "Ruta Nacional 9 Km 50",
-          "locality": "Córdoba",
-          "region": "Córdoba",
-          "code": "X5000",
-          "country": "AR"
-        }
-      ],
-      "emails": [
-        {
-          "addr": "compras@distribuidora.com.ar"
-        }
-      ],
-      "ext": {
-        "ar-arca-vat-status": "1"
-      }
-    },
-    "lines": [
-      {
-        "i": 1,
-        "quantity": "100",
-        "item": {
-          "key": "goods",
-          "name": "Productos alimenticios varios",
-          "price": "5000.00"
-        },
-        "sum": "500000.00",
-        "taxes": [
-          {
-            "cat": "VAT",
-            "key": "standard",
-            "rate": "reduced",
-            "percent": "10.5%",
-            "ext": {
-              "ar-arca-vat-rate": "4"
-            }
-          }
-        ],
-        "total": "500000.00"
-      }
-    ],
-    "charges": [
-      {
-        "i": 1,
-        "key": "tax",
-        "percent": "3.5%",
-        "amount": "17500.00",
-        "ext": {
-          "ar-arca-tax-type": "5"
-        }
-      },
-      {
-        "i": 2,
-        "key": "tax",
-        "percent": "1%",
-        "amount": "5000.00",
-        "ext": {
-          "ar-arca-tax-type": "3"
-        }
-      }
-    ],
-    "totals": {
-      "sum": "500000.00",
-      "charge": "22500.00",
-      "total": "522500.00",
-      "taxes": {
-        "categories": [
-          {
-            "code": "VAT",
-            "rates": [
-              {
-                "key": "standard",
-                "ext": {
-                  "ar-arca-vat-rate": "4"
-                },
-                "base": "500000.00",
-                "percent": "10.5%",
-                "amount": "52500.00"
-              }
-            ],
-            "amount": "52500.00"
-          }
-        ],
-        "sum": "52500.00"
-      },
-      "tax": "52500.00",
-      "total_with_tax": "575000.00",
-      "payable": "575000.00"
-    }
-  }
-}) satisfies Envelope<bill.Invoice>;
-
-// ar/out/invoice-ar-arca-zero-rate.json
-({
-  "$schema": "https://gobl.org/draft-0/envelope",
-  "head": {
-    "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
-    "dig": {
-      "alg": "sha256",
-      "val": "8154f301d7a38d5f1c3fb55deda4cb6a398e443914d797929c173a268a26e009"
-    }
-  },
-  "doc": {
-    "$schema": "https://gobl.org/draft-0/bill/invoice",
-    "$regime": "AR",
-    "$addons": [
-      "ar-arca-v4"
-    ],
-    "uuid": "2d6b643f-e257-d464-c946-7b7179db7e1d",
-    "type": "standard",
-    "series": "1",
-    "code": "00000300",
-    "issue_date": "2025-02-15",
-    "currency": "ARS",
-    "tax": {
-      "ext": {
-        "ar-arca-concept": "1",
-        "ar-arca-doc-type": "1"
-      }
-    },
-    "supplier": {
-      "name": "Librería Académica S.A.",
-      "tax_id": {
-        "country": "AR",
-        "code": "30712345671"
-      },
-      "addresses": [
-        {
-          "street": "Av. Córdoba 2000",
-          "locality": "Buenos Aires",
-          "region": "Ciudad Autónoma de Buenos Aires",
-          "code": "C1120",
-          "country": "AR"
-        }
-      ],
-      "emails": [
-        {
-          "addr": "ventas@libreriaacademica.com.ar"
-        }
-      ]
-    },
-    "customer": {
-      "name": "Universidad Nacional de Buenos Aires",
-      "tax_id": {
-        "country": "AR",
-        "code": "30546670623"
-      },
-      "addresses": [
-        {
-          "street": "Viamonte 430",
-          "locality": "Buenos Aires",
-          "region": "Ciudad Autónoma de Buenos Aires",
-          "code": "C1053",
-          "country": "AR"
-        }
-      ],
-      "emails": [
-        {
-          "addr": "compras@uba.ar"
-        }
-      ],
-      "ext": {
-        "ar-arca-vat-status": "1"
-      }
-    },
-    "lines": [
-      {
-        "i": 1,
-        "quantity": "100",
-        "item": {
-          "key": "goods",
-          "name": "Libros académicos (exentos de IVA)",
-          "price": "5000.00"
-        },
-        "sum": "500000.00",
-        "taxes": [
-          {
-            "cat": "VAT",
-            "key": "zero",
-            "percent": "0%",
-            "ext": {
-              "ar-arca-vat-rate": "3"
-            }
-          }
-        ],
-        "total": "500000.00"
-      }
-    ],
-    "totals": {
-      "sum": "500000.00",
-      "total": "500000.00",
-      "taxes": {
-        "categories": [
-          {
-            "code": "VAT",
-            "rates": [
-              {
-                "key": "zero",
-                "ext": {
-                  "ar-arca-vat-rate": "3"
-                },
-                "base": "500000.00",
-                "percent": "0%",
-                "amount": "0.00"
-              }
-            ],
-            "amount": "0.00"
-          }
-        ],
-        "sum": "0.00"
-      },
-      "tax": "0.00",
-      "total_with_tax": "500000.00",
-      "payable": "500000.00"
-    }
-  }
-}) satisfies Envelope<bill.Invoice>;
-
 // ar/out/invoice-increased-rate.json
 ({
   "$schema": "https://gobl.org/draft-0/envelope",
@@ -2271,6 +858,168 @@ import type * as tax from '../src/gen/tax/index.js';
   }
 }) satisfies Envelope<bill.Invoice>;
 
+// ar/out/invoice-tourism-vat-refund.json
+({
+  "$schema": "https://gobl.org/draft-0/envelope",
+  "head": {
+    "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
+    "dig": {
+      "alg": "sha256",
+      "val": "86310ebb58258876f7d4a44d82e4a3f2ea45fcbcd69ebc7d481d0b3f7bb2cef7"
+    }
+  },
+  "doc": {
+    "$schema": "https://gobl.org/draft-0/bill/invoice",
+    "$regime": "AR",
+    "uuid": "0190f3a8-6c1e-7b40-9a52-1a0b2c3d4e03",
+    "type": "standard",
+    "code": "0003-00000103",
+    "issue_date": "2026-08-15",
+    "currency": "ARS",
+    "tax": {
+      "prices_include": "VAT"
+    },
+    "supplier": {
+      "name": "Hotel Patagonia S.A.",
+      "tax_id": {
+        "country": "AR",
+        "code": "30712345671"
+      },
+      "addresses": [
+        {
+          "street": "Av. Bustillo 1500",
+          "locality": "San Carlos de Bariloche",
+          "region": "Río Negro",
+          "code": "8400",
+          "country": "AR"
+        }
+      ],
+      "emails": [
+        {
+          "addr": "reservas@hotelpatagonia.com.ar"
+        }
+      ]
+    },
+    "customer": {
+      "name": "Lucía Fernández",
+      "addresses": [
+        {
+          "street": "Calle Mayor 10",
+          "locality": "Madrid",
+          "code": "28013",
+          "country": "ES"
+        }
+      ],
+      "emails": [
+        {
+          "addr": "lucia.fernandez@example.com"
+        }
+      ]
+    },
+    "lines": [
+      {
+        "i": 1,
+        "quantity": "5",
+        "item": {
+          "name": "Habitación deluxe king - noche",
+          "price": "77530.86"
+        },
+        "sum": "387654.30",
+        "taxes": [
+          {
+            "cat": "VAT",
+            "key": "standard",
+            "rate": "general",
+            "percent": "21.0%"
+          }
+        ],
+        "total": "387654.30"
+      },
+      {
+        "i": 2,
+        "quantity": "5",
+        "item": {
+          "name": "Desayuno buffet",
+          "price": "12100.00"
+        },
+        "sum": "60500.00",
+        "taxes": [
+          {
+            "cat": "VAT",
+            "key": "standard",
+            "rate": "general",
+            "percent": "21.0%"
+          }
+        ],
+        "total": "60500.00"
+      }
+    ],
+    "ordering": {
+      "period": {
+        "start": "2026-08-10",
+        "end": "2026-08-15"
+      }
+    },
+    "payment": {
+      "advances": [
+        {
+          "date": "2026-08-10",
+          "key": "card",
+          "description": "Seña",
+          "amount": "150000.00"
+        },
+        {
+          "waiver": "vat-refund",
+          "description": "Reintegro de IVA - turista extranjero (Decreto 1043/2016)",
+          "taxes": [
+            {
+              "cat": "VAT"
+            }
+          ],
+          "amount": "77778.85"
+        }
+      ],
+      "terms": {
+        "key": "due-date",
+        "due_dates": [
+          {
+            "date": "2026-08-15",
+            "amount": "220375.45",
+            "percent": "100%"
+          }
+        ]
+      }
+    },
+    "totals": {
+      "sum": "448154.30",
+      "tax_included": "77778.85",
+      "total": "370375.45",
+      "taxes": {
+        "categories": [
+          {
+            "code": "VAT",
+            "rates": [
+              {
+                "key": "standard",
+                "base": "370375.45",
+                "percent": "21.0%",
+                "amount": "77778.85"
+              }
+            ],
+            "amount": "77778.85"
+          }
+        ],
+        "sum": "77778.85"
+      },
+      "tax": "77778.85",
+      "total_with_tax": "448154.30",
+      "payable": "448154.30",
+      "advance": "227778.85",
+      "due": "220375.45"
+    }
+  }
+}) satisfies Envelope<bill.Invoice>;
+
 // be/out/invoice-peppol.json
 ({
   "$schema": "https://gobl.org/draft-0/envelope",
@@ -2463,6 +1212,101 @@ import type * as tax from '../src/gen/tax/index.js';
   }
 }) satisfies Envelope<bill.Invoice>;
 
+// bs/out/invoice-bs.json
+({
+  "$schema": "https://gobl.org/draft-0/envelope",
+  "head": {
+    "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
+    "dig": {
+      "alg": "sha256",
+      "val": "b6e8b4f9d00b3494056a7c6b79cfae571b5cd3476773981d3184199cf31f2832"
+    }
+  },
+  "doc": {
+    "$schema": "https://gobl.org/draft-0/bill/invoice",
+    "$regime": "BS",
+    "uuid": "b2c3d4e5-f6a7-4b8c-9d0e-1f2a3b4c5d6e",
+    "type": "standard",
+    "code": "INV-001",
+    "issue_date": "2026-10-11",
+    "currency": "BSD",
+    "supplier": {
+      "name": "GOBL Technologies",
+      "tax_id": {
+        "country": "BS",
+        "code": "123456789"
+      },
+      "addresses": [
+        {
+          "num": "84",
+          "street": "Christie Ave",
+          "locality": "Nassau",
+          "country": "BS"
+        }
+      ]
+    },
+    "customer": {
+      "name": "GOBL Consumer Ltd.",
+      "tax_id": {
+        "country": "BS",
+        "code": "987654321"
+      },
+      "addresses": [
+        {
+          "num": "34",
+          "street": "Roosevelt Ave",
+          "locality": "Nassau",
+          "country": "BS"
+        }
+      ]
+    },
+    "lines": [
+      {
+        "i": 1,
+        "quantity": "5",
+        "item": {
+          "name": "Computer",
+          "price": "1000.00"
+        },
+        "sum": "5000.00",
+        "taxes": [
+          {
+            "cat": "VAT",
+            "key": "standard",
+            "rate": "general",
+            "percent": "10%"
+          }
+        ],
+        "total": "5000.00"
+      }
+    ],
+    "totals": {
+      "sum": "5000.00",
+      "total": "5000.00",
+      "taxes": {
+        "categories": [
+          {
+            "code": "VAT",
+            "rates": [
+              {
+                "key": "standard",
+                "base": "5000.00",
+                "percent": "10%",
+                "amount": "500.00"
+              }
+            ],
+            "amount": "500.00"
+          }
+        ],
+        "sum": "500.00"
+      },
+      "tax": "500.00",
+      "total_with_tax": "5500.00",
+      "payable": "5500.00"
+    }
+  }
+}) satisfies Envelope<bill.Invoice>;
+
 // ca/out/invoice-ca-ca.json
 ({
   "$schema": "https://gobl.org/draft-0/envelope",
@@ -2563,176 +1407,56 @@ import type * as tax from '../src/gen/tax/index.js';
   }
 }) satisfies Envelope<bill.Invoice>;
 
-// co/out/simple.json
+// cr/out/credit-note-cr.json
 ({
   "$schema": "https://gobl.org/draft-0/envelope",
   "head": {
     "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
     "dig": {
       "alg": "sha256",
-      "val": "961ab135dce22637224c2f214aaed47a7504aa4c47d3b6f6166a52bdf3200cdc"
+      "val": "5ad8eda9e2a1ad1b720fab23a799a71481b42cbda6da56dc2cfe0b9e72528f12"
     }
   },
   "doc": {
     "$schema": "https://gobl.org/draft-0/bill/invoice",
-    "$regime": "CO",
-    "$addons": [
-      "co-dian-v2"
-    ],
-    "uuid": "3aea7b56-59d8-4beb-90bd-f8f280d852a0",
-    "type": "standard",
-    "series": "SETT",
-    "code": "1234",
-    "issue_date": "2021-01-01",
-    "currency": "COP",
-    "supplier": {
-      "name": "EXAMPLE SUPPLIER S.A.S.",
-      "tax_id": {
-        "country": "CO",
-        "code": "9014514812"
-      },
-      "addresses": [
-        {
-          "street": "CRA 8 113 31 OF 703",
-          "locality": "Bogotá, D.C.",
-          "region": "Bogotá",
-          "country": "CO"
-        }
-      ],
-      "ext": {
-        "co-dian-fiscal-responsibility": "O-23",
-        "co-dian-municipality": "11001"
-      }
-    },
-    "customer": {
-      "name": "EXAMPLE CUSTOMER S.A.S.",
-      "tax_id": {
-        "country": "CO",
-        "code": "9014514805"
-      },
-      "addresses": [
-        {
-          "street": "CRA 8 113 31 OF 703",
-          "locality": "Bogotá, D.C.",
-          "region": "Bogotá",
-          "country": "CO"
-        }
-      ],
-      "emails": [
-        {
-          "addr": "benito.ortiz@example.com"
-        }
-      ],
-      "telephones": [
-        {
-          "num": "3114131811"
-        }
-      ],
-      "ext": {
-        "co-dian-fiscal-responsibility": "O-15",
-        "co-dian-municipality": "11001"
-      }
-    },
-    "lines": [
+    "$regime": "CR",
+    "uuid": "0193e2c1-6c9f-7e5a-9d7c-8b0f4a3e6d9c",
+    "type": "credit-note",
+    "series": "2026",
+    "code": "0003",
+    "issue_date": "2026-06-02",
+    "currency": "CRC",
+    "preceding": [
       {
-        "i": 1,
-        "quantity": "1",
-        "item": {
-          "name": "Servicios Mes de Julio 2022",
-          "price": "200000.00"
-        },
-        "sum": "200000.00",
-        "taxes": [
-          {
-            "cat": "VAT",
-            "key": "standard",
-            "percent": "19%"
-          }
-        ],
-        "total": "200000.00"
+        "issue_date": "2026-05-12",
+        "code": "2026/0001"
       }
     ],
-    "payment": {
-      "terms": {
-        "due_dates": [
-          {
-            "date": "2021-01-01",
-            "amount": "238000.00",
-            "percent": "100%"
-          }
-        ]
-      }
-    },
-    "totals": {
-      "sum": "200000.00",
-      "total": "200000.00",
-      "taxes": {
-        "categories": [
-          {
-            "code": "VAT",
-            "rates": [
-              {
-                "key": "standard",
-                "base": "200000.00",
-                "percent": "19%",
-                "amount": "38000.00"
-              }
-            ],
-            "amount": "38000.00"
-          }
-        ],
-        "sum": "38000.00"
-      },
-      "tax": "38000.00",
-      "total_with_tax": "238000.00",
-      "payable": "238000.00"
-    }
-  }
-}) satisfies Envelope<bill.Invoice>;
-
-// co/out/simplified-id.json
-({
-  "$schema": "https://gobl.org/draft-0/envelope",
-  "head": {
-    "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
-    "dig": {
-      "alg": "sha256",
-      "val": "fa11fd5740fb979c4274ab4f85410a5e01700bd85abf83cf34b9eb41500f64e0"
-    }
-  },
-  "doc": {
-    "$schema": "https://gobl.org/draft-0/bill/invoice",
-    "$regime": "CO",
-    "$addons": [
-      "co-dian-v2"
-    ],
-    "$tags": [
-      "simplified"
-    ],
-    "uuid": "3aea7b56-59d8-4beb-90bd-f8f280d852a0",
-    "type": "standard",
-    "series": "SETT",
-    "code": "1234",
-    "issue_date": "2021-01-01",
-    "currency": "COP",
-    "tax": {},
     "supplier": {
-      "name": "EXAMPLE SUPPLIER S.A.S.",
+      "name": "Distribuidora del Valle S.A.",
       "tax_id": {
-        "country": "CO",
-        "code": "9014514812"
+        "country": "CR",
+        "code": "3101123456"
       },
-      "ext": {
-        "co-dian-fiscal-responsibility": "O-23",
-        "co-dian-municipality": "11001"
-      }
+      "addresses": [
+        {
+          "street": "Avenida Central, Calle 5",
+          "locality": "San José",
+          "country": "CR"
+        }
+      ]
     },
     "customer": {
-      "name": "Test end user",
-      "identities": [
+      "name": "María Rodríguez Jiménez",
+      "tax_id": {
+        "country": "CR",
+        "code": "109980456"
+      },
+      "addresses": [
         {
-          "key": "co-id-card",
-          "code": "1234567890"
+          "street": "Barrio Escalante",
+          "locality": "San José",
+          "country": "CR"
         }
       ]
     },
@@ -2741,248 +1465,24 @@ import type * as tax from '../src/gen/tax/index.js';
         "i": 1,
         "quantity": "1",
         "item": {
-          "name": "Useful service",
-          "price": "200000.00"
+          "name": "Licencia de software",
+          "price": "250000.00"
         },
-        "sum": "200000.00",
-        "taxes": [
-          {
-            "cat": "VAT",
-            "key": "standard",
-            "percent": "19%"
-          }
-        ],
-        "total": "200000.00"
-      }
-    ],
-    "payment": {
-      "advances": [
-        {
-          "description": "Prepaid",
-          "percent": "100%",
-          "amount": "238000.00"
-        }
-      ]
-    },
-    "totals": {
-      "sum": "200000.00",
-      "total": "200000.00",
-      "taxes": {
-        "categories": [
-          {
-            "code": "VAT",
-            "rates": [
-              {
-                "key": "standard",
-                "base": "200000.00",
-                "percent": "19%",
-                "amount": "38000.00"
-              }
-            ],
-            "amount": "38000.00"
-          }
-        ],
-        "sum": "38000.00"
-      },
-      "tax": "38000.00",
-      "total_with_tax": "238000.00",
-      "payable": "238000.00",
-      "advance": "238000.00",
-      "due": "0.00"
-    }
-  }
-}) satisfies Envelope<bill.Invoice>;
-
-// co/out/simplified.json
-({
-  "$schema": "https://gobl.org/draft-0/envelope",
-  "head": {
-    "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
-    "dig": {
-      "alg": "sha256",
-      "val": "c7a3a15d4f227fe4ce67ccc19925403b968751d8d767fa71526f2f5d2d9bf0dc"
-    }
-  },
-  "doc": {
-    "$schema": "https://gobl.org/draft-0/bill/invoice",
-    "$regime": "CO",
-    "$addons": [
-      "co-dian-v2"
-    ],
-    "$tags": [
-      "simplified"
-    ],
-    "uuid": "3aea7b56-59d8-4beb-90bd-f8f280d852a0",
-    "type": "standard",
-    "series": "SETT",
-    "code": "1234",
-    "issue_date": "2021-01-01",
-    "currency": "COP",
-    "tax": {},
-    "supplier": {
-      "name": "EXAMPLE SUPPLIER S.A.S.",
-      "tax_id": {
-        "country": "CO",
-        "code": "9014514812"
-      },
-      "ext": {
-        "co-dian-fiscal-responsibility": "O-23",
-        "co-dian-municipality": "11001"
-      }
-    },
-    "lines": [
-      {
-        "i": 1,
-        "quantity": "1",
-        "item": {
-          "name": "Useful service",
-          "price": "200000.00"
-        },
-        "sum": "200000.00",
-        "taxes": [
-          {
-            "cat": "VAT",
-            "key": "standard",
-            "percent": "19%"
-          }
-        ],
-        "total": "200000.00"
-      }
-    ],
-    "payment": {
-      "advances": [
-        {
-          "description": "Prepaid",
-          "percent": "100%",
-          "amount": "238000.00"
-        }
-      ]
-    },
-    "totals": {
-      "sum": "200000.00",
-      "total": "200000.00",
-      "taxes": {
-        "categories": [
-          {
-            "code": "VAT",
-            "rates": [
-              {
-                "key": "standard",
-                "base": "200000.00",
-                "percent": "19%",
-                "amount": "38000.00"
-              }
-            ],
-            "amount": "38000.00"
-          }
-        ],
-        "sum": "38000.00"
-      },
-      "tax": "38000.00",
-      "total_with_tax": "238000.00",
-      "payable": "238000.00",
-      "advance": "238000.00",
-      "due": "0.00"
-    }
-  }
-}) satisfies Envelope<bill.Invoice>;
-
-// de/out/invoice-de-de-stnr.json
-({
-  "$schema": "https://gobl.org/draft-0/envelope",
-  "head": {
-    "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
-    "dig": {
-      "alg": "sha256",
-      "val": "b103d630624be212d1b7cc81f26e048ff853d03e4408803e0df3fe26dd847621"
-    }
-  },
-  "doc": {
-    "$schema": "https://gobl.org/draft-0/bill/invoice",
-    "$regime": "DE",
-    "uuid": "3aea7b56-59d8-4beb-90bd-f8f280d852a0",
-    "type": "standard",
-    "series": "SAMPLE",
-    "code": "001",
-    "issue_date": "2022-02-01",
-    "currency": "EUR",
-    "supplier": {
-      "name": "Provide One GmbH",
-      "tax_id": {
-        "country": "DE"
-      },
-      "identities": [
-        {
-          "key": "de-tax-number",
-          "code": "92/345/67894"
-        }
-      ],
-      "addresses": [
-        {
-          "num": "16",
-          "street": "Dietmar-Hopp-Allee",
-          "locality": "Walldorf",
-          "code": "69190",
-          "country": "DE"
-        }
-      ],
-      "emails": [
-        {
-          "addr": "billing@example.com"
-        }
-      ]
-    },
-    "customer": {
-      "name": "Sample Consumer",
-      "tax_id": {
-        "country": "DE",
-        "code": "282741168"
-      },
-      "addresses": [
-        {
-          "num": "25",
-          "street": "Werner-Heisenberg-Allee",
-          "locality": "München",
-          "code": "80939"
-        }
-      ],
-      "emails": [
-        {
-          "addr": "email@sample.com"
-        }
-      ]
-    },
-    "lines": [
-      {
-        "i": 1,
-        "quantity": "20",
-        "item": {
-          "name": "Development services",
-          "price": "90.00",
-          "unit": "h"
-        },
-        "sum": "1800.00",
-        "discounts": [
-          {
-            "reason": "Special discount",
-            "percent": "10%",
-            "amount": "180.00"
-          }
-        ],
+        "sum": "250000.00",
         "taxes": [
           {
             "cat": "VAT",
             "key": "standard",
             "rate": "general",
-            "percent": "19%"
+            "percent": "13.0%"
           }
         ],
-        "total": "1620.00"
+        "total": "250000.00"
       }
     ],
     "totals": {
-      "sum": "1620.00",
-      "total": "1620.00",
+      "sum": "250000.00",
+      "total": "250000.00",
       "taxes": {
         "categories": [
           {
@@ -2990,39 +1490,470 @@ import type * as tax from '../src/gen/tax/index.js';
             "rates": [
               {
                 "key": "standard",
-                "base": "1620.00",
-                "percent": "19%",
-                "amount": "307.80"
+                "base": "250000.00",
+                "percent": "13.0%",
+                "amount": "32500.00"
               }
             ],
-            "amount": "307.80"
+            "amount": "32500.00"
           }
         ],
-        "sum": "307.80"
+        "sum": "32500.00"
       },
-      "tax": "307.80",
-      "total_with_tax": "1927.80",
-      "payable": "1927.80"
+      "tax": "32500.00",
+      "total_with_tax": "282500.00",
+      "payable": "282500.00"
     }
   }
 }) satisfies Envelope<bill.Invoice>;
 
-// de/out/invoice-de-de-xr.json
+// cr/out/invoice-cr-multi-rate.json
 ({
   "$schema": "https://gobl.org/draft-0/envelope",
   "head": {
     "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
     "dig": {
       "alg": "sha256",
-      "val": "bec7f88e94b60b48d3241a6d03511e785ef571f641fdf9b2e7e411ad6779b55a"
+      "val": "97da076ac70feb2131f34d73eff374f6cc80b9a98f6469c3009457d12fd8eeb2"
+    }
+  },
+  "doc": {
+    "$schema": "https://gobl.org/draft-0/bill/invoice",
+    "$regime": "CR",
+    "uuid": "0193e2c1-5b8e-7d4f-8c6b-7a9e3f2d5c8b",
+    "type": "standard",
+    "series": "2026",
+    "code": "0002",
+    "issue_date": "2026-05-20",
+    "currency": "CRC",
+    "supplier": {
+      "name": "Farmacia y Abastecedor La Sabana S.A.",
+      "tax_id": {
+        "country": "CR",
+        "code": "3101654321"
+      },
+      "addresses": [
+        {
+          "street": "La Sabana Norte",
+          "locality": "San José",
+          "country": "CR"
+        }
+      ]
+    },
+    "customer": {
+      "name": "Hotel Monteverde Verde S.R.L.",
+      "tax_id": {
+        "country": "CR",
+        "code": "3102987654"
+      },
+      "addresses": [
+        {
+          "street": "Cerro Plano",
+          "locality": "Monteverde",
+          "region": "Puntarenas",
+          "country": "CR"
+        }
+      ]
+    },
+    "lines": [
+      {
+        "i": 1,
+        "quantity": "1",
+        "item": {
+          "name": "Consulta médica privada",
+          "price": "45000.00"
+        },
+        "sum": "45000.00",
+        "taxes": [
+          {
+            "cat": "VAT",
+            "key": "standard",
+            "rate": "intermediate",
+            "percent": "4.0%"
+          }
+        ],
+        "total": "45000.00"
+      },
+      {
+        "i": 2,
+        "quantity": "24",
+        "item": {
+          "name": "Acetaminofén 500mg",
+          "price": "2500.00"
+        },
+        "sum": "60000.00",
+        "taxes": [
+          {
+            "cat": "VAT",
+            "key": "standard",
+            "rate": "reduced",
+            "percent": "2.0%"
+          }
+        ],
+        "total": "60000.00"
+      },
+      {
+        "i": 3,
+        "quantity": "50",
+        "item": {
+          "name": "Arroz 95% grano entero (canasta básica)",
+          "price": "1200.00"
+        },
+        "sum": "60000.00",
+        "taxes": [
+          {
+            "cat": "VAT",
+            "key": "standard",
+            "rate": "super-reduced",
+            "percent": "1.0%"
+          }
+        ],
+        "total": "60000.00"
+      },
+      {
+        "i": 4,
+        "quantity": "20",
+        "item": {
+          "name": "Café orgánico certificado",
+          "price": "5500.00"
+        },
+        "sum": "110000.00",
+        "taxes": [
+          {
+            "cat": "VAT",
+            "key": "standard",
+            "rate": "special",
+            "percent": "0.5%"
+          }
+        ],
+        "total": "110000.00"
+      },
+      {
+        "i": 5,
+        "quantity": "5",
+        "item": {
+          "name": "Utensilios de cocina",
+          "price": "12000.00"
+        },
+        "sum": "60000.00",
+        "taxes": [
+          {
+            "cat": "VAT",
+            "key": "standard",
+            "rate": "general",
+            "percent": "13.0%"
+          }
+        ],
+        "total": "60000.00"
+      }
+    ],
+    "totals": {
+      "sum": "335000.00",
+      "total": "335000.00",
+      "taxes": {
+        "categories": [
+          {
+            "code": "VAT",
+            "rates": [
+              {
+                "key": "standard",
+                "base": "45000.00",
+                "percent": "4.0%",
+                "amount": "1800.00"
+              },
+              {
+                "key": "standard",
+                "base": "60000.00",
+                "percent": "2.0%",
+                "amount": "1200.00"
+              },
+              {
+                "key": "standard",
+                "base": "60000.00",
+                "percent": "1.0%",
+                "amount": "600.00"
+              },
+              {
+                "key": "standard",
+                "base": "110000.00",
+                "percent": "0.5%",
+                "amount": "550.00"
+              },
+              {
+                "key": "standard",
+                "base": "60000.00",
+                "percent": "13.0%",
+                "amount": "7800.00"
+              }
+            ],
+            "amount": "11950.00"
+          }
+        ],
+        "sum": "11950.00"
+      },
+      "tax": "11950.00",
+      "total_with_tax": "346950.00",
+      "payable": "346950.00"
+    }
+  }
+}) satisfies Envelope<bill.Invoice>;
+
+// cr/out/invoice-cr-standard.json
+({
+  "$schema": "https://gobl.org/draft-0/envelope",
+  "head": {
+    "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
+    "dig": {
+      "alg": "sha256",
+      "val": "9d4a586f981bc15e3ce5f7fc9ac00821c7a48ffabfb6b3cdbb72e52ce43e8aaa"
+    }
+  },
+  "doc": {
+    "$schema": "https://gobl.org/draft-0/bill/invoice",
+    "$regime": "CR",
+    "uuid": "0193e2c1-4a7d-7c3e-9b5a-6f8d2e1c4b7a",
+    "type": "standard",
+    "series": "2026",
+    "code": "0001",
+    "issue_date": "2026-05-12",
+    "currency": "CRC",
+    "supplier": {
+      "name": "Distribuidora del Valle S.A.",
+      "tax_id": {
+        "country": "CR",
+        "code": "3101123456"
+      },
+      "addresses": [
+        {
+          "street": "Avenida Central, Calle 5",
+          "locality": "San José",
+          "country": "CR"
+        }
+      ]
+    },
+    "customer": {
+      "name": "María Rodríguez Jiménez",
+      "tax_id": {
+        "country": "CR",
+        "code": "109980456"
+      },
+      "addresses": [
+        {
+          "street": "Barrio Escalante",
+          "locality": "San José",
+          "country": "CR"
+        }
+      ]
+    },
+    "lines": [
+      {
+        "i": 1,
+        "quantity": "10",
+        "item": {
+          "name": "Servicios de consultoría",
+          "price": "150000.00"
+        },
+        "sum": "1500000.00",
+        "taxes": [
+          {
+            "cat": "VAT",
+            "key": "standard",
+            "rate": "general",
+            "percent": "13.0%"
+          }
+        ],
+        "total": "1500000.00"
+      },
+      {
+        "i": 2,
+        "quantity": "2",
+        "item": {
+          "name": "Licencia de software",
+          "price": "250000.00"
+        },
+        "sum": "500000.00",
+        "taxes": [
+          {
+            "cat": "VAT",
+            "key": "standard",
+            "rate": "general",
+            "percent": "13.0%"
+          }
+        ],
+        "total": "500000.00"
+      }
+    ],
+    "totals": {
+      "sum": "2000000.00",
+      "total": "2000000.00",
+      "taxes": {
+        "categories": [
+          {
+            "code": "VAT",
+            "rates": [
+              {
+                "key": "standard",
+                "base": "2000000.00",
+                "percent": "13.0%",
+                "amount": "260000.00"
+              }
+            ],
+            "amount": "260000.00"
+          }
+        ],
+        "sum": "260000.00"
+      },
+      "tax": "260000.00",
+      "total_with_tax": "2260000.00",
+      "payable": "2260000.00"
+    }
+  }
+}) satisfies Envelope<bill.Invoice>;
+
+// cz/out/invoice-cz-cz.json
+({
+  "$schema": "https://gobl.org/draft-0/envelope",
+  "head": {
+    "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
+    "dig": {
+      "alg": "sha256",
+      "val": "cccca0ceb283f033362458d919902701c5e4c1ea643153c6b7fbce9960fff4e8"
+    }
+  },
+  "doc": {
+    "$schema": "https://gobl.org/draft-0/bill/invoice",
+    "$regime": "CZ",
+    "uuid": "3f2e9c1a-7b4d-4e8f-9a6c-2d1b0e5f8a7c",
+    "type": "standard",
+    "series": "SAMPLE",
+    "code": "001",
+    "issue_date": "2026-03-01",
+    "currency": "CZK",
+    "supplier": {
+      "name": "Vzorová s.r.o.",
+      "tax_id": {
+        "country": "CZ",
+        "code": "12345679"
+      },
+      "addresses": [
+        {
+          "num": "12",
+          "street": "Hlavní",
+          "locality": "Praha",
+          "code": "11000",
+          "country": "CZ"
+        }
+      ],
+      "emails": [
+        {
+          "addr": "fakturace@example.cz"
+        }
+      ]
+    },
+    "customer": {
+      "name": "Zákazník s.r.o.",
+      "tax_id": {
+        "country": "CZ",
+        "code": "76543218"
+      },
+      "addresses": [
+        {
+          "num": "5",
+          "street": "Masarykova",
+          "locality": "Brno",
+          "code": "60200",
+          "country": "CZ"
+        }
+      ]
+    },
+    "lines": [
+      {
+        "i": 1,
+        "quantity": "10",
+        "item": {
+          "name": "Softwarové služby",
+          "price": "1200.00",
+          "unit": "h"
+        },
+        "sum": "12000.00",
+        "taxes": [
+          {
+            "cat": "VAT",
+            "key": "standard",
+            "rate": "general",
+            "percent": "21.0%"
+          }
+        ],
+        "total": "12000.00"
+      },
+      {
+        "i": 2,
+        "quantity": "2",
+        "item": {
+          "name": "Ubytování",
+          "price": "1500.00",
+          "unit": "day"
+        },
+        "sum": "3000.00",
+        "taxes": [
+          {
+            "cat": "VAT",
+            "key": "standard",
+            "rate": "reduced",
+            "percent": "12.0%"
+          }
+        ],
+        "total": "3000.00"
+      }
+    ],
+    "totals": {
+      "sum": "15000.00",
+      "total": "15000.00",
+      "taxes": {
+        "categories": [
+          {
+            "code": "VAT",
+            "rates": [
+              {
+                "key": "standard",
+                "base": "12000.00",
+                "percent": "21.0%",
+                "amount": "2520.00"
+              },
+              {
+                "key": "standard",
+                "base": "3000.00",
+                "percent": "12.0%",
+                "amount": "360.00"
+              }
+            ],
+            "amount": "2880.00"
+          }
+        ],
+        "sum": "2880.00"
+      },
+      "tax": "2880.00",
+      "total_with_tax": "17880.00",
+      "payable": "17880.00"
+    }
+  }
+}) satisfies Envelope<bill.Invoice>;
+
+// de/out/invoice-de-de-en16931.json
+({
+  "$schema": "https://gobl.org/draft-0/envelope",
+  "head": {
+    "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
+    "dig": {
+      "alg": "sha256",
+      "val": "469768b7b21b6993e9d5c580b998ff197ea9f2351499215ee8ed2065ed407233"
     }
   },
   "doc": {
     "$schema": "https://gobl.org/draft-0/bill/invoice",
     "$regime": "DE",
     "$addons": [
-      "eu-en16931-v2017",
-      "de-xrechnung-v3"
+      "eu-en16931-v2017"
     ],
     "uuid": "3aea7b56-59d8-4beb-90bd-f8f280d852a0",
     "type": "standard",
@@ -3186,22 +2117,141 @@ import type * as tax from '../src/gen/tax/index.js';
   }
 }) satisfies Envelope<bill.Invoice>;
 
-// de/out/invoice-de-es-xr.json
+// de/out/invoice-de-de-stnr.json
 ({
   "$schema": "https://gobl.org/draft-0/envelope",
   "head": {
     "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
     "dig": {
       "alg": "sha256",
-      "val": "bc93ceab8383fb00eeef3f018232ad5133e1c213943064133dfe365b0a89884f"
+      "val": "b103d630624be212d1b7cc81f26e048ff853d03e4408803e0df3fe26dd847621"
+    }
+  },
+  "doc": {
+    "$schema": "https://gobl.org/draft-0/bill/invoice",
+    "$regime": "DE",
+    "uuid": "3aea7b56-59d8-4beb-90bd-f8f280d852a0",
+    "type": "standard",
+    "series": "SAMPLE",
+    "code": "001",
+    "issue_date": "2022-02-01",
+    "currency": "EUR",
+    "supplier": {
+      "name": "Provide One GmbH",
+      "tax_id": {
+        "country": "DE"
+      },
+      "identities": [
+        {
+          "key": "de-tax-number",
+          "code": "92/345/67894"
+        }
+      ],
+      "addresses": [
+        {
+          "num": "16",
+          "street": "Dietmar-Hopp-Allee",
+          "locality": "Walldorf",
+          "code": "69190",
+          "country": "DE"
+        }
+      ],
+      "emails": [
+        {
+          "addr": "billing@example.com"
+        }
+      ]
+    },
+    "customer": {
+      "name": "Sample Consumer",
+      "tax_id": {
+        "country": "DE",
+        "code": "282741168"
+      },
+      "addresses": [
+        {
+          "num": "25",
+          "street": "Werner-Heisenberg-Allee",
+          "locality": "München",
+          "code": "80939"
+        }
+      ],
+      "emails": [
+        {
+          "addr": "email@sample.com"
+        }
+      ]
+    },
+    "lines": [
+      {
+        "i": 1,
+        "quantity": "20",
+        "item": {
+          "name": "Development services",
+          "price": "90.00",
+          "unit": "h"
+        },
+        "sum": "1800.00",
+        "discounts": [
+          {
+            "reason": "Special discount",
+            "percent": "10%",
+            "amount": "180.00"
+          }
+        ],
+        "taxes": [
+          {
+            "cat": "VAT",
+            "key": "standard",
+            "rate": "general",
+            "percent": "19%"
+          }
+        ],
+        "total": "1620.00"
+      }
+    ],
+    "totals": {
+      "sum": "1620.00",
+      "total": "1620.00",
+      "taxes": {
+        "categories": [
+          {
+            "code": "VAT",
+            "rates": [
+              {
+                "key": "standard",
+                "base": "1620.00",
+                "percent": "19%",
+                "amount": "307.80"
+              }
+            ],
+            "amount": "307.80"
+          }
+        ],
+        "sum": "307.80"
+      },
+      "tax": "307.80",
+      "total_with_tax": "1927.80",
+      "payable": "1927.80"
+    }
+  }
+}) satisfies Envelope<bill.Invoice>;
+
+// de/out/invoice-de-es-en16931.json
+({
+  "$schema": "https://gobl.org/draft-0/envelope",
+  "head": {
+    "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
+    "dig": {
+      "alg": "sha256",
+      "val": "84df9b70cd7bb49c9e3caea75b42b59b66603b79701316131e677f5e8c8067af"
     }
   },
   "doc": {
     "$schema": "https://gobl.org/draft-0/bill/invoice",
     "$regime": "DE",
     "$addons": [
-      "eu-en16931-v2017",
-      "de-xrechnung-v3"
+      "eu-en16931-v2017"
     ],
     "$tags": [
       "reverse-charge"
@@ -5341,15 +4391,12 @@ import type * as tax from '../src/gen/tax/index.js';
     "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
     "dig": {
       "alg": "sha256",
-      "val": "e4fa017a668c5313836f211c4428c61588cb0a3695767c9648b17b4a3e093a32"
+      "val": "2e34ebc27a1803ef2ce68dddffe5db425bf36e2b909c128699503a9331a7b676"
     }
   },
   "doc": {
     "$schema": "https://gobl.org/draft-0/bill/invoice",
     "$regime": "ES",
-    "$addons": [
-      "es-facturae-v3"
-    ],
     "$tags": [
       "bypass"
     ],
@@ -5358,12 +4405,6 @@ import type * as tax from '../src/gen/tax/index.js';
     "code": "SAMPLE-001",
     "issue_date": "2022-02-01",
     "currency": "EUR",
-    "tax": {
-      "ext": {
-        "es-facturae-doc-type": "FC",
-        "es-facturae-invoice-class": "OO"
-      }
-    },
     "supplier": {
       "name": "Provide One S.L.",
       "tax_id": {
@@ -5600,26 +4641,17 @@ import type * as tax from '../src/gen/tax/index.js';
     "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
     "dig": {
       "alg": "sha256",
-      "val": "22c8f6383aa2b0e875028fb500253a80752ad5afb0f6f29d1d5bee8192fa501e"
+      "val": "79c7983da6df06812cf359c57a927f4ffd4688efa737caad163e229192facb01"
     }
   },
   "doc": {
     "$schema": "https://gobl.org/draft-0/bill/invoice",
     "$regime": "ES",
-    "$addons": [
-      "es-facturae-v3"
-    ],
     "uuid": "3aea7b56-59d8-4beb-90bd-f8f280d852a0",
     "type": "standard",
     "code": "SAMPLE-001",
     "issue_date": "2022-02-01",
     "currency": "EUR",
-    "tax": {
-      "ext": {
-        "es-facturae-doc-type": "FC",
-        "es-facturae-invoice-class": "OO"
-      }
-    },
     "supplier": {
       "name": "Provide One S.L.",
       "tax_id": {
@@ -5905,26 +4937,17 @@ import type * as tax from '../src/gen/tax/index.js';
     "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
     "dig": {
       "alg": "sha256",
-      "val": "db45c718ca59b6c22d12c84490d4ce880758960e9559898896a1ced64fcc5fd1"
+      "val": "2a225f93142c5c370a0b07a7d6826a1eb00bc5678311d883990f244e99e29f7c"
     }
   },
   "doc": {
     "$schema": "https://gobl.org/draft-0/bill/invoice",
     "$regime": "ES",
-    "$addons": [
-      "es-facturae-v3"
-    ],
     "uuid": "3aea7b56-59d8-4beb-90bd-f8f280d852a0",
     "type": "standard",
     "code": "SAMPLE-001",
     "issue_date": "2022-02-01",
     "currency": "EUR",
-    "tax": {
-      "ext": {
-        "es-facturae-doc-type": "FC",
-        "es-facturae-invoice-class": "OO"
-      }
-    },
     "supplier": {
       "name": "Provide One S.L.",
       "tax_id": {
@@ -6043,27 +5066,18 @@ import type * as tax from '../src/gen/tax/index.js';
     "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
     "dig": {
       "alg": "sha256",
-      "val": "345b3fd300cdb9fdfb9ae5a1a8d65a3f8a2f072df5757cbc7e24b936304bf883"
+      "val": "5dcaa4b94854d8011b3e58a121b3bf01760ba7055c98baa4f9bd3b5a7d148868"
     }
   },
   "doc": {
     "$schema": "https://gobl.org/draft-0/bill/invoice",
     "$regime": "ES",
-    "$addons": [
-      "es-facturae-v3"
-    ],
     "uuid": "3aea7b56-59d8-4beb-90bd-f8f280d852a0",
     "type": "standard",
     "series": "SAMPLE",
     "code": "001",
     "issue_date": "2024-11-15",
     "currency": "EUR",
-    "tax": {
-      "ext": {
-        "es-facturae-doc-type": "FC",
-        "es-facturae-invoice-class": "OO"
-      }
-    },
     "supplier": {
       "name": "Provide One S.L.",
       "tax_id": {
@@ -7522,7 +6536,7 @@ import type * as tax from '../src/gen/tax/index.js';
     "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
     "dig": {
       "alg": "sha256",
-      "val": "8e43085b35411786426734af6a0038dc8dd02ab9a17aa30bdb0c0686e4a31e51"
+      "val": "6c1bfca889a45d578f5f20262379c11f40ca05aaa4dc51ec89517d40c66cd011"
     }
   },
   "doc": {
@@ -7614,21 +6628,6 @@ import type * as tax from '../src/gen/tax/index.js';
       }
     ],
     "payment": {
-      "terms": {
-        "key": "due-date",
-        "due_dates": [
-          {
-            "date": "2021-10-30",
-            "amount": "45.72",
-            "percent": "40%"
-          },
-          {
-            "date": "2021-11-30",
-            "amount": "68.58",
-            "percent": "60%"
-          }
-        ]
-      },
       "advances": [
         {
           "date": "2021-09-01",
@@ -7636,6 +6635,21 @@ import type * as tax from '../src/gen/tax/index.js';
           "amount": "25.00"
         }
       ],
+      "terms": {
+        "key": "due-date",
+        "due_dates": [
+          {
+            "date": "2021-10-30",
+            "amount": "35.72",
+            "percent": "40%"
+          },
+          {
+            "date": "2021-11-30",
+            "amount": "53.58",
+            "percent": "60%"
+          }
+        ]
+      },
       "instructions": {
         "key": "credit-transfer",
         "credit_transfer": [
@@ -7779,1147 +6793,6 @@ import type * as tax from '../src/gen/tax/index.js';
   }
 }) satisfies Envelope<bill.Invoice>;
 
-// es/out/invoice-es-es-verifactu-N2.json
-({
-  "$schema": "https://gobl.org/draft-0/envelope",
-  "head": {
-    "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
-    "dig": {
-      "alg": "sha256",
-      "val": "b3f43353df56d1f289ae23f9945458db70e4e18b304a6a5f8a275676bd770b42"
-    }
-  },
-  "doc": {
-    "$schema": "https://gobl.org/draft-0/bill/invoice",
-    "$regime": "ES",
-    "$addons": [
-      "es-verifactu-v1"
-    ],
-    "uuid": "3aea7b56-59d8-4beb-90bd-f8f280d852a0",
-    "type": "standard",
-    "series": "EXPORT",
-    "code": "N2-001",
-    "issue_date": "2024-12-04",
-    "currency": "EUR",
-    "tax": {
-      "ext": {
-        "es-verifactu-doc-type": "F1"
-      }
-    },
-    "supplier": {
-      "name": "Provide One S.L.",
-      "tax_id": {
-        "country": "ES",
-        "code": "B98602642"
-      },
-      "addresses": [
-        {
-          "num": "42",
-          "street": "Calle Pradillo",
-          "locality": "Madrid",
-          "region": "Madrid",
-          "code": "28002",
-          "country": "ES"
-        }
-      ],
-      "emails": [
-        {
-          "addr": "billing@example.com"
-        }
-      ]
-    },
-    "customer": {
-      "name": "Global Tech Solutions Inc.",
-      "tax_id": {
-        "country": "US",
-        "code": "1234567890"
-      },
-      "addresses": [
-        {
-          "street": "123 Main Street",
-          "locality": "New York",
-          "region": "NY",
-          "code": "10001",
-          "country": "US"
-        }
-      ]
-    },
-    "lines": [
-      {
-        "i": 1,
-        "quantity": "10",
-        "item": {
-          "name": "Software development services",
-          "price": "150.00",
-          "unit": "h"
-        },
-        "sum": "1500.00",
-        "taxes": [
-          {
-            "cat": "VAT",
-            "key": "outside-scope",
-            "ext": {
-              "es-verifactu-op-class": "N2",
-              "es-verifactu-regime": "01"
-            }
-          }
-        ],
-        "total": "1500.00"
-      },
-      {
-        "i": 2,
-        "quantity": "5",
-        "item": {
-          "name": "Technical consulting",
-          "price": "200.00",
-          "unit": "day"
-        },
-        "sum": "1000.00",
-        "taxes": [
-          {
-            "cat": "VAT",
-            "key": "outside-scope",
-            "ext": {
-              "es-verifactu-op-class": "N2",
-              "es-verifactu-regime": "01"
-            }
-          }
-        ],
-        "total": "1000.00"
-      },
-      {
-        "i": 3,
-        "quantity": "1",
-        "item": {
-          "name": "Project management",
-          "price": "500.00"
-        },
-        "sum": "500.00",
-        "taxes": [
-          {
-            "cat": "VAT",
-            "key": "outside-scope",
-            "ext": {
-              "es-verifactu-op-class": "N2",
-              "es-verifactu-regime": "01"
-            }
-          }
-        ],
-        "total": "500.00"
-      }
-    ],
-    "totals": {
-      "sum": "3000.00",
-      "total": "3000.00",
-      "taxes": {
-        "categories": [
-          {
-            "code": "VAT",
-            "rates": [
-              {
-                "key": "outside-scope",
-                "ext": {
-                  "es-verifactu-op-class": "N2",
-                  "es-verifactu-regime": "01"
-                },
-                "base": "3000.00",
-                "amount": "0.00"
-              }
-            ],
-            "amount": "0.00"
-          }
-        ],
-        "sum": "0.00"
-      },
-      "tax": "0.00",
-      "total_with_tax": "3000.00",
-      "payable": "3000.00"
-    },
-    "notes": [
-      {
-        "key": "general",
-        "text": "Services provided to customer outside the European Union - outside scope of Spanish VAT"
-      }
-    ]
-  }
-}) satisfies Envelope<bill.Invoice>;
-
-// es/out/invoice-es-es-verifactu-corrective.json
-({
-  "$schema": "https://gobl.org/draft-0/envelope",
-  "head": {
-    "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
-    "dig": {
-      "alg": "sha256",
-      "val": "37e6b4e94aeb0d98a7d35ddf02bf37da5b27a12044fc22e84e57ce0de1e943ef"
-    }
-  },
-  "doc": {
-    "$schema": "https://gobl.org/draft-0/bill/invoice",
-    "$regime": "ES",
-    "$addons": [
-      "es-verifactu-v1"
-    ],
-    "uuid": "3aea7b56-59d8-4beb-90bd-f8f280d852a0",
-    "type": "corrective",
-    "series": "SAMPLE-F",
-    "code": "004",
-    "issue_date": "2025-07-10",
-    "currency": "EUR",
-    "preceding": [
-      {
-        "type": "invoice",
-        "issue_date": "2025-07-01",
-        "series": "SAMPLE",
-        "code": "003",
-        "tax": {
-          "categories": [
-            {
-              "code": "VAT",
-              "rates": [
-                {
-                  "base": "10000.00",
-                  "percent": "21.0%",
-                  "amount": "2100.00"
-                }
-              ],
-              "amount": "2100.00"
-            }
-          ],
-          "sum": "2100.00"
-        }
-      }
-    ],
-    "tax": {
-      "ext": {
-        "es-verifactu-correction-type": "S",
-        "es-verifactu-doc-type": "R1"
-      }
-    },
-    "supplier": {
-      "name": "Provide One S.L.",
-      "tax_id": {
-        "country": "ES",
-        "code": "B98602642"
-      },
-      "addresses": [
-        {
-          "num": "42",
-          "street": "Calle Pradillo",
-          "locality": "Madrid",
-          "region": "Madrid",
-          "code": "28002",
-          "country": "ES"
-        }
-      ],
-      "emails": [
-        {
-          "addr": "billing@example.com"
-        }
-      ]
-    },
-    "customer": {
-      "name": "Sample Consumer",
-      "tax_id": {
-        "country": "ES",
-        "code": "54387763P"
-      },
-      "addresses": [
-        {
-          "num": "1",
-          "street": "Calle de la Libertad",
-          "locality": "Madrid",
-          "region": "Madrid",
-          "code": "28001",
-          "country": "ES"
-        }
-      ]
-    },
-    "lines": [
-      {
-        "i": 1,
-        "quantity": "20",
-        "item": {
-          "name": "Development services",
-          "price": "90.00",
-          "unit": "h"
-        },
-        "sum": "1800.00",
-        "discounts": [
-          {
-            "reason": "Special discount",
-            "percent": "10%",
-            "amount": "180.00"
-          }
-        ],
-        "taxes": [
-          {
-            "cat": "VAT",
-            "key": "standard",
-            "rate": "general",
-            "percent": "21.0%",
-            "ext": {
-              "es-verifactu-op-class": "S1",
-              "es-verifactu-regime": "01"
-            }
-          }
-        ],
-        "total": "1620.00"
-      },
-      {
-        "i": 2,
-        "quantity": "1",
-        "item": {
-          "name": "Financial service",
-          "price": "10.00"
-        },
-        "sum": "10.00",
-        "taxes": [
-          {
-            "cat": "VAT",
-            "key": "zero",
-            "percent": "0%",
-            "ext": {
-              "es-verifactu-op-class": "S1",
-              "es-verifactu-regime": "01"
-            }
-          }
-        ],
-        "total": "10.00"
-      }
-    ],
-    "totals": {
-      "sum": "1630.00",
-      "total": "1630.00",
-      "taxes": {
-        "categories": [
-          {
-            "code": "VAT",
-            "rates": [
-              {
-                "key": "standard",
-                "ext": {
-                  "es-verifactu-op-class": "S1",
-                  "es-verifactu-regime": "01"
-                },
-                "base": "1620.00",
-                "percent": "21.0%",
-                "amount": "340.20"
-              },
-              {
-                "key": "zero",
-                "ext": {
-                  "es-verifactu-op-class": "S1",
-                  "es-verifactu-regime": "01"
-                },
-                "base": "10.00",
-                "percent": "0%",
-                "amount": "0.00"
-              }
-            ],
-            "amount": "340.20"
-          }
-        ],
-        "sum": "340.20"
-      },
-      "tax": "340.20",
-      "total_with_tax": "1970.20",
-      "payable": "1970.20"
-    }
-  }
-}) satisfies Envelope<bill.Invoice>;
-
-// es/out/invoice-es-es-verifactu-credit-note-no-preceding.json
-({
-  "$schema": "https://gobl.org/draft-0/envelope",
-  "head": {
-    "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
-    "dig": {
-      "alg": "sha256",
-      "val": "9a959ce8a88979f7029aee8a18e6e3344d269180d165c4c651c479dd6b9bcde2"
-    }
-  },
-  "doc": {
-    "$schema": "https://gobl.org/draft-0/bill/invoice",
-    "$regime": "ES",
-    "$addons": [
-      "es-verifactu-v1"
-    ],
-    "uuid": "3aea7b56-59d8-4beb-90bd-f8f280d852a0",
-    "type": "credit-note",
-    "series": "SAMPLE-F",
-    "code": "004",
-    "issue_date": "2025-07-10",
-    "currency": "EUR",
-    "tax": {
-      "ext": {
-        "es-verifactu-correction-type": "I",
-        "es-verifactu-doc-type": "R1"
-      }
-    },
-    "supplier": {
-      "name": "Provide One S.L.",
-      "tax_id": {
-        "country": "ES",
-        "code": "B98602642"
-      },
-      "addresses": [
-        {
-          "num": "42",
-          "street": "Calle Pradillo",
-          "locality": "Madrid",
-          "region": "Madrid",
-          "code": "28002",
-          "country": "ES"
-        }
-      ],
-      "emails": [
-        {
-          "addr": "billing@example.com"
-        }
-      ]
-    },
-    "customer": {
-      "name": "Sample Consumer",
-      "tax_id": {
-        "country": "ES",
-        "code": "54387763P"
-      },
-      "addresses": [
-        {
-          "num": "1",
-          "street": "Calle de la Libertad",
-          "locality": "Madrid",
-          "region": "Madrid",
-          "code": "28001",
-          "country": "ES"
-        }
-      ]
-    },
-    "lines": [
-      {
-        "i": 1,
-        "quantity": "20",
-        "item": {
-          "name": "Development services",
-          "price": "90.00",
-          "unit": "h"
-        },
-        "sum": "1800.00",
-        "discounts": [
-          {
-            "reason": "Special discount",
-            "percent": "10%",
-            "amount": "180.00"
-          }
-        ],
-        "taxes": [
-          {
-            "cat": "VAT",
-            "key": "standard",
-            "rate": "general",
-            "percent": "21.0%",
-            "ext": {
-              "es-verifactu-op-class": "S1",
-              "es-verifactu-regime": "01"
-            }
-          }
-        ],
-        "total": "1620.00"
-      },
-      {
-        "i": 2,
-        "quantity": "1",
-        "item": {
-          "name": "Financial service",
-          "price": "10.00"
-        },
-        "sum": "10.00",
-        "taxes": [
-          {
-            "cat": "VAT",
-            "key": "zero",
-            "percent": "0%",
-            "ext": {
-              "es-verifactu-op-class": "S1",
-              "es-verifactu-regime": "01"
-            }
-          }
-        ],
-        "total": "10.00"
-      }
-    ],
-    "totals": {
-      "sum": "1630.00",
-      "total": "1630.00",
-      "taxes": {
-        "categories": [
-          {
-            "code": "VAT",
-            "rates": [
-              {
-                "key": "standard",
-                "ext": {
-                  "es-verifactu-op-class": "S1",
-                  "es-verifactu-regime": "01"
-                },
-                "base": "1620.00",
-                "percent": "21.0%",
-                "amount": "340.20"
-              },
-              {
-                "key": "zero",
-                "ext": {
-                  "es-verifactu-op-class": "S1",
-                  "es-verifactu-regime": "01"
-                },
-                "base": "10.00",
-                "percent": "0%",
-                "amount": "0.00"
-              }
-            ],
-            "amount": "340.20"
-          }
-        ],
-        "sum": "340.20"
-      },
-      "tax": "340.20",
-      "total_with_tax": "1970.20",
-      "payable": "1970.20"
-    }
-  }
-}) satisfies Envelope<bill.Invoice>;
-
-// es/out/invoice-es-es-verifactu-replacement.json
-({
-  "$schema": "https://gobl.org/draft-0/envelope",
-  "head": {
-    "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
-    "dig": {
-      "alg": "sha256",
-      "val": "409bd2bf957795546b026daed3c1c3d7b66669f71daa879e040cfcdd72659157"
-    }
-  },
-  "doc": {
-    "$schema": "https://gobl.org/draft-0/bill/invoice",
-    "$regime": "ES",
-    "$addons": [
-      "es-verifactu-v1"
-    ],
-    "$tags": [
-      "replacement"
-    ],
-    "uuid": "3aea7b56-59d8-4beb-90bd-f8f280d852a0",
-    "type": "standard",
-    "series": "SAMPLE-F",
-    "code": "004",
-    "issue_date": "2025-07-10",
-    "currency": "EUR",
-    "preceding": [
-      {
-        "type": "invoice",
-        "issue_date": "2025-07-01",
-        "series": "SAMPLE",
-        "code": "003"
-      }
-    ],
-    "tax": {
-      "ext": {
-        "es-verifactu-doc-type": "F3"
-      }
-    },
-    "supplier": {
-      "name": "Provide One S.L.",
-      "tax_id": {
-        "country": "ES",
-        "code": "B98602642"
-      },
-      "addresses": [
-        {
-          "num": "42",
-          "street": "Calle Pradillo",
-          "locality": "Madrid",
-          "region": "Madrid",
-          "code": "28002",
-          "country": "ES"
-        }
-      ],
-      "emails": [
-        {
-          "addr": "billing@example.com"
-        }
-      ]
-    },
-    "customer": {
-      "name": "Sample Consumer",
-      "tax_id": {
-        "country": "ES",
-        "code": "54387763P"
-      },
-      "addresses": [
-        {
-          "num": "1",
-          "street": "Calle de la Libertad",
-          "locality": "Madrid",
-          "region": "Madrid",
-          "code": "28001",
-          "country": "ES"
-        }
-      ]
-    },
-    "lines": [
-      {
-        "i": 1,
-        "quantity": "20",
-        "item": {
-          "name": "Development services",
-          "price": "90.00",
-          "unit": "h"
-        },
-        "sum": "1800.00",
-        "discounts": [
-          {
-            "reason": "Special discount",
-            "percent": "10%",
-            "amount": "180.00"
-          }
-        ],
-        "taxes": [
-          {
-            "cat": "VAT",
-            "key": "standard",
-            "rate": "general",
-            "percent": "21.0%",
-            "ext": {
-              "es-verifactu-op-class": "S1",
-              "es-verifactu-regime": "01"
-            }
-          }
-        ],
-        "total": "1620.00"
-      },
-      {
-        "i": 2,
-        "quantity": "1",
-        "item": {
-          "name": "Financial service",
-          "price": "10.00"
-        },
-        "sum": "10.00",
-        "taxes": [
-          {
-            "cat": "VAT",
-            "key": "zero",
-            "percent": "0%",
-            "ext": {
-              "es-verifactu-op-class": "S1",
-              "es-verifactu-regime": "01"
-            }
-          }
-        ],
-        "total": "10.00"
-      }
-    ],
-    "totals": {
-      "sum": "1630.00",
-      "total": "1630.00",
-      "taxes": {
-        "categories": [
-          {
-            "code": "VAT",
-            "rates": [
-              {
-                "key": "standard",
-                "ext": {
-                  "es-verifactu-op-class": "S1",
-                  "es-verifactu-regime": "01"
-                },
-                "base": "1620.00",
-                "percent": "21.0%",
-                "amount": "340.20"
-              },
-              {
-                "key": "zero",
-                "ext": {
-                  "es-verifactu-op-class": "S1",
-                  "es-verifactu-regime": "01"
-                },
-                "base": "10.00",
-                "percent": "0%",
-                "amount": "0.00"
-              }
-            ],
-            "amount": "340.20"
-          }
-        ],
-        "sum": "340.20"
-      },
-      "tax": "340.20",
-      "total_with_tax": "1970.20",
-      "payable": "1970.20"
-    }
-  }
-}) satisfies Envelope<bill.Invoice>;
-
-// es/out/invoice-es-es-verifactu-self-billed.json
-({
-  "$schema": "https://gobl.org/draft-0/envelope",
-  "head": {
-    "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
-    "dig": {
-      "alg": "sha256",
-      "val": "b7e8eb365e589f1d0e5c3999ae41a73dd1ce76bcfda1ba39f050df60ac7afc43"
-    }
-  },
-  "doc": {
-    "$schema": "https://gobl.org/draft-0/bill/invoice",
-    "$regime": "ES",
-    "$addons": [
-      "es-verifactu-v1"
-    ],
-    "$tags": [
-      "self-billed"
-    ],
-    "uuid": "3aea7b56-59d8-4beb-90bd-f8f280d852a0",
-    "type": "standard",
-    "series": "SAMPLE",
-    "code": "004",
-    "issue_date": "2024-12-04",
-    "currency": "EUR",
-    "tax": {
-      "ext": {
-        "es-verifactu-doc-type": "F1",
-        "es-verifactu-issuer-type": "D"
-      },
-      "notes": [
-        {
-          "key": "self-billed",
-          "text": "Facturación por el destinatario."
-        }
-      ]
-    },
-    "supplier": {
-      "name": "Provide One S.L.",
-      "tax_id": {
-        "country": "ES",
-        "code": "B98602642"
-      },
-      "addresses": [
-        {
-          "num": "42",
-          "street": "Calle Pradillo",
-          "locality": "Madrid",
-          "region": "Madrid",
-          "code": "28002",
-          "country": "ES"
-        }
-      ],
-      "emails": [
-        {
-          "addr": "billing@example.com"
-        }
-      ]
-    },
-    "customer": {
-      "name": "Sample Consumer",
-      "tax_id": {
-        "country": "ES",
-        "code": "54387763P"
-      }
-    },
-    "lines": [
-      {
-        "i": 1,
-        "quantity": "20",
-        "item": {
-          "name": "Development services",
-          "price": "90.00",
-          "unit": "h"
-        },
-        "sum": "1800.00",
-        "discounts": [
-          {
-            "reason": "Special discount",
-            "percent": "10%",
-            "amount": "180.00"
-          }
-        ],
-        "taxes": [
-          {
-            "cat": "VAT",
-            "key": "standard",
-            "rate": "general",
-            "percent": "21.0%",
-            "ext": {
-              "es-verifactu-op-class": "S1",
-              "es-verifactu-regime": "01"
-            }
-          }
-        ],
-        "total": "1620.00"
-      },
-      {
-        "i": 2,
-        "quantity": "1",
-        "item": {
-          "name": "Financial service",
-          "price": "10.00"
-        },
-        "sum": "10.00",
-        "taxes": [
-          {
-            "cat": "VAT",
-            "key": "zero",
-            "percent": "0%",
-            "ext": {
-              "es-verifactu-op-class": "S1",
-              "es-verifactu-regime": "01"
-            }
-          }
-        ],
-        "total": "10.00"
-      }
-    ],
-    "totals": {
-      "sum": "1630.00",
-      "total": "1630.00",
-      "taxes": {
-        "categories": [
-          {
-            "code": "VAT",
-            "rates": [
-              {
-                "key": "standard",
-                "ext": {
-                  "es-verifactu-op-class": "S1",
-                  "es-verifactu-regime": "01"
-                },
-                "base": "1620.00",
-                "percent": "21.0%",
-                "amount": "340.20"
-              },
-              {
-                "key": "zero",
-                "ext": {
-                  "es-verifactu-op-class": "S1",
-                  "es-verifactu-regime": "01"
-                },
-                "base": "10.00",
-                "percent": "0%",
-                "amount": "0.00"
-              }
-            ],
-            "amount": "340.20"
-          }
-        ],
-        "sum": "340.20"
-      },
-      "tax": "340.20",
-      "total_with_tax": "1970.20",
-      "payable": "1970.20"
-    }
-  }
-}) satisfies Envelope<bill.Invoice>;
-
-// es/out/invoice-es-es-verifactu-simplified-with-customer.json
-({
-  "$schema": "https://gobl.org/draft-0/envelope",
-  "head": {
-    "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
-    "dig": {
-      "alg": "sha256",
-      "val": "840b3933159910f03ea4e1d2d4b5ae573f07a1b7734932addd761b8498203c68"
-    }
-  },
-  "doc": {
-    "$schema": "https://gobl.org/draft-0/bill/invoice",
-    "$regime": "ES",
-    "$addons": [
-      "es-verifactu-v1"
-    ],
-    "$tags": [
-      "simplified"
-    ],
-    "uuid": "3aea7b56-59d8-4beb-90bd-f8f280d852a1",
-    "type": "standard",
-    "series": "SAMPLE",
-    "code": "005",
-    "issue_date": "2024-12-04",
-    "currency": "EUR",
-    "tax": {
-      "ext": {
-        "es-verifactu-doc-type": "F2"
-      }
-    },
-    "supplier": {
-      "name": "Provide One S.L.",
-      "tax_id": {
-        "country": "ES",
-        "code": "B98602642"
-      },
-      "addresses": [
-        {
-          "num": "42",
-          "street": "Calle Pradillo",
-          "locality": "Madrid",
-          "region": "Madrid",
-          "code": "28002",
-          "country": "ES"
-        }
-      ],
-      "emails": [
-        {
-          "addr": "billing@example.com"
-        }
-      ]
-    },
-    "customer": {
-      "name": "Sample Consumer",
-      "addresses": [
-        {
-          "num": "10",
-          "street": "Avenida Siempre Viva",
-          "locality": "Springfield",
-          "region": "SP",
-          "code": "28080",
-          "country": "ES"
-        }
-      ]
-    },
-    "lines": [
-      {
-        "i": 1,
-        "quantity": "20",
-        "item": {
-          "name": "Development services",
-          "price": "90.00",
-          "unit": "h"
-        },
-        "sum": "1800.00",
-        "taxes": [
-          {
-            "cat": "VAT",
-            "key": "standard",
-            "rate": "general",
-            "percent": "21.0%",
-            "ext": {
-              "es-verifactu-op-class": "S1",
-              "es-verifactu-regime": "01"
-            }
-          }
-        ],
-        "total": "1800.00"
-      },
-      {
-        "i": 2,
-        "quantity": "1",
-        "item": {
-          "name": "Other service",
-          "price": "10.00"
-        },
-        "sum": "10.00",
-        "taxes": [
-          {
-            "cat": "VAT",
-            "key": "standard",
-            "rate": "general",
-            "percent": "21.0%",
-            "ext": {
-              "es-verifactu-op-class": "S1",
-              "es-verifactu-regime": "01"
-            }
-          }
-        ],
-        "total": "10.00"
-      }
-    ],
-    "totals": {
-      "sum": "1810.00",
-      "total": "1810.00",
-      "taxes": {
-        "categories": [
-          {
-            "code": "VAT",
-            "rates": [
-              {
-                "key": "standard",
-                "ext": {
-                  "es-verifactu-op-class": "S1",
-                  "es-verifactu-regime": "01"
-                },
-                "base": "1810.00",
-                "percent": "21.0%",
-                "amount": "380.10"
-              }
-            ],
-            "amount": "380.10"
-          }
-        ],
-        "sum": "380.10"
-      },
-      "tax": "380.10",
-      "total_with_tax": "2190.10",
-      "payable": "2190.10"
-    }
-  }
-}) satisfies Envelope<bill.Invoice>;
-
-// es/out/invoice-es-es-verifactu.json
-({
-  "$schema": "https://gobl.org/draft-0/envelope",
-  "head": {
-    "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
-    "dig": {
-      "alg": "sha256",
-      "val": "91e637b697254356940c01c6f4bc784874b376e25aa953edfaaf4a27c2ed49d6"
-    }
-  },
-  "doc": {
-    "$schema": "https://gobl.org/draft-0/bill/invoice",
-    "$regime": "ES",
-    "$addons": [
-      "es-verifactu-v1"
-    ],
-    "uuid": "3aea7b56-59d8-4beb-90bd-f8f280d852a0",
-    "type": "standard",
-    "series": "SAMPLE",
-    "code": "004",
-    "issue_date": "2024-12-04",
-    "currency": "EUR",
-    "tax": {
-      "ext": {
-        "es-verifactu-doc-type": "F1"
-      }
-    },
-    "supplier": {
-      "name": "Provide One S.L.",
-      "tax_id": {
-        "country": "ES",
-        "code": "B98602642"
-      },
-      "addresses": [
-        {
-          "num": "42",
-          "street": "Calle Pradillo",
-          "locality": "Madrid",
-          "region": "Madrid",
-          "code": "28002",
-          "country": "ES"
-        }
-      ],
-      "emails": [
-        {
-          "addr": "billing@example.com"
-        }
-      ]
-    },
-    "customer": {
-      "name": "Sample Consumer",
-      "tax_id": {
-        "country": "ES",
-        "code": "54387763P"
-      }
-    },
-    "lines": [
-      {
-        "i": 1,
-        "quantity": "20",
-        "item": {
-          "name": "Development services",
-          "price": "90.00",
-          "unit": "h"
-        },
-        "sum": "1800.00",
-        "discounts": [
-          {
-            "reason": "Special discount",
-            "percent": "10%",
-            "amount": "180.00"
-          }
-        ],
-        "taxes": [
-          {
-            "cat": "VAT",
-            "key": "standard",
-            "rate": "general",
-            "percent": "21.0%",
-            "ext": {
-              "es-verifactu-op-class": "S1",
-              "es-verifactu-regime": "01"
-            }
-          }
-        ],
-        "total": "1620.00"
-      },
-      {
-        "i": 2,
-        "quantity": "1",
-        "item": {
-          "name": "Financial service",
-          "price": "10.00"
-        },
-        "sum": "10.00",
-        "taxes": [
-          {
-            "cat": "VAT",
-            "key": "zero",
-            "percent": "0%",
-            "ext": {
-              "es-verifactu-op-class": "S1",
-              "es-verifactu-regime": "01"
-            }
-          }
-        ],
-        "total": "10.00"
-      }
-    ],
-    "totals": {
-      "sum": "1630.00",
-      "total": "1630.00",
-      "taxes": {
-        "categories": [
-          {
-            "code": "VAT",
-            "rates": [
-              {
-                "key": "standard",
-                "ext": {
-                  "es-verifactu-op-class": "S1",
-                  "es-verifactu-regime": "01"
-                },
-                "base": "1620.00",
-                "percent": "21.0%",
-                "amount": "340.20"
-              },
-              {
-                "key": "zero",
-                "ext": {
-                  "es-verifactu-op-class": "S1",
-                  "es-verifactu-regime": "01"
-                },
-                "base": "10.00",
-                "percent": "0%",
-                "amount": "0.00"
-              }
-            ],
-            "amount": "340.20"
-          }
-        ],
-        "sum": "340.20"
-      },
-      "tax": "340.20",
-      "total_with_tax": "1970.20",
-      "payable": "1970.20"
-    },
-    "notes": [
-      {
-        "key": "general",
-        "text": "Random invoice"
-      }
-    ]
-  }
-}) satisfies Envelope<bill.Invoice>;
-
 // es/out/invoice-es-es.env.json
 ({
   "$schema": "https://gobl.org/draft-0/envelope",
@@ -9021,26 +6894,17 @@ import type * as tax from '../src/gen/tax/index.js';
     "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
     "dig": {
       "alg": "sha256",
-      "val": "77210118a44b619012c0647cafb15e1a5a24a8d8ef63dfe61380f61acc79a4fe"
+      "val": "50e898866779a30e1b87acb45dd9ad1c8bb51ad847bc02083594ea4a8dc36f5d"
     }
   },
   "doc": {
     "$schema": "https://gobl.org/draft-0/bill/invoice",
     "$regime": "ES",
-    "$addons": [
-      "es-facturae-v3"
-    ],
     "uuid": "3aea7b56-59d8-4beb-90bd-f8f280d852a0",
     "type": "standard",
     "code": "SAMPLE-001",
     "issue_date": "2022-02-01",
     "currency": "EUR",
-    "tax": {
-      "ext": {
-        "es-facturae-doc-type": "FC",
-        "es-facturae-invoice-class": "OO"
-      }
-    },
     "supplier": {
       "name": "Provide One S.L.",
       "tax_id": {
@@ -9520,26 +7384,17 @@ import type * as tax from '../src/gen/tax/index.js';
     "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
     "dig": {
       "alg": "sha256",
-      "val": "5b7ed829f9c9835b8ce0f2d23ad84de34f0fa9165f9f203609cc2042e850c04e"
+      "val": "647768650f33941933c791a49276245d5a89ebd989793757af51fd9e7259e9b9"
     }
   },
   "doc": {
     "$schema": "https://gobl.org/draft-0/bill/invoice",
     "$regime": "ES",
-    "$addons": [
-      "es-facturae-v3"
-    ],
     "uuid": "3aea7b56-59d8-4beb-90bd-f8f280d852a0",
     "type": "standard",
     "code": "SAMPLE-001",
     "issue_date": "2022-02-01",
     "currency": "EUR",
-    "tax": {
-      "ext": {
-        "es-facturae-doc-type": "FC",
-        "es-facturae-invoice-class": "OO"
-      }
-    },
     "supplier": {
       "name": "Provide One S.L.",
       "tax_id": {
@@ -12357,9 +10212,6 @@ import type * as tax from '../src/gen/tax/index.js';
       }
     ],
     "payment": {
-      "terms": {
-        "notes": "Pay before delivery"
-      },
       "advances": [
         {
           "description": "Paid in full",
@@ -12367,6 +10219,9 @@ import type * as tax from '../src/gen/tax/index.js';
           "amount": "1944.00"
         }
       ],
+      "terms": {
+        "notes": "Pay before delivery"
+      },
       "instructions": {
         "key": "card",
         "ext": {
@@ -12406,22 +10261,21 @@ import type * as tax from '../src/gen/tax/index.js';
   }
 }) satisfies Envelope<bill.Invoice>;
 
-// fr/out/invoice-fr-fr-facturx.json
+// fr/out/invoice-fr-fr-en16931.json
 ({
   "$schema": "https://gobl.org/draft-0/envelope",
   "head": {
     "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
     "dig": {
       "alg": "sha256",
-      "val": "1a5539d5cb3af435b30f28a6499c864caaf721590cc4e220459b7f3297111b87"
+      "val": "b3c78da5cffdc50082f4c4d29a1ca3acfcc23ed30d609f0fb8c9ff8506bef4f5"
     }
   },
   "doc": {
     "$schema": "https://gobl.org/draft-0/bill/invoice",
     "$regime": "FR",
     "$addons": [
-      "eu-en16931-v2017",
-      "fr-facturx-v1"
+      "eu-en16931-v2017"
     ],
     "uuid": "3aea7b56-59d8-4beb-90bd-f8f280d852a0",
     "type": "standard",
@@ -13110,6 +10964,108 @@ import type * as tax from '../src/gen/tax/index.js';
       "tax": "12.00",
       "total_with_tax": "72.00",
       "payable": "72.00"
+    }
+  }
+}) satisfies Envelope<bill.Invoice>;
+
+// gb/out/invoice-item-price.json
+({
+  "$schema": "https://gobl.org/draft-0/envelope",
+  "head": {
+    "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
+    "dig": {
+      "alg": "sha256",
+      "val": "32c80b07dbd7514a6ad6b503f8bbc78275b49c03dd0522a0b8c3a210d55eb8a6"
+    }
+  },
+  "doc": {
+    "$schema": "https://gobl.org/draft-0/bill/invoice",
+    "$regime": "GB",
+    "uuid": "019035bd-4524-73ab-bf44-6037841ce5d9",
+    "type": "standard",
+    "series": "SAMPLE",
+    "code": "003",
+    "issue_date": "2024-07-31",
+    "currency": "GBP",
+    "supplier": {
+      "name": "Test Company Ltd.",
+      "tax_id": {
+        "country": "GB",
+        "code": "000472631"
+      },
+      "addresses": [
+        {
+          "num": "12",
+          "street": "Main Street",
+          "locality": "Hull",
+          "code": "HU17 7PQ",
+          "country": "GB"
+        }
+      ]
+    },
+    "customer": {
+      "name": "Random Company Ltd.",
+      "tax_id": {
+        "country": "GB",
+        "code": "350983637"
+      },
+      "addresses": [
+        {
+          "num": "45",
+          "street": "Some Street",
+          "locality": "London",
+          "code": "SW1A 1AA",
+          "country": "GB"
+        }
+      ]
+    },
+    "lines": [
+      {
+        "i": 1,
+        "quantity": "250",
+        "item": {
+          "name": "Bulk coffee beans",
+          "list": "120.00",
+          "discount": "12.00",
+          "price": "108.00",
+          "per": "100",
+          "unit": "kg"
+        },
+        "sum": "270.00",
+        "taxes": [
+          {
+            "cat": "VAT",
+            "key": "standard",
+            "rate": "general",
+            "percent": "20.0%"
+          }
+        ],
+        "total": "270.00"
+      }
+    ],
+    "totals": {
+      "sum": "270.00",
+      "total": "270.00",
+      "taxes": {
+        "categories": [
+          {
+            "code": "VAT",
+            "rates": [
+              {
+                "key": "standard",
+                "base": "270.00",
+                "percent": "20.0%",
+                "amount": "54.00"
+              }
+            ],
+            "amount": "54.00"
+          }
+        ],
+        "sum": "54.00"
+      },
+      "tax": "54.00",
+      "total_with_tax": "324.00",
+      "payable": "324.00"
     }
   }
 }) satisfies Envelope<bill.Invoice>;
@@ -15367,1432 +13323,62 @@ import type * as tax from '../src/gen/tax/index.js';
   }
 }) satisfies Envelope<bill.Invoice>;
 
-// pl/out/credit-note-prepayment.json
+// pe/out/credit-note-pe.json
 ({
   "$schema": "https://gobl.org/draft-0/envelope",
   "head": {
     "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
     "dig": {
       "alg": "sha256",
-      "val": "c557c24fcc9a78d2a283f4ad8ff6a86a3578c4244313e7c1d032173bb4a0b7d5"
+      "val": "8c5f40240fe1573aaa6275b0a4442f18fb4fdefdb9866e41ea069d9da3953080"
     }
   },
   "doc": {
     "$schema": "https://gobl.org/draft-0/bill/invoice",
-    "$regime": "PL",
-    "$addons": [
-      "pl-favat-v3"
-    ],
-    "$tags": [
-      "partial"
-    ],
-    "uuid": "01927639-c1a0-7f3a-88d9-5b1f2a5e3c9c",
+    "$regime": "PE",
+    "uuid": "9c5b3a17-2e8d-4f60-a1b9-6d7e8c9f0a2d",
     "type": "credit-note",
-    "series": "KOR-ZAL",
-    "code": "001",
-    "issue_date": "2026-01-20",
-    "currency": "PLN",
+    "series": "FC01",
+    "code": "00000012",
+    "issue_date": "2026-07-01",
+    "currency": "PEN",
     "preceding": [
       {
         "type": "standard",
-        "issue_date": "2026-01-20",
-        "series": "ZAL",
-        "code": "001",
-        "reason": "Advance payment cancelled",
-        "stamps": [
-          {
-            "prv": "favat-ksef-number",
-            "val": "1234567890-20260120-XYZ98765-AB"
-          }
-        ],
-        "ext": {
-          "pl-favat-effective-date": "2"
-        }
+        "issue_date": "2026-06-15",
+        "series": "F001",
+        "code": "00000123"
       }
     ],
-    "tax": {
-      "ext": {
-        "pl-favat-invoice-type": "KOR_ZAL"
-      }
-    },
     "supplier": {
-      "name": "Testowa Firma Sp. z o.o.",
+      "name": "Comercial Andina S.A.C.",
       "tax_id": {
-        "country": "PL",
-        "code": "9876543210"
+        "country": "PE",
+        "code": "20401234561"
       },
       "addresses": [
         {
-          "street": "ul. Główna 1",
-          "locality": "Warsaw",
-          "code": "00-001",
-          "country": "PL"
+          "street": "Av. Javier Prado Este 1234",
+          "locality": "San Isidro",
+          "region": "Lima",
+          "code": "15036",
+          "country": "PE"
         }
       ]
     },
     "customer": {
-      "name": "Klient Testowy Sp. z o.o.",
+      "name": "Distribuidora del Sur S.A.",
       "tax_id": {
-        "country": "PL",
-        "code": "9876543210"
+        "country": "PE",
+        "code": "20876543215"
       },
       "addresses": [
         {
-          "street": "ul. Testowa 10",
-          "locality": "Kraków",
-          "code": "30-001",
-          "country": "PL"
-        }
-      ]
-    },
-    "lines": [
-      {
-        "i": 1,
-        "quantity": "1",
-        "item": {
-          "name": "Advance Payment Refund",
-          "price": "5000.00"
-        },
-        "sum": "5000.00",
-        "taxes": [
-          {
-            "cat": "VAT",
-            "key": "standard",
-            "rate": "general",
-            "percent": "23.0%",
-            "ext": {
-              "pl-favat-tax-category": "1"
-            }
-          }
-        ],
-        "total": "5000.00"
-      }
-    ],
-    "totals": {
-      "sum": "5000.00",
-      "total": "5000.00",
-      "taxes": {
-        "categories": [
-          {
-            "code": "VAT",
-            "rates": [
-              {
-                "key": "standard",
-                "ext": {
-                  "pl-favat-tax-category": "1"
-                },
-                "base": "5000.00",
-                "percent": "23.0%",
-                "amount": "1150.00"
-              }
-            ],
-            "amount": "1150.00"
-          }
-        ],
-        "sum": "1150.00"
-      },
-      "tax": "1150.00",
-      "total_with_tax": "6150.00",
-      "payable": "6150.00"
-    }
-  }
-}) satisfies Envelope<bill.Invoice>;
-
-// pl/out/credit-note-settlement.json
-({
-  "$schema": "https://gobl.org/draft-0/envelope",
-  "head": {
-    "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
-    "dig": {
-      "alg": "sha256",
-      "val": "529eec2f3d99cef7f0750b366fda8dcd544cd4206b323ee9ad7b8459c5872b2f"
-    }
-  },
-  "doc": {
-    "$schema": "https://gobl.org/draft-0/bill/invoice",
-    "$regime": "PL",
-    "$addons": [
-      "pl-favat-v3"
-    ],
-    "$tags": [
-      "settlement"
-    ],
-    "uuid": "01927639-c1a0-7f3a-88d9-5b1f2a5e3cad",
-    "type": "credit-note",
-    "series": "KOR-ROZ",
-    "code": "001",
-    "issue_date": "2026-01-20",
-    "currency": "PLN",
-    "preceding": [
-      {
-        "type": "standard",
-        "issue_date": "2026-01-20",
-        "series": "ROZ",
-        "code": "001",
-        "reason": "Final settlement correction",
-        "stamps": [
-          {
-            "prv": "favat-ksef-number",
-            "val": "1234567890-20260120-DEF45678-GH"
-          }
-        ],
-        "ext": {
-          "pl-favat-effective-date": "1"
-        }
-      }
-    ],
-    "tax": {
-      "ext": {
-        "pl-favat-invoice-type": "KOR_ROZ"
-      }
-    },
-    "supplier": {
-      "name": "Testowa Firma Sp. z o.o.",
-      "tax_id": {
-        "country": "PL",
-        "code": "9876543210"
-      },
-      "addresses": [
-        {
-          "street": "ul. Główna 1",
-          "locality": "Warsaw",
-          "code": "00-001",
-          "country": "PL"
-        }
-      ]
-    },
-    "customer": {
-      "name": "Klient Testowy Sp. z o.o.",
-      "tax_id": {
-        "country": "PL",
-        "code": "9876543210"
-      },
-      "addresses": [
-        {
-          "street": "ul. Testowa 10",
-          "locality": "Kraków",
-          "code": "30-001",
-          "country": "PL"
-        }
-      ]
-    },
-    "lines": [
-      {
-        "i": 1,
-        "quantity": "1",
-        "item": {
-          "name": "Settlement Invoice Correction",
-          "price": "1000.00"
-        },
-        "sum": "1000.00",
-        "taxes": [
-          {
-            "cat": "VAT",
-            "key": "standard",
-            "rate": "general",
-            "percent": "23.0%",
-            "ext": {
-              "pl-favat-tax-category": "1"
-            }
-          }
-        ],
-        "total": "1000.00"
-      }
-    ],
-    "totals": {
-      "sum": "1000.00",
-      "total": "1000.00",
-      "taxes": {
-        "categories": [
-          {
-            "code": "VAT",
-            "rates": [
-              {
-                "key": "standard",
-                "ext": {
-                  "pl-favat-tax-category": "1"
-                },
-                "base": "1000.00",
-                "percent": "23.0%",
-                "amount": "230.00"
-              }
-            ],
-            "amount": "230.00"
-          }
-        ],
-        "sum": "230.00"
-      },
-      "tax": "230.00",
-      "total_with_tax": "1230.00",
-      "payable": "1230.00"
-    }
-  }
-}) satisfies Envelope<bill.Invoice>;
-
-// pl/out/credit-note-standard.json
-({
-  "$schema": "https://gobl.org/draft-0/envelope",
-  "head": {
-    "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
-    "dig": {
-      "alg": "sha256",
-      "val": "220e4ecba4e613d6aee9eba9183f735afd1e57d234f3cd4cd77a583f16226aa1"
-    }
-  },
-  "doc": {
-    "$schema": "https://gobl.org/draft-0/bill/invoice",
-    "$regime": "PL",
-    "$addons": [
-      "pl-favat-v3"
-    ],
-    "uuid": "01927639-c1a0-7f3a-88d9-5b1f2a5e3c8b",
-    "type": "credit-note",
-    "series": "KOR",
-    "code": "001",
-    "issue_date": "2026-01-20",
-    "currency": "PLN",
-    "preceding": [
-      {
-        "type": "standard",
-        "issue_date": "2026-01-20",
-        "series": "INVOICE",
-        "code": "001",
-        "reason": "Price correction",
-        "stamps": [
-          {
-            "prv": "favat-ksef-number",
-            "val": "1234567890-20260120-ABCD1234-EF"
-          }
-        ],
-        "ext": {
-          "pl-favat-effective-date": "1"
-        }
-      }
-    ],
-    "tax": {
-      "ext": {
-        "pl-favat-invoice-type": "KOR"
-      }
-    },
-    "supplier": {
-      "name": "Testowa Firma Sp. z o.o.",
-      "tax_id": {
-        "country": "PL",
-        "code": "9876543210"
-      },
-      "addresses": [
-        {
-          "street": "ul. Główna 1",
-          "locality": "Warsaw",
-          "code": "00-001",
-          "country": "PL"
-        }
-      ]
-    },
-    "customer": {
-      "name": "Klient Testowy Sp. z o.o.",
-      "tax_id": {
-        "country": "PL",
-        "code": "9876543210"
-      },
-      "addresses": [
-        {
-          "street": "ul. Testowa 10",
-          "locality": "Kraków",
-          "code": "30-001",
-          "country": "PL"
-        }
-      ]
-    },
-    "lines": [
-      {
-        "i": 1,
-        "quantity": "10",
-        "item": {
-          "name": "Software Development Services",
-          "price": "10.00",
-          "unit": "h"
-        },
-        "sum": "100.00",
-        "taxes": [
-          {
-            "cat": "VAT",
-            "key": "standard",
-            "rate": "general",
-            "percent": "23.0%",
-            "ext": {
-              "pl-favat-tax-category": "1"
-            }
-          }
-        ],
-        "total": "100.00"
-      }
-    ],
-    "totals": {
-      "sum": "100.00",
-      "total": "100.00",
-      "taxes": {
-        "categories": [
-          {
-            "code": "VAT",
-            "rates": [
-              {
-                "key": "standard",
-                "ext": {
-                  "pl-favat-tax-category": "1"
-                },
-                "base": "100.00",
-                "percent": "23.0%",
-                "amount": "23.00"
-              }
-            ],
-            "amount": "23.00"
-          }
-        ],
-        "sum": "23.00"
-      },
-      "tax": "23.00",
-      "total_with_tax": "123.00",
-      "payable": "123.00"
-    }
-  }
-}) satisfies Envelope<bill.Invoice>;
-
-// pl/out/invoice-exempt.json
-({
-  "$schema": "https://gobl.org/draft-0/envelope",
-  "head": {
-    "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
-    "dig": {
-      "alg": "sha256",
-      "val": "4893cbac1a4d8d3e8a093c27fcbce5b3bb6f202a9a5cc4b2dd6dc0f9c7dc2183"
-    }
-  },
-  "doc": {
-    "$schema": "https://gobl.org/draft-0/bill/invoice",
-    "$regime": "PL",
-    "$addons": [
-      "pl-favat-v3"
-    ],
-    "uuid": "01927639-c1a0-7f3a-88d9-5b1f2a5e3cda",
-    "type": "standard",
-    "series": "EX",
-    "code": "001",
-    "issue_date": "2026-01-20",
-    "currency": "PLN",
-    "tax": {
-      "ext": {
-        "pl-favat-exemption": "A",
-        "pl-favat-invoice-type": "VAT"
-      }
-    },
-    "supplier": {
-      "name": "Medical Services Sp. z o.o.",
-      "tax_id": {
-        "country": "PL",
-        "code": "1111111111"
-      },
-      "addresses": [
-        {
-          "street": "ul. Zdrowia 5",
-          "locality": "Warsaw",
-          "code": "00-001",
-          "country": "PL"
-        }
-      ]
-    },
-    "customer": {
-      "name": "Patient Jan Kowalski",
-      "tax_id": {
-        "country": "PL",
-        "code": "1111111111"
-      },
-      "addresses": [
-        {
-          "street": "ul. Pacjenta 15",
-          "locality": "Warsaw",
-          "code": "00-005",
-          "country": "PL"
-        }
-      ]
-    },
-    "lines": [
-      {
-        "i": 1,
-        "quantity": "1",
-        "item": {
-          "name": "Medical Consultation",
-          "price": "200.00"
-        },
-        "sum": "200.00",
-        "taxes": [
-          {
-            "cat": "VAT",
-            "key": "exempt",
-            "ext": {
-              "pl-favat-tax-category": "7"
-            }
-          }
-        ],
-        "total": "200.00"
-      }
-    ],
-    "totals": {
-      "sum": "200.00",
-      "total": "200.00",
-      "taxes": {
-        "categories": [
-          {
-            "code": "VAT",
-            "rates": [
-              {
-                "key": "exempt",
-                "ext": {
-                  "pl-favat-tax-category": "7"
-                },
-                "base": "200.00",
-                "amount": "0.00"
-              }
-            ],
-            "amount": "0.00"
-          }
-        ],
-        "sum": "0.00"
-      },
-      "tax": "0.00",
-      "total_with_tax": "200.00",
-      "payable": "200.00"
-    },
-    "notes": [
-      {
-        "key": "legal",
-        "code": "A",
-        "src": "pl-favat-exemption",
-        "text": "Exempt from VAT under Article 43(1)(18) of the Polish VAT Act - medical services."
-      }
-    ]
-  }
-}) satisfies Envelope<bill.Invoice>;
-
-// pl/out/invoice-group-vat.json
-({
-  "$schema": "https://gobl.org/draft-0/envelope",
-  "head": {
-    "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
-    "dig": {
-      "alg": "sha256",
-      "val": "189018c511316cd8777f838b7d1532e0f5cb84d797a8053a5a67cac021b29690"
-    }
-  },
-  "doc": {
-    "$schema": "https://gobl.org/draft-0/bill/invoice",
-    "$regime": "PL",
-    "$addons": [
-      "pl-favat-v3"
-    ],
-    "uuid": "01927639-c1a0-7f3a-88d9-5b1f2a5e3cfc",
-    "type": "standard",
-    "series": "GV",
-    "code": "001",
-    "issue_date": "2026-01-20",
-    "currency": "PLN",
-    "tax": {
-      "ext": {
-        "pl-favat-invoice-type": "VAT"
-      }
-    },
-    "supplier": {
-      "name": "Testowa Firma Sp. z o.o.",
-      "tax_id": {
-        "country": "PL",
-        "code": "9876543210"
-      },
-      "addresses": [
-        {
-          "street": "ul. Główna 1",
-          "locality": "Warsaw",
-          "code": "00-001",
-          "country": "PL"
-        }
-      ]
-    },
-    "customer": {
-      "name": "VAT Group Member Sp. z o.o.",
-      "tax_id": {
-        "country": "PL",
-        "code": "9876543210"
-      },
-      "identities": [
-        {
-          "code": "GV-MEMBER-12345",
-          "ext": {
-            "pl-favat-third-party-role": "10"
-          }
-        }
-      ],
-      "addresses": [
-        {
-          "street": "ul. Grupowa 50",
-          "locality": "Kraków",
-          "code": "30-001",
-          "country": "PL"
-        }
-      ],
-      "ext": {
-        "pl-favat-group-vat": "1"
-      }
-    },
-    "lines": [
-      {
-        "i": 1,
-        "quantity": "10",
-        "item": {
-          "name": "Consulting Services for VAT Group Member",
-          "price": "500.00",
-          "unit": "h"
-        },
-        "sum": "5000.00",
-        "taxes": [
-          {
-            "cat": "VAT",
-            "key": "standard",
-            "rate": "general",
-            "percent": "23.0%",
-            "ext": {
-              "pl-favat-tax-category": "1"
-            }
-          }
-        ],
-        "total": "5000.00"
-      }
-    ],
-    "totals": {
-      "sum": "5000.00",
-      "total": "5000.00",
-      "taxes": {
-        "categories": [
-          {
-            "code": "VAT",
-            "rates": [
-              {
-                "key": "standard",
-                "ext": {
-                  "pl-favat-tax-category": "1"
-                },
-                "base": "5000.00",
-                "percent": "23.0%",
-                "amount": "1150.00"
-              }
-            ],
-            "amount": "1150.00"
-          }
-        ],
-        "sum": "1150.00"
-      },
-      "tax": "1150.00",
-      "total_with_tax": "6150.00",
-      "payable": "6150.00"
-    },
-    "notes": [
-      {
-        "key": "general",
-        "text": "Invoice for services provided to a VAT Group member."
-      }
-    ]
-  }
-}) satisfies Envelope<bill.Invoice>;
-
-// pl/out/invoice-jst-customer.json
-({
-  "$schema": "https://gobl.org/draft-0/envelope",
-  "head": {
-    "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
-    "dig": {
-      "alg": "sha256",
-      "val": "30c20213384406a2c9aa563389571d93061cb56320e27eda9435465471095b6e"
-    }
-  },
-  "doc": {
-    "$schema": "https://gobl.org/draft-0/bill/invoice",
-    "$regime": "PL",
-    "$addons": [
-      "pl-favat-v3"
-    ],
-    "uuid": "01927639-c1a0-7f3a-88d9-5b1f2a5e3ceb",
-    "type": "standard",
-    "series": "JST",
-    "code": "001",
-    "issue_date": "2026-01-20",
-    "currency": "PLN",
-    "tax": {
-      "ext": {
-        "pl-favat-invoice-type": "VAT"
-      }
-    },
-    "supplier": {
-      "name": "Testowa Firma Sp. z o.o.",
-      "tax_id": {
-        "country": "PL",
-        "code": "9876543210"
-      },
-      "addresses": [
-        {
-          "street": "ul. Główna 1",
-          "locality": "Warsaw",
-          "code": "00-001",
-          "country": "PL"
-        }
-      ]
-    },
-    "customer": {
-      "name": "Urząd Miasta Warsaw",
-      "tax_id": {
-        "country": "PL",
-        "code": "9876543210"
-      },
-      "identities": [
-        {
-          "code": "JST-WARSAW-2025",
-          "ext": {
-            "pl-favat-third-party-role": "8"
-          }
-        }
-      ],
-      "addresses": [
-        {
-          "street": "Plac Defilad 1",
-          "locality": "Warsaw",
-          "code": "00-901",
-          "country": "PL"
-        }
-      ],
-      "ext": {
-        "pl-favat-jst": "1"
-      }
-    },
-    "lines": [
-      {
-        "i": 1,
-        "quantity": "1",
-        "item": {
-          "name": "IT System Development for Local Government",
-          "price": "50000.00"
-        },
-        "sum": "50000.00",
-        "taxes": [
-          {
-            "cat": "VAT",
-            "key": "standard",
-            "rate": "general",
-            "percent": "23.0%",
-            "ext": {
-              "pl-favat-tax-category": "1"
-            }
-          }
-        ],
-        "total": "50000.00"
-      }
-    ],
-    "totals": {
-      "sum": "50000.00",
-      "total": "50000.00",
-      "taxes": {
-        "categories": [
-          {
-            "code": "VAT",
-            "rates": [
-              {
-                "key": "standard",
-                "ext": {
-                  "pl-favat-tax-category": "1"
-                },
-                "base": "50000.00",
-                "percent": "23.0%",
-                "amount": "11500.00"
-              }
-            ],
-            "amount": "11500.00"
-          }
-        ],
-        "sum": "11500.00"
-      },
-      "tax": "11500.00",
-      "total_with_tax": "61500.00",
-      "payable": "61500.00"
-    },
-    "notes": [
-      {
-        "key": "general",
-        "text": "Invoice for services provided to Local Government Unit (JST)."
-      }
-    ]
-  }
-}) satisfies Envelope<bill.Invoice>;
-
-// pl/out/invoice-payment-card.json
-({
-  "$schema": "https://gobl.org/draft-0/envelope",
-  "head": {
-    "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
-    "dig": {
-      "alg": "sha256",
-      "val": "fbfb57a6d1ffed4f9b84c61f62661ed4a2716278ea48bb47b741a83555800b33"
-    }
-  },
-  "doc": {
-    "$schema": "https://gobl.org/draft-0/bill/invoice",
-    "$regime": "PL",
-    "$addons": [
-      "pl-favat-v3"
-    ],
-    "uuid": "01927639-c1a0-7f3a-88d9-5b1f2a5e3d0d",
-    "type": "standard",
-    "series": "PAY",
-    "code": "001",
-    "issue_date": "2026-01-20",
-    "currency": "PLN",
-    "tax": {
-      "ext": {
-        "pl-favat-invoice-type": "VAT"
-      }
-    },
-    "supplier": {
-      "name": "Sklep Testowy",
-      "tax_id": {
-        "country": "PL",
-        "code": "9876543210"
-      },
-      "addresses": [
-        {
-          "street": "ul. Handlowa 5",
-          "locality": "Warsaw",
-          "code": "00-001",
-          "country": "PL"
-        }
-      ]
-    },
-    "customer": {
-      "name": "Klient Indywidualny",
-      "tax_id": {
-        "country": "PL",
-        "code": "9876543210"
-      },
-      "addresses": [
-        {
-          "street": "ul. Klienta 10",
-          "locality": "Warsaw",
-          "code": "00-015",
-          "country": "PL"
-        }
-      ]
-    },
-    "lines": [
-      {
-        "i": 1,
-        "quantity": "1",
-        "item": {
-          "name": "Electronics - Laptop",
-          "price": "3500.00"
-        },
-        "sum": "3500.00",
-        "taxes": [
-          {
-            "cat": "VAT",
-            "key": "standard",
-            "rate": "general",
-            "percent": "23.0%",
-            "ext": {
-              "pl-favat-tax-category": "1"
-            }
-          }
-        ],
-        "total": "3500.00"
-      }
-    ],
-    "payment": {
-      "instructions": {
-        "key": "card",
-        "detail": "Payment by card",
-        "ext": {
-          "pl-favat-payment-means": "2"
-        }
-      }
-    },
-    "totals": {
-      "sum": "3500.00",
-      "total": "3500.00",
-      "taxes": {
-        "categories": [
-          {
-            "code": "VAT",
-            "rates": [
-              {
-                "key": "standard",
-                "ext": {
-                  "pl-favat-tax-category": "1"
-                },
-                "base": "3500.00",
-                "percent": "23.0%",
-                "amount": "805.00"
-              }
-            ],
-            "amount": "805.00"
-          }
-        ],
-        "sum": "805.00"
-      },
-      "tax": "805.00",
-      "total_with_tax": "4305.00",
-      "payable": "4305.00"
-    },
-    "notes": [
-      {
-        "key": "general",
-        "text": "Payment received by card at point of sale."
-      }
-    ]
-  }
-}) satisfies Envelope<bill.Invoice>;
-
-// pl/out/invoice-prepayment.json
-({
-  "$schema": "https://gobl.org/draft-0/envelope",
-  "head": {
-    "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
-    "dig": {
-      "alg": "sha256",
-      "val": "b57f7b6b9a00e5037cd36109b6ffd992c7f2a99efbfdac0b262b4aa1cdd89d9a"
-    }
-  },
-  "doc": {
-    "$schema": "https://gobl.org/draft-0/bill/invoice",
-    "$regime": "PL",
-    "$addons": [
-      "pl-favat-v3"
-    ],
-    "$tags": [
-      "partial"
-    ],
-    "uuid": "01927639-c1a0-7f3a-88d9-5b1f2a5e3c5e",
-    "type": "standard",
-    "series": "ZAL",
-    "code": "001",
-    "issue_date": "2026-01-20",
-    "currency": "PLN",
-    "tax": {
-      "ext": {
-        "pl-favat-invoice-type": "ZAL"
-      }
-    },
-    "supplier": {
-      "name": "Testowa Firma Sp. z o.o.",
-      "tax_id": {
-        "country": "PL",
-        "code": "9876543210"
-      },
-      "addresses": [
-        {
-          "street": "ul. Główna 1",
-          "locality": "Warsaw",
-          "code": "00-001",
-          "country": "PL"
-        }
-      ]
-    },
-    "customer": {
-      "name": "Klient Testowy Sp. z o.o.",
-      "tax_id": {
-        "country": "PL",
-        "code": "9876543210"
-      },
-      "addresses": [
-        {
-          "street": "ul. Testowa 10",
-          "locality": "Kraków",
-          "code": "30-001",
-          "country": "PL"
-        }
-      ]
-    },
-    "lines": [
-      {
-        "i": 1,
-        "quantity": "1",
-        "item": {
-          "name": "Advance Payment for Project",
-          "price": "5000.00"
-        },
-        "sum": "5000.00",
-        "taxes": [
-          {
-            "cat": "VAT",
-            "key": "standard",
-            "rate": "general",
-            "percent": "23.0%",
-            "ext": {
-              "pl-favat-tax-category": "1"
-            }
-          }
-        ],
-        "total": "5000.00"
-      }
-    ],
-    "payment": {
-      "advances": [
-        {
-          "date": "2026-01-20",
-          "key": "credit-transfer",
-          "description": "50% advance payment",
-          "percent": "50%",
-          "amount": "3075.00",
-          "ext": {
-            "pl-favat-payment-means": "6"
-          }
-        }
-      ]
-    },
-    "totals": {
-      "sum": "5000.00",
-      "total": "5000.00",
-      "taxes": {
-        "categories": [
-          {
-            "code": "VAT",
-            "rates": [
-              {
-                "key": "standard",
-                "ext": {
-                  "pl-favat-tax-category": "1"
-                },
-                "base": "5000.00",
-                "percent": "23.0%",
-                "amount": "1150.00"
-              }
-            ],
-            "amount": "1150.00"
-          }
-        ],
-        "sum": "1150.00"
-      },
-      "tax": "1150.00",
-      "total_with_tax": "6150.00",
-      "payable": "6150.00",
-      "advance": "3075.00",
-      "due": "3075.00"
-    }
-  }
-}) satisfies Envelope<bill.Invoice>;
-
-// pl/out/invoice-reverse-charge.json
-({
-  "$schema": "https://gobl.org/draft-0/envelope",
-  "head": {
-    "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
-    "dig": {
-      "alg": "sha256",
-      "val": "828c81c0cadc28182366bf3d0a08198cef4eb64b3b2c43621412cd4252745229"
-    }
-  },
-  "doc": {
-    "$schema": "https://gobl.org/draft-0/bill/invoice",
-    "$regime": "PL",
-    "$addons": [
-      "pl-favat-v3"
-    ],
-    "$tags": [
-      "reverse-charge"
-    ],
-    "uuid": "01927639-c1a0-7f3a-88d9-5b1f2a5e3ccf",
-    "type": "standard",
-    "series": "RC",
-    "code": "001",
-    "issue_date": "2026-01-20",
-    "currency": "PLN",
-    "tax": {
-      "ext": {
-        "pl-favat-invoice-type": "VAT",
-        "pl-favat-reverse-charge": "1"
-      }
-    },
-    "supplier": {
-      "name": "Testowa Firma Sp. z o.o.",
-      "tax_id": {
-        "country": "PL",
-        "code": "9876543210"
-      },
-      "addresses": [
-        {
-          "street": "ul. Główna 1",
-          "locality": "Warsaw",
-          "code": "00-001",
-          "country": "PL"
-        }
-      ]
-    },
-    "customer": {
-      "name": "EU Business GmbH",
-      "tax_id": {
-        "country": "DE",
-        "code": "111111125"
-      },
-      "addresses": [
-        {
-          "street": "Hauptstraße 100",
-          "locality": "Berlin",
-          "code": "10115",
-          "country": "DE"
-        }
-      ]
-    },
-    "lines": [
-      {
-        "i": 1,
-        "quantity": "1",
-        "item": {
-          "name": "IT Services - EU Reverse Charge",
-          "price": "5000.00"
-        },
-        "sum": "5000.00",
-        "taxes": [
-          {
-            "cat": "VAT",
-            "key": "reverse-charge",
-            "ext": {
-              "pl-favat-tax-category": "9"
-            }
-          }
-        ],
-        "total": "5000.00"
-      }
-    ],
-    "totals": {
-      "sum": "5000.00",
-      "total": "5000.00",
-      "taxes": {
-        "categories": [
-          {
-            "code": "VAT",
-            "rates": [
-              {
-                "key": "reverse-charge",
-                "ext": {
-                  "pl-favat-tax-category": "9"
-                },
-                "base": "5000.00",
-                "amount": "0.00"
-              }
-            ],
-            "amount": "0.00"
-          }
-        ],
-        "sum": "0.00"
-      },
-      "tax": "0.00",
-      "total_with_tax": "5000.00",
-      "payable": "5000.00"
-    },
-    "notes": [
-      {
-        "key": "legal",
-        "text": "Reverse charge mechanism applies - VAT to be accounted for by the customer."
-      }
-    ]
-  }
-}) satisfies Envelope<bill.Invoice>;
-
-// pl/out/invoice-self-billed.json
-({
-  "$schema": "https://gobl.org/draft-0/envelope",
-  "head": {
-    "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
-    "dig": {
-      "alg": "sha256",
-      "val": "b02534f2fc07d95236cacb9e1bcb3257b5503461426361d159c87c9747ed62cf"
-    }
-  },
-  "doc": {
-    "$schema": "https://gobl.org/draft-0/bill/invoice",
-    "$regime": "PL",
-    "$addons": [
-      "pl-favat-v3"
-    ],
-    "$tags": [
-      "self-billed"
-    ],
-    "uuid": "01927639-c1a0-7f3a-88d9-5b1f2a5e3cbe",
-    "type": "standard",
-    "series": "SELF",
-    "code": "001",
-    "issue_date": "2026-01-20",
-    "currency": "PLN",
-    "tax": {
-      "ext": {
-        "pl-favat-invoice-type": "VAT",
-        "pl-favat-self-billing": "1"
-      }
-    },
-    "supplier": {
-      "name": "External Supplier Ltd",
-      "tax_id": {
-        "country": "PL",
-        "code": "1111111111"
-      },
-      "addresses": [
-        {
-          "street": "ul. Dostawcy 20",
-          "locality": "Poznań",
-          "code": "60-001",
-          "country": "PL"
-        }
-      ]
-    },
-    "customer": {
-      "name": "Testowa Firma Sp. z o.o.",
-      "tax_id": {
-        "country": "PL",
-        "code": "9876543210"
-      },
-      "addresses": [
-        {
-          "street": "ul. Główna 1",
-          "locality": "Warsaw",
-          "code": "00-001",
-          "country": "PL"
-        }
-      ]
-    },
-    "lines": [
-      {
-        "i": 1,
-        "quantity": "100",
-        "item": {
-          "name": "Agricultural Products",
-          "price": "50.00",
-          "unit": "kg"
-        },
-        "sum": "5000.00",
-        "taxes": [
-          {
-            "cat": "VAT",
-            "key": "standard",
-            "rate": "reduced",
-            "percent": "8.0%",
-            "ext": {
-              "pl-favat-tax-category": "2"
-            }
-          }
-        ],
-        "total": "5000.00"
-      }
-    ],
-    "totals": {
-      "sum": "5000.00",
-      "total": "5000.00",
-      "taxes": {
-        "categories": [
-          {
-            "code": "VAT",
-            "rates": [
-              {
-                "key": "standard",
-                "ext": {
-                  "pl-favat-tax-category": "2"
-                },
-                "base": "5000.00",
-                "percent": "8.0%",
-                "amount": "400.00"
-              }
-            ],
-            "amount": "400.00"
-          }
-        ],
-        "sum": "400.00"
-      },
-      "tax": "400.00",
-      "total_with_tax": "5400.00",
-      "payable": "5400.00"
-    },
-    "notes": [
-      {
-        "key": "legal",
-        "text": "Self-billing invoice issued by the buyer on behalf of the supplier with their agreement."
-      }
-    ]
-  }
-}) satisfies Envelope<bill.Invoice>;
-
-// pl/out/invoice-settlement.json
-({
-  "$schema": "https://gobl.org/draft-0/envelope",
-  "head": {
-    "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
-    "dig": {
-      "alg": "sha256",
-      "val": "1165948094449b0780fbffe6d66caf901e5ba078b94f281c7c8d5cd63a86684a"
-    }
-  },
-  "doc": {
-    "$schema": "https://gobl.org/draft-0/bill/invoice",
-    "$regime": "PL",
-    "$addons": [
-      "pl-favat-v3"
-    ],
-    "$tags": [
-      "settlement"
-    ],
-    "uuid": "01927639-c1a0-7f3a-88d9-5b1f2a5e3c6f",
-    "type": "standard",
-    "series": "ROZ",
-    "code": "001",
-    "issue_date": "2026-01-20",
-    "currency": "PLN",
-    "tax": {
-      "ext": {
-        "pl-favat-invoice-type": "ROZ"
-      }
-    },
-    "supplier": {
-      "name": "Testowa Firma Sp. z o.o.",
-      "tax_id": {
-        "country": "PL",
-        "code": "9876543210"
-      },
-      "addresses": [
-        {
-          "street": "ul. Główna 1",
-          "locality": "Warsaw",
-          "code": "00-001",
-          "country": "PL"
-        }
-      ]
-    },
-    "customer": {
-      "name": "Klient Testowy Sp. z o.o.",
-      "tax_id": {
-        "country": "PL",
-        "code": "9876543210"
-      },
-      "addresses": [
-        {
-          "street": "ul. Testowa 10",
-          "locality": "Kraków",
-          "code": "30-001",
-          "country": "PL"
-        }
-      ]
-    },
-    "lines": [
-      {
-        "i": 1,
-        "quantity": "1",
-        "item": {
-          "name": "Project Completion - Final Invoice",
-          "price": "10000.00"
-        },
-        "sum": "10000.00",
-        "taxes": [
-          {
-            "cat": "VAT",
-            "key": "standard",
-            "rate": "general",
-            "percent": "23.0%",
-            "ext": {
-              "pl-favat-tax-category": "1"
-            }
-          }
-        ],
-        "total": "10000.00"
-      }
-    ],
-    "payment": {
-      "advances": [
-        {
-          "date": "2026-01-20",
-          "description": "Advance payment from ZAL/001",
-          "amount": "6150.00"
-        }
-      ]
-    },
-    "totals": {
-      "sum": "10000.00",
-      "total": "10000.00",
-      "taxes": {
-        "categories": [
-          {
-            "code": "VAT",
-            "rates": [
-              {
-                "key": "standard",
-                "ext": {
-                  "pl-favat-tax-category": "1"
-                },
-                "base": "10000.00",
-                "percent": "23.0%",
-                "amount": "2300.00"
-              }
-            ],
-            "amount": "2300.00"
-          }
-        ],
-        "sum": "2300.00"
-      },
-      "tax": "2300.00",
-      "total_with_tax": "12300.00",
-      "payable": "12300.00",
-      "advance": "6150.00",
-      "due": "6150.00"
-    },
-    "notes": [
-      {
-        "key": "general",
-        "text": "This is a settlement invoice that finalizes the transaction including all previous advance payments."
-      }
-    ]
-  }
-}) satisfies Envelope<bill.Invoice>;
-
-// pl/out/invoice-simplified.json
-({
-  "$schema": "https://gobl.org/draft-0/envelope",
-  "head": {
-    "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
-    "dig": {
-      "alg": "sha256",
-      "val": "6a903cd41a1827d9f83010c899810a13d3f8cc58113536897725815833de68e0"
-    }
-  },
-  "doc": {
-    "$schema": "https://gobl.org/draft-0/bill/invoice",
-    "$regime": "PL",
-    "$addons": [
-      "pl-favat-v3"
-    ],
-    "$tags": [
-      "simplified"
-    ],
-    "uuid": "01927639-c1a0-7f3a-88d9-5b1f2a5e3c7a",
-    "type": "standard",
-    "series": "UPR",
-    "code": "001",
-    "issue_date": "2026-01-20",
-    "currency": "PLN",
-    "tax": {
-      "ext": {
-        "pl-favat-invoice-type": "UPR"
-      }
-    },
-    "supplier": {
-      "name": "Sklep Testowy",
-      "tax_id": {
-        "country": "PL",
-        "code": "9876543210"
-      },
-      "addresses": [
-        {
-          "street": "ul. Handlowa 5",
-          "locality": "Warsaw",
-          "code": "00-001",
-          "country": "PL"
+          "street": "Av. Ejército 745",
+          "locality": "Arequipa",
+          "region": "Arequipa",
+          "code": "04001",
+          "country": "PE"
         }
       ]
     },
@@ -16801,27 +13387,24 @@ import type * as tax from '../src/gen/tax/index.js';
         "i": 1,
         "quantity": "2",
         "item": {
-          "name": "Coffee",
-          "price": "15.00"
+          "name": "Servicios de consultoría",
+          "price": "1500.00"
         },
-        "sum": "30.00",
+        "sum": "3000.00",
         "taxes": [
           {
             "cat": "VAT",
             "key": "standard",
-            "rate": "reduced",
-            "percent": "8.0%",
-            "ext": {
-              "pl-favat-tax-category": "2"
-            }
+            "rate": "general",
+            "percent": "18.0%"
           }
         ],
-        "total": "30.00"
+        "total": "3000.00"
       }
     ],
     "totals": {
-      "sum": "30.00",
-      "total": "30.00",
+      "sum": "3000.00",
+      "total": "3000.00",
       "taxes": {
         "categories": [
           {
@@ -16829,158 +13412,95 @@ import type * as tax from '../src/gen/tax/index.js';
             "rates": [
               {
                 "key": "standard",
-                "ext": {
-                  "pl-favat-tax-category": "2"
-                },
-                "base": "30.00",
-                "percent": "8.0%",
-                "amount": "2.40"
+                "base": "3000.00",
+                "percent": "18.0%",
+                "amount": "540.00"
               }
             ],
-            "amount": "2.40"
+            "amount": "540.00"
           }
         ],
-        "sum": "2.40"
+        "sum": "540.00"
       },
-      "tax": "2.40",
-      "total_with_tax": "32.40",
-      "payable": "32.40"
-    },
-    "notes": [
-      {
-        "key": "general",
-        "text": "Simplified invoice for small transactions up to 450 PLN."
-      }
-    ]
+      "tax": "540.00",
+      "total_with_tax": "3540.00",
+      "payable": "3540.00"
+    }
   }
 }) satisfies Envelope<bill.Invoice>;
 
-// pl/out/invoice-standard.json
+// pe/out/invoice-pe-simplified.json
 ({
   "$schema": "https://gobl.org/draft-0/envelope",
   "head": {
     "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
     "dig": {
       "alg": "sha256",
-      "val": "a954de45fd1a608c654a17236b42b004e5e3ecf4b528825fc0744ce10bbe9a18"
+      "val": "84d438475d92192cefbc7357512499c8dd084d90e73dff263f804bf7c11891a3"
     }
   },
   "doc": {
     "$schema": "https://gobl.org/draft-0/bill/invoice",
-    "$regime": "PL",
-    "$addons": [
-      "pl-favat-v3"
+    "$regime": "PE",
+    "$tags": [
+      "simplified"
     ],
-    "uuid": "01927639-c1a0-7f3a-88d9-5b1f2a5e3c4d",
+    "uuid": "5a8d4f02-9b6e-4c13-8d7a-3e5f1b2c4d6e",
     "type": "standard",
-    "series": "INVOICE",
-    "code": "001",
-    "issue_date": "2026-01-20",
-    "currency": "PLN",
-    "tax": {
-      "ext": {
-        "pl-favat-invoice-type": "VAT"
-      }
-    },
+    "series": "B001",
+    "code": "00000789",
+    "issue_date": "2026-06-18",
+    "currency": "PEN",
+    "tax": {},
     "supplier": {
-      "name": "Testowa Firma Sp. z o.o.",
+      "name": "Comercial Andina S.A.C.",
       "tax_id": {
-        "country": "PL",
-        "code": "9876543210"
+        "country": "PE",
+        "code": "20401234561"
       },
       "addresses": [
         {
-          "street": "ul. Główna 1",
-          "locality": "Warsaw",
-          "code": "00-001",
-          "country": "PL"
-        }
-      ],
-      "emails": [
-        {
-          "addr": "kontakt@testowa.pl"
+          "street": "Av. Javier Prado Este 1234",
+          "locality": "San Isidro",
+          "region": "Lima",
+          "code": "15036",
+          "country": "PE"
         }
       ]
     },
     "customer": {
-      "name": "Klient Testowy Sp. z o.o.",
-      "tax_id": {
-        "country": "PL",
-        "code": "1111111111"
-      },
-      "addresses": [
+      "name": "Juan Pérez Quispe",
+      "identities": [
         {
-          "street": "ul. Testowa 10",
-          "locality": "Kraków",
-          "code": "30-001",
-          "country": "PL"
+          "country": "PE",
+          "key": "national",
+          "code": "40123456"
         }
       ]
     },
     "lines": [
       {
         "i": 1,
-        "quantity": "10",
+        "quantity": "2",
         "item": {
-          "name": "Software Development Services",
-          "price": "100.00",
-          "unit": "h"
+          "name": "Memoria USB 64GB",
+          "price": "45.00"
         },
-        "sum": "1000.00",
+        "sum": "90.00",
         "taxes": [
           {
             "cat": "VAT",
             "key": "standard",
             "rate": "general",
-            "percent": "23.0%",
-            "ext": {
-              "pl-favat-tax-category": "1"
-            }
+            "percent": "18.0%"
           }
         ],
-        "total": "1000.00"
-      },
-      {
-        "i": 2,
-        "quantity": "5",
-        "item": {
-          "name": "Consulting Services",
-          "price": "150.00",
-          "unit": "h"
-        },
-        "sum": "750.00",
-        "taxes": [
-          {
-            "cat": "VAT",
-            "key": "standard",
-            "rate": "reduced",
-            "percent": "8.0%",
-            "ext": {
-              "pl-favat-tax-category": "2"
-            }
-          }
-        ],
-        "total": "750.00"
+        "total": "90.00"
       }
     ],
-    "payment": {
-      "instructions": {
-        "key": "credit-transfer",
-        "detail": "Transfer payment to our bank account",
-        "credit_transfer": [
-          {
-            "iban": "PL61109010140000071219812874",
-            "name": "Testowa Firma Sp. z o.o."
-          }
-        ],
-        "ext": {
-          "pl-favat-payment-means": "6"
-        }
-      }
-    },
     "totals": {
-      "sum": "1750.00",
-      "total": "1750.00",
+      "sum": "90.00",
+      "total": "90.00",
       "taxes": {
         "categories": [
           {
@@ -16988,31 +13508,135 @@ import type * as tax from '../src/gen/tax/index.js';
             "rates": [
               {
                 "key": "standard",
-                "ext": {
-                  "pl-favat-tax-category": "1"
-                },
-                "base": "1000.00",
-                "percent": "23.0%",
-                "amount": "230.00"
-              },
-              {
-                "key": "standard",
-                "ext": {
-                  "pl-favat-tax-category": "2"
-                },
-                "base": "750.00",
-                "percent": "8.0%",
-                "amount": "60.00"
+                "base": "90.00",
+                "percent": "18.0%",
+                "amount": "16.20"
               }
             ],
-            "amount": "290.00"
+            "amount": "16.20"
           }
         ],
-        "sum": "290.00"
+        "sum": "16.20"
       },
-      "tax": "290.00",
-      "total_with_tax": "2040.00",
-      "payable": "2040.00"
+      "tax": "16.20",
+      "total_with_tax": "106.20",
+      "payable": "106.20"
+    }
+  }
+}) satisfies Envelope<bill.Invoice>;
+
+// pe/out/invoice-pe-standard.json
+({
+  "$schema": "https://gobl.org/draft-0/envelope",
+  "head": {
+    "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
+    "dig": {
+      "alg": "sha256",
+      "val": "4987cabc1cecc64f155febf0fa8d3f16f93299c5884af5601b968b8cf539dd8e"
+    }
+  },
+  "doc": {
+    "$schema": "https://gobl.org/draft-0/bill/invoice",
+    "$regime": "PE",
+    "uuid": "3d7a2c91-5e48-4b0f-9c6d-8a1b2e3f4a5b",
+    "type": "standard",
+    "series": "F001",
+    "code": "00000123",
+    "issue_date": "2026-06-15",
+    "currency": "PEN",
+    "supplier": {
+      "name": "Comercial Andina S.A.C.",
+      "tax_id": {
+        "country": "PE",
+        "code": "20401234561"
+      },
+      "addresses": [
+        {
+          "street": "Av. Javier Prado Este 1234",
+          "locality": "San Isidro",
+          "region": "Lima",
+          "code": "15036",
+          "country": "PE"
+        }
+      ]
+    },
+    "customer": {
+      "name": "Distribuidora del Sur S.A.",
+      "tax_id": {
+        "country": "PE",
+        "code": "20876543215"
+      },
+      "addresses": [
+        {
+          "street": "Av. Ejército 745",
+          "locality": "Arequipa",
+          "region": "Arequipa",
+          "code": "04001",
+          "country": "PE"
+        }
+      ]
+    },
+    "lines": [
+      {
+        "i": 1,
+        "quantity": "20",
+        "item": {
+          "name": "Servicios de consultoría",
+          "price": "1500.00"
+        },
+        "sum": "30000.00",
+        "taxes": [
+          {
+            "cat": "VAT",
+            "key": "standard",
+            "rate": "general",
+            "percent": "18.0%"
+          }
+        ],
+        "total": "30000.00"
+      },
+      {
+        "i": 2,
+        "quantity": "3",
+        "item": {
+          "name": "Licencia de software",
+          "price": "5000.00"
+        },
+        "sum": "15000.00",
+        "taxes": [
+          {
+            "cat": "VAT",
+            "key": "standard",
+            "rate": "general",
+            "percent": "18.0%"
+          }
+        ],
+        "total": "15000.00"
+      }
+    ],
+    "totals": {
+      "sum": "45000.00",
+      "total": "45000.00",
+      "taxes": {
+        "categories": [
+          {
+            "code": "VAT",
+            "rates": [
+              {
+                "key": "standard",
+                "base": "45000.00",
+                "percent": "18.0%",
+                "amount": "8100.00"
+              }
+            ],
+            "amount": "8100.00"
+          }
+        ],
+        "sum": "8100.00"
+      },
+      "tax": "8100.00",
+      "total_with_tax": "53100.00",
+      "payable": "53100.00"
     }
   }
 }) satisfies Envelope<bill.Invoice>;
@@ -17630,6 +14254,657 @@ import type * as tax from '../src/gen/tax/index.js';
   }
 }) satisfies Envelope<bill.Invoice>;
 
+// ro/out/credit-note-ro-ro.json
+({
+  "$schema": "https://gobl.org/draft-0/envelope",
+  "head": {
+    "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
+    "dig": {
+      "alg": "sha256",
+      "val": "37cc8b72656596453f7ec04f65352424ca64e79920fd352ee0189ea4c2e35711"
+    }
+  },
+  "doc": {
+    "$schema": "https://gobl.org/draft-0/bill/invoice",
+    "$regime": "RO",
+    "uuid": "01927639-c1a0-7f3a-88d9-5b1f2a5e4005",
+    "type": "credit-note",
+    "series": "CN",
+    "code": "2026-0201",
+    "issue_date": "2026-09-12",
+    "currency": "RON",
+    "preceding": [
+      {
+        "issue_date": "2026-09-01",
+        "series": "FCT",
+        "code": "2026-0101",
+        "reason": "Discount de 10% acordat ulterior"
+      }
+    ],
+    "supplier": {
+      "name": "Furnizor Exemplu S.R.L.",
+      "tax_id": {
+        "country": "RO",
+        "code": "16281620"
+      },
+      "addresses": [
+        {
+          "num": "10",
+          "street": "Bulevardul Unirii",
+          "locality": "Sector 3",
+          "region": "B",
+          "code": "030167",
+          "country": "RO"
+        }
+      ],
+      "emails": [
+        {
+          "addr": "facturare@furnizor-exemplu.ro"
+        }
+      ]
+    },
+    "customer": {
+      "name": "Client Exemplu S.R.L.",
+      "tax_id": {
+        "country": "RO",
+        "code": "23456783"
+      },
+      "addresses": [
+        {
+          "num": "5",
+          "street": "Strada Memorandumului",
+          "locality": "Cluj-Napoca",
+          "region": "CJ",
+          "code": "400114",
+          "country": "RO"
+        }
+      ]
+    },
+    "lines": [
+      {
+        "i": 1,
+        "quantity": "1",
+        "item": {
+          "name": "Discount 10% servicii de consultanță",
+          "price": "250.00"
+        },
+        "sum": "250.00",
+        "taxes": [
+          {
+            "cat": "VAT",
+            "key": "standard",
+            "rate": "general",
+            "percent": "21.0%"
+          }
+        ],
+        "total": "250.00"
+      }
+    ],
+    "payment": {
+      "terms": {
+        "notes": "Compensare cu următoarea factură"
+      }
+    },
+    "totals": {
+      "sum": "250.00",
+      "total": "250.00",
+      "taxes": {
+        "categories": [
+          {
+            "code": "VAT",
+            "rates": [
+              {
+                "key": "standard",
+                "base": "250.00",
+                "percent": "21.0%",
+                "amount": "52.50"
+              }
+            ],
+            "amount": "52.50"
+          }
+        ],
+        "sum": "52.50"
+      },
+      "tax": "52.50",
+      "total_with_tax": "302.50",
+      "payable": "302.50"
+    }
+  }
+}) satisfies Envelope<bill.Invoice>;
+
+// ro/out/invoice-ro-b2c.json
+({
+  "$schema": "https://gobl.org/draft-0/envelope",
+  "head": {
+    "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
+    "dig": {
+      "alg": "sha256",
+      "val": "0a2c0746607fd7d9d97d9a5c3bf877d84c3ed758e527aead47ba90e8d20b3cdf"
+    }
+  },
+  "doc": {
+    "$schema": "https://gobl.org/draft-0/bill/invoice",
+    "$regime": "RO",
+    "uuid": "01927639-c1a0-7f3a-88d9-5b1f2a5e4003",
+    "type": "standard",
+    "series": "FCT",
+    "code": "2026-0103",
+    "issue_date": "2026-09-02",
+    "currency": "RON",
+    "supplier": {
+      "name": "Furnizor Exemplu S.R.L.",
+      "tax_id": {
+        "country": "RO",
+        "code": "16281620"
+      },
+      "addresses": [
+        {
+          "num": "10",
+          "street": "Bulevardul Unirii",
+          "locality": "Sector 3",
+          "region": "B",
+          "code": "030167",
+          "country": "RO"
+        }
+      ],
+      "emails": [
+        {
+          "addr": "facturare@furnizor-exemplu.ro"
+        }
+      ]
+    },
+    "customer": {
+      "name": "Ion Popescu",
+      "addresses": [
+        {
+          "num": "5",
+          "street": "Strada Memorandumului",
+          "locality": "Cluj-Napoca",
+          "region": "CJ",
+          "code": "400114",
+          "country": "RO"
+        }
+      ]
+    },
+    "lines": [
+      {
+        "i": 1,
+        "quantity": "1",
+        "item": {
+          "name": "Laptop",
+          "price": "3500.00"
+        },
+        "sum": "3500.00",
+        "taxes": [
+          {
+            "cat": "VAT",
+            "key": "standard",
+            "rate": "general",
+            "percent": "21.0%"
+          }
+        ],
+        "total": "3500.00"
+      }
+    ],
+    "payment": {
+      "advances": [
+        {
+          "key": "card",
+          "description": "Plată cu cardul",
+          "percent": "100%",
+          "amount": "4235.00"
+        }
+      ],
+      "instructions": {
+        "key": "card"
+      }
+    },
+    "totals": {
+      "sum": "3500.00",
+      "total": "3500.00",
+      "taxes": {
+        "categories": [
+          {
+            "code": "VAT",
+            "rates": [
+              {
+                "key": "standard",
+                "base": "3500.00",
+                "percent": "21.0%",
+                "amount": "735.00"
+              }
+            ],
+            "amount": "735.00"
+          }
+        ],
+        "sum": "735.00"
+      },
+      "tax": "735.00",
+      "total_with_tax": "4235.00",
+      "payable": "4235.00",
+      "advance": "4235.00",
+      "due": "0.00"
+    }
+  }
+}) satisfies Envelope<bill.Invoice>;
+
+// ro/out/invoice-ro-ro-eur.json
+({
+  "$schema": "https://gobl.org/draft-0/envelope",
+  "head": {
+    "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
+    "dig": {
+      "alg": "sha256",
+      "val": "59e08e55bb9b21be00a4059168dd5665df1a547a2d053a3b028647d7b46113b6"
+    }
+  },
+  "doc": {
+    "$schema": "https://gobl.org/draft-0/bill/invoice",
+    "$regime": "RO",
+    "uuid": "01927639-c1a0-7f3a-88d9-5b1f2a5e4002",
+    "type": "standard",
+    "series": "FCT",
+    "code": "2026-0102",
+    "issue_date": "2026-09-01",
+    "currency": "EUR",
+    "exchange_rates": [
+      {
+        "from": "EUR",
+        "to": "RON",
+        "amount": "5.0850"
+      }
+    ],
+    "supplier": {
+      "name": "Furnizor Exemplu S.R.L.",
+      "tax_id": {
+        "country": "RO",
+        "code": "16281620"
+      },
+      "addresses": [
+        {
+          "num": "10",
+          "street": "Bulevardul Unirii",
+          "locality": "Sector 3",
+          "region": "B",
+          "code": "030167",
+          "country": "RO"
+        }
+      ],
+      "emails": [
+        {
+          "addr": "facturare@furnizor-exemplu.ro"
+        }
+      ]
+    },
+    "customer": {
+      "name": "Client Exemplu S.R.L.",
+      "tax_id": {
+        "country": "RO",
+        "code": "23456783"
+      },
+      "addresses": [
+        {
+          "num": "5",
+          "street": "Strada Memorandumului",
+          "locality": "Cluj-Napoca",
+          "region": "CJ",
+          "code": "400114",
+          "country": "RO"
+        }
+      ]
+    },
+    "lines": [
+      {
+        "i": 1,
+        "quantity": "1",
+        "item": {
+          "name": "Licență software anuală",
+          "price": "1200.00"
+        },
+        "sum": "1200.00",
+        "taxes": [
+          {
+            "cat": "VAT",
+            "key": "standard",
+            "rate": "general",
+            "percent": "21.0%"
+          }
+        ],
+        "total": "1200.00"
+      }
+    ],
+    "payment": {
+      "terms": {
+        "due_dates": [
+          {
+            "date": "2026-10-01",
+            "amount": "1452.00",
+            "percent": "100%"
+          }
+        ]
+      },
+      "instructions": {
+        "key": "credit-transfer",
+        "credit_transfer": [
+          {
+            "iban": "RO49AAAA1B31007593840000",
+            "name": "Furnizor Exemplu S.R.L."
+          }
+        ]
+      }
+    },
+    "totals": {
+      "sum": "1200.00",
+      "total": "1200.00",
+      "taxes": {
+        "categories": [
+          {
+            "code": "VAT",
+            "rates": [
+              {
+                "key": "standard",
+                "base": "1200.00",
+                "percent": "21.0%",
+                "amount": "252.00"
+              }
+            ],
+            "amount": "252.00"
+          }
+        ],
+        "sum": "252.00"
+      },
+      "tax": "252.00",
+      "total_with_tax": "1452.00",
+      "payable": "1452.00"
+    }
+  }
+}) satisfies Envelope<bill.Invoice>;
+
+// ro/out/invoice-ro-ro-reverse-charge.json
+({
+  "$schema": "https://gobl.org/draft-0/envelope",
+  "head": {
+    "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
+    "dig": {
+      "alg": "sha256",
+      "val": "29fb2d05cd6bbffaff1c74f9ea3016dcefc4d2a4784f8b44a0dab8f1a2546fcd"
+    }
+  },
+  "doc": {
+    "$schema": "https://gobl.org/draft-0/bill/invoice",
+    "$regime": "RO",
+    "$tags": [
+      "reverse-charge"
+    ],
+    "uuid": "01927639-c1a0-7f3a-88d9-5b1f2a5e4004",
+    "type": "standard",
+    "series": "FCT",
+    "code": "2026-0104",
+    "issue_date": "2026-09-03",
+    "currency": "RON",
+    "tax": {
+      "notes": [
+        {
+          "cat": "VAT",
+          "key": "reverse-charge",
+          "text": "Reverse charge: Customer to account for VAT to the relevant tax authority."
+        }
+      ]
+    },
+    "supplier": {
+      "name": "Furnizor Exemplu S.R.L.",
+      "tax_id": {
+        "country": "RO",
+        "code": "16281620"
+      },
+      "addresses": [
+        {
+          "num": "10",
+          "street": "Bulevardul Unirii",
+          "locality": "Sector 3",
+          "region": "B",
+          "code": "030167",
+          "country": "RO"
+        }
+      ],
+      "emails": [
+        {
+          "addr": "facturare@furnizor-exemplu.ro"
+        }
+      ]
+    },
+    "customer": {
+      "name": "Client Exemplu S.R.L.",
+      "tax_id": {
+        "country": "RO",
+        "code": "23456783"
+      },
+      "addresses": [
+        {
+          "num": "5",
+          "street": "Strada Memorandumului",
+          "locality": "Cluj-Napoca",
+          "region": "CJ",
+          "code": "400114",
+          "country": "RO"
+        }
+      ]
+    },
+    "lines": [
+      {
+        "i": 1,
+        "quantity": "5000",
+        "item": {
+          "name": "Deșeuri feroase",
+          "price": "1.40",
+          "unit": "kg"
+        },
+        "sum": "7000.00",
+        "taxes": [
+          {
+            "cat": "VAT",
+            "key": "reverse-charge"
+          }
+        ],
+        "total": "7000.00"
+      }
+    ],
+    "payment": {
+      "terms": {
+        "due_dates": [
+          {
+            "date": "2026-10-01",
+            "amount": "7000.00",
+            "percent": "100%"
+          }
+        ]
+      },
+      "instructions": {
+        "key": "credit-transfer",
+        "credit_transfer": [
+          {
+            "iban": "RO49AAAA1B31007593840000",
+            "name": "Furnizor Exemplu S.R.L."
+          }
+        ]
+      }
+    },
+    "totals": {
+      "sum": "7000.00",
+      "total": "7000.00",
+      "taxes": {
+        "categories": [
+          {
+            "code": "VAT",
+            "rates": [
+              {
+                "key": "reverse-charge",
+                "base": "7000.00",
+                "amount": "0.00"
+              }
+            ],
+            "amount": "0.00"
+          }
+        ],
+        "sum": "0.00"
+      },
+      "tax": "0.00",
+      "total_with_tax": "7000.00",
+      "payable": "7000.00"
+    }
+  }
+}) satisfies Envelope<bill.Invoice>;
+
+// ro/out/invoice-ro-ro.json
+({
+  "$schema": "https://gobl.org/draft-0/envelope",
+  "head": {
+    "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
+    "dig": {
+      "alg": "sha256",
+      "val": "75a7a9550cd4431d53a5ebf06c1740c6aa0ace8a374d021f7ca1800b2d5afe83"
+    }
+  },
+  "doc": {
+    "$schema": "https://gobl.org/draft-0/bill/invoice",
+    "$regime": "RO",
+    "uuid": "01927639-c1a0-7f3a-88d9-5b1f2a5e4001",
+    "type": "standard",
+    "series": "FCT",
+    "code": "2026-0101",
+    "issue_date": "2026-09-01",
+    "currency": "RON",
+    "supplier": {
+      "name": "Furnizor Exemplu S.R.L.",
+      "tax_id": {
+        "country": "RO",
+        "code": "16281620"
+      },
+      "addresses": [
+        {
+          "num": "10",
+          "street": "Bulevardul Unirii",
+          "locality": "Sector 3",
+          "region": "B",
+          "code": "030167",
+          "country": "RO"
+        }
+      ],
+      "emails": [
+        {
+          "addr": "facturare@furnizor-exemplu.ro"
+        }
+      ]
+    },
+    "customer": {
+      "name": "Client Exemplu S.R.L.",
+      "tax_id": {
+        "country": "RO",
+        "code": "23456783"
+      },
+      "addresses": [
+        {
+          "num": "5",
+          "street": "Strada Memorandumului",
+          "locality": "Cluj-Napoca",
+          "region": "CJ",
+          "code": "400114",
+          "country": "RO"
+        }
+      ]
+    },
+    "lines": [
+      {
+        "i": 1,
+        "quantity": "10",
+        "item": {
+          "name": "Servicii de consultanță",
+          "price": "250.00",
+          "unit": "h"
+        },
+        "sum": "2500.00",
+        "taxes": [
+          {
+            "cat": "VAT",
+            "key": "standard",
+            "rate": "general",
+            "percent": "21.0%"
+          }
+        ],
+        "total": "2500.00"
+      },
+      {
+        "i": 2,
+        "quantity": "5",
+        "item": {
+          "name": "Cărți tehnice",
+          "price": "80.00"
+        },
+        "sum": "400.00",
+        "taxes": [
+          {
+            "cat": "VAT",
+            "key": "standard",
+            "rate": "reduced",
+            "percent": "11.0%"
+          }
+        ],
+        "total": "400.00"
+      }
+    ],
+    "payment": {
+      "terms": {
+        "due_dates": [
+          {
+            "date": "2026-10-01",
+            "amount": "3469.00",
+            "percent": "100%"
+          }
+        ]
+      },
+      "instructions": {
+        "key": "credit-transfer",
+        "credit_transfer": [
+          {
+            "iban": "RO49AAAA1B31007593840000",
+            "name": "Furnizor Exemplu S.R.L."
+          }
+        ]
+      }
+    },
+    "totals": {
+      "sum": "2900.00",
+      "total": "2900.00",
+      "taxes": {
+        "categories": [
+          {
+            "code": "VAT",
+            "rates": [
+              {
+                "key": "standard",
+                "base": "2500.00",
+                "percent": "21.0%",
+                "amount": "525.00"
+              },
+              {
+                "key": "standard",
+                "base": "400.00",
+                "percent": "11.0%",
+                "amount": "44.00"
+              }
+            ],
+            "amount": "569.00"
+          }
+        ],
+        "sum": "569.00"
+      },
+      "tax": "569.00",
+      "total_with_tax": "3469.00",
+      "payable": "3469.00"
+    }
+  }
+}) satisfies Envelope<bill.Invoice>;
+
 // se/out/invoice-se-se.json
 ({
   "$schema": "https://gobl.org/draft-0/envelope",
@@ -18138,6 +15413,158 @@ import type * as tax from '../src/gen/tax/index.js';
       "tax": "18000.00",
       "total_with_tax": "218000.00",
       "payable": "218000.00"
+    }
+  }
+}) satisfies Envelope<bill.Invoice>;
+
+// sk/out/invoice-sk-sk.json
+({
+  "$schema": "https://gobl.org/draft-0/envelope",
+  "head": {
+    "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
+    "dig": {
+      "alg": "sha256",
+      "val": "2e59c41a0a403e18ea546660126c31142267955460446e819c662c1ca539272e"
+    }
+  },
+  "doc": {
+    "$schema": "https://gobl.org/draft-0/bill/invoice",
+    "$regime": "SK",
+    "uuid": "b3d5f7a1-2c4e-4b6a-8d9f-1a2b3c4d5e6f",
+    "type": "standard",
+    "series": "SAMPLE",
+    "code": "001",
+    "issue_date": "2025-03-01",
+    "currency": "EUR",
+    "supplier": {
+      "name": "Vzorová s.r.o.",
+      "tax_id": {
+        "country": "SK",
+        "code": "2020273893"
+      },
+      "addresses": [
+        {
+          "num": "12",
+          "street": "Hlavná",
+          "locality": "Bratislava",
+          "code": "81101",
+          "country": "SK"
+        }
+      ],
+      "emails": [
+        {
+          "addr": "fakturacia@example.sk"
+        }
+      ]
+    },
+    "customer": {
+      "name": "Zákazník s.r.o.",
+      "tax_id": {
+        "country": "SK",
+        "code": "7120001713"
+      },
+      "addresses": [
+        {
+          "num": "5",
+          "street": "Štúrova",
+          "locality": "Košice",
+          "code": "04001",
+          "country": "SK"
+        }
+      ]
+    },
+    "lines": [
+      {
+        "i": 1,
+        "quantity": "10",
+        "item": {
+          "name": "Softvérové služby",
+          "price": "120.00",
+          "unit": "h"
+        },
+        "sum": "1200.00",
+        "taxes": [
+          {
+            "cat": "VAT",
+            "key": "standard",
+            "rate": "general",
+            "percent": "23.0%"
+          }
+        ],
+        "total": "1200.00"
+      },
+      {
+        "i": 2,
+        "quantity": "100",
+        "item": {
+          "name": "Elektrina",
+          "price": "0.25"
+        },
+        "sum": "25.00",
+        "taxes": [
+          {
+            "cat": "VAT",
+            "key": "standard",
+            "rate": "reduced",
+            "percent": "19.0%"
+          }
+        ],
+        "total": "25.00"
+      },
+      {
+        "i": 3,
+        "quantity": "5",
+        "item": {
+          "name": "Knihy",
+          "price": "20.00"
+        },
+        "sum": "100.00",
+        "taxes": [
+          {
+            "cat": "VAT",
+            "key": "standard",
+            "rate": "super-reduced",
+            "percent": "5.0%"
+          }
+        ],
+        "total": "100.00"
+      }
+    ],
+    "totals": {
+      "sum": "1325.00",
+      "total": "1325.00",
+      "taxes": {
+        "categories": [
+          {
+            "code": "VAT",
+            "rates": [
+              {
+                "key": "standard",
+                "base": "1200.00",
+                "percent": "23.0%",
+                "amount": "276.00"
+              },
+              {
+                "key": "standard",
+                "base": "25.00",
+                "percent": "19.0%",
+                "amount": "4.75"
+              },
+              {
+                "key": "standard",
+                "base": "100.00",
+                "percent": "5.0%",
+                "amount": "5.00"
+              }
+            ],
+            "amount": "285.75"
+          }
+        ],
+        "sum": "285.75"
+      },
+      "tax": "285.75",
+      "total_with_tax": "1610.75",
+      "payable": "1610.75"
     }
   }
 }) satisfies Envelope<bill.Invoice>;

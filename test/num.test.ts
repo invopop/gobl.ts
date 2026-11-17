@@ -315,7 +315,13 @@ describe('agrees with GOBL-calculated line totals', () => {
     for (const file of files) {
       const doc = (
         JSON.parse(readFileSync(`test/fixtures/${file}`, 'utf8')) as {
-          doc?: { lines?: Array<{ quantity?: string; sum?: string; item?: { price?: string } }> };
+          doc?: {
+            lines?: Array<{
+              quantity?: string;
+              sum?: string;
+              item?: { price?: string; per?: string };
+            }>;
+          };
         }
       ).doc;
 
@@ -323,7 +329,12 @@ describe('agrees with GOBL-calculated line totals', () => {
         const price = line.item?.price;
         if (!price || !line.quantity || !line.sum) continue;
 
-        const got = Amount.parse(price).multiply(Amount.parse(line.quantity));
+        let got = Amount.parse(price).multiply(Amount.parse(line.quantity));
+        const per = line.item?.per ? Amount.parse(line.item.per) : undefined;
+        if (per?.isPositive()) {
+          // The price covers `per` units: GOBL upscales by per's digit count, then divides.
+          got = got.upscale(per.rescale(0).value().toString().length).divide(per);
+        }
         const want = Amount.parse(line.sum);
 
         if (got.equals(want)) {
@@ -334,7 +345,7 @@ describe('agrees with GOBL-calculated line totals', () => {
           afterRounding++;
         } else {
           unexplained.push(
-            `${file}: ${price} x ${line.quantity} -> ${got}, document says ${line.sum}`
+            `${file}: ${price} x ${line.quantity}${per ? ` / ${per}` : ''} -> ${got}, document says ${line.sum}`
           );
         }
       }

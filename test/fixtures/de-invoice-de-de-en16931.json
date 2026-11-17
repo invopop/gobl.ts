@@ -4,18 +4,14 @@
     "uuid": "8a51fd30-2a27-11ee-be56-0242ac120002",
     "dig": {
       "alg": "sha256",
-      "val": "bc93ceab8383fb00eeef3f018232ad5133e1c213943064133dfe365b0a89884f"
+      "val": "469768b7b21b6993e9d5c580b998ff197ea9f2351499215ee8ed2065ed407233"
     }
   },
   "doc": {
     "$schema": "https://gobl.org/draft-0/bill/invoice",
     "$regime": "DE",
     "$addons": [
-      "eu-en16931-v2017",
-      "de-xrechnung-v3"
-    ],
-    "$tags": [
-      "reverse-charge"
+      "eu-en16931-v2017"
     ],
     "uuid": "3aea7b56-59d8-4beb-90bd-f8f280d852a0",
     "type": "standard",
@@ -26,17 +22,7 @@
     "tax": {
       "ext": {
         "untdid-document-type": "380"
-      },
-      "notes": [
-        {
-          "cat": "VAT",
-          "key": "reverse-charge",
-          "text": "Reverse charge applies according to EU VAT Directive.",
-          "ext": {
-            "untdid-tax-category": "AE"
-          }
-        }
-      ]
+      }
     },
     "supplier": {
       "name": "Provide One GmbH",
@@ -49,13 +35,17 @@
           "name": {
             "given": "John",
             "surname": "Doe"
-          }
+          },
+          "emails": [
+            {
+              "addr": "billing@example.com"
+            }
+          ]
         }
       ],
       "inboxes": [
         {
-          "scheme": "0204",
-          "code": "992-90009-96"
+          "email": "billing@example.com"
         }
       ],
       "addresses": [
@@ -67,11 +57,6 @@
           "country": "DE"
         }
       ],
-      "emails": [
-        {
-          "addr": "billing@example.com"
-        }
-      ],
       "telephones": [
         {
           "num": "+49100200300"
@@ -79,35 +64,33 @@
       ]
     },
     "customer": {
-      "name": "Provide One S.L.",
+      "name": "Sample Consumer",
       "tax_id": {
-        "country": "ES",
-        "code": "B98602642"
+        "country": "DE",
+        "code": "282741168"
       },
       "inboxes": [
         {
-          "scheme": "9942",
-          "code": "B98602642"
+          "email": "billing@example.com"
         }
       ],
       "addresses": [
         {
-          "num": "42",
-          "street": "Calle Pradillo",
-          "locality": "Madrid",
-          "region": "Madrid",
-          "code": "28002",
-          "country": "ES"
+          "num": "25",
+          "street": "Werner-Heisenberg-Allee",
+          "locality": "München",
+          "code": "80939",
+          "country": "DE"
         }
       ],
       "emails": [
         {
-          "addr": "billing@example.com"
+          "addr": "email@sample.com"
         }
       ],
       "telephones": [
         {
-          "num": "+34100200300"
+          "num": "+49100200300"
         }
       ]
     },
@@ -131,9 +114,11 @@
         "taxes": [
           {
             "cat": "VAT",
-            "key": "reverse-charge",
+            "key": "standard",
+            "rate": "general",
+            "percent": "19%",
             "ext": {
-              "untdid-tax-category": "AE"
+              "untdid-tax-category": "S"
             }
           }
         ],
@@ -145,12 +130,7 @@
     },
     "payment": {
       "terms": {
-        "due_dates": [
-          {
-            "date": "2022-02-01",
-            "amount": "1620.00"
-          }
-        ]
+        "notes": "Please pay within 10 days"
       },
       "instructions": {
         "key": "credit-transfer+sepa",
@@ -174,22 +154,23 @@
             "code": "VAT",
             "rates": [
               {
-                "key": "reverse-charge",
+                "key": "standard",
                 "ext": {
-                  "untdid-tax-category": "AE"
+                  "untdid-tax-category": "S"
                 },
                 "base": "1620.00",
-                "amount": "0.00"
+                "percent": "19%",
+                "amount": "307.80"
               }
             ],
-            "amount": "0.00"
+            "amount": "307.80"
           }
         ],
-        "sum": "0.00"
+        "sum": "307.80"
       },
-      "tax": "0.00",
-      "total_with_tax": "1620.00",
-      "payable": "1620.00"
+      "tax": "307.80",
+      "total_with_tax": "1927.80",
+      "payable": "1927.80"
     }
   }
 }
